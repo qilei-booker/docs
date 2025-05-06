@@ -69,14 +69,6 @@
               "api-reference/enrichment/domain-intelligence",
               "api-reference/enrichment/get-ip-reputation-feeds"
             ]
-          },
-          {
-            "group": "Feeds",
-            "pages": [
-              "guide/account&limites",
-              "guide/research",
-              "guide/chat"
-            ]
           }
         ]
       }
