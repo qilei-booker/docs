@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "SecAI Investigator Documentation",
+  "name": "ThreatBook CTI Documentation",
   "colors": {
     "primary": "#CC0000",
     "light": "#eb2d17",
@@ -50,32 +50,60 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "API Documentation",
+            "pages": [
+              "api-reference/authentication"
+            ]
+          },
+          {
+            "group": "Enrichment",
+            "pages": [
+              "api-reference/enrichment/ip-report",
+              "api-reference/enrichment/compromise-detection",
+              "api-reference/enrichment/ip-intelligence",
+              "api-reference/enrichment/domain-intelligence",
+              "api-reference/enrichment/get-ip-reputation-feeds"
+            ]
+          },
+          {
+            "group": "Feeds",
+            "pages": [
+              "guide/account&limites",
+              "guide/research",
+              "guide/chat"
+            ]
+          }
+        ]
       }
     ]
   },
   "logo": {
     "light": "/logo/logo_light.svg",
     "dark": "/logo/logo_dark.svg",
-    "href": "https://i.secai.ai/research/"
+    "href": "https://threatbook.io/research/"
   },
   "navbar": {
     "links": [
       {
         "label": "Contact us",
-        "href": "https://i.secai.ai/contact_us"
+        "href": "https://threatbook.io/contact_us"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Go to Investigator",
-      "href": "https://i.secai.ai/research"
+      "label": "Go to ThreatBook CTI",
+      "href": "https://threatbook.io/research"
     }
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/secai_ai",
-      "discord": "https://discord.gg/MQpzCjjgy8",
-      "linkedin": "https://www.linkedin.com/company/secai-ai/"
+      "x": "https://x.com/ThreatBookLabs",
+      "linkedin": "https://www.linkedin.com/company/threatbook/"
     }
   }
 }

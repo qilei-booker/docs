@@ -1,4 +1,4 @@
-.secai-download-btn {
+.threatBook-download-btn {
   color: #fff;
   background-color: #1A1A1A;
   border-radius: 40px;
@@ -13,17 +13,17 @@
   line-height: 16px;
 }
 
-.secai-download-btn:hover {
+.threatBook-download-btn:hover {
   background-color: #4D4D4D;
 }
 
-.secai-download-btn svg {
+.threatBook-download-btn svg {
   width: 14px;
   height: 14px;
   fill: #fff;
 }
 
-a[href="https://i.secai.ai/contact_us"] {
+a[href="https://threatbook.ai/contactus"] {
   display: none;
 }
 
