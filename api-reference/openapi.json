@@ -11,7 +11,7 @@
       "post": {
         "summary": "IP Report",
         "deprecated": false,
-        "description": "You are able to get an IP report with comprehensive intelligence judgments, such as **C2, Malware, Zombie, Compromised Host, Scanner,** etc., and contextual information like **open ports, certificates,** and so on.",
+        "description": "You are able to get an IP report with comprehensive intelligence labels, such as **C2, Malware, Zombie, Compromised Host, Scanner,** etc., and contextual information like **open ports, certificates,** and so on.",
         "tags": [],
         "parameters": [
           {
@@ -733,7 +733,7 @@
       "post": {
         "summary": "IP Intelligence",
         "deprecated": false,
-        "description": "Public IP addresses are obtained from the firewalls, WAF, and other security devices, which can be analyzed and investigated with our intelligence to determine if it is a C2, Zombie, Scanner, etc. \n\nYou are able to get intelligence judgment(intelligence type), relevant threat actors, virus/trojan family, complete original intelligence, and contextual information under this API. ",
+        "description": "Public IP addresses are obtained from the firewalls, WAF, and other security devices, which can be analyzed and investigated with our intelligence to determine if it is a C2, Zombie, Scanner, etc. \n\nYou are able to get intelligence labels(intelligence type), relevant threat actors, virus/trojan family, complete original intelligence, and contextual information under this API. ",
         "tags": [],
         "parameters": [
           {
