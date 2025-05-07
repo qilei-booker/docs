@@ -71,123 +71,24 @@
                       "properties": {
                         "summary": {
                           "type": "object",
-                          "properties": {
-                            "judgments": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            },
-                            "whitelist": {
-                              "type": "boolean"
-                            },
-                            "first_seen": {
-                              "type": "string"
-                            },
-                            "last_seen": {
-                              "type": "string"
-                            }
-                          },
-                          "required": [
-                            "judgments",
-                            "whitelist",
-                            "first_seen",
-                            "last_seen"
-                          ],
+                          "properties": {},
                           "description": "Summary of the intelligence determined by ThreatBook.\n            \nEach item includes the following fields:\n- judgments: Array. Intelligence type of the final verdict by ThreatBook.\n- whitelist: Boolean.\n  - true: It is whitelisted.\n  - false: It is not whitelisted.\n- first_seen: String. UTC Time of the first discovery of intelligence.\n- last_seen: String. UTC Time of the last discovery of intelligence."
                         },
                         "basic": {
                           "type": "object",
-                          "properties": {
-                            "carrier": {
-                              "type": "string"
-                            },
-                            "location": {
-                              "type": "object",
-                              "properties": {
-                                "country": {
-                                  "type": "string"
-                                },
-                                "province": {
-                                  "type": "string"
-                                },
-                                "city": {
-                                  "type": "string"
-                                },
-                                "lng": {
-                                  "type": "string"
-                                },
-                                "lat": {
-                                  "type": "string"
-                                },
-                                "country_code": {
-                                  "type": "string"
-                                }
-                              },
-                              "required": [
-                                "country",
-                                "province",
-                                "city",
-                                "lng",
-                                "lat",
-                                "country_code"
-                              ]
-                            }
-                          },
-                          "required": [
-                            "carrier",
-                            "location"
-                          ],
+                          "properties": {},
                           "description": "Geographic location information. \n- carrier\n- Location\n   - country\n   - country_code\n   - province\n   - city\n   - lng: longitude.\n   - lat: latitude."
                         },
                         "asn": {
                           "type": "object",
-                          "properties": {
-                            "rank": {
-                              "type": "integer"
-                            },
-                            "info": {
-                              "type": "string"
-                            },
-                            "number": {
-                              "type": "integer"
-                            }
-                          },
-                          "required": [
-                            "rank",
-                            "info",
-                            "number"
-                          ],
+                          "properties": {},
                           "description": "Asn information."
                         },
                         "ports": {
                           "type": "array",
                           "items": {
                             "type": "object",
-                            "properties": {
-                              "port": {
-                                "type": "integer"
-                              },
-                              "module": {
-                                "type": "string"
-                              },
-                              "product": {
-                                "type": "string"
-                              },
-                              "version": {
-                                "type": "string"
-                              },
-                              "detail": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "port",
-                              "module",
-                              "product",
-                              "version",
-                              "detail"
-                            ]
+                            "properties": {}
                           },
                           "description": "Open ports. Each item includes the following fields:\n- port\n- module\n- product\n- version\n- detail"
                         },
@@ -195,73 +96,7 @@
                           "type": "array",
                           "items": {
                             "type": "object",
-                            "properties": {
-                              "protocol": {
-                                "type": "string"
-                              },
-                              "port": {
-                                "type": "integer"
-                              },
-                              "digital_certificate": {
-                                "type": "object",
-                                "properties": {
-                                  "sha256": {
-                                    "type": "string"
-                                  },
-                                  "subject": {
-                                    "type": "string"
-                                  },
-                                  "issuer": {
-                                    "type": "string"
-                                  },
-                                  "fingerprint": {
-                                    "type": "string"
-                                  },
-                                  "purpose": {
-                                    "type": "string"
-                                  },
-                                  "verify": {
-                                    "type": "string"
-                                  },
-                                  "status": {
-                                    "type": "string"
-                                  },
-                                  "revoked": {
-                                    "type": "boolean"
-                                  },
-                                  "begin": {
-                                    "type": "string"
-                                  },
-                                  "end": {
-                                    "type": "string"
-                                  },
-                                  "status_desc": {
-                                    "type": "string"
-                                  },
-                                  "serial_number": {
-                                    "type": "string"
-                                  },
-                                  "revoked_time": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "sha256",
-                                  "subject",
-                                  "issuer",
-                                  "fingerprint",
-                                  "purpose",
-                                  "verify",
-                                  "status",
-                                  "revoked",
-                                  "begin",
-                                  "end",
-                                  "status_desc",
-                                  "serial_number",
-                                  "revoked_time"
-                                ]
-                              }
-                            }
+                            "properties": {}
                           },
                           "description": "Relevant certificates. Each item includes the following fields:\n- protocol\n- Port\n- digital_certificate: Certificate detail.\n  - subject\n  - issuer\n  - fingerprint\n  - purpose\n  - verify: digital signature algorithm.\n  - Status: There are four status for the certificate.\n    - 0: Normal.\n    - 1: Expired.\n    - 2: Invalid.\n    - 3: Self-signed.\n  - status_desc: Description for the certificate status.\n  - revoked: Boolean.Get to know whether the certificate is revoked.\n  - revoke_time: The revoke time for the certificate.\n  - Start: Effective time of the certificate.\n  - End: Expiration time of the certificate.\n  - Serial_number: Serial number of the certificate."
                         },
@@ -623,66 +458,7 @@
                       "properties": {
                         "ips": {
                           "type": "object",
-                          "properties": {
-                            "183.18.2.4:8080": {
-                              "type": "object",
-                              "properties": {
-                                "judgments": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "string"
-                                  }
-                                },
-                                "whitelist": {
-                                  "type": "boolean"
-                                },
-                                "family": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "string"
-                                  }
-                                },
-                                "severity": {
-                                  "type": "string"
-                                },
-                                "APT": {
-                                  "type": "boolean"
-                                },
-                                "threat_actor": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "string"
-                                  }
-                                },
-                                "tag_categories": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "string"
-                                  }
-                                },
-                                "confidence_level": {
-                                  "type": "string"
-                                },
-                                "threat_level": {
-                                  "type": "string"
-                                }
-                              },
-                              "required": [
-                                "judgments",
-                                "whitelist",
-                                "family",
-                                "severity",
-                                "APT",
-                                "threat_actor",
-                                "tag_categories",
-                                "confidence_level",
-                                "threat_level"
-                              ]
-                            }
-                          },
-                          "required": [
-                            "183.18.2.4:8080"
-                          ],
+                          "properties": {},
                           "description": "Key is an IP, value is a JSON Object. All fields for each item are shown below:\n- **threat_level**: String.\n  - **malicious**: Only when we capture some specific activities related to \"C2, Sinkhole C2, MiningPool, CoinMiner, Malware\", we will consider it malicious in the compromise detection scenario.   \n  - **safe**: This determination is made only from the perspective of compromise detection and does not mean that there are no other malicious intelligence or activities associated with the IP or domain name beyond compromise.\n- **confidence_level**: String. There are three levels.\n  - high\n  - Midium\n  - Low\n- **judgments**: Array. Intelligence type.\n  There are 5 malicious types considered as **indicators of compromise(IOC)** in this API shown as below, other malicious types in the complete Intelligence Types sheets will not be returned.\n  - C2\n  - Sinkhole C2\n  - MiningPool\n  - CoinMiner\n  - Malware\n  \n    Besides, neutral intelligence type will be returned, such as CDN, IDC, DNS, etc.\n- **whitelist**: Boolean. \n  - true: It is whitelisted.\n  - false: It is not whitelisted.\n- **APT**: Boolean\n  - true: It is an APT.\n  - false: There is not enough evidence to identify whether it is an APT.\n- **threat_actor**: Array. \n- **family**: Array. Virus or Trojan family.\n- **tag_categories**: Array. Fields for each item are shown bellow. \n  - tag_type: Tag type. For example, “industry”.\n  - tags: Specific tags are under the tag type."
                         },
                         "domains": {
@@ -1005,288 +781,37 @@
                       "properties": {
                         "summary": {
                           "type": "object",
-                          "properties": {
-                            "judgments": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            },
-                            "whitelist": {
-                              "type": "boolean"
-                            },
-                            "family": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            },
-                            "first_seen": {
-                              "type": "string"
-                            },
-                            "last_seen": {
-                              "type": "string"
-                            },
-                            "APT": {
-                              "type": "boolean"
-                            },
-                            "threat_actor": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            },
-                            "tag_categories": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            }
-                          },
-                          "required": [
-                            "judgments",
-                            "whitelist",
-                            "family",
-                            "first_seen",
-                            "last_seen",
-                            "APT",
-                            "threat_actor",
-                            "tag_categories"
-                          ],
+                          "properties": {},
                           "description": "Summary of the intelligence determined by ThreatBook. It is produced in a strict quality control process.\n\nEach item includes the following fields:\n- **judgments**: Array. Intelligence type of the final verdict by ThreatBook.\n- **whitelist**: Boolean. \n  - true: It is whitelisted.\n  - false: It is not whitelisted.\n- **APT**: Boolean\n  - true: It is an APT.\n  - false: There is not enough evidence to identify whether it is an APT.\n- **threat_actor**: Array. \n- **family**: Array. Virus or trojan family.\n- **tag_categories**: Array. Fields for each item are shown bellow. \n  - tag_type: Tag type. For example, “industry”.\n  - tags: Specific tags are under the tag type.\n- **first_seen**: String. UTC Time of the first discovery of intelligence.\n- **last_seen**: String. UTC Time of the last discovery of intelligence."
                         },
                         "intelligences": {
                           "type": "object",
-                          "properties": {
-                            "threatbook_lab": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "source": {
-                                    "type": "string"
-                                  },
-                                  "confidence": {
-                                    "type": "integer"
-                                  },
-                                  "expired": {
-                                    "type": "boolean"
-                                  },
-                                  "intel_tags": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "first_seen": {
-                                    "type": "string"
-                                  },
-                                  "intel_types": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "last_seen": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "source",
-                                  "confidence",
-                                  "expired",
-                                  "intel_tags",
-                                  "first_seen",
-                                  "intel_types",
-                                  "last_seen"
-                                ]
-                              }
-                            },
-                            "open_source": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "source": {
-                                    "type": "string"
-                                  },
-                                  "confidence": {
-                                    "type": "integer"
-                                  },
-                                  "expired": {
-                                    "type": "boolean"
-                                  },
-                                  "intel_tags": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "tags": {
-                                          "type": "array",
-                                          "items": {
-                                            "type": "string"
-                                          }
-                                        },
-                                        "tags_type": {
-                                          "type": "string"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "first_seen": {
-                                    "type": "string"
-                                  },
-                                  "intel_types": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "last_seen": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "source",
-                                  "confidence",
-                                  "expired",
-                                  "intel_tags",
-                                  "first_seen",
-                                  "intel_types",
-                                  "last_seen"
-                                ]
-                              }
-                            }
-                          },
-                          "required": [
-                            "threatbook_lab",
-                            "open_source"
-                          ],
+                          "properties": {},
                           "description": "Complete original intelligence. \n\nIntelligence consists of two parts:\n- threatbook_lab: The intelligence is produced or discovered by ThreatBook. All the final comprehensive verdicts are determined based on our own intelligence. \n  - source: Intelligence source.\n  - first_seen: String. UTC time.\n  - last_seen: String. UTC time.\n  - confidence: String. confidence score. The higher the score, the higher the credibility of the intelligence.\n  - expired: Boolean.\n    - true: This piece of intelligence is expired.\n    - false: This piece of intelligence is still valid.\n  - intel_types: Array. Intelligence type.\n  - Intel_tags: Array. tags for this intelligence.\n- open_source: The intelligence is gathered from open source. It is just for reference for our customers, we will not use it in our final verdict.\n  \n  All the fields are the same as \"threatbook_lab\" above. \n  \n  ——————\n\n  Open source intelligence includes the following non-exclusive intelligence sources, updating continuously…\n  \n  [mirc.com](http://mirc.com)\n  \n  [danger.rulez.sk](http://danger.rulez.sk)\n  \n  [alexa.com](http://alexa.com)\n  \n  [binarydefense.com](http://binarydefense.com)\n  \n  [blocklist.de](http://blocklist.de)\n  \n  [cinsscore.com](http://cinsscore.com)\n  \n  [sslbl.abuse.ch](http://sslbl.abuse.ch)\n  \n  [phishtank.com](http://phishtank.com)\n  \n  [packetmail.net](http://packetmail.net)\n  \n  [spamhaus.org](http://spamhaus.org)\n  \n  [vxvault.net](http://vxvault.net)\n  \n  [alienvault.com](http://alienvault.com)\n  \n  [nothink.org](http://nothink.org)\n  \n  [feodotracker.abuse.ch](http://feodotracker.abuse.ch)\n  \n  [openphish.com](http://openphish.com)\n  \n  [hosts-file.net](http://hosts-file.net)\n  \n  ……"
                         },
                         "samples": {
                           "type": "array",
                           "items": {
                             "type": "object",
-                            "properties": {
-                              "sha256": {
-                                "type": "string"
-                              },
-                              "ratio": {
-                                "type": "string"
-                              },
-                              "scan_time": {
-                                "type": "string"
-                              },
-                              "malware_type": {
-                                "type": "string"
-                              },
-                              "malware_family": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "sha256",
-                              "ratio",
-                              "scan_time",
-                              "malware_type",
-                              "malware_family"
-                            ]
+                            "properties": {}
                           },
                           "description": "Relevant samples. It will be returned up to 20 samples.Each item includes the following fields:\n- sha256\n- scan_time\n- ratio: Detecting by multi-engine antivirus scanners. For example, \"1/22\" means one of the antivirus scanners considers this sample as malicious.\n- malware_type\n- malware_family"
                         },
                         "basic": {
                           "type": "object",
-                          "properties": {
-                            "carrier": {
-                              "type": "string"
-                            },
-                            "location": {
-                              "type": "object",
-                              "properties": {
-                                "country": {
-                                  "type": "string"
-                                },
-                                "province": {
-                                  "type": "string"
-                                },
-                                "city": {
-                                  "type": "string"
-                                },
-                                "lng": {
-                                  "type": "string"
-                                },
-                                "lat": {
-                                  "type": "string"
-                                },
-                                "country_code": {
-                                  "type": "string"
-                                }
-                              },
-                              "required": [
-                                "country",
-                                "province",
-                                "city",
-                                "lng",
-                                "lat",
-                                "country_code"
-                              ]
-                            }
-                          },
-                          "required": [
-                            "carrier",
-                            "location"
-                          ],
+                          "properties": {},
                           "description": "Geographic location information. \n- carrier\n- location\n  - country\n  - country_code\n  - province\n  - city\n  - lng: longitude.\n  - lat: latitude."
                         },
                         "asn": {
                           "type": "object",
-                          "properties": {
-                            "rank": {
-                              "type": "integer"
-                            },
-                            "info": {
-                              "type": "string"
-                            },
-                            "number": {
-                              "type": "integer"
-                            }
-                          },
-                          "required": [
-                            "rank",
-                            "info",
-                            "number"
-                          ],
+                          "properties": {},
                           "description": "Asn information."
                         },
                         "ports": {
                           "type": "array",
                           "items": {
                             "type": "object",
-                            "properties": {
-                              "port": {
-                                "type": "integer"
-                              },
-                              "module": {
-                                "type": "string"
-                              },
-                              "product": {
-                                "type": "string"
-                              },
-                              "version": {
-                                "type": "string"
-                              },
-                              "detail": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "port",
-                              "module",
-                              "product",
-                              "version",
-                              "detail"
-                            ]
+                            "properties": {}
                           },
                           "description": "Open ports. Each item includes the following fields:\n- port\n- module\n- product\n- version\n- detail"
                         },
@@ -1294,73 +819,7 @@
                           "type": "array",
                           "items": {
                             "type": "object",
-                            "properties": {
-                              "protocol": {
-                                "type": "string"
-                              },
-                              "port": {
-                                "type": "integer"
-                              },
-                              "digital_certificate": {
-                                "type": "object",
-                                "properties": {
-                                  "sha256": {
-                                    "type": "string"
-                                  },
-                                  "subject": {
-                                    "type": "string"
-                                  },
-                                  "issuer": {
-                                    "type": "string"
-                                  },
-                                  "fingerprint": {
-                                    "type": "string"
-                                  },
-                                  "purpose": {
-                                    "type": "string"
-                                  },
-                                  "verify": {
-                                    "type": "string"
-                                  },
-                                  "status": {
-                                    "type": "string"
-                                  },
-                                  "revoked": {
-                                    "type": "boolean"
-                                  },
-                                  "begin": {
-                                    "type": "string"
-                                  },
-                                  "end": {
-                                    "type": "string"
-                                  },
-                                  "status_desc": {
-                                    "type": "string"
-                                  },
-                                  "serial_number": {
-                                    "type": "string"
-                                  },
-                                  "revoked_time": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "sha256",
-                                  "subject",
-                                  "issuer",
-                                  "fingerprint",
-                                  "purpose",
-                                  "verify",
-                                  "status",
-                                  "revoked",
-                                  "begin",
-                                  "end",
-                                  "status_desc",
-                                  "serial_number",
-                                  "revoked_time"
-                                ]
-                              }
-                            }
+                            "properties": {}
                           },
                           "description": "Relevant certificates. Each item includes the following fields:\n- protocol\n- Port\n- digital_certificate: Certificate detail.\n  - subject\n  - issuer\n  - fingerprint\n  - purpose\n  - verify: digital signature algorithm.\n  - Status: There are four status for the certificate.\n    - 0: Normal.\n    - 1: Expired.\n    - 2: Invalid.\n    - 3: Self-signed.\n  - status_desc: Description for the certificate status.\n  - revoked: Boolean.Get to know whether the certificate is revoked.\n  - revoke_time: The revoke time for the certificate.\n  - begin: Effective time of the certificate.\n  - End: Expiration time of the certificate.\n  - Serial_number: Serial number of the certificate."
                         },
@@ -2168,182 +1627,19 @@
                       "properties": {
                         "summary": {
                           "type": "object",
-                          "properties": {
-                            "judgments": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            },
-                            "whitelist": {
-                              "type": "boolean"
-                            },
-                            "family": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            },
-                            "first_seen": {
-                              "type": "string"
-                            },
-                            "last_seen": {
-                              "type": "string"
-                            },
-                            "APT": {
-                              "type": "boolean"
-                            },
-                            "threat_actor": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            },
-                            "tag_categories": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            }
-                          },
-                          "required": [
-                            "judgments",
-                            "whitelist",
-                            "family",
-                            "first_seen",
-                            "last_seen",
-                            "APT",
-                            "threat_actor",
-                            "tag_categories"
-                          ],
+                          "properties": {},
                           "description": "Summary of the intelligence determined by ThreatBook. It is produced in a strict quality control process.\nEach item includes the following fields:\n- **judgments**: Array. Intelligence type of the final verdict by ThreatBook.\n- **whitelist**: Boolean. \n  - true: It is whitelisted.\n  - false: It is not whitelisted.\n- **APT**: Boolean\n  - true: It is an APT.\n  - false: There is not enough evidence to identify whether it is an APT.\n- **threat_actor**: Array. \n- **family**: Array. Virus or trojan family.\n- **tag_categories**: Array. Fields for each item are shown bellow. \n  - tag_type: Tag type. For example, “industry”.\n  - tags: Specific tags are under the tag type.\n- **first_seen**: String. UTC Time of the first discovery of intelligence.\n- **last_seen**: String. UTC Time of the last discovery of intelligence."
                         },
                         "intelligences": {
                           "type": "object",
-                          "properties": {
-                            "threatbook_lab": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "source": {
-                                    "type": "string"
-                                  },
-                                  "confidence": {
-                                    "type": "integer"
-                                  },
-                                  "expired": {
-                                    "type": "boolean"
-                                  },
-                                  "intel_tags": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "first_seen": {
-                                    "type": "string"
-                                  },
-                                  "intel_types": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "last_seen": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "source",
-                                  "confidence",
-                                  "expired",
-                                  "intel_tags",
-                                  "first_seen",
-                                  "intel_types",
-                                  "last_seen"
-                                ]
-                              }
-                            },
-                            "open_source": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "source": {
-                                    "type": "string"
-                                  },
-                                  "confidence": {
-                                    "type": "integer"
-                                  },
-                                  "expired": {
-                                    "type": "boolean"
-                                  },
-                                  "intel_tags": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "first_seen": {
-                                    "type": "string"
-                                  },
-                                  "intel_types": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "last_seen": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "source",
-                                  "confidence",
-                                  "expired",
-                                  "intel_tags",
-                                  "first_seen",
-                                  "intel_types",
-                                  "last_seen"
-                                ]
-                              }
-                            }
-                          },
-                          "required": [
-                            "threatbook_lab",
-                            "open_source"
-                          ],
+                          "properties": {},
                           "description": "Complete original intelligence. \n\nIntelligence consists of two parts:\n\n- threatbook_lab: The intelligence is produced or discovered by ThreatBook. All the final comprehensive verdicts are determined based on our own intelligence. \n  - source: Intelligence source.\n  - first_seen: String. UTC time.\n  - last_seen: String. UTC time.\n  - confidence: String. confidence score. The higher the score, the higher the credibility of the intelligence.\n  - expired: Boolean.\n    - true: This piece of intelligence is expired.\n    - false: This piece of intelligence is still valid.\n  - intel_types: Array. Intelligence type.\n  - Intel_tags: Array. tags for this intelligence.\n- open_source: The intelligence is gathered from open source. It is just for reference for our customers, we will not use it in our final verdict.\n  \n  All the fields are the same as \"threatbook_lab\" above.\n   \n  ——————\n  \n  Open source intelligence includes the following non-exclusive intelligence sources, updating continuously…\n  \n  [mirc.com](http://mirc.com)\n  \n  [danger.rulez.sk](http://danger.rulez.sk)\n  \n  [alexa.com](http://alexa.com)\n  \n  [binarydefense.com](http://binarydefense.com)\n  \n  [blocklist.de](http://blocklist.de)\n  \n  [cinsscore.com](http://cinsscore.com)\n  \n  [sslbl.abuse.ch](http://sslbl.abuse.ch)\n  \n  [phishtank.com](http://phishtank.com)\n  \n  [packetmail.net](http://packetmail.net)\n  \n  [spamhaus.org](http://spamhaus.org)\n  \n  [vxvault.net](http://vxvault.net)\n  \n  [alienvault.com](http://alienvault.com)\n  \n  [nothink.org](http://nothink.org)\n  \n  [feodotracker.abuse.ch](http://feodotracker.abuse.ch)\n  \n  [openphish.com](http://openphish.com)\n  \n  [hosts-file.net](http://hosts-file.net)\n  \n  ……"
                         },
                         "samples": {
                           "type": "array",
                           "items": {
                             "type": "object",
-                            "properties": {
-                              "sha256": {
-                                "type": "string"
-                              },
-                              "ratio": {
-                                "type": "string"
-                              },
-                              "scan_time": {
-                                "type": "string"
-                              },
-                              "malware_type": {
-                                "type": "string"
-                              },
-                              "malware_family": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "sha256",
-                              "ratio",
-                              "scan_time",
-                              "malware_type",
-                              "malware_family"
-                            ]
+                            "properties": {}
                           },
                           "description": "Relevant samples. It will be returned up to 20 samples.Each item includes the following fields:\n- sha256\n- scan_time\n- ratio: Detecting by multi-engine antivirus scanners. For example, \"1/22\" means one of the antivirus scanners considers this sample as malicious.\n- malware_type\n- malware_family"
                         },
@@ -2355,181 +1651,26 @@
                           "type": "array",
                           "items": {
                             "type": "object",
-                            "properties": {
-                              "subject": {
-                                "type": "string"
-                              },
-                              "issuer": {
-                                "type": "string"
-                              },
-                              "fingerprint": {
-                                "type": "string"
-                              },
-                              "purpose": {
-                                "type": "string"
-                              },
-                              "verify": {
-                                "type": "string"
-                              },
-                              "status": {
-                                "type": "string"
-                              },
-                              "revoked": {
-                                "type": "boolean"
-                              },
-                              "begin": {
-                                "type": "string"
-                              },
-                              "end": {
-                                "type": "string"
-                              },
-                              "status_desc": {
-                                "type": "string"
-                              },
-                              "serial_number": {
-                                "type": "string"
-                              },
-                              "revoked_time": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "subject",
-                              "issuer",
-                              "fingerprint",
-                              "purpose",
-                              "verify",
-                              "status",
-                              "revoked",
-                              "begin",
-                              "end",
-                              "status_desc",
-                              "serial_number",
-                              "revoked_time"
-                            ]
+                            "properties": {}
                           },
                           "description": "Relevant certificates. Each item includes the following fields:\n- subject\n- issuer\n- fingerprint\n- purpose\n- verify: digital signature algorithm.\n- Status: There are four status for the certificate.\n  - 0: Normal.\n  - 1: Expired.\n  - 2: Invalid.\n  - 3: Self-signed.\n- status_desc: Description for the certificate status.\n- revoked: Boolean.Get to know whether the certificate is revoked.\n- revoked_time: The revoke time for the certificate.\n- begin: Effective time of the certificate.\n- End: Expiration time of the certificate.\n- Serial_number: Serial number of the certificate."
                         },
                         "categories": {
                           "type": "object",
-                          "properties": {
-                            "first_cats": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            },
-                            "second_cats": {
-                              "type": "string"
-                            }
-                          },
-                          "required": [
-                            "first_cats",
-                            "second_cats"
-                          ],
+                          "properties": {},
                           "description": "Domain categories. \n            \n- first_cats: Array.\n- second_cats: String."
                         },
                         "cur_ips": {
                           "type": "array",
                           "items": {
                             "type": "object",
-                            "properties": {
-                              "ip": {
-                                "type": "string"
-                              },
-                              "carrier": {
-                                "type": "string"
-                              },
-                              "location": {
-                                "type": "object",
-                                "properties": {
-                                  "country": {
-                                    "type": "string"
-                                  },
-                                  "province": {
-                                    "type": "string"
-                                  },
-                                  "city": {
-                                    "type": "string"
-                                  },
-                                  "lng": {
-                                    "type": "string"
-                                  },
-                                  "lat": {
-                                    "type": "string"
-                                  },
-                                  "country_code": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "country",
-                                  "province",
-                                  "city",
-                                  "lng",
-                                  "lat",
-                                  "country_code"
-                                ]
-                              }
-                            },
-                            "required": [
-                              "ip",
-                              "carrier",
-                              "location"
-                            ]
+                            "properties": {}
                           },
                           "description": "Current resolved IPs for the domain. Each item includes the following fields.\n- ip\n- location\n  - country\n  - country_code\n  - province\n  - city\n  - lng: longitude.\n  - lat: latitude."
                         },
                         "cur_whois": {
                           "type": "object",
-                          "properties": {
-                            "cdate": {
-                              "type": "string"
-                            },
-                            "edate": {
-                              "type": "string"
-                            },
-                            "udate": {
-                              "type": "string"
-                            },
-                            "alexa": {
-                              "type": "string"
-                            },
-                            "registrar_name": {
-                              "type": "string"
-                            },
-                            "name_server": {
-                              "type": "string"
-                            },
-                            "registrant_name": {
-                              "type": "string"
-                            },
-                            "registrant_email": {
-                              "type": "string"
-                            },
-                            "registrant_company": {
-                              "type": "string"
-                            },
-                            "registrant_address": {
-                              "type": "string"
-                            },
-                            "registrant_phone": {
-                              "type": "string"
-                            }
-                          },
-                          "required": [
-                            "cdate",
-                            "edate",
-                            "udate",
-                            "alexa",
-                            "registrar_name",
-                            "name_server",
-                            "registrant_name",
-                            "registrant_email",
-                            "registrant_company",
-                            "registrant_address",
-                            "registrant_phone"
-                          ],
+                          "properties": {},
                           "description": "Latest whois information for the domain. All the fields are shown bellow.\n- registrar_name: Registrar name.\n- name_server: Server names separated by \"|\".\n- registrant_name: Registrant name. \n- registrant_email: Registrant email.\n- registrant_company: Registrant company.\n- registrant_address: Registrant address.\n- registrant_phone: Registrant phone.\n- cdate: Registration date.\n- udate: Update date.\n- edate: Expiration date."
                         }
                       },
@@ -10128,8 +9269,506 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                }
+              }
+            },
+            "headers": {
+              "Content-Disposition": {
+                "example": "",
+                "required": true,
+                "description": "",
+                "schema": {
+                  "type": "string",
+                  "const": "attachment; filename=your_file_name.zip"
+                }
+              },
+              "Content-Type": {
+                "example": "",
+                "required": true,
+                "description": "",
+                "schema": {
+                  "type": "string",
+                  "const": "application/zip"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "No data"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 204
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
                 },
-                "example": "89504e470d0a1a0a0000000d4948445200000108000000a00806000000f0cef2c80000000970485973000016250000162501495224f0000000017352474200aece1ce90000000467414d410000b18f0bfc610500007a42494441547801edbd0980dd55753f7ebecbdb66cd4c3299240cc9248404869d80888009a082028a4adc71a968f5afedaf755faa21b5a5da5aab2d52b15a15b74a5c705f400d02ee511118b6904cc2846432c9ec336ffd7ebffff339f7deefbbefcd9bc9040841f20e4cde77b9fbf7de73cf76cf71687670a228e27f9df8c1c6abaf76e8eaaba967fd7aa76370d019dcbc39eae5146bf9dd036bc8a12d446bd6106ddb42ce1e5ae9ac5c49942975397d7d7dd4d85572a89f1376f15fbf2a2f4d81438bad1a77ab7f463a3b9d79036e84772361e8ccd6c8f4fcf94eaeb737a2ce4ea28101925f0dd9818128c365c98d7e87b70326019ef1937447e8e45cae4f3fcb12456d1d1d2e6ef13c6db521373818e17d37973b6037c4d46dff02acf694ebb4a0aadd71fbacfca83f6e1ffa1c729fddfd11fa87fbb68e1e17f77191927d7a99d5cfa78d2597dbcae50cd8fda9eedfb43c21e77123949beee870303e9d9c6ea0ba3c528da818eb19a0620cf4f8cce331c7bca868473c969d2a935ca1eeaa31aefe36d5f5587db1e7814a5463acf89de963cd76cf706fc33cfe76e80fd2e4b9ce91dda1336f31ff721bd20303619a1697e71c79d2a60ef2e5b74fcaf6a309da1a514f0f516f2fade0f119e73fbc1f5cbf3ea24d9b54e6f5eb09d7bc4ea3abf94f12f0bf52b883251e390c35bf47cd8517a9221c410cea9a363a0a4b6c60e40004c1553bbdebd639b47933d6b0d32665f55013151c12a4c0c8a08f28c548615f10c4f5a0f39d7a8047793275f0e52837d0bc9fd00bb1bdbd9d0a23235279523f2b0c0d4513eded4e13ffd2820544fbf65192eff11cbf433a1f0d0dd1902e8fefe2eb26fe0828df7e665f5743ad77a60cd306d3de26d3367e6fda6bd751d093cee4457b4d9f4c5f4c7e736dfa62fac79de3db2129cf5cdb6daa6ebb8121ab0d689b3d5e76db2bf256959fac2a7f6886716ab2fa4933a4b1efedb6578f5d3c6e7a3ca8ba1ffa77a8aabc782c31b6688b95b7a20d561fdbf5b7b0c7a51aaac769da7bfb1ba36df3e63985ad5b233347edb61055ce477b1ec82f432b2fdac1c14175ddd9192fe051208fc58b9d9ce7451dfd0a6164813878dd4d707d06513cc06b7215ff0259f46edaa4f263fd92ace388cce6af3044cd3ecd8420d4736402c5b06143040401e4b0e99e7b1c60235ed8ce033aff1afe2f4d596727f53a99ee6e79369ecfbb29ee7c9eb164734f8f8b8e26b95c332013165248e8eb29fe6dc5006040aa7e255d73b3d3303e1ec9fde828b52e5dca3fa3345768e5ff464777526b6b2b4d7159452eab56ba86d1d168aab5d5691875a2c4d21687741da335cb34ed4499615c26ca487019a356ba99ca88cb413dadadb5dfe339bfaf1e9318f40b93bbc8932b618d31fa9be89f08a75aa78f71b9df4ea4deb7527174673c067866da58d463131760b59fecf7d6185435b1b2eda3fa1fdd6fd43dc875cf637a61a6b6568f656b7990648cec6f2bdf5ca7acf50daacbc7983538f3228a734d87d6aa5e8cc663dfaac7608cfb1d39a35579ccfc88db8139dcda2a25c563c5f7c5b131697b5136c836f9bf303c1c352d5820c8af002aa1a343ca48fb7e88dfdc6e2f9a6424d1497dd1d29e9e88090a1aa65e2967b7a62a7af0cbd48441161b4009f01a77d42fbed3b4f5300d41542007ce2788011919516ce2bf0e9d07c8813909da4be46e65d47512959c41a616c03d8062c8954a2eb320e8bc33c17fc9b63607839f68510b0ec8c08f9aa52c9f42a744c0be637cdde4e4f06e6232f49b9b38ef04a5c755c3716fda8934695e04a5f189a8d4d4e8a69dc9c86f6c744a93655209799bf83f3c1fd93310353537c9333f6a94bce55e730b399d5deec438a76b6a8caf9157525ad7c897d36599ba4c1ae42d719bccb35c23973b39735995e556b67f3630e59ab69b71b3fb64f771427ecd9be965633c91dffcce54afcff58eec998caadb5c0dd5fd527d5275e39d5c99efc2df097d31759bbcea57e599099027a7e726f2a8ef381999ef53d95eae6d9ce8406db7c7c3e44993998be4a0ecd2c46444dcb6797aeec9f856956d8f65dca7f83b34c573cea44f8e4f8653cd58872dd4c0cfc7f85983c3084f230f20ff26fe331453c6f30449e49925cfd1ee68b29ba2cebe95c27e0c737b57590b1fd4c47a46102c2ae0257db5f007101be09ae68220f0cca4da88f7903768c4c0c44ed4c16cc503e3e38c1cb6889ca10908a0abcba5fe7e90412ef8ad9620704129806210a410b53853d18846080a0960324cecd9230bc96b687068729273e2af91fc86c8999c62f684d1489e87066d494d4e458d8d3c089c16ef6c30e91a7509f633fcfa28a3811f72be9249cbf7a5a9f2b529d37e2ef7f847bf97b21ad4739435a9df4f52e53b931f6dce3756d5a5cbc3bd496ff7c7b477b246df4cbe5266819bce4e4564b5dbee675c1e5f3756f519eff06ba0baaf9395434b8d557d37657b19b5910459272ae79be2f40d3236761fe3fc5c4f2ed3c08b81fb3035fd9b9976e11d7eabfb138fb11e7b8fcb0a781cf01ceff33a7de394350ff81bf81de57637ea7940d677ad05a65d8d669ca6f55fd5dd58a38c8a31d3633bbd2e3d48549e73a636d40b84116f827a49ca33461e8c37047114f51f90c5c4d0500836046293745722ecf0fd28dba7d98e6432ea5db8305cbc7933440121a888f537de1862f3bf5a49200c22980305613d038260ea41e40db837d4c320f5b0f0ae9726bbbbddc692123cb67616dd51f0858c1c62c430123985e6d0054220c69ca9a60637c78b1fc8a094c9b818238fcbc464cbf275a62143d9a92c3565d20eb82a4056ff93c9a8eb8c3ce574fc5f46ffaa17ea0e13d6e3fce6bd64cf664d46ae2fed241967ab745caf2e1bf705becfe83a93fabd49571ea18c9467e729bfc9548c6590cdc565aa369b7fed3e94fb55a0b463e74dea89a1ea5729abdb69ca263512f1b5fccb0f5046dc467d6ffa93d505549645e531d4fdd459e344f637c038059994eb65f3615cae357e05196ff4a3b2df54519efe4ed637cde871c6aba4d567d36e33fe95df28638d79797cc9ea17de25adef96b4e6cbf4ef587e563d56e591a669f333abcb40fbcd789b9e15f4fc2b8f4be5fc4cf2629732a7d475a0176dba9111c514df6b842188a385e51c1313a1411449a6240afc0b81b150135dcc76b08ca273250b3319490c6732116dd9426f6424b109824b06a62642d347674e1484165c30c9e10af580345c58c7a64d0a39b03ca1a9c082c8ad5bb94fddcef8e2bc0b76024801c8a118862e78ac42d8e4fae3634e899182276c0b238528e3263391208609fec598b89aa5f1a2f2e270c92cba9cfc1be6280a522937010c2af2dc9423d7b91ca5d36995271539619e070a8849c835e44d13d2a7f16ba535504e4b71baea6b03b5f2573ed3f5e9679565f01dbfae7e9ed3fd23f34e1291bc47db02271fa5751f74f1f22ecce522379d9e91fc37e346557da805763dd5633253bfab9f1779ec13187bfef546f321daa6cac983ec97ef65f745eef37c5f51aeee2099f1a71a7d30697254ab6f6a5c30a7d3568ee9dfdf5c9b394335fa59bbdf391e9f54c5f8547c5bbe48f20a42ffedb2abdb6f7f6753171720ed4fa7339c4aa12020032fe730e2e54dd4714241bc902d65b9e8c96c484d8d0464e13b9361899f4f8e8d859dededa1613958ee17505717819a18eceb0b87350210c125fff582ade035be410929e7a8c5600471b5e3b81b54610ea807a11cd6ad235669ba10754cd294db487dce304b52db18398c73f94b1939e4c36617ac443a8adc52d4c07fa120872052c800c8212ff72917a31aa492fc9b97610a5a9add44a1104178e9528a59837c45b3429e506e2a35adbdf21c728dbc9d3ec5f426736ea994bad665d965e4f51b0309ee6f7106a1ed34d0998b5192055a85d0ce375339685e2a55ce5f4c56e6c5abacd53e9403d94daa567f751a97cb0879cc6ad55351dfe30815e3563d8833a5ab02e95b9efb7610ed435fb3dcd79a594c87512fffa6f87ed6f952e3b95d462dc0f7f2c6c765e155e79fb1cc72e1ba5db5df9a5a312e48141620604d5190cb4794e67b50214e3e04620a8134b2d930686c8c822962e4e032b2980ad3cdcd518e1145c275c314ff01491458dd9c5fbc386adebd3beca36e518b2e5cd31a6e61f140db160a998688984ba0abcb94435496572aa8c962185b07c086f5eb9dcd4c3db01cc6d94b2bc52e60a22be7e68a4537ade50ca01c1a9872d8cf7f99a8d12d4d8cbbadcc7bf32ee2b262d903424ca4421788c14ff1b3bcdaa932a89f076e2a99745d4a3820b24b50cf1630210c1591d42d2b50ed7b1b92f25c2d1c7445a5292fa4a44e51a0f235f3ba8562544aaafa6b95974c26a950307526cbaff13059ddb4721dd5ed989eb850ee4ad2ae5341c8ed4a73bb50965f7066686315485995f524adc7854265dfedf1a8ddff4a70992e76278a6109dfa750eeb3c9cb346ee4d66827c6c2e7b190fa93f637547955ffec6f5e7bcccaed3575218fdd1ba28aba2bda48d3dfd3f4b6b8bc4f87548978cb7595c1e7851b52c295b995ac551e55d5a39e95fb5ad96ed7298615750a62606a81afbd7c210cd2c46c673a9a14ca622464d95d28ec15a771a67241a989a216d70d404d4c319200cb0144011b8be6dda930abed2686d7b0e0b2795d0413055012eb5115cd81c5a8963fc0180ad72bb66d73b76dc93aa01cbaf91e6c055498d98101b7d0d6a690c3282307d626a4986a883229cf9b6486899143908ddc809142035305a02480187ca6c25867c19a0b500b3ce1f8b79448ca840b139120a1846e87421c8c658b93510203c92f8a4535d08904df17cb89519e5f96b14aba84f96009f51e77ccb445a504a72deab4c8cfe5e059542c326d9c907290bf81eb28d6284b1eda20cff4c74e283629ae076db2d2d7aa3bee3055b6c5f4d93cb7eb8ecb4994fb2ebffa99496f8f8b193be9a39d2eaec2ea274d6f57f533199744b2328d359ea6efd5e310f216816feb723b42f43391e057c5697daceea7f90e2e3f0ba906596c8f65b1fa95ea7b0a75eab1c218ab2e252bfb6af7cd6e53a2721cec3935e3f859f94c7f251de696995709944131a2098ac51088849a5862c1080863e73222e0c51f0ac592e6c5c5d44331c7b29f06de87726e0844d1e4648389093748901b36b531db619004cb24f6532a0415f1f09aad210c1a77af132421c841730cd390442582803c80c90ba3bd580b9682b14cf39a35ce2fb76c719b59e6c05c8fc39c98dbb220704139248679909b1b3d8a4a1e9043984e7901e3af04238d2c8b4d5858e9fafc9765a4e027126ea9404e9af28c2c981822208982e3f9be1ba04ed0db09d526c8263c0869b48c222c316dc1a3c885c56de6d1e289c58319ebfb6bad5c95cee433656242aa324d7e758f744853c4c7f455ba62b1483363858a2915d7552ca9b79888aeeff37d91127e655e539fddae725b1315e5cdd41fbb5d76dfd06655be2fe9a43dbeddeea255674916685035e6b3438212b2604d39beee47a9223fda1af022aaec7bb9ad7679f6f87a9c0f77b5fa9ecaf84ee5b753803ea6134efcdcf4792edfb37a2e557f87eaef31db77aa1eebea31a9552758071e51461b4599e761714a10429213e431871861e09e57730424e1922308a108ea8169788f2986ec502e6820274834358739c70b93ac4b743d2f8041d9d83e2f14ed060b2def5ad917a55ad784bb992de9e9e890f15a7fc20911ec9daa6511d32888d8945a0b2787376d72db7a7a9ca6de5e67a09b9ca9c91e1ff60d4ded903984ee5810b090963703d6c652187aad2cd19ee2df04288928f2a284efe5f279175483c708029443a1107a2e159d9011037691125f63c785b8c5d56d722adac693901211f03508bb124433e4c7ef3d664c02bec7afc30ba2542a3fc37bdfc7a86242f90444c49a13bdddaa672817791cbd984c5e93af24edf16b2e1abc473a3b7fc4f9cdfc30cf4d1af36bd2d865e399b9461b5409dc5fce8032ec67b208a42faacf76ff705d991e692bc7cbb4b59853ed27ab2da64f81be36694ddb4db9019e97ca6381e7e5fe94b772fbfbc8b78d9156b9bf711b4ae56b19fbaaef62fa62c6ce6e53e5f7a648c6428fb39917e5b6e27d91dbe4e836abc55e7bde548e5f35f0fc6589811399f1c2e791718ce7811f7f2b333e763da4eb09b9cdb804e60d755f23cc5546029c3ff445abc1c44fa91800410845914a874eb1c88f5d960317e4973519216413e3ce54c02b2c6cd348c2dd9708f6d36ea622287a98d684ab688b32cb86c092ff848a50328878ded4a42062a3a875e40cee65ad052307c80bc6172f168d05288746460ec51146644d0d423944d184978cd26e3e95645c107a49461281b012a11f444ceff0358fb8173232e18fe3e217c82024c67dbc58fd123029dffb8c886551e4d4448b67826aa3cb1c57c8f487fc06416406587fa9395f073c5b3c7b65987a0cf854f9b03a8d5f3143a6d7a57f3d3d51abf3fa1ad155a7af008d48cc0231f9037de34dcb60b56d86f27c5f211c961ecbae857148f9e9725ba47c75118f0f9e611156f799ca75a09f050855394f9ebf1dca9464b2e255428f1741c0df9a4a66812a642dcfaac60e6d90fa6364aa1659451fedb658e36b235af3dcae278420dc2c8252ed710b541eab3dea1ee3572ce5a2eab989f4298daca68d7fd5b57c03ab72203322d3465edaa520142413705305f19442ae30025260cd0613a54c25f01fd810de3ac2242385aceb961af9ba5828163d27c79f96154548cb3209082e27b54c029697cda95408ad062b1fc2416d5df91256774655c801504b0621cf36f25a5c4bacb9e8d92b6acd895c5930c9a3e041ee10860d5e14065e9409857a88f82fc56c452e97f5d28984ef32fb50f41b7cc68d8c341839808a888a8c103c97693e171404938a8c9278b17bdc15fef554039c50ce9294471618bec808c1f77cb92ec9803abc783cb487cc7d89bf94ef95f360801dad36956b260399468becf7e6cba11df6bd3d534a329b3d6b17b6b1ac691b5179778f64978bac7478e6a90feea00455466d0ca1d206915d9eca5bfeb57751eeb8a620224df970d955ab1a63232dd4cfecb132fd2855f5cda409cc18ea6f608f91dd56bc617119253c8ca57aa6ca401f3ca7b2cfe571a7780e96fb1cb78bbf99505d7a4330edf12aca2fff567f57b42a6f8d1b597345caf7bc8ab1f6f5789bfe620c31cf30c6f63cb4a1a4fb6cee8b55e38436e4ac769ab4a69dae23060651a0c7c6a120446399e366b6c21104c1adc2a926de9593fc8867242301e6a3e4b7c48b3ee17aa5a9f18952a6813976460c61ce2b819270dda9c0082d5906120041c088ea616a652aa299559e9b21a88c2d296d3984f5612c64c1d4c3662d7fc8ae5ce90df0229e9fcf57500f3c705e699c915a63c6cb84135e2195f2a36ce46592091fac8503a440cc6230d580fb5c84f5c3e93d8fd90b6c609e5015bcba1d7eedf20c00cbe138c26aa8b698dd869107e3480c5e20cbca063cf3311965c6e0379074b8461e3a10583b8fa9c7bcc2bd7c3c533766b9b5e38432e3028dfdbd8af26a9535637bac36d8f598f2537c5f2a057a17f3a6658ffb8b4954d265d8e97c92adc8aedfa4a9feb54b95658431658acdb42fbe373013f555a29aa0c601f9bdda6d9b256fadef3febfb78f70f488d61ed7cbe1e5f93de9e47f1d8f85eb9bf1599cb754c9f736a0ced6f6f7f5f538fa1345134100190159327eaf33b25a1224288b30208fd12a1b019816c5901b01caf9a129004a5d34154043fcac8215f905fc765429e590d677c3c48b5b733ef9f08fa98ae3f7af7ee60a2a7271acef44646e5490631589444058270d47150b747db3e4038b97774d4c5c94c1cbecaeddeed420339afb5d52bb0d622c76c51f3fcb41fb03ca594f41394cb79dc013f95f0856af00a05a612d22ca72c7886820082f0801db8f9a51253438c9979045834c1c8c21392136d61d98a47853c2342e6403088b867ca8b9140993c0c4bc0091ef4051136835070849a7a3cb27ce33a414c1c7259261f939878efcb7b2080b052a5853af83d4b4a30d411eed54401a6e7fb48df0781148db4663a90aeade4717f021046aa3cf55cb5d5b4dd6536559565f27a542666d5bf8c9029a9fba89046e4d8fd712ce11750ab90cf688f267ee423c7ed57135e8da3abc61a9b133735d2fda278ecca6360f74cc6ca87fc001a284c5c08209d38afcaafcaa71a20632063aaea9725a3bb8cfed8e342d69838224f282f3ecf1a6fd54e352ebc7220c78aaa6bad1ed720ceadeb8dcae35aee87a3fb1154b45ff2c643e2559557aeabba9e6a30f5baca6292d06e57992a46a85bcb1f02e9b783d9c67b68e0e0373008824578903394585819b8c5a0c8ec4489590b4610454110a02488351bf2cbb208501163fc17643241635f4338bc26134158b981b5198ee0ea5806588920d02c79b971a3c81fe0e3a1877adc3dcc269cd45d720ad9ac97650436ccec05ef005e73d4c06c46e04df2a7294449bf2119f845460a2c35c7e7e53f661b0b111000cb20f839c6c383ac32120a82e5ebfc5b72e5c37b9049b89800722f8b8a8929c7550bd8ec0941a897915b7b17b1d3024251a16acccd7967cc57f52e4629567da19ea05e8dba249d6b4d3e5d1e7e1da86ff1f183209aadced9da657e2bfa63d74fa477af20b2db23082014690f8b8218c9ba0ac9912997a8e67e5cdd37de856a2cba725ab2fa62f7ab567b43ec9ac542549dc68c15fa60f73b1e53f487eff14b73f896b5fa36d39897b7904ae1b8abe42415dfd42e4bda66f5c3cc8f99e693017b5c0025fe46d8e85ce11459bec63ba82b9f2e84d602185910043aee083e150d86500d4ccd811609fc54aa1464b3c5b0502a85e9b420076f74ac480d8d8c31738a1d6104c1fc670004910515d1d8182cdcda1a8eb3b0520e71dd78a3b2c3506733143b671a29c8410928e57eedba7574ebe6bdf434be1e640a02e6d3e600160631174d7027333873c102caac1be44351634296c2c8c185cd03f38eccdc0159787e582aba223160ea21c8032194f81d463190ae42c81ac93701fd841184e83602b6708cf50827e2767aa0afa21a3343b07d58f5d8ce1b5a94ad48bc12e084788cf18e4b36ebdcd1f9f05c9511a9f2b1df7aaa80721a0fe222689f848c045d68ca8372c7d1db7875bb9006b2295fefa6e6b94c0c83c54d39fab7a21cae370c833296e77aecbee28b2ab33f47ae4d590ae3eaebaa76b9ba2df21c9402dae5273046485731e6d24eeeb6ecb056fba46e9ee4a64fa194a5c635d4ed74acf4648fb5ee83f9563249f53705f7c4ccb4fc52557ebb1c5f869d6753116da81853940bdb1b724d06dd47330ee6e08359db78e6e9ef51dd6682e13f14945c6664be8319bf48b59fff2d8f678db6c64561c5702da11cbc6628812987ce80e5079c34942680c2e1b23c542b3457a43017f8796e0253eb2cb1f0fca4235b4298cf85413acd4b94777ee6efa11a85122282331a264b8020b66edd4a133d3ca427ac97e6c8c96ded0cc68025a15258038802d4c3a5e3e34e4f4f2f6de59bee60b133aa91831c868b1a9d465ed8b974e06679eb4fc3b63e0c5c3fcf6bd417e4207207d6707a218497c4c881a511400e229f70c186b144052c153ac362091e4ea8455db11ce081c054907f782c58996b91ab51fc893d4f09914208b9dcca3dcee52f14cacea7de0bd9cfd79ea6e5f02e92ef8ab2b0b2b1c23da1eb4c9e8a2faa91855d87d4cfb4368c0d0487b814ef976e557910c405ba5d404cc29df0358f9a53c9b596f96811d8851aa7b96ae711329ff3c9c7e687a69f340bd869a46f91a7591e59e5b24ba2ad011601dfb942efebf1d463e458e9543b89aac7dcd455dd2747d3cdb5da5a49d45bcf5cd55ad2f9e43385eabbd5fa3ef11843d42d6b4791c4920e485fcf13852e4da672fbe5bbe8b6616298f2831ae3a8daace6a123df5fb5098c902fab5de517fe218a68da5caad17f47e1519e53aee2b8c1559278cf09456289e6817c887c27a1e4406ab17a29c2fea4be6b217493298f05ff6198e275e8ca5a0c617b05170730cc6e9b977486c7c789559fd1247573f17d11ce590d1a356715d41252caf90b2089765ae92deacab96926f743d69e148216d72fe57d6a2879a98909371732ebc0c2c92064d22184a6c24b82bd60bcc99208a61a3c2fa1ee23115c0294f0923c417cd05a0625c6f78c2058d620da0bc87a5c4c7e6e8f4c08dd2e8bc5d3ac7f4c0dc8bd4d6fdba34f8accc6eec16de40f6cf1c6366d29e5d6166e0a9faef301794564c92cac32ec74d3585202790dc4174efb0881d2f729b233a8cca3b6305d6edc4ed6d83baa2fe853c9f5ddb8dc6adea3aa0d713b64f72ca7b39fc93845ba1f338dab55764856bf82f2984576bbac77d8a18b410df66686f6489b49dd1b994975fa9acf896a8f41d5fb5ae361a7b3e71bbe05a62ab3c0b1a421ce4fd6370ea6f769a6be4ab9c0a1d85460df60e4108e42108e6831c292a4767caed80197c1fc398bf182b00476836b2db258a2e827591e31355508d36e89a98a52b2a1a1c4d44250648d0613f041e84d06ac0c083a5858b97f772a6cece90b7b7b298433995a9a8c0a5d0d8ca47ab4fcc17e0e37716e38cf69d4fa411cc02a66322e84aa3c60622959820a9314fb81bfa77dfdcbcf6b3df1c467b2044bbcc2842264d04230fca2fbd8644502a30552d2a42a8bb388688e47a8fe32e089eecfe351dfc194f197fcbd9ec8b6d7a80b74be5b61a4047d9ebe87405ac474e57bfc85c5c2f8d83df7fee28e17bfe2fbbc10153b9264562362de3ee53870cc94999aa206a7c90944c0328f26c331076b1a56d17b7ac959ccca08dab2454e768a07b999d49c1ba9ecff6178cd1a37bf65d45d443917be1eb203813bd9dae03ba3c35ee3c20c0b2a937e3439e905a904b72648302b918060320a53c98b1fb8f35f539d9dcfa43ad4a10e4f08e407067ff1d355c7bfabc04445d2750b4c98177330b9624ebec92b16b3396833bca0e8254b913701a23f48b3ca744f7f3a4cd1d6108e640c05e1d85c585c0313351bb480125ea3cce3f462e57036d91eb2403274e0012a3f39e9c831ee740a820318d7c81f6c1ecefeced72ea923873ad4e189855467c733d77cfb9b97c2c23d5be0f518a993d2e24a21520720696282b086e113f6e8d8a9f056f8ac74d6c3818c5eff91a5b22e230830061b3644e23d6af3665ab3453d86e7dc515d58c318cea94f9097c93805463469558053ca8303f4dda0e03b2dc71db796ea50873a3ce130eff8d5cfc4c147d60eb87e32c17f492623b2e289ab051eb49a9a88c6c6c461347c6543b6d8dcdd0d1623daac1d4291d1666a70ed0a3656f8bede42cddd2527ad5dd6a3d0a916855960734fd91c4d46a1a833a1dec4115a5784aaa9037b02ad431deaf0b8032b0ce01957d661a99017674389544a9c340d4f919383197e7373bcc625044d1f51db962dea99a6202acaac7ed0abf98f6d40027d70a7bd3b22ed9b1f4e67e1290a2ee3dc74ca310eb9a04629150a8c5d8a4e34a7a3c275a8431d1e6fc0da83424c4e4927924e91914422978fe0ce1122017be78617b8c5bbd535cb1b6dcdda0c32080dc6498c0104e8e8e8e8203bc60248168f799c622e2f4e5fe0e3c1387ea13ad4a10e870d640dc2df45a140a5242389345ce16937bb1393f0c8cf94bf5aa7c00f70681b53100063511d9767bda805bb77ef26434194618a208380bf3c500f8e76c5558a9e520ac93ad4e12f0a602529071d194180d5c0da344ea1330d88a1d2e034d39804b09acfcf16338ab86f6b4ee18075eb54211b375619a019d066d6c67bb5c4fb43c19d9dcee88205ead9f8182136008494c95c4e1c884e819228281b761767e4c33a92a8431d0e17c809027d8d0d1bfe2c65794e21ba57c4728826899686f712e7b44b2766c584b683a019598c0dacc518342f7b7ba9bbbbfc4e2261213ad0940a49524823fc09bc8c478eabddc40562b35efb504f1dea5087430b5884e2392ba17c7d8282c86876c18eed8290863857650252f76a62404364b318559e39ca9bff30ad8926fbf693a7031b37487839a2c6c9a9a810a61c37051fff09dd30584446cacebd4e41d4a10e870f4a4518a53bac35a092e38a0320c4ebc2aeadb676ac624517e406dda88dfa234344182dc68c14c4460b73b4d116a79b54f8721571799e148e5072260a10588c929527f0a33a0551873a3c09c0d59ed9ab4371201668ab157579f800c6e5952c86febd55fff6f17f03a443b08f8c941366ed029c10aec395b354a78e1cea50872701a8302e5620a0aca224403f98b8e5e98e10b13ae335bba906b2a856734ae2b55aa2d9d8d5e5088600ccb352690a224f4aad82180bea405a5124a954873ad4e1b080f127ea17110c2a59b116cb2c86821c6ffc3bbacb3288f5e6b8644d536b2ab3180f6cde2cbf08fc99a58188f6ed8bd3942655246584194ce802559c819a45d6a10e75780221a8618b0469a121fac162409fd1aeef5bfa980860850420a6206632b5360e2356596407d49c6415ee37ea70e669897ce080945151918cc4b3da774e1deaf02800063bf80b439aeadb462377fe91727b15398b67759819245010a9d080b887c533a28f37c6294695d84086b39fda57ae742056e8adf20501a8a420d4597001e0946e8290b29326dadbe55cf904932729a620826c36025a820004aa14c820201491c251711deaf058403ce83077fbd51be88e35c7d1af2f7f2efdfa552fa3ef9d7a127debd493696a60003e4ba90ed3c1d391dc10d6cfb66cce1a634a7d2f6a4e9641747575d1503219e184a5b1a2aea9e6c4218aab1dc7112cb26e9dd3b37733f5f5f671859d824520f91c639927b4185e2a601d6a924a882f969d92388f88371889bfdaba9ab30e8f113c8ffa3ef00e1afad51d945eb69cdc42919c3cebcb5adba9500ae97f7952bf76db366ae25fc7f3e88980eaa8d74f5640b42e5e8b146887cf69ca47d99c3b4dfc081663dfe060b44f5d3bb7b2dcb167d32679e7a8ceca754c4144baf77079bf165655bd2049ba1c5318249ff1610f4647e06bc2b1b1288e61ccfad728578aea2c461d1e13f0dc9cfaf31f69ecf69f93dfde3ecd4b62c494c3a2534ea11b4e3b3d460ef0fd3c363a4a13e3e3f23739314efd3b77d28eeddb298a1e3d415bd28134f2b99cfcfef2f6dbe8173fff396d7fe821ddd4b995bd6fef5e7af081fb1f535be60a563034894a5fa494939653958a84306b7808ff74761231925d047f94bce6b590d2892c4c182308a7aaf508113e091fc1a4d49c0de2faaa49f13119a5c628a652e568da7e42feea2c461d1e0d98e917e090d1037793eb7bb157f169691949444c55ecfecdef04a1f04e48adf3e6516b4b0bcde3bfe6e616fa9feb3e49fff0ee77c5bb7e3e9faf2823b05814209848cb3c6c4088bc37befa55f4d9eb3f25e55c7ac925f4fe77bf9356ae5c29e5e3999dc7b03df6335c7fe1b39fa1375ff5fab82d871251944a4a61002d4681c79274bf33fc1fb41860310adad41a328836bf5fae37ad5f6f1a55fb34a78d351e607cd196ed718625445c25a0922464100c897c5e42a89b77126aaeaee6acc34102848ef9871ea45f9e7512fd68f532bae59affa0251ffb2c9506f75648d46dc8b4b553ff6d77c87b9c36c6a27bf9152fa68f5cf3cf088c44e34c452499053ee3e413e9ed6f7d0ba55229baea552fa7173cf722fae68d5f130a63e9a24e3a66e9d18ad2e036dcdb7b0fadee5e4a6fff9bb7d0cb5efc421a191ea66f7eeb26faaf4f7c42100acabdf917b7d3bbdef677f4a3ef7d4fdad1c7acce49ab56d2da739e21da3c501df7df772f9d78ec0abae0bc73255f63531323ad66497fd595570a423a24e31895d59c30b7f60b85883b4e9a008a21d91a394d4343926eb88f9c3d3c8a1d658731b54f73da58035a8ce1dedea8addb2fa3ba11601fe09f292156bc54e40805814668285191ea50878385a890a77baeb898524b8ea2a66357533a93a22f9ef934ea7edf3f52383151330f766bbf41792431944681774bb017800c53b93ff8f14fe8c66f7c8b3e79fda785caf8de0f7f44173ff7b9f4fc17bd98ba57aca0bbefbb9f5ef7dad7d00aa6085c66574e38f124facfeb3e45279f722a7ded9b374939c7af5e45175f7c1102c2d192f9ed52ee873ff671fa7fef7ca7b033c87beda7aea7f58c9c162e98aff2f49c40fff3f91be8e28b2ea2ae258be9d855ab69f9b26e7afa996b2426897788e426c0a55073863a22b9b183101643db2ec56282050b48480808292b1939a73605a11dd6021065a78d7ac4610c404cade73185d0d8c8791bc4e55cc0d403c8171767ce63bc90a03ad4e16061ecb69f51f2e8a5bc8bab79891db6a5ad8d763ed0475176b2669ea9d1215a76c1f93396996339d9eb5ec38bffd86369c9e285823c72c512bdf8a52fa72dbffb0d1d73d4625ab17c39ed1f1e2190e27ffcfdef68f58ae574d1f39e47afb9ea0dccaa34cb52597454179d72eaa952e69e7dfb696c6c8c76f46da7b5175c48b7ffe2563af7cc33e4faad7fff76a1163ef7e9ebe9626ed7d9e79c4beffa870f0815b27ddb4374fd673e430f6ddb4e9ff9fc17a6b13b8f27c09a3965a2c15b002d066c986c2d861ca4e8576a4efdd8f04071be4ab7f724aa0eea6572037eea925ba6e42c06a2f0248226c79b644d0557524a690b6ffc4ab88f2279a5280abcba80b20e070f89b6f91461d130e500c1e3144fdaee97be8c565c7a09fdf9ba7f657e17bb9d1d35d7a1d6e52ba8fdb8d515e560819a30ab403613136372ed79908d4960284973e65967d38e47f6d00f7ef07da6081a449887e7f7f302fef92d37d3235cffc8d8b8a4074f5fd4c2ca04cb24aefbf8c7a8f7ee7b24acc5b32eba989e7be965f49b5fde417f60048358cfaf7add5fd11bdff256fac3ef7e4b37ffe4c7b4b063012d6344f4a637be01b13de8ac334ea7dffcfe0f52dfa1a024b0a0f3a02092c9e9ef580359d287b5c0628c9112525a1091a5c120aa751683551dd089b665b738308418b0de4f98c35a550043295671d64d28ebf0a8a0f18ca7ab0073c5024dedeaa70bbef6355ad07f2fddfccc67d031ff7b2315f63ca212f2c465f29986b66fa357ffe98f22acb461cd9967d2aae38e93ebe34f3c914e38e964b93ee3b4d3782f4bd3196b4ea7142f1cac81817d7be9831ffc20bdfb1d6fa3c18101d9351fb8b797defa96b7d02d3fbd857eccc803be95ce5873062d65552be095af7c396d7de0416a686aa4c17dfb44e8f800cb1bde70d555f4b5fffb3fdab37fbfc83aeebaf34e7acdab5f4d3ffbc9cdf450df4ea65e0a2244fd8f6baf652ae518faf70f5f73e8d88cb4efc00e0242cada29149301db26b9e8e7bfad5be3ec18635b0651b1d8231555cb4564ef41fe9da46e7749a70ada3b592cfacd6183974b977c2f08fcf454e8659309e63e82841f8588b2972c16c3e4a50f3f786d72fefc53a90e759823442aa2193d74cdd534b8753b2def5941fd77fc92868627694f36a435679f4cdbbfff032a044cf25f76393dfde31f17a1a26b2d32b025ae96454050e86b7d1fd887a4460a46eb60ff9abce6dad634e02f2e93f9683f5166a16d4dc46ce5d89482694bf5f3c70b0afbf7ffe9e6a357bd254c3845270878b8dca2e77a45b7305e701a1a8289bc574abb7e69af3319a67dbf84d818fb0606c2b19e9e807a7bc30d3a44a9b49f6a04efc5590c1cdb10a309d842c869ce4e5ac0fcca24b532fd304cfe545a4c28e1302615aaf0632815b66f55de25ea50873901900316fc31efbb9a8ee1fbddfff5af5460a16261aac43b7e13f57cfc53b4fac339786d568bbb0a39005c4b25ea5bc6006641562f5cdbe8c9ada14ec57b3b8d8d1caaf3cf568e8d049216d97f282808c159be32b52eb016c329290aab4069c787e6d16d120663fe981ba6da89f64146a95d4a7558e5d88652154b1a6731366943a941608aa96e916e881dc4d058946db612b3ee249f4ce0b8770483eb72c4ed3aa751878387d8e68117ffe2bf7917cfd8c5d4b263179df0eef7085be1a5d3d3d3d6611a408b811097cc6848b0e504e5233fedd2543ee3c086699451c454abeb18d12f380cd6443a368280c9c3340a026028080139e0d547e90ed666d05e39ee9d1e6121296ac9427592a6925010918467575ead8165eb82ca3a3c06e0c58f0d6cf1cbaea4c5a46c245cbf4e9ace15600781155852717269224f4ea356712aa40019c4549cbeadbb3f6adc3ab393a71815e3a09639cd090fb7b0a4c471addc60af328a8a5a9c5cb3965948853932ca1a2721482282c4b76e495987c70a36f95ea716e60e12359b948ad30829213465d6cc81f1734a5c355876259d031238670fab399b11c0d7402d35e786abaf8e620a82598c36be9eece6eb6c27b1f49111c0a81cf7ce6975936d9c0533084f9756b7a4ac431d0e1f144bd9c84d24c592d2c820c27c3ecae65d0a44038925af2908c60fc35d5d8ebf756b346e1b4bcda4e6047468cd06b08a3194c2c18ea253ed4e2e2da6d6e20f02b7a01e60a051a720ea5087c306beaf84a9a020e2735216a4c727e4599359a71042ac5c6927a91d17c31cd682dbfb5bf91767c4417fcc1b188850d854ec864a631f1878a754e01c4042378cea14441dea70d800365d9edecc4bb5bc4b217405194b4a38a7ee8f1631053178c0c35a30b5d648023e29c16ac027a50edfa7ddde837f696076222d47488bf9bc78948a8a4e542cc19a120dabf38c75a8c3e18322e58a0587126595aa1107a48cbb48321444a7788592c35a83838e717b5fd327e5c68d1b9d8dd5cadd7e1249b20d25f128958b72da2725ce6294881bc414843aac55d762d4a10e870b7c5e9509598b95d403f40ab082f6f5e24f6a0a62b8afcb813f88e6f1716793f228579bc58090522ed6af5761b858cd39d9ed4708cf0572644aa2031b7f104acd09e96888d39cda88c41769449d82a8431d0e1b68b5036410f6698cac5675969ce9720958348c6fd9a29e838aa829a4047781979b36495c8cde1ee5e916924e9023ad624949f1598c5c4ea93993ba31400d750aa20e7538bc601cc6c84ad4ae18acd3de54a1e6242583900b84ba0071c084823393d35ac383ac25b89eeba1ee3e52a1b5341809a83884b02ddb58a522a6d6a5e945d6a10e7578e2c0d147bd53bc262be26258c1ae204f1cd2d750739ae7eb376d9a465d5444f786a1546f1cbc97945b6b5212cfa23316f95a022a2c0629198460a9a2d84144f5b31875a8c3e105b1a42c95a2d03acd5984dc2136946aa2294b08d9d6df1fc169ad881534d4f42865a0277ed94b7d7d7d7265dc53d9e44931c595688731c014755f5275a8c36186489dc57075846ff33801b983a120c66d1663a082823070e0b818e0477a14f9d169f11871d15c59907722115232c63291b5ea8173ea5087c3084e9982b08da44c642d097a850397ad3ab25667a750108b3442d8a4e362d8a6d61586521b366ca8e0417010746040b98c49b4b4c4982649ca696dd97156c2faadcb20ea5087c305b542ef2573b90842cad879dfe82819190475778b1d045c3cac3fe104e5f6be56e01c516d180a82f99161c6234996707a8c65268aed4ee3d858649fc5507829c12c069332703b17130e750aa20e75783200a8089ff25121d5ea160b45399881353c3e3a4526386763a9e48caf5c89b81811757460fd8735d59ce230065a0ca83a189bece67b1338a7dad4ba90c9c4258405a5e2346acefa69ce3ad4e1f08109bd27d1bd999a40e09c84939735091b26b1859e578e8b31e92b53ebcda01aa0c5007b518bc5d8a8bc5a476207c114849ceaec3a9ad2f3e78ba1546b9ca541ff2a35271a116989298e9ad64f73d6a10e870f0c8b51eb1c06580cf10611e9b8189d2a2e46af9d4879d29a2ea4dc60492ed79a02fb7747e9dede1014c468756d3a1a87af3d4aa923dff5b31875a8c3e104ac4139ac95a8f46a6de486b1a241e26228e899a5bc4a2d86114ec40e6388606a0dbbed865173584b45d6829d14549c88205c8ab1d6a1b5a4ac151eadfa5960853f33b115ab2319d50a7d16cc102dba549cbb02d76ecbe8c8083dbca38f262727a6b5a158284ccb3797b26d28161fbd623928952aee8df55df9be447381eab109ea11b70f2b9829123085502c56ce318f8c5860820aa3a311eddba75cd6c3ed7d4f4fed82a8d676afcf62b465c9e9b69fcf33174a0621c17b0b0504f366418892431c4a4b4ae331f897b7fd82ce7bda19b4b473213dede413e9dbdff8ba3cc7e4c4c486e3d08bcf5f474d990c35a553746cf732baebcf77729fd5020d8292a4fbeb575f49ab8eeea2954b8fa637bdf6d51508c5ae13ce4a5f7cd9a574e133cfa5fbeeed9db17da81fedf8d68d5fa385f35a69415b1bad5cb1829a9b9ae984d5c7d2c33b77c4b11b13c9249d7afc71b4b8bd9d6efafaa639458d469a5fdd7e1b2de958402bb94f89c4a30f52e4f93ebdfd2d6fa6a54b16d1ab5f7245ec43c0868e96663a96c767a6bff92d2db49f27d98b9e77311dcd82ec0def7df72173e57e20c0771adabf4fda73a8c2dafd25803d8df0452bce62e85f082993adad4e126eef3b95a114f55af31a9b5cade0bd800d1521b87aa8af5b5d15b490b2493898063b0b818280a935f61235d10ecd07429bafbff6bfe839cf7a16dd7bcfdd34b07f3f6dddb68dfeeaaf5e4b57beeca53239e1cdf8e8450b69dbfdf71242a0b7f224cf8f8dd269a79d4e7ddbb6cbceed30cdd3c888e3c73ffc3e6defdf453b1eee971808295e7088be145abb2090cd3bfee62d74db2f6ea55ffeead7126a6d2640fd6f79fdebe9b5af7d0da57c9712a9242dea543624a5ec24752f5f41db1e7a282ebf58cc533e07df1a7317d9600cc65945959d9ca4c70c88313155bb1c20cb7de313d4bf7b37ed7c64374df0185250e431cdf3fd23f27c88c7a2c4c85682d16427e684e40e15e03b2d5cd0410b3a3a2426c5910c76e83d00bc4915a354fc710c8b216a4ef128a52660b3f26a2f30b3a19492642a16a3371391b6a43c101821e5a18ccd8998026ffa9bbfa5242fe47ffb8f4f4818b54f5dff3f54cc17e9ff6edc44fd0f3f4cdffff64d343595a5febdfb6878628206864668cdd39e46cb3b17d0152fb84c76ee2baf781175cd6f232fd348e3d92ced1b1ea602e3b46e4ef38a17bf3076a70e8ae0f7bff9357decdaeb2893f065a0665a025850bffdd5afe8f35ff83ca599f7bbe8e2e7d26436473b78714d711d59d6301d77f45174eed3cf9ae6aedd2ec3b01120dd8319d823496be171139ade4e679755cd82cd658705b2ebbdfb2ebaabf75eeadbb9932e7aeec5825c530d8db493912a9ef7de75171dc5426c33970c7b1186414c89e159356b54d0ec15d81aa42be70b63b6692696b0ba2f36c5d7dcd840298f11c5c285725fcdc61d29001904a84b50f666041026d31cd632b1398d90b2ad9f22788f83cbb90d780109652d7f10d5b09bb638388c910e951603cf4afab056a0a37bdbe0229af0218ccdf9b39ffc981ab8e3f398747fdd1bff5a26ca4b5ef94aea58309f9a79b7dec9fcfea7affb2435f2eefdae77bd93522c24c16efd992f7d851e1edc4f77dd7b9f94f3a35b6ea1bd2363f4fd1ffe50e214b4b4b6d2673eff391a658472efbdf74a1ac3aa9cfdf4b3e99cd34fa39e134f9cb56dd83ddff486d75317532fed3c4151a799e44068bffcedef6870748c4266734006578309e27207532a2bbb8ea2a686066691d274c2aa95b223562f8c566ef3bdf7dc23ac4c5343868e5ab880eefce31fe230f628eba73c5e3dc72ca7567edfc2ecd6928ef912b5dad55ea3670397f31f7fc289b472d52a5a7cd4519461c480c8d6a03a3a172f96e7c75b63829eae3cf658fae0bbdfc9d459861af87b9ccc7c6da4c7e0b7bffa25f5ac3a965e78c9f3686c748416f1376c6d6a128a0f6dbee459175233f7b92195a2658b17d1afeeb83d1e17fcfd69cb1666c956532b2381161e97458ce0ffea152f93fc7730cb89fecf6f66a53cff9ec3ec67f7514b643338120114046410ae960bfacd4917f242b0188d3a4dab957e98bf2ad49cd6a38ac9511341c46a4e869cbb5f5ccee104586951a3a447f0de34ab3975844ea61c124e989d3aa4f60f199e40975f7609bdfeaf5e27f76601eed93b40052675971cd5450f3eb89526f2053af3aca7cb22c16e8d9067d811d1b8f1f131ba90a9a3675d78211dddbd3c0e8ef28b9fff9c27679adae7abe8cc9878a79e788288546edbf207de35fb676d1b76c1defbeea791b1317afbdbde561191096de83a7a29ed6304b1777894dadadba7e5471bbe77d337e9d9cc3eed19dc2b51a04fe205fac8ae47245cdcef9892b1c1e3fe02699dfdb433e9285eb049eedd9a33cea481ddcaffd72d3ffe115df2dce7d1ae1d3be83def79375df3cfff444546805ff8c20df436963d1c901d38487621c33370c33ffc03fdefe7bf40cfb960adcc8ba9917d74fe39674b5d60ddfa77f6d1d8f07e3afed89534c4025c1336afa9214dbff9d51db4bc6b093d67dd3359763648179e7fbe2c7cc05d77fe4942eaf56ddd466f7df39be8a3fffe5172987afcd18f7e482fe2f9b0841118643d1243b390a7e52c535ab1bc9b8e5c286fd23ecb08b30527028d692c29c1621459486942ef49e09c2a21a5ade68c2d29c1775c0d4bcaabaf1635e7a03ced633e057cf43e9a62c1863339c9024965ff90e3ff4031c891d27c205e6c8ad1a16131b0e0d65df82cf90380140519751a776c112f38871777f7f2e53436312e415bd399f2e9772cf634a7cd3142e9dfb1936efccef7e4b9112a7ef75bdfa44f7ce23fa9c8efbf7bcb4fe5ddbffce3d5f46726a37f7ef3cd72ef3ab30bdfc61931044148538c9c4e3ae5947801de7eeb66faffdef4269ad7a408bb71d6687ce293d7d133cfbfc0ee9dfcfbf297be941a7877fce475d7d1cb5ef56a7976cdc60d74ed273e4ecfbbf862da375256346fef7f4476d9a73fe31cb93f99298d158c88fe9a85addfb9f9a774c3673f43679f713abdf275afa337bcf92d9206eee3ff79c307695b390ee3e306828c93696147005fbde10bf4b78c8806ef36c22fe5a8e83ea67a4e3be554face8f6f1624f48657bd82e631b571f915ebe9facfdf20296fe3cde9b2e75d442fb8ec32e9f397996d5b7bd6d3e8dc679e471ffad78f4a9aa3972ea357b3dc69e7f63e5abee218baf5d7bfa5b6c646cae673f4eb6f7c93162fe98ae7c891061e95a23c28e0240ca43c41d658e4e0311af312018fc6792d4b62184a911f81b2b895ffd6c15092ff14ad5823f41e29af52cea7f9afcdbc007e0816502b0ff81864748de5c6e02c862f9a8c90518347878ac5b0631f6267be9bc9ee673ce319946176a291c9ed9d3b1e96f7beebc59d89fbc5adc3e2c5a3a48e4a0ee480722e626dc71d77dcc1f82da46fb136e4141666de73d79fe97d1b36d2c6f7bf97d63d4b2124cf571448234f42202bc807ec506c6622b2fe99d59ae5a02443fb98b561ca02b4c48ac50b69efd0b084a5b7c1751d5eb40f52b184c8d4397ae92baf8c49ebbf7fd77be8ea8dff4808583d3c145bcfd37c16c601391856e13ffeeb5abae2f2e7d31ffea4047437dcf875f9ddb17d3b7d6bd38dd2a78f7df4a334afa5e99090de0867ffda2b1552439b9ec6df667c2acf2c5ca2829d19189ba45dbfb85dc60f9a941ffcf8278469d7c1fdf9c887fe51d0c83c46f83e13c8a38c74f7313bf611963701f63075048dd583f7df4ffff6e17fa1b6d6161e77cbbf80a358a351462a401047227200402c83be0b7dc61415ef96f21cd32e7041ed838668a326772a2a74cc77fa07c79c46d6628028d0fe60f019a65310506f884f4a46126b376f8e06376f76e0b41688216019441e644733ef84e10c3a72e8d279173b54a6d62620eb9b5fff3afac20d5f62097a40ef78effbe97d1b3f14bf9bcf7c3642beefdfbfcfca17c089a784856f65de177c711f6b3f4e60ea23e33bb48849f4dfdff967e1eb0137b19076094fbeffb9fe53f4917ffba89290b736d352962f9cb5e60c3a8a5583bddbfa2adad6c8144223f3c7f3d209fac177be4d173cfbd982d42ebaf452dacd527fc84d8e597634230a779aa413e92699fc777951a475ec49f31c7d723d5fc8f1a9a932e2696ec8c469002dadf3a8c4fd3361ea7ff7eb5fd179e79d4779eefbc2f6363af98413847df9e5edbfa0430118d39446bee5a06dd134a1ee12add5f174a4ac1ceff86dcdcd74c397bec4c81fe91d11c03635b7f00477688459925116229f7cd289429db5b3cca587651d975c7209fde4473fa03a4c070c6da58837cfb4be2b2c0650839cc54000bed073c2c4fe90ba06a8b7a587d6b2ec6c13aff9f5bca3ca17d473abc2610c30480fb3190f8c8fcbdb8e7e3fea1b1810ef3338cdd95451b18a8b812b9c3d1747998c240e95a93516cbf39f7b117debebdf209fc9d28777ed12e4801dca046b3d9f79576811b0d30040713cc4bb739adfb73635d082050b682bdf43c8d6c465bced1defa4adcc76cc6339454ca530c531ce0b2d5b28096f9d4e25e3b2d2ac1e65d2ad66fb2ebff41209420b16028b19025208413b172de25def3e1ab128001b8220a2a39775b31c25a031a63e265985090a077f037bf690c35a0108081758966fdb1feed7799596e076166e36337bd2364f19ab3cfb82f3c506e46b5ffe22ab8387e8e65fdc46a7311f5f2a1d3a43a630aa96734d9f064e5584b74ea61cf63302f8cef77f40fd037be9e18101f9dd72f73db46de7c32cf85c4d17ac7d26b5f237f8f03f6ee4b423741b0b7c9ff782cbe5fb5403c6c2508973313e7baa41a4fd418825256feccaa394a69a6d4b4ade0cc5ab350ca53095988278809183d840390ed53ccd09dd060c2458c949abb66c89067b7a9c3eceb858271a66fd7bb36d03919368cb4ec01358ac1f7006dd4fd1a1007cecdfffe637f4b35b7ec60b3b416fff7fff8fbef0d9ffd1aa4087c9f6297afe8baea077beef03f4f1ffba8ebe7ed3b7e9cdccff9f7cea69f49c0b2f901df7a5af78a594b5eedc7368d5518b58cb91a263571d47fff4c17f602a4187676752f9ea7ff9307de043ff5c513f24e80fb000f44e1e8f6357ad9ec6df02797c8a79e806967d1cdf7db418117dfad3d78b20f1d7bfbc83def1f677503b535fb9192c14416140633135364a4f3ff554fa9948f11d3ae7ac3369096b6996f34249592efeda58b0f7ecf3cea16f7eff877437b30fef7cf77ba89da99c37be4969778abc1b874181a9a3256afcb87dff75edb52ce8cdf0f3b959491e6a403b377ee843f486abde4017ae5d4b77f0f73d8a85b9fff9d17fa5ab79fc17ce6fa75d83fb84ca00b25db6bc3bce7bf5073f40f3783c8da05ab17d01cb211ae8ba4ffc075dce73e19cb5ebe84803b5c7317b11050e82dc615617291fa5990ec867dadcc67c31104916afe5a4e7393a1e9e28247ad7ad8bde0813079a414829d653464766014cad173019d8ca7ae5a942c161fa44b9d0e6f91a669982603e107610214e908990f2f1b7a444933ef481f733dfefc17d16f3a01fa9d8b1e09a13d2ec33ce3a8bfef5c3d7d07bdff33ea126602ed2c2ed5bd4d5451fe39d7d47df76dacd2acf36de6d4129bcee35afaed8e7122c630082a88671ded90b2ca7d8cf131608a29abf051b0275e6ce9d3b68255303cd3c79dff1b77f43399ed869965f80cefafb77be9bdefb810f3027a616e854ae40594634795e0018f62d2cd0839a746fffc3d4d9b948d23472dbe72feca05b6ebf5d16493e97a729cebf7c61276d63ca072ada0696616061b4cfefa0b7bdfbbd92ef652cf4bbe9dbdf62e4f82cd6a07451ff23bbe898a54b6917f3f1dbfa76489a0916e88e4ce5686c6cfc80e30f21ecc854969c1a169723ac9919e1be804d3250e2b12a415ea417306c1ff2dcee896c396023fabcfe15afa26fb250f1dbdfbe894e64ad0de81b180443be73ffb6ed92e66fdffa37f4918f7c845effdad7d1fbdef77e1a181ca4a5ac0a1d1a9f60c1f3ee787e3c9d0599bffaf5afe9ba6bff9baefdefebc54ee6c80496063a9ed80dc30e82c5944e8e9f85d95c9470cbc27643cfb67553b4a78f9cb570390719a472f9504306c100198451780cf7f64649ea66c9529617c748143185c07cbf68312066031a283205e1827964459b57ca4725cf4588ef4342db61f2bf71a2f6648651cc69679c21130ae99effc21789f47b94858217b134fca2e75d22728ab6b676faca17bf484d4d8d35cb99e92cc17f7df29334393e4eab8e5b4d3301d4998b971c25da92fffdf4a7e85b37de2893f9f4d34fa70f7fece32c9e71c506e038960700a0adc8b2e408c246a36eddb37f986e66f5dd4f7ef07d669b3c7aee6597b3c6e3fc58c6723ab3097730750195ef294c1d7dea3f3f216ac075cf7a36ad7ff92b241dcaf92cf3f497dff42dd1d0cc67d6e4252f7f25f59c74127df3c6af91af0db56074f6dccb5e202cd081e0efdef92e7a0953607e8d28db1b19a1423509b6cdc0518cacbffcc51bc8e53ea03d273155f4256e9321ff65bc18a9a2bd5f650471efdd77d3a6af7e858686f6d3d9e79ec782da5789493cbee7fb59488b31f80a7fcf2646bca014cf65eae02b9fff9cc83240450079fee4d65fd01f7fff3bb198a543c2e4fe65000ca560071158b139417b32d31c4dc24c0a2ee75aad4dbc8f68918ea6b74e0929235b8b110fa5f607e1400681f89cace6742731ef3b3bbd9620701941785e90f17361c9f7c2c0775349df0f8344def7925ee8259cc2841f446eead2871fbc36397ffea9f438420dc2e6a0d2cd357fadb4079377a6f446fb72a0326b3d9f6b5afbfe406d3e983e1e4c3d7369ff5cc6f3407da9f5feb17eb7a70214f6efffd38f961ffbd62808f3a1e31459f05d748aa54232e396a65cb794ce7ba551d72f45ee54d0984894c6f6ed0bf75157c83466c06b3e6404116a4d666c6e5dd3edbd004bf987093e29cb51782a3ceaebb81838b0051643cea11f22afd673fdd033a53b9889529df6602759adf46e5508fb8369e75cd3daf7076af3c1f4f160ea994bfbe77a306dae65da5a9f99d21c69008731097ddc1b7242fc662ab5eb7a4d6b7fb3c650ca5effa6acf8aa4aeabb87e50d38099a1f70231cd64a442d8e898b21764869d246184e6442efc1614cdda3541dea70f8c0b39cd5fa3a700e4401c00fea685e8dc03938cdb96e1d6dd2166d4ecdc35a888b615cce31887d763f84948a7a405c8c5cb362496074e1e91362b0f9f68de69be514758f5275a8c39300e00f8255f238cd89c35ac6614cf9b896029cc5d8a3e362acc7daafd20f97bd5ae31fcd7f3c6064135dea9d8acdd922c7bd4ba4ce5c044e3e028b0149298e7b8b7cdbaf28b20e75a8c3130c659773248e9cc062404889f353b668be303414a53b42584cc3ce4921051d59ab66e01c8d36e4b8f72a7ddbe1fbf2ab8e178d123c4af9d4e098407f309432b68145ddaaba57eb3ad4e1c905f00800aadff8a404e0b0566e70301aaed4f938e293b2168b81871bab8414e20e02d656fa046293459ee034a7a8390b05f866a1436df95e7dbeff50bb37ab76e986f3063640b70f432da8ea44d5f614f2643497be4447b0e7a6273b88c39844229641c0c6ce9c5f341208b5a23b0914447c965373103351108e9162228806a0b1ab246ea90a232372dcbbba211052c22f65a222f4dea1613170c868d992c5b4b4b383def7f6b7cdd9bd19263b8e790feddf2f66cc7335c18531d405e79c4d472d984ffffee17f91b3062f7aee45d4b5b083deffceb78b19f58b2fbd841a33297ad98b5f344d53f1970c03037b68414b13adec5a52f1b7e2a8c5b46ad952fae835ff24a743e7eabbf289027ceb7d8383b46fefde23d6f51cbcba418b01cda209de1be67251b62a786f4187d31c262bf49e3eace5588ba4d2e51c27e858b74e59555199c5b041050055014143aa651475e83e0cbc2785853cb9dedce5a058b8573cff3239cbf0d7afb9f2a0d45f189cb09093538200183b45f9ac9cc004b4b4b4d0bca6666a696ca0a71280c81c9d98a404f773f7ee3db4f311fee3df3efecd4d8cd1873ffc11f1d359cb70ea7002a8ca8e850ba9a3b3537c801e89601c103b566cce02a5ad493f216eef93da1f040e63c41e29117a0fc7bd6bfaa4846d3cbf1c44841d4d410cf695e2d89c26704e1ef1fd48b9b182fc01aead80ad3c9035fe13177a2faae1960ceece0c6b609cd802962f5b468b9a1b68e5b1abe2b400b3cb204f6916176fb500796eb871130d0c8f8807a98266414cfe9c760567b342b55ca719977192d672d566d76397679763d787f6972c976db53c7d23cd4c6edd6a41dfaeddf4a77b7ac535dff854960a9cf7ecf3cea5c6a44fdffadef7c573f7b4fef038986bbbdeeab6d8fdb1db62b71d66e8e57ca58af130f5dae583ea4b257c56b633093d5f1d6e3bd25ccf99d89cb836f139ad633c44da1819a60b24a76bb5c318ac7908294145d4f46a6d9006ab3ae46417296712032c843081738ccb39b1b5d6b51aa7b501ce62a09843646a5d0d2071ffee4d6fa445ed6df4b94f5f4fef7fc7dbb4bbb314ad6432180e66d189052dcdf4931ffe801a1a1be90b9ffd0cb5f1fdb687b6cae4c2b1ef138f5d2987b9e0c8f6a4e38e1356642ef20d4cc6b7bff5ffa3d37a8e6396e7efc58c1865defde73fd3e2b63629735e4303dddb7b0f9d77d6994c9a77d1aefefed851cda73f792d2d9cd722eee59ad349faab57bc5c4c8731d971f6611e5cc9752c9085b4b85d95d79a49d3c7fff5c3311584b2f6ec7e443c64c38b7703f701eed6e084d75817a23c9c9338e78cd3e37e1eb3f468ba8fdb754024c165c0312dd82bfc793ce61fbbf6bf69cff02822460b8230168b37fff087b494db2b7530fbf59cf3ce1136d0987fc3fddd8aaea3a46f5d1df3557f1ad2e2a60e549ef16589eb7ffac0fbf9bbf1d8641ac49de0b3cf7b869c44c57b8cfb45e7afa5e3972fa37ea612fefecd6f121777cf3ee7e974f4e285e26fb47bd1423a65f5b1b46af9f223cef59c89ee8deb5ac173fc458dcae851cc1106c40ea20776109a6bd01f344e5f21a4948b588b014bca92a4348173fce62695530b3c8c9a5317e4c069ed1369078105956496e61f377c903ef3bf9fa717b08c208d982151c80b77b5bc3f1e8ba7b95916431b2fdce356ae14ef57f08c7decb1c7d2f6beed74de339e4ea79e7412edd9b55348547b579f0dc6464769efaefe78277d84af4f39ed344ab07864c5d15db4eedc67d049279f42a3fb0669fbc38fc882c6a2b9ea55afa4f7befbdde2d8f68acb2ea1868646fad1f7bf4b679d7a8a90edf8467837afa981e6f14239ebcc33840a6a6f6ea477bdf77d74ffbdf74a9abd0303e23876cf23bb68f531dd74c1b9e7d07ee6c15fc232914d5ff9b22a879103dceedd73f73de2466fedd94f171efda4934ea69ddcf7d99021f263ec0c0029fff4273fa1d646e5a3726977b73c07827ef10b2fa7bd8c5c2fbbe8d9b48491d43d77dd490be6b52a3604c8b87f17c195ea121e5ff8e038ff9c738462baeefaebc573384ed422ed45175e40d731f29ce0765f7ec973a96d7e3bdd7fcf3de2a3d320b4416efff0bebdf4d6375c459ff8d4f5e24ba2a9b5854e3ce104a130f0fd5631e25f75ec3174a44154d28173a84c41008c8fb5d264a52c71b8ababda04b5b6162332a1f7b4a1143167d2c614040d9814ad541138879490d2e0e7daf2882700b843f0a3b0777898feefdbdfa51f6fbe9576ed815f817de2bde9b6dffc8ece3afb19bc1367e9d2cb5f48bffac31f65625ffc9c67530bef62df6152f9e65b6fa7dffcf14ff4aa575d494b5a1bc521eadcab77e21dfd2daf7f1d2d5fb8808e5eb69ceedff130ddf4935bc485da430fef8abd6263517eeecb5f11727d686c9cbeca6d1e181a26306c773239ff87dfff2e2e7bd7c020fd98a99f9b7e7c333db0bd8fa68a212d686ea2ef7ffb5b5227fc63ac80a3565e6c77def720fde8d6dbe893fffddf345128d195af798decc6973de759d4c132920f5df3cfdcf73fd1cdb7ff92aee534f399e5baecb917cf2aec8573d8f52c6b00f571ee99a7d399a79c446ffeeb37529ac9f8dbeeb85d900b16edebfffa4d94e7fe3cb4f361fac60f7e4c5bfb765067d75231d6f9dca73f157b87c8329bf2f2975c41bffff3ddf493db6ea71bbefc650a58a6041f1aa094e088f7179b7f4e0323e3b463f76edaf4ddef8bfca36de1223a8a11c59b5ff71a35e6fc5f73cb3cfaeecd3fa59fde72b3d4fdf5effe807e78cbcf69efd804ed1e19a3af7dfb7bf43d1effc71260e82f111c5f39ad35b139cdf3d869edb86549a9d776afed93b24a885f799a93cbefd16eef417234320591633625590c997d18a5a946264fc603099ce35bd4293e425a1cc33ef16ebe7092ef39179c1fdfc3db72b6a8c85ad355f0b2888761a25c818dd8b57b80da79e1603786cb7a7129c702c76231a09fddfae83c2f6df9d39f99841ea7cf7df4df62d2fbdcb56b29c9ec58694219badef4f5af53072fcee54cfe7ef6faffa6519661c095dde9279d20ecc857bff845fac0873e2469713cfa19e73d332eebccd34fa12dbffd9d2c262ccc7b7aef638a2da09f5efbc938b0d0ab5f7f15bde0c557487e3946fea73b29c3886292ebbf86292dacd434b362f09ff0c043db64b74d5530a9658087abfbb63e48203280032773793a7a411bb31b6989f36182f9c0f94e47db3cf1a6052d024e8c9ed8733ceddbbd8bbe72c30df4da37fcb59437c00bf71f3ff26f4a7ec4795fb4fea5f4dad7be8e292e9ffab66e9520426d4d8d747ccf89cc1e77c67df8d87f7e82d6bfe00574f32db7c46d2bb0b0f8ad6f783d9d7fe1b3e2f111768614023194d311eb7a0e724a5673fa8e1b45195742efc969ce6689cea9126188fbc12b58817394dbfbd82784edb496ae36378c1c107a2fb9c58f3c661b20d0f09b9aa8345c8c90016eef73a9507c508642c6a880398723ba37485d4cd818a2728766e275404d401101bf86fff6efffce8ba568b250234faab9f848a8d916f1f01488fb381b201799e205eab216646878887cd7a7415e48f0736084adf067e931cfbdebe19dca351d297f95a002ca4265473f77c50e036ef7c248b968336a5694d7aa3d4b65b353e297a16d413b5dcf6c806127504a0bb35b45a65c0abc83cf842076f0ee7def835b69192333c987a3db4cb617b8dca79d7c12ed1cdc27c856dace6dbde69a6b626122343f5eaa411ccf96bd75458c9cd2c2aa1868618400566d9455d150476371cfef287bcf42de66ee1f9c0ae72d6a60329ba7b3ce392f4e530705105262713b8924731bae13b1ca2f8a5cdee05db1a414a7b526f1803a8b0153eb0ebb106b3c6d9f94acc6d8e81093799043b46d21077b1ee26224e7159cfcbe7d51137332e0ce61b6496152aa13fffbb083c03c2f61823ef1a7f14d58bd03248afd112809b7430ff10208aa482af0e7c94729d85acac2bf3d2c88fce4c7ff83ce5b77be0c2904a2fb7911a1be3008c58fc31453344b8f39867eb9e50f715e6820c077c3bf651cc12baae6dbca262c586869e6cbe1021f549071d90fd7f7279f703c251349f1c8d4c842d09d83fb69cfc0de0a97fbf0e10044d6d0d834738778a200c9d84e833ff5d9ffa54b9efd6cca32b281e666d571c78b139bfd5339710967039007bc58192d4303b3265b1fb85f6441a65f8fecdd47492e1f14c3092c17293045f4dbdffe36ae4fe285dc769bc4c358a083e298b198e9bba36c381a96eb23ecd837d49c6e2259d1e58493472006ca651a9c7c1eae625c099c33c6633e3c4072960ab64febc0396cd8505b4809b4b3012f1939c8590ccd96202e060ca5701d732f6274a18e7b0b54b0794f3e031590e4400e3ffaee7784c705b2b8f8d917d251edad74360b06e1587668df3e5a77f6d34487fed6375e458f0636fef3351220e72737df422f7bc165f46ffffc213a7ef56a31f00260109fffa217b18ca048f7dd772f7decc3ff42232c3b41d01bf129c90b78ebfdf7cfb9be375f75952cc0e75df41cdafed043343a3a42e7b36034c394ca85ebd64a9abf7deb5b442372da893db47ddb4334c202d5ab5ef50aeaec5828eef80e269e26a894252c14cdc27a145ea31839ad3efe7816a436539a7bf7c6d75c29818176eed8415d9d1de2ace6c7dfff5ebc4017f3b3675f70013df4e0838204cf5d733a1db3b8835a9892eb5e710c5df1f257d0d04496654739fa3bd64e804db89da9d977bffb3d8284fee95ffea5b24155c85d5ccf3152696fccd07f335b72dbcf7f76645117d83fb406838ad3d5bb41762a4a8f2bdc2c713158c83dc6b9e030c6d83e550f584d4705a2c5d06cc9bc013732fe20e2bd4644a2d3c952ff10db41e4991c1e99ccc63b2c48d251deb9462d9640547bfc0b2fd6c62dddabffea2aea1b1ca21d2c2c5c7bfe05b250becb82bf644b2bddc52a1e7840822bf95ffff6f7acea5c1dbb8d1f6181ce48b64053530a3562710d31693ba1053de363a3343c09b76d6372ff9ce73e8fdef9f6b7897bb66f7cf77bf49e0f6ca0cf30698f9075221a16c7311efde9ce3b6998dbfd5ed64800299c7efa1a6105aefdd8bfc711aba40fb02fb05491c3ccc3a33da034d0cf8f7ce23fc55f25ae57ad5a45ededf35995fa0853784d74c3a66f886ce8ea6b3e4cab4f3c495cc81f73cc4ad9bdbffc95af527b6b2bfd9ee513b5b418a833e0a1839bbda0cad16d3bb7b710aa311ed8bd47f243803acc63f225163a223ee6321602efdd3f44af61d5ede557bc245ec843ccd2bcf2e52fa7558c54d08eeddbb7d1d6dd83f42b96ab805a80bce00f5b7e4f03fc3d3ffde94f8b4bbd0b1989c133d5152f79095df6c2174b39132c7c9e64240b56d106e43f8535199041c198eb924b2fa3230a66c18559adc6883591029dd462e5daa4ddcdd95a8cf8a510affc2137b134afdaa3945b2c7a8d61e8c61ea55281df1026fdc93048b861081735a9b4172698e44b5ebcfda16b93f3db1e578f5206bef3cd6fc802eb5eb19c4e64f52176de9d7d7d120eee694f3f5bd28037ff360bbb206478f14b9436023bdfc3bcabddf9c72d3ca9f274f125970a790e84867077dffbf64d320297bee08574ce33d7c64e696ffdd94f79571ea5e378428394fe250be4406960b73bf1e4935960f81ba13e8eeaeaa253d79c110b43613300527af1515d2280842d0642fbf5b1941f69c516826bfcd2e73fc75a8bdf8b3fcdd75cf50671ff868502925ca27eeb3e18f90202f10cf3c25bc948ecf89e13e2762234dd376efc3f2a70df2ee2be5df09ce7c46eeae2347fd842dfbcf146d6244cd285cfb9882ee6c563d254030497dff9d637a5fee75cfc3c59a836dcb4e94651211fcbd4d171dc0ea3be459b6f670aad99d3bfecca57d36a1e3341403caf606d0ab7fc8fb086690723862f72df17f3777bebdfbf5d021d19598bc871b88e2ff3fb3f72bf162d5e442fbff235a27932f5dcf2a31f8ad93cc67c9956b5024c5f7f8fefd2ff302396045df2fc17d09102c6a314cfc182e37a055623173dd72bfabc804bf97c31ccbaa5c9e69620e3654b932eafdca1217c9d607ce5cae8a4ad5b835a1ea52a1044ec726edd3ae7d6cd9b5d1e7cd7cb66639773c5743ac15a0caf8911449e11831f261201238930f21391172429f292976ebfef90208803b9149bc9f5d8c194395b3973716976d5abafa42f7ce94bd4d6d222a6c998f89fb9ee93f49ef7bc472c0cc7f38559f3cfa55d076ae75cdb7ab0f53f9676c0de010802bff73ef0002d674ae6f16adba3f94e4f550082f8e1d1abdee2269c62e0bac5c454361fa53325208828ef96265caf9476fdd2385cce8d8e960a1d1d51ff202fe695e9708811c40683206a693104cc694ec4e66419c4e4541f810c81d5158b429de64915e74f9cd6e28265793810e2858103799123d4c9a191411cc8a5d84caec70ea6ccd9ca39d03d76fecfdcf045ba95056a1014667430da1c230648f4ef6615a6d90167aa7ba6b267abff60d21ee8d9a37937977660a64d1594a0aa5028ce5ade4ccf0e54ff5cef9fea0082d02995a2006a5f741fb16b328a02c539aa09d60809b07c2837e84663ddfd51cf568a4ec2331359ab96db7b000ca5c4ed144b339bfafb9dc93e709a596a5ae0c253946462855d94e07f21a034a1f7222d31b6dd5d1d6900121924ee83cc8f236ee68fbefb5d11e29d76c69974f98baf9089fa543af1793000a4b8537c0790440bafc3a103288cdc84eff8411005ac8d6396dc298a9ab312318ba975a747cba89ba8a74182e76c2485031ccbdcba32f41eab397b804598829800e2ef666491ed1443a9b0a5c509878b8c141a9c12d49bf049196a85868abaa74e921dc13e29c1ff626ccf3ee75cf93370a4a9daaa017d3f7ad932aac3a10750101ecf431630477028eda533b19ad31cb42c308520e6636249d927fa88b54c146c809a13ebbfe6590c9015964f4af0188d7dca4e5b4e7e8d56b524a72808580cc4c66a3ed191bb0c141c2cc95c873a3c9e000a02942cec935ced0fa21a922c2e68d73631e2518ad7fabacd9b23d16254a98e2b1dc60074f82d901c38cd89cb895a07b0b4576b662a25b296c21189c3622855873ad44101ce62986bfbb0567c16435b33c1b6294d58d75d84d39c9f665c0097b554b599952908a683374c3b70d527ffaad39c9524045ccec1632e319f83e3de129b53ded45d91d5a10e870f34399f48561cf78619843a0da4ad99585d9feb7423985a83c558b56e5dbcf6a39a2ee7980ede68bdd8432b9d6e1642cc1b18908c705305dce3651a6a520891efbbca9b4dddab751dea70f8a0a87c52160b424140bd2e2ee7a8f234a7b2a4e48b6e15bc37f60731535c0ca78a7a18a2ad511fff8e50a72004e5516a826685279707b23ad4e18804388c313a0b18ed05ad2a1827ce62a8d39c6518ee2367cfca95cebaf2fa8f66745acb2c06f5c25082a5993de68cb88ece050a025ead61cf6df2c0abb531fdf14044e8539d75a8431d0e0f185383846631109a027f7886b55b7d34afadbb3b1adaba35dacceb7f93b6a6aeed728ec41f04f5287b6c11528a576b0bca87b5b2acc4c8011d885f4a082941d694e8c872ce51873a3c1941ad45257f28ead89c06cc1a6e129f9424b12d8cbb1823a4acc9625480e64726fbfbe38460310cf6c9643222a4544e6b81a68c4fcac4116d0751873a1c6e08c8775270c76041314a3999aa74e600265ccef5561752cb0e02b0c10a9ca3327593f16aad84940aff40e0014b6b630761402888ba9ab30e75388c509ce6660f8652b1534a1652368c3a08b7a70ca5fafb630a42dcded30c5a0c01f88358bf9e6e35f7dd4c810cfcd9a2086c0e26a7ec204c23e27feb32883ad4e170835b2c85c60ec20e310021e554ab623f600781c85ab14fca134e5007b56ab21830b5d6267f6b49a93ebafb989de8642d06eb4c6d1603e069dec6082983ba11651deaf0a400c8204288070bc6a5539aca91b526a8303aaa100721366797236eef8d99f5c68dcecc1404405b5282c5e823adc458a07c04c671314805cec12f580c50344a8b51873ad4e17083c4c548244885decbc7b13995256513255b5b95a97567271943a918588b59db0ec21cf1048b0135a78e8b911f706343a9d81b8dc646b6abfb624907f7ae431dea70d8004e908aa522c1ed3d7cab86798a60284555d1bdc58da4369402dc5a0e9c83c38596b9b606ed514ad41c9be1518a798cb6deee68a4b3e8b668af63132603041ea10a9653643ec76739a9ef7bfcefac6da7dc830fd2beffdb4475a8c353168c47f3e8d0c8e2165ef53a4a2e5e3ce3fb62ae1489ab7f38152e144414103819d72f142b7c07aaf3559eb009b079ea009b5175921350c915f0cb4dda05f67086225b43011904622c8d661a9cf9e138081782e441f4adace68cc0ef781894994dadf3bb1ea1be0f7e80ea5087a722381a39d8871a2c03457a3ca0f9bc7366451038ee2da8299154473b1902d66214f5baacb6856e6435e79e4241b9bdd75a4c9bc5a8888b21c1505ff2121ae4cbb64df77089631293335b5528041e6e4ab1184022611114047c21c071cc6c98d3619c75640632a9c3531d98f8f612b11562641b2c1bcbc4e8b12309670eba00b0186ed29d83938101d67276d1584f521a86e0dd1b366cd015a9dcb616233eead9b16993d34beab8f7a836a880ee14d8270553eb0cb41811f065dc86ba0d651d8e6830ac452d177ce61abf87d8370882f722f62c6410f0f68667c6ff3c5cce9974888b21d1bd11dc5b6b31623ba89a8652e634276b316007216a4efe1b1e1c149200ba535bcd99c86ba1a60932232739eb68a20e4722807ab0e28b5848c2a9851c0e21a2c0590c09de8bb318acc5c0390c6306515ab0205eef38cd89a0586dfdbe44d6a2725c8c8af2ecc35a64fc41c00e6278cd9a68b0abe4881d440dc891aab5c4fc4b891282b5a8ce3ed4e14805b3e86b2001a7fab99de7100082f7dabe20a0e6446c4efba0252037b83f82941281736e9da12cfbb8b704efedd548a26dcb1667d22f7b946a10356859c481b318386bee8bfd83d25fd40f6bd5e18804b017b643e21a48c0217a42a8092d97145f10f04989c35ad8ca0b94a951c9407cb5d67a5afbb8b716a0f4582f61490900bf9210dd6899c940a5386b0e320687b58ad2a83a055187230d347b2142c919167e1535e11c426a022ee7c062808248373569936aa2f2612db5c92b8f949de293728ff664bf49affddaa6d656039bd7ac1147967dddfac18205950ee7acd89ce2f6bea8bce406165953873a1c290004312b1b51e3f9a1a426c062c0bc197610c6716db52692c4927280da0c326019c47aa398b50ca52a4f73ea04e3cdcdd170a637c259715021c2628c964f7302d2566c4e2711090511c9e190bacbb93a1c49e0c4ec85da7e6758ec73a1261e23a2a8d0a22612720c026c06849499eaf3de4343bcb6414174398b7a7a6c194445c5d50e631c717bcfd8a42d4b0e321b8f5253ad2d8e890c3cadb2b8e4431759ab0e7578f241a42c93007a51c7b286032dfc2a4411c363603b1ca7327895394809216581d28ef249a99ec971efce1a328819e36250998290935d2cad6cd36eefe17da6c1198bcf624c64b33aca960273fc3c82b3cc3ad4e108810834b38d20acdf0aa1a4fd7e86ebc78b9a306c3eec202a9e67739178b56e6ea24473b32a7000bb7f3ff5f65ac7b5e0f2a196cbb9f811ec20a0139523e27d15959bd39c5e26e3188731253b38875f1752d6e14802a7a6fdc3ac2ace2748885962c581b936de201af56f717c3c528652b093ea2a3b8cd1f538566cce8ab8181b8d3f4a4d41c447bd4c45cd95fc098c30c45a2b51b780a8c391078e57c95ecc747d406ae26084980704b5126d0a42b418556281a4767b0f6b692cf5c1f5eba33878f70c1484b3c1dc8855550f639c9263e262009a2c35a71cd54a265dd32470194e5d8b5187c7081188641c0164ae39aa722020cf581c1e398190f7f1730777459da75095a7a8cb797cb95f612f1255dba22ce099777f6736d6e1608498b3c2745b24082903160bd8c7bd21834877842c67ec734041740c0e3a74cf3da6e2386fa59a13fc070014440fb04b7f34d2d9e9408b91885a9c588b9185b75cd1b78a44125eadc5bb3595ea5a8c3acc0122bd98e169c8b19e9628b1703125bbba2975cc6a4a741e250843de3152c89c7e16a54f3895326b9e466e4303a9451f923faf8d32a79d21efd2c79f1c2309949fec5e29e5398f3bfb1b926b1044c5c2a7b9511333b11133208a8a34076a999605c66731d2105e664448696b227383f0f5d2a56e4014c0e51ca0a6db7be3728eb5186bb55db6683148bbc82645419426d5612d789402523086521e19845fd762d44141c473a1bceb5b2f12494af79c42e99378b19fbe8622df897338bcf05d16a4399cc6c1cc8ee753a4a4e13015e42db1729930ed9a2f880f84a808eac3da019b1ac99bdf266d793cc1717dc3afcf223398994da8603b66a226ecf4763db3405472227894820cc2960fc20ec284de2b8c6a190364101a3fc42ee7e030c6aac8f628a52ef4612dc4c568eb565a0cb8c82e8e8ec9694ebfb13cfac650aa6e605d878814996f2634760b7f41075302c751e6e435e42f84c45c2dd2282828e93f16332f76d7379e475c5ee8f9b84cc7f7caacc46c1c826b2d1c2b7a341085031b05c48209037afc209a4691d49619d09cd888d9288e69d7070013bc1754bdedcf052208133633d91a39624939204eade13186ecc35ace8c7131b49022d689f6a91fd199ce635245b4180d540df150d5b51847203095c09ca6d7d44cc9e5ab78032a6f1760039c645216bddb9029b30b21238650230bfe75e4447028be0ec4f190590c8c446c0624aae14f419e5808220aca9482137b778a1e570f4f227f48a554e5739119cc464d388f4e883913c491b5882aa431d90c5544c5134b4ae5f79ef6f4f6aa82adb017062ad59c5682610b8b80c58047a9d827a540d992127ef8655ad483f73ec521d202c432a58085d2c0328144f732f25a58cda5a901b8060a46c6622b433793b1048b7c55d0d3176e48989588742e61158c65a2e7d9a2c8191dae38ae3e0b81a566530aba1c4146d1e349413842ddcc246fa8ed0b82e6c446d05cd88e59008173f05b023161194d65b295c17b876049a9f49c316cd25acc9a87b540566cb02a6ac3a3eef23d3c4b4d8c978594400fe5b81809f14fe9c09b6e5d06f11484488484900f2497ada0e40a500a6a8107f9490af359910d30594b5e33660ae68043e1d4845a48b80335e0e86b41049a52082372b11beb3c51b1a0d80200ff96d9052a2308a7b26d1527290da2208d3830b1219ba0c70fa6093cab29043a0035f1588498070445c1f98964d9a174a44254184329407b55ae5b6728ad42cd59fdb2b154199b939af56fa66c7c218de12600477b54b7a47caa8092386b36807f134b96526ae54aa104bca6a6f27a002218d31b07efd45edbbc583d19957282000c38c9b4cee331f298d26544318b2177419945110ec1b10c916a52105119a1e836c4f93deda09111c45c5cb5cd0530161e84a7a8a78282209a938c216edc74a4625f57b01d072183884dad19d1ba5a345c11590b5a8cd15125366068f3295aa4f1effa1ae555f203cce4f55ace2326fbfd280b3b887dfba8a8a37b97413b8c8116838cd55682ea2cc65f36888a90d76472392383862652a23e46fd03bbcb9394b70337d322970e6f0fc1d0fef84c82d3d858515aa8858e1153189e94a72985293836d58b1f720a9323b06d1f0443e87a28965b549203515906e198348e6a372308c82da2e2e3294657f60f4ebcc0abb6d65ad404d1818598335016d3d90e3a20889a93b5404606010a027e64e1724ed6706b6bac9904c0504ae48e575f1de966cd20a4e406c01f8424d6e1b8c4a3d48205e2d5da244bca590cb51bf85067d72d29ff82a1bcda429e52c9635653fac493c9e55dd25fb450c91bf08ea90190ff92a3c89ceefcf99a527028981ce3b5aed90790c90923c8664a6162a2cc4ab0ca3132ec07b3258ea7e513228c2c231f5be3e0b807a220a8cc62483d168230e7248a459ad3ca9a03887ad3550b55ad5d7bb193755d7bb13f6695e82c60864702e714cb224a9824c09232dfd8e0e41ad53a9e30c17bfbbaca052b19644545eeb4d201d08902af74b3f2c20a9c638c2c0a998c93660a2294e85aaa21c5ba4fcabf38c0e27712be5822025c46f3c1e03e21c9311fbc96d698c47721741cdcaf776b5eecf38cac41692582824529b4aa770ee70ac7c6194f78646c1c224bd559962938713d22c8349a08bcf7acc80ca1a6163cb7a2172213d00bcb683194a590ca0bdb88c783b245dbdd74466b4466dae5e37f6a2ef638fdb4f7445453b85955cf2c88cece6e9fc5107312ed10a234c91f9bbf0f6410e98ef9924648015ef31b75376bfa83d8a89dd676907260d9ab63ef8d90c2343605a1ab8dafc4929275aca53a1df197033ea383a39753eae4937941b30e5be9eca8343614efc821ef42fe3c845dc482603683590927a144d398ac6e4ab113401ee1d048bc83034118ea22cc4ec6320237958c178790fea54016bc083093ba5ca93894d654d20bcc514f4e50b06f3f95f6ecd58bde917685c3c38cbc06b90d433195135310823482c74d02e1ca6a2bb33e86ec2feff2b89981ed988d9a3898eb59c06831ecb318c262d889580651601623e7c22765bf7ac66b7e83a9a9d6612d73d4fbd6abaf0e150541cae79cf6070187314d152ee772903e3be67384d2a03a05f1e4854a56227d7c0f792c2f88262629d175143f53df0ea47e69ff7e35197937f63b17f23b251708839cb25320b52b7bed0bb46d03549ac3428d005cc821f4640e995210b9001604eff44e22a3eb21a12e4afb86a8b06d1b6f6da17e9ea4dcfdf750febebb2877d71f627528641d85ddfd54dc3b40459687184400f94891115771702fbfdf45c1e8b0502ef27c60979451da3f488f8b6c8ca5a64e42b33cb2604d99f6c2af663b6a5d575305547e5e713d9dfa3810c48a8244b2e2b939ac6556b0b01803d0567697a37b03a2289ad1a314a0070736189bd438ed4df6598c74b90031b5c6b5f2495957733ed940588964a2cc4a3849ca3ff8a03c9385cb13dd6b505404166269cf1ead59e0d7bcebbbbefada2ede810511eb446641dadb62e327a83bed2ddf4da9a9e8803067f57830324af9ad0f5988204185feed54dabb874a234c7d58c249bc03a2507f16690e57acb2f8ad1d5caedc1829e0af327d52a77feca3e8b216260aaaa903972a6262c46bda2cf039083167a426683a523900ae88dd3e3202c5174c503e8216c308296353050d38ac55f160e346c74648d32d293759b133bbb50c82b518f028050ac2c8a8a1c31019849e48400d75afd64f3e88dc9092cb5652eac493c85fb0502d68b0f9b9718af245657bcfbb7472e9d13115014a21cc29a2342a14c54c5a21029782e17df12125d838b836458059c8ef029e844ab818ca022decd84a45defd83b1d14a35a42002572381b9ef92870344fe20dbb0658b518d28cc8b19a909b2ae6b5313071462ce013ccd2288576b52361068bacf42cae9761096a514d6ff4cd1bd01125967fd7a7a00ad0109d1d74dbbf93f68319871110a6228c3f933ea0829580c776222849038602ac211fea7aee67cb2002887d48a63595dc93bdfd41425962c21b204928587772a4a0113139442b241e621de9576ef513c3c2805d65890a614c032044675c9bc7da273b1200fa1081e7a8849fa3f5261fb03144c4d92990b0a1178e43cc991c081c04d6bb27dda2eaf134ca3266c36c24a6fa05ac6103f3e0035310bc00e024e6b81ea2b0e6b65cd612d0505388c2138aded8f10590b6b5e2c29f9afa625a50024474c41acc2dc1287317d8c0b54e01c6831fca8d1f1f665439c2d8f590cdd08c8206c7f7875383ca0fc1f18c36526301f7a8011b9fa5a901fc0e029564f4e8dca2217dd012ffa64d7526d215929ac049be036b44a3ab019a2e9600012293eb2ab4cc247061924fee2914135281372bdc3c708c1dee5edc45531321c9b9a706a501fe6b97360b6e30060e26218b63faf9179f9b0d604659b9b1d7118a3dddee33dd6fc7ad841cc46416cd42d7a40bbbd17304e6b192ba58124984c11a2526388509f39171019555d06713840ec15921ea54f3885a986152288d42fa8f0c8ee586e90e8e8880d8b848ad8b9533b3ee13dbeb9996791394be1b20051092ba16d482e5ba66d22f8f9febd9463216269ff3e6d29f9782183481f110fe2331fc6098cf11f217f1237aaeacfbcd369c3387da0cb9cae17997bab58580bff139141bc16a2980b35311bdb41b3c81b88e8607d41485c8c5229325a8c54aa7c20421dd66a228fa9fea11a79e3b3189690b2ac64e6ce6fe0064002b16acb9668509adccd3288bec85fb9d289f6ed8b47173e294b5321e5792ef9a020f49b52ae888958a7229e609009bc60b16823e4f834f3996e9a79cd5c5e49f3f7f65362d122a120c27c8e2985e58c181e929d3e9860d560b84cca090bfc6e4917b31edbe51dac27fd459d54dcf508ab1707e4194009023d7ab4a016ab5ab86a8d7872e41ba6d850233255aa04a8b09fd03b696445c8ae3ed5a9caa8dc81e3139c85128525461439d5f7b09867845720852c5cf93bb00c84db996950e559e53b9a1a884cd01cfbac8869a220097dd0ccd12f22d27da298e52ba737fb77b94c5b353c17641cf8be13b8aee3946a1f504b320268e35fd081715c0c682e6bc4e7f4ed8c08ffdd5371a2b304f315a76564a4e28b088b916ea5496df1860d28963d854f31daf2490cd8658d64bfb86f0f238825f2148b21b5f258cadefd477e935494425f1f5301478b7ad26f6ba3c22e7c34ce1925a9f8f0c32ca45c2a464eb0902c3cd2af440e2cb1cffee13744b176e0d17cda28dec5a12d8150d36be45daca931967f802e86497698e505ccb28bd2d8b0b445a8d1a8bcf31b47304ecd5aec143a15908beb8bc935341050ebfae9f9522f84a830eb963ac7c759683ba1cf8138babf96b33594e1bbdca63292b211822c76b2166f6471f151b92d65032bd20b5fbd8be2f48e95d7b1900ac588c2997da80560b4e82653127e0f8f72bc69a44001955d6dc46731e0146a474f8b985a6b16836c16c3b78633ba5a9318105800c388dbfbce4e4a168b8e55b658529642ae143b90ddc03a8bf184804c4687c9fea52b28cf1a0285043c5123a6962f57670f7832263a96b05a72401677696c1f2582a364a20915b16c39e5b7dd2f794b63fb29e12c93a3dba5a1219e88f8908a997528f9285a8759c108c14d30226811c329500630a10e27a758cb31ce088a9140a8c22d999d9c62c985a31768d54980596a756a3745101d10415018a7d2c438a9f919aa97bcfd3989344bf71b2939ff68ee7f9a873564aa8ad38e8ef0384d493a9f37c3c83a7416eff23112a8414de8e7d3a9099a4e89186a82aad3dbe55814ca2c830039a0d89b900abf27b41e2b13c492d255761018059cc5184364ad816e389e766ee567eb34711059744c0505b1811f223edfaa75eba25b376fe629d3471042ec668967bab5d5c9c0614c63ba66db125270fdb0d6a10651b7f1444e1d7fbc4c7c7f5e070523438204828961de111729ed034ff4e4514789bc00aa712082c2364620ab568b5a13f20651513219ea46d0406c63ca6352cca69d83b48855bb6749a695d7d0427e7bbb38880999920986479822d9c56dc51663766745d21f6c3d8f0d0cf2b1d823349bd5b8c5028bea587d1b5339a9061ed776f25a960a6208709ea4161b31c32e1f6936224e5f414d904214c6818d663b0c628c6aa6af4248b3002c291d604558c1164b5104d370111816c544c184d0849738f23ac50ea26b2b85435d6575273cdc9b3e958f7b6b536bb9615ea49d563a2c8210982f6a4eb8bd6faa68623e9faf6a5c3db2d6a106b015a99ee3456d09976da9ee6ebdf9321270524a6b9156483c0469b96215cb11f332c14226a3e59835cae16f975abd3ad65a80b407cb31d7456b5cccc14f84dfd64e9995c753fa98e3a46eb028595843eed8c6d4c9a8b02aca602941d5464e4f0610a123ef9540a22c86674459a002cb5fa61ebc97b2184fc30a550b2549df93255c244b884955e9ada4330b319d030b316785626c0761d49ce6b877494e736a804729389462c420a73979cd9be0bd331b4a01d6af271650468b686b999ed9b74fd49c4d1509d3b18414673114b158f76a7d28402d4645f2c30a32f7e73f69afce24064de9637b1809e4b4608e11f78e1d71cc06f1dfa055940e2390c2f687c86d69114491efbd276621e6a696d41ea558cbeeb7cea3ccb18c14561ccbbc799117d27d94db7a2f1561a61d9046083efda5aa3b81c88030bc4443794d93bdd8ab17fef4e733fb82b02b9a7eae23ce2bf54555e9695698d1d420ab4e739a5bf128c5e203323e298954f0de28a299ed20009b36110e6c358182e8eb56cf40418c549a5a9be8de06eac7b40e0d8820b2214d89a3bb65c716ea95d9873c0b1d8d7a92123e25da8dc112cb1b86f7c67e15a0b948ae3c465949e2e373deec1fb7b016631be97378736883f24eeda4538210328c9050569611428e7758c814b0f33e3ef60f46d519c6b28cc305a8df638d1064278a755030b32d442d6a82e6a01275e8a0ce751c0024ba77d5590c5010b08390153c3aaafc410c0c8821250ca56ee5c74241383338adc5c30de03d988240e287d76c952f634cade1b4d6767b6f038c32944f4ae9e701242975982b8827a7854b9842582db11fdc463869091512181964819fb68d63897f72d952750cda21c56a3c78bf62351cb5f325972cd30884d3148339b112a27de02f9b58d0410dc79d247c79beef21ca3ed02bac8313251e35951055d83c28ef4cf04189539d702c03d77589f90bb491d7e19a522cef69c464af24ff8d35c4ecd48453494dccc6761838a025e681c721982178555636753d5f58682c32086de384c35a6b29d66254e4af3494c2410da62090b86d0b3988ac35d259de66404194fd05a52d9f948a82804fcaa8aee67cdc000e558c6d032881f4b1ab28d21429c8df1c6b21445508cd04b30ce9d53d5ade10898564e19147e4646571e74e2a3eb283ca079966ff4442a9f0be905ada4d0dab4e90331653f7dd45853d8ff09a711f05a56051054e24fd825f051f48a06d0123a085e433958ac35fdebc565181c2ad9b786ef27c3a5ce078899ae1f59cb9b211359ed7a43e6c6a42eecdb28c62b6a3829a980d4ae62772aaf54fe9ac15f95b28085ee7fdbe985aaf33d887351935590c3cdc6047d62215592b6b85de4be37c8fe663bc54195345da6a4bf13f7521e563810a8b3fd821dc7337393869e338b250d33d272a2440ca1232775f2fb32099780227177669fb08a632f60e083b51c251ec39a82b0531f80e0b1b5753ba7b8598514fdd7fb7a8260ff654a4410832b999dc0555000a24d1ce8880a921d824088b64ec03b4bd8368ee6dcd807636f34483f89e6c6c56a6e8b3b00e71cb0e24c49c2b3511230f501316429f237b61f492b08108b53c8285d59121fa2b8e7b93b2751a5eb326da5cae39722c4bb40a16236e848eeeddcdff0968194485db7bedb536147dab62314a9545d6e12041d46c400609a534c65789f2392a3edcaf7c2de0fbb00c21ddbd4a9b52ab3812c5fe47d442c2e1a9254b5856a0c2d2c9820edd032eec1831b0d031d5b594f2dbb75276db832c7c0c69ee7610652a01ac82976136a1659e42064d4dca3a12ed0f350230ea3cfcb93a4215695edc75e3c5a682e71c0e60f56f7373f9b69a22a8a1757874424c2a3fb7eb8aafab849873a5dc58cd092a0201b699d59403966030cc616f13dd1b52cab66c56156aec206a45d6c2e7daa86bbf9529087894fa236397c5b498d471ef288ecd09eb4af8b9839a139e734d884285bcea14c4a301ecfa6e6313a557ada2346c1cb45d81984aefdf2dbbb8d1ab63e2c2d3939229f8541cdc2531491c396a3d2eeacfb9d5c91cab1b08c5903a7a190b1cefa71ccb181452991b696fce39c0f642a88456969534358ba9b42c9ed86ec0b576592a2306d7ad8918e41dfe730f0f0581f678e61cc33436a2f6629f464dc4e9a9765eb2a8896aeaa3829ad0e37310601c2f1453eab837ac9f8d7820a10f6ba5c3f98ea839c57d9c05b5627382acd8a0498bc5e3e312f1d73a294ead1219438178144857194cf1049ddbb4acc374e045dfd84ae9e38e2bcb1b4e3855b112b1bce13ec6c02a400c0c9d52ddcbd53df2b25032f7e00354dcb58b17f97ddaa7a3334b6d2a782ea8858695c7b1e0711be5986a70426f4e8841b141a10845bd4c23f92dad82dcccf170458c62713b8f0e3138ca898ddc8b5fc9271a41448c1c1a29b2ce410854f4a37ae157521374b0d404cde40bc26a96e3ce8980801d0414072a78af624711bcd744f72e8e8f4730b51e1e1c0e117baf076a4e139bb30afe7f13a840d5d9b153750000000049454e44ae426082"
+                "example": {
+                  "msg": "No data",
+                  "response_code": 204
+                }
+              }
+            },
+            "headers": {}
+          },
+          "206": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation."
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 206
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                  "response_code": 206
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Required:{resource/apikey}",
+                        "Invalid parameter:{parameter}"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 400
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Required:{resource/apikey}",
+                  "response_code": 400
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Invalid account status",
+                        "Invalid access IP",
+                        "Invalid API key",
+                        "Invalid key status",
+                        "No access to the API",
+                        "Expired API key"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 401
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid account status",
+                  "response_code": 401
+                }
+              }
+            },
+            "headers": {}
+          },
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Invalid API method"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 405
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid API method",
+                  "response_code": 405
+                }
+              }
+            },
+            "headers": {}
+          },
+          "429": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Request rate limitation",
+                        "Beyond {daily/monthly/total} quotas limitation"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 429
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Request rate limitation",
+                  "response_code": 429
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "System error"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 500
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "System error",
+                  "response_code": 500
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/v1/feeds/stix/ioc": {
+      "get": {
+        "summary": "Get IOC Feeds",
+        "deprecated": false,
+        "description": "This API provides outbound malicious or suspicious domains and IPs. \n",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "No data"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 204
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "No data",
+                  "response_code": 204
+                }
+              }
+            },
+            "headers": {}
+          },
+          "206": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation."
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 206
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                  "response_code": 206
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Required:{resource/apikey}",
+                        "Invalid parameter:{parameter}"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 400
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Required:{resource/apikey}",
+                  "response_code": 400
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Invalid account status",
+                        "Invalid access IP",
+                        "Invalid API key",
+                        "Invalid key status",
+                        "No access to the API",
+                        "Expired API key"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 401
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid account status",
+                  "response_code": 401
+                }
+              }
+            },
+            "headers": {}
+          },
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Invalid API method"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 405
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid API method",
+                  "response_code": 405
+                }
+              }
+            },
+            "headers": {}
+          },
+          "429": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Request rate limitation",
+                        "Beyond {daily/monthly/total} quotas limitation"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 429
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Request rate limitation",
+                  "response_code": 429
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "System error"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 500
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "System error",
+                  "response_code": 500
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/v1/feeds/stix/hash": {
+      "get": {
+        "summary": "Get Hash Feeds",
+        "deprecated": false,
+        "description": "This API provides inbound malicious Hashs. ",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
               }
             },
             "headers": {}
