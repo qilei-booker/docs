@@ -425,7 +425,7 @@
           {
             "name": "apikey",
             "in": "query",
-            "description": "Premium API key. Unique identifier for API request.\n              \nYou are able to get the key on \"My API\" page of [threatbook.io](https://threatbook.io).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "description": "Premium API key. Unique identifier for API request.\n              \nYou are able to get the key on \"My API\" page of [threatbook.io](https://threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
             "required": true,
             "schema": {
               "type": "string"
@@ -739,7 +739,7 @@
           {
             "name": "apikey",
             "in": "query",
-            "description": "Premium API key. Unique identifier for API request.\n              \nYou are able to get the key on \"My API\" page of [threatbook.io](https://threatbook.io).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "description": "Premium API key. Unique identifier for API request.\n              \nYou are able to get the key on \"My API\" page of [threatbook.io](https://threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
             "required": true,
             "schema": {
               "type": "string"
@@ -1585,7 +1585,7 @@
           {
             "name": "apikey",
             "in": "query",
-            "description": "Premium API key. Unique identifier for API request.\n              \nYou are able to get the key on \"My API\" page of [threatbook.io](https://threatbook.io).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "description": "Premium API key. Unique identifier for API request.\n              \nYou are able to get the key on \"My API\" page of [threatbook.io](https://threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
             "required": true,
             "schema": {
               "type": "string"

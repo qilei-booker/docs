@@ -66,8 +66,15 @@
               "api-reference/enrichment/ip-report",
               "api-reference/enrichment/compromise-detection",
               "api-reference/enrichment/ip-intelligence",
-              "api-reference/enrichment/domain-intelligence",
-              "api-reference/enrichment/get-ip-reputation-feeds"
+              "api-reference/enrichment/domain-intelligence"
+            ]
+          },
+          {
+            "group": "Feeds",
+            "pages": [
+              "api-reference/feeds/ip-reputation",
+              "api-reference/feeds/ioc",
+              "api-reference/feeds/hash"
             ]
           }
         ]
