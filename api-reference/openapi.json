@@ -1,0 +1,3362 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "api",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/v1/community/ip": {
+      "post": {
+        "summary": "IP Report",
+        "deprecated": false,
+        "description": "You are able to get an IP report with comprehensive intelligence labels, such as **C2, Malware, Zombie, Compromised Host, Scanner,** etc., and contextual information like **open ports, certificates,** and so on.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "query",
+            "description": "Community API key. Unique identifier for API request.",
+            "required": true,
+            "example": "28a5eab7660142159192cf7c6f9317217d90e40f62aa4591ae1a530c99c2fe46",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource",
+            "in": "query",
+            "description": "Single IPv4 or IPv6 to query.",
+            "required": true,
+            "example": "1.1.1.1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "You are allowed to specify the following arguments to get specific data back. Each of them should be separated by commas if you would like to request more than two of them.\n \n- **summary**: Summary of the threat intelligence.\n- **ports**: open ports of the IP.\n- **cas**: Relevant certificates of the IP.\n- **basic**: Geographic location and carrier, etc.\n- **asn**: Asn information.\n\nIf you don’t specify this parameter, we will return all data by default.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "summary": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Summary of the intelligence determined by ThreatBook.\n            \nEach item includes the following fields:\n- judgments: Array. Intelligence type of the final verdict by ThreatBook.\n- whitelist: Boolean.\n  - true: It is whitelisted.\n  - false: It is not whitelisted.\n- first_seen: String. UTC Time of the first discovery of intelligence.\n- last_seen: String. UTC Time of the last discovery of intelligence."
+                        },
+                        "basic": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Geographic location information. \n- carrier\n- Location\n   - country\n   - country_code\n   - province\n   - city\n   - lng: longitude.\n   - lat: latitude."
+                        },
+                        "asn": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Asn information."
+                        },
+                        "ports": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "Open ports. Each item includes the following fields:\n- port\n- module\n- product\n- version\n- detail"
+                        },
+                        "cas": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "Relevant certificates. Each item includes the following fields:\n- protocol\n- Port\n- digital_certificate: Certificate detail.\n  - subject\n  - issuer\n  - fingerprint\n  - purpose\n  - verify: digital signature algorithm.\n  - Status: There are four status for the certificate.\n    - 0: Normal.\n    - 1: Expired.\n    - 2: Invalid.\n    - 3: Self-signed.\n  - status_desc: Description for the certificate status.\n  - revoked: Boolean.Get to know whether the certificate is revoked.\n  - revoke_time: The revoke time for the certificate.\n  - Start: Effective time of the certificate.\n  - End: Expiration time of the certificate.\n  - Serial_number: Serial number of the certificate."
+                        },
+                        "IP": {
+                          "type": "string",
+                          "description": "IP address for query will be returned. \n            \nPlease pay attention, IPv6 will be returned in the following format.\n\nFor example: **2001:0db8:0000:0000:0001:0000:0000:0000**"
+                        }
+                      },
+                      "required": [
+                        "summary",
+                        "basic",
+                        "asn",
+                        "ports",
+                        "cas",
+                        "IP"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 200
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "data",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Success",
+                  "data": {
+                    "summary": {
+                      "judgments": [],
+                      "whitelist": true,
+                      "first_seen": "2020-07-02",
+                      "last_seen": "2022-09-11"
+                    },
+                    "basic": {
+                      "carrier": "Cloudflare, Inc.",
+                      "location": {
+                        "country": "Australia",
+                        "province": "",
+                        "city": "",
+                        "lng": "151.211354",
+                        "lat": "-33.86264",
+                        "country_code": "AU"
+                      }
+                    },
+                    "asn": {
+                      "rank": 4,
+                      "info": "CLOUDFLARENET, US",
+                      "number": 13335
+                    },
+                    "ports": [
+                      {
+                        "port": 80,
+                        "module": "http",
+                        "product": "Cloudflare http proxy",
+                        "version": "",
+                        "detail": ""
+                      },
+                      {
+                        "port": 443,
+                        "module": "https",
+                        "product": "Cloudflare http proxy",
+                        "version": "",
+                        "detail": ""
+                      }
+                    ],
+                    "cas": [
+                      {
+                        "protocol": "https",
+                        "port": 443,
+                        "digital_certificate": {
+                          "sha256": "73b8ed5becf1ba6493d2e2215a42dfdc7877e91e311ff5e59fb43d094871e699",
+                          "subject": "cloudflare-dns.com",
+                          "issuer": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
+                          "fingerprint": "3ba7e9f806eb30d2f4e3f905e53f07e9acf08e1e",
+                          "purpose": "SSL client|SSL server|Any Purpose|Any Purpose CA|OCSP helper",
+                          "verify": "SHA256withRSA",
+                          "status": "0",
+                          "revoked": false,
+                          "begin": "2025-01-02",
+                          "end": "2026-01-21",
+                          "status_desc": "Valid",
+                          "serial_number": "27dc8c5e17294aec9ed3f67728e8a08",
+                          "revoked_time": ""
+                        }
+                      }
+                    ],
+                    "IP": "1.1.1.1"
+                  },
+                  "response_code": 200
+                }
+              }
+            },
+            "headers": {}
+          },
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "No data"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 204
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "No data",
+                  "response_code": 204
+                }
+              }
+            },
+            "headers": {}
+          },
+          "206": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation."
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 206
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                  "response_code": 206
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Required:{resource/apikey}",
+                        "Invalid parameter:{parameter}"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 400
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Required:{resource/apikey}",
+                  "response_code": 400
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Invalid account status",
+                        "Invalid access IP",
+                        "Invalid API key",
+                        "Invalid key status",
+                        "No access to the API",
+                        "Expired API key"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 401
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid account status",
+                  "response_code": 401
+                }
+              }
+            },
+            "headers": {}
+          },
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Invalid API method"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 405
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid API method",
+                  "response_code": 405
+                }
+              }
+            },
+            "headers": {}
+          },
+          "429": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Request rate limitation",
+                        "Beyond {daily/monthly/total} quotas limitation"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 429
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Request rate limitation",
+                  "response_code": 429
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "System error"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 500
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "System error",
+                  "response_code": 500
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/ioc/query": {
+      "post": {
+        "summary": "Compromise Detection",
+        "deprecated": false,
+        "description": "Attackers, especially APT group can spend a long time within a compromised network without detection, cyber-attacks by threat actors with special goals, such as stealing, spying, or disrupting cause losses of enterprises and brand crisis. Indicators of Compromise(IOC) can help SOC teams in enterprises to discover and remediate cyber-attacks with essential clues or evidence. \n\nYou are able to accurately find out the compromised host in your network with our 99.9% high-fidelity intelligence.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "query",
+            "description": "Premium API key. Unique identifier for API request.\n              \nYou are able to get the key on \"My API\" page of [threatbook.io](https://threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource",
+            "in": "query",
+            "description": "Single IP address or Domain name to query.\n\nYou are allowed to query an IP address with a port to get more accurate intelligence, for example:\n- IPv4 with port to query:\n\n  **183.18.2.4:8080**\n  \n- IPv6 with port to query:\n\n  \\[**2001:0db8:0000:0000:0001:0000:0000:0000**\\]:80",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "ips": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Key is an IP, value is a JSON Object. All fields for each item are shown below:\n- **threat_level**: String.\n  - **malicious**: Only when we capture some specific activities related to \"C2, Sinkhole C2, MiningPool, CoinMiner, Malware\", we will consider it malicious in the compromise detection scenario.   \n  - **safe**: This determination is made only from the perspective of compromise detection and does not mean that there are no other malicious intelligence or activities associated with the IP or domain name beyond compromise.\n- **confidence_level**: String. There are three levels.\n  - high\n  - Midium\n  - Low\n- **judgments**: Array. Intelligence type.\n  There are 5 malicious types considered as **indicators of compromise(IOC)** in this API shown as below, other malicious types in the complete Intelligence Types sheets will not be returned.\n  - C2\n  - Sinkhole C2\n  - MiningPool\n  - CoinMiner\n  - Malware\n  \n    Besides, neutral intelligence type will be returned, such as CDN, IDC, DNS, etc.\n- **whitelist**: Boolean. \n  - true: It is whitelisted.\n  - false: It is not whitelisted.\n- **APT**: Boolean\n  - true: It is an APT.\n  - false: There is not enough evidence to identify whether it is an APT.\n- **threat_actor**: Array. \n- **family**: Array. Virus or Trojan family.\n- **tag_categories**: Array. Fields for each item are shown bellow. \n  - tag_type: Tag type. For example, “industry”.\n  - tags: Specific tags are under the tag type."
+                        },
+                        "domains": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Key is an Domain name, value is a JSON Object. All fields for each item are shown below:\n- **categories**: Object. Domain categories.\n  - first_cats:Array.\n  - Second_cats:String.\n  \nOther fields are the same as the description of \"ips\" above."
+                        }
+                      },
+                      "required": [
+                        "ips",
+                        "domains"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 200
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "data",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Success",
+                  "data": {
+                    "ips": {
+                      "183.18.2.4:8080": {
+                        "judgments": [
+                          "Dynamic IP",
+                          "Gateway"
+                        ],
+                        "whitelist": false,
+                        "family": [],
+                        "severity": "info",
+                        "APT": false,
+                        "threat_actor": [],
+                        "tag_categories": [],
+                        "confidence_level": "high",
+                        "threat_level": "safe"
+                      }
+                    }
+                  },
+                  "response_code": 200
+                }
+              }
+            },
+            "headers": {}
+          },
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "No data"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 204
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "No data",
+                  "response_code": 204
+                }
+              }
+            },
+            "headers": {}
+          },
+          "206": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation."
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 206
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                  "response_code": 206
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Required:{resource/apikey}",
+                        "Invalid parameter:{parameter}"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 400
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Required:{resource/apikey}",
+                  "response_code": 400
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Invalid account status",
+                        "Invalid access IP",
+                        "Invalid API key",
+                        "Invalid key status",
+                        "No access to the API",
+                        "Expired API key"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 401
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid account status",
+                  "response_code": 401
+                }
+              }
+            },
+            "headers": {}
+          },
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Invalid API method"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 405
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid API method",
+                  "response_code": 405
+                }
+              }
+            },
+            "headers": {}
+          },
+          "429": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Request rate limitation",
+                        "Beyond {daily/monthly/total} quotas limitation"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 429
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Request rate limitation",
+                  "response_code": 429
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "System error"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 500
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "System error",
+                  "response_code": 500
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/ip/query": {
+      "post": {
+        "summary": "IP Intelligence",
+        "deprecated": false,
+        "description": "Public IP addresses are obtained from the firewalls, WAF, and other security devices, which can be analyzed and investigated with our intelligence to determine if it is a C2, Zombie, Scanner, etc. \n\nYou are able to get intelligence labels(intelligence type), relevant threat actors, virus/trojan family, complete original intelligence, and contextual information under this API. ",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "query",
+            "description": "Premium API key. Unique identifier for API request.\n              \nYou are able to get the key on \"My API\" page of [threatbook.io](https://threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource",
+            "in": "query",
+            "description": "Single IPv4 or IPv6 address to query.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "You are allowed to specify the following arguments to get specific data back. Each of them should be separated by commas if you would like to request more than two of them. \n- **summary**: Full summary of the threat intelligence;\n- **intelligences**: Original threat intelligence. \n- **samples**: Relevant samples;\n- **ports**: open ports of the IP;\n- **cas**: Relevant certificates of the IP;\n- **basic**: Geographic location and carrier, etc.\n- **asn**: Asn information.\n\nIf you don’t specify this parameter, we will return all data by default.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "summary": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Summary of the intelligence determined by ThreatBook. It is produced in a strict quality control process.\n\nEach item includes the following fields:\n- **judgments**: Array. Intelligence type of the final verdict by ThreatBook.\n- **whitelist**: Boolean. \n  - true: It is whitelisted.\n  - false: It is not whitelisted.\n- **APT**: Boolean\n  - true: It is an APT.\n  - false: There is not enough evidence to identify whether it is an APT.\n- **threat_actor**: Array. \n- **family**: Array. Virus or trojan family.\n- **tag_categories**: Array. Fields for each item are shown bellow. \n  - tag_type: Tag type. For example, “industry”.\n  - tags: Specific tags are under the tag type.\n- **first_seen**: String. UTC Time of the first discovery of intelligence.\n- **last_seen**: String. UTC Time of the last discovery of intelligence."
+                        },
+                        "intelligences": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Complete original intelligence. \n\nIntelligence consists of two parts:\n- threatbook_lab: The intelligence is produced or discovered by ThreatBook. All the final comprehensive verdicts are determined based on our own intelligence. \n  - source: Intelligence source.\n  - first_seen: String. UTC time.\n  - last_seen: String. UTC time.\n  - confidence: String. confidence score. The higher the score, the higher the credibility of the intelligence.\n  - expired: Boolean.\n    - true: This piece of intelligence is expired.\n    - false: This piece of intelligence is still valid.\n  - intel_types: Array. Intelligence type.\n  - Intel_tags: Array. tags for this intelligence.\n- open_source: The intelligence is gathered from open source. It is just for reference for our customers, we will not use it in our final verdict.\n  \n  All the fields are the same as \"threatbook_lab\" above. \n  \n  ——————\n\n  Open source intelligence includes the following non-exclusive intelligence sources, updating continuously…\n  \n  [mirc.com](http://mirc.com)\n  \n  [danger.rulez.sk](http://danger.rulez.sk)\n  \n  [alexa.com](http://alexa.com)\n  \n  [binarydefense.com](http://binarydefense.com)\n  \n  [blocklist.de](http://blocklist.de)\n  \n  [cinsscore.com](http://cinsscore.com)\n  \n  [sslbl.abuse.ch](http://sslbl.abuse.ch)\n  \n  [phishtank.com](http://phishtank.com)\n  \n  [packetmail.net](http://packetmail.net)\n  \n  [spamhaus.org](http://spamhaus.org)\n  \n  [vxvault.net](http://vxvault.net)\n  \n  [alienvault.com](http://alienvault.com)\n  \n  [nothink.org](http://nothink.org)\n  \n  [feodotracker.abuse.ch](http://feodotracker.abuse.ch)\n  \n  [openphish.com](http://openphish.com)\n  \n  [hosts-file.net](http://hosts-file.net)\n  \n  ……"
+                        },
+                        "samples": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "Relevant samples. It will be returned up to 20 samples.Each item includes the following fields:\n- sha256\n- scan_time\n- ratio: Detecting by multi-engine antivirus scanners. For example, \"1/22\" means one of the antivirus scanners considers this sample as malicious.\n- malware_type\n- malware_family"
+                        },
+                        "basic": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Geographic location information. \n- carrier\n- location\n  - country\n  - country_code\n  - province\n  - city\n  - lng: longitude.\n  - lat: latitude."
+                        },
+                        "asn": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Asn information."
+                        },
+                        "ports": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "Open ports. Each item includes the following fields:\n- port\n- module\n- product\n- version\n- detail"
+                        },
+                        "cas": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "Relevant certificates. Each item includes the following fields:\n- protocol\n- Port\n- digital_certificate: Certificate detail.\n  - subject\n  - issuer\n  - fingerprint\n  - purpose\n  - verify: digital signature algorithm.\n  - Status: There are four status for the certificate.\n    - 0: Normal.\n    - 1: Expired.\n    - 2: Invalid.\n    - 3: Self-signed.\n  - status_desc: Description for the certificate status.\n  - revoked: Boolean.Get to know whether the certificate is revoked.\n  - revoke_time: The revoke time for the certificate.\n  - begin: Effective time of the certificate.\n  - End: Expiration time of the certificate.\n  - Serial_number: Serial number of the certificate."
+                        },
+                        "IP": {
+                          "type": "string",
+                          "description": "IP address for query will be returned. \n\nPlease pay attention, IPv6 will be returned in the following format.\n\nFor example: **2001:0db8:0000:0000:0001:0000:0000:0000** "
+                        }
+                      },
+                      "required": [
+                        "summary",
+                        "intelligences",
+                        "samples",
+                        "basic",
+                        "asn",
+                        "ports",
+                        "cas",
+                        "IP"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 200
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "data",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Success",
+                  "data": {
+                    "summary": {
+                      "judgments": [],
+                      "whitelist": true,
+                      "family": [],
+                      "first_seen": "2020-07-02",
+                      "last_seen": "2022-09-11",
+                      "APT": false,
+                      "threat_actor": [],
+                      "tag_categories": []
+                    },
+                    "intelligences": {
+                      "threatbook_lab": [
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2021-08-29",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2021-08-30"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2021-08-29",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2021-08-30"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2020-07-02",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2022-09-11"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2019-05-27",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2020-07-01"
+                        }
+                      ],
+                      "open_source": [
+                        {
+                          "source": "phishtank.com",
+                          "confidence": 55,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2024-07-02",
+                          "intel_types": [
+                            "Phishing"
+                          ],
+                          "last_seen": "2024-10-25"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2024-02-08",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2025-04-19"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2018-09-13",
+                          "intel_types": [
+                            "Malware"
+                          ],
+                          "last_seen": "2018-09-29"
+                        },
+                        {
+                          "source": "cinsscore.com",
+                          "confidence": 50,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2018-04-24",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2018-04-24"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2018-02-24",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2018-03-10"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2017-10-11",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2017-10-28"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2017-10-02",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2018-04-04"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2017-07-07",
+                          "intel_types": [
+                            "Malware"
+                          ],
+                          "last_seen": "2025-04-28"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2017-07-07",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2017-10-23"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2017-07-06",
+                          "intel_types": [
+                            "Spam"
+                          ],
+                          "last_seen": "2018-09-23"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 55,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2020-06-17",
+                          "intel_types": [
+                            "Malware"
+                          ],
+                          "last_seen": "2025-03-21"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 75,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2020-05-07",
+                          "intel_types": [
+                            "CDN"
+                          ],
+                          "last_seen": "2020-08-25"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 50,
+                          "expired": true,
+                          "intel_tags": [
+                            {
+                              "tags": [
+                                "Bitrep"
+                              ],
+                              "tags_type": "virus_family"
+                            }
+                          ],
+                          "first_seen": "2018-03-15",
+                          "intel_types": [
+                            "C2"
+                          ],
+                          "last_seen": "2019-09-18"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2017-07-14",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2023-08-31"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2017-07-06",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2023-08-31"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 35,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2016-11-10",
+                          "intel_types": [
+                            "Malware"
+                          ],
+                          "last_seen": "2022-08-08"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 43,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2016-10-06",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2018-06-08"
+                        },
+                        {
+                          "source": "openphish.com",
+                          "confidence": 26,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2016-09-03",
+                          "intel_types": [
+                            "Phishing"
+                          ],
+                          "last_seen": "2018-07-15"
+                        },
+                        {
+                          "source": "spamhaus.org",
+                          "confidence": 69,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2015-12-02",
+                          "intel_types": [
+                            "Phishing"
+                          ],
+                          "last_seen": "2016-09-25"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 35,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2015-11-25",
+                          "intel_types": [
+                            "Exploit",
+                            "Malware"
+                          ],
+                          "last_seen": "2016-05-03"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 75,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2015-08-07",
+                          "intel_types": [
+                            "C2"
+                          ],
+                          "last_seen": "2016-10-16"
+                        }
+                      ]
+                    },
+                    "samples": [
+                      {
+                        "sha256": "08e9828b447cd3b12ddadf97985f858458d44769a04e7673f72249fc369f5eea",
+                        "ratio": "9/26",
+                        "scan_time": "2018-10-12 20:57:32",
+                        "malware_type": "SoftwareBundler",
+                        "malware_family": "ICLoader"
+                      },
+                      {
+                        "sha256": "75f515c886b417aa22e41d3b98630a5fe3b7254c25b6eb9c1a0d45d8b02c65b3",
+                        "ratio": "18/26",
+                        "scan_time": "2018-10-11 23:43:26",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "2236cd5dde6cb49d555ac787848a46ae9b1fba30928e775fbe750590164b7530",
+                        "ratio": "17/26",
+                        "scan_time": "2018-10-11 23:38:49",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "39c73e94d7fce76bb8a66c744a9326953d763795c0a9eafb5aab1e2cdea21482",
+                        "ratio": "17/26",
+                        "scan_time": "2018-10-11 21:16:15",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "e9dca6a2cb8642fcffd88e4668b669c110188922b11b88073b1e8fd9663f446c",
+                        "ratio": "6/26",
+                        "scan_time": "2018-10-11 20:13:38",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "a657c145a49bb467073b3ad98cbfbe951542ea7f86636696e9c05f701aba59a7",
+                        "ratio": "16/26",
+                        "scan_time": "2018-10-11 20:03:50",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "c0d40937bc77fa5facd4f08a7f2a74e4b8892cc6306cbf472a1a5045c0c0652a",
+                        "ratio": "18/26",
+                        "scan_time": "2018-10-11 19:23:38",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "f8b59451e34354cd82f5a13b63e0b9ea5d982c88c16b7bf9ba41bad983426d70",
+                        "ratio": "5/26",
+                        "scan_time": "2018-09-21 19:14:03",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "697c3b1fe1f886f6825c5b00f9185cfe180ae91253d3ea935e9498de8c97d92f",
+                        "ratio": "9/26",
+                        "scan_time": "2018-09-21 05:51:01",
+                        "malware_type": "SoftwareBundler",
+                        "malware_family": "ICLoader"
+                      },
+                      {
+                        "sha256": "66c302f6557ab3383ae559f5214232e64087c56c76b08fc75380eded732b37cb",
+                        "ratio": "6/26",
+                        "scan_time": "2018-09-21 05:31:35",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "1baf005a5d0f6ccc544191290cad02fc686aa065ab963b30f3e252318d9f71c4",
+                        "ratio": "6/26",
+                        "scan_time": "2018-09-21 05:26:13",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "b343cca26cd6ca83f903527831c778bafa45908a7b797c04e3f136a61111737f",
+                        "ratio": "6/26",
+                        "scan_time": "2018-09-21 05:15:11",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "37cfcbc7ab3cd031b5e23710c4c295bd5a128c68a9257afe95d94df645d3cd68",
+                        "ratio": "6/26",
+                        "scan_time": "2018-09-21 03:47:16",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "6dcbf32d8c6695d6070d6d589513da5ee43d95414c1d1f50456db4c2ab3e1ad3",
+                        "ratio": "11/26",
+                        "scan_time": "2018-08-23 20:16:15",
+                        "malware_type": "SoftwareBundler",
+                        "malware_family": "ICLoader"
+                      },
+                      {
+                        "sha256": "34589e27b7362fcd59c32a8c4ed7995c950c7db265aca58ee121dc091ae321b2",
+                        "ratio": "7/26",
+                        "scan_time": "2018-07-10 21:18:39",
+                        "malware_type": "",
+                        "malware_family": "Downloader"
+                      },
+                      {
+                        "sha256": "94a7e25aa2e79df2f84fd7a9670c440a8886e5cb37b47eb475bbce3e402fae47",
+                        "ratio": "3/26",
+                        "scan_time": "2018-06-16 18:43:28",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "c3589327ad0e848caf61b15c6b61ff234dbdaa28a18ea74e916d04974c471817",
+                        "ratio": "3/26",
+                        "scan_time": "2018-06-15 17:52:36",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "2fffb84c9304f0cd47f412229b7f71ba52cf84b5c2526e580a2e0457a28f1d25",
+                        "ratio": "3/26",
+                        "scan_time": "2018-06-15 17:47:14",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "c5ecadd07034afcae90d8504d4dc8d52353b1194b811566a0c0f41d4fee50644",
+                        "ratio": "1/26",
+                        "scan_time": "2018-06-03 00:12:20",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "efd4c9d36bf59e9c4f3d0e36784c274d890267535a3182b073df1db1ccbd8dcb",
+                        "ratio": "1/26",
+                        "scan_time": "2018-05-23 03:05:24",
+                        "malware_type": "",
+                        "malware_family": ""
+                      }
+                    ],
+                    "basic": {
+                      "carrier": "Cloudflare, Inc.",
+                      "location": {
+                        "country": "Australia",
+                        "province": "",
+                        "city": "",
+                        "lng": "151.211354",
+                        "lat": "-33.86264",
+                        "country_code": "AU"
+                      }
+                    },
+                    "asn": {
+                      "rank": 4,
+                      "info": "CLOUDFLARENET, US",
+                      "number": 13335
+                    },
+                    "ports": [
+                      {
+                        "port": 80,
+                        "module": "http",
+                        "product": "Cloudflare http proxy",
+                        "version": "",
+                        "detail": ""
+                      },
+                      {
+                        "port": 443,
+                        "module": "https",
+                        "product": "Cloudflare http proxy",
+                        "version": "",
+                        "detail": ""
+                      }
+                    ],
+                    "cas": [
+                      {
+                        "protocol": "https",
+                        "port": 443,
+                        "digital_certificate": {
+                          "sha256": "73b8ed5becf1ba6493d2e2215a42dfdc7877e91e311ff5e59fb43d094871e699",
+                          "subject": "cloudflare-dns.com",
+                          "issuer": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
+                          "fingerprint": "3ba7e9f806eb30d2f4e3f905e53f07e9acf08e1e",
+                          "purpose": "SSL client|SSL server|Any Purpose|Any Purpose CA|OCSP helper",
+                          "verify": "SHA256withRSA",
+                          "status": "0",
+                          "revoked": false,
+                          "begin": "2025-01-02",
+                          "end": "2026-01-21",
+                          "status_desc": "Valid",
+                          "serial_number": "27dc8c5e17294aec9ed3f67728e8a08",
+                          "revoked_time": ""
+                        }
+                      }
+                    ],
+                    "IP": "1.1.1.1"
+                  },
+                  "response_code": 200
+                }
+              }
+            },
+            "headers": {}
+          },
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "No data"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 204
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "No data",
+                  "response_code": 204
+                }
+              }
+            },
+            "headers": {}
+          },
+          "206": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation."
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 206
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                  "response_code": 206
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Required:{resource/apikey}",
+                        "Invalid parameter:{parameter}"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 400
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Required:{resource/apikey}",
+                  "response_code": 400
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Invalid account status",
+                        "Invalid access IP",
+                        "Invalid API key",
+                        "Invalid key status",
+                        "No access to the API",
+                        "Expired API key"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 401
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid account status",
+                  "response_code": 401
+                }
+              }
+            },
+            "headers": {}
+          },
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Invalid API method"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 405
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid API method",
+                  "response_code": 405
+                }
+              }
+            },
+            "headers": {}
+          },
+          "429": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Request rate limitation",
+                        "Beyond {daily/monthly/total} quotas limitation"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 429
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Request rate limitation",
+                  "response_code": 429
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "System error"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 500
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "System error",
+                  "response_code": 500
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/domain/query": {
+      "post": {
+        "summary": "Domain Intelligence",
+        "deprecated": false,
+        "description": "Domain names extracted from internal DNS, NGFW, or other security devices can be analyzed to determine whether it is a remote control server, a phishing website, etc.\n \nYou are able to get intelligence judgment, relevant threat actors, virus/trojan family, complete original intelligence, and contextual information under this API.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "query",
+            "description": "Premium API key. Unique identifier for API request.\n              \nYou are able to get the key on \"My API\" page of [threatbook.io](https://threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource",
+            "in": "query",
+            "description": "Single domain name to query.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "You are allowed to specify the following arguments to get specific data back. Each of them should be separated by commas if you would like to request more than two of them. \n\n- **summary**: Full summary of the threat intelligence.\n- **intelligences**: Original threat intelligence. \n- **samples**: Relevant samples.\n- **cur_ips**: Current resolved IPs for the domain.\n- **cur_whois**: latest whois information for the domain.\n- **cas**: Relevant certificates of the domain.\n- **categories**: Domain categories.\n\nIf you don’t specify this parameter, we will return all data",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "summary": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Summary of the intelligence determined by ThreatBook. It is produced in a strict quality control process.\nEach item includes the following fields:\n- **judgments**: Array. Intelligence type of the final verdict by ThreatBook.\n- **whitelist**: Boolean. \n  - true: It is whitelisted.\n  - false: It is not whitelisted.\n- **APT**: Boolean\n  - true: It is an APT.\n  - false: There is not enough evidence to identify whether it is an APT.\n- **threat_actor**: Array. \n- **family**: Array. Virus or trojan family.\n- **tag_categories**: Array. Fields for each item are shown bellow. \n  - tag_type: Tag type. For example, “industry”.\n  - tags: Specific tags are under the tag type.\n- **first_seen**: String. UTC Time of the first discovery of intelligence.\n- **last_seen**: String. UTC Time of the last discovery of intelligence."
+                        },
+                        "intelligences": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Complete original intelligence. \n\nIntelligence consists of two parts:\n\n- threatbook_lab: The intelligence is produced or discovered by ThreatBook. All the final comprehensive verdicts are determined based on our own intelligence. \n  - source: Intelligence source.\n  - first_seen: String. UTC time.\n  - last_seen: String. UTC time.\n  - confidence: String. confidence score. The higher the score, the higher the credibility of the intelligence.\n  - expired: Boolean.\n    - true: This piece of intelligence is expired.\n    - false: This piece of intelligence is still valid.\n  - intel_types: Array. Intelligence type.\n  - Intel_tags: Array. tags for this intelligence.\n- open_source: The intelligence is gathered from open source. It is just for reference for our customers, we will not use it in our final verdict.\n  \n  All the fields are the same as \"threatbook_lab\" above.\n   \n  ——————\n  \n  Open source intelligence includes the following non-exclusive intelligence sources, updating continuously…\n  \n  [mirc.com](http://mirc.com)\n  \n  [danger.rulez.sk](http://danger.rulez.sk)\n  \n  [alexa.com](http://alexa.com)\n  \n  [binarydefense.com](http://binarydefense.com)\n  \n  [blocklist.de](http://blocklist.de)\n  \n  [cinsscore.com](http://cinsscore.com)\n  \n  [sslbl.abuse.ch](http://sslbl.abuse.ch)\n  \n  [phishtank.com](http://phishtank.com)\n  \n  [packetmail.net](http://packetmail.net)\n  \n  [spamhaus.org](http://spamhaus.org)\n  \n  [vxvault.net](http://vxvault.net)\n  \n  [alienvault.com](http://alienvault.com)\n  \n  [nothink.org](http://nothink.org)\n  \n  [feodotracker.abuse.ch](http://feodotracker.abuse.ch)\n  \n  [openphish.com](http://openphish.com)\n  \n  [hosts-file.net](http://hosts-file.net)\n  \n  ……"
+                        },
+                        "samples": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "Relevant samples. It will be returned up to 20 samples.Each item includes the following fields:\n- sha256\n- scan_time\n- ratio: Detecting by multi-engine antivirus scanners. For example, \"1/22\" means one of the antivirus scanners considers this sample as malicious.\n- malware_type\n- malware_family"
+                        },
+                        "domain": {
+                          "type": "string",
+                          "description": "Domain name for query will be returned."
+                        },
+                        "cas": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "Relevant certificates. Each item includes the following fields:\n- subject\n- issuer\n- fingerprint\n- purpose\n- verify: digital signature algorithm.\n- Status: There are four status for the certificate.\n  - 0: Normal.\n  - 1: Expired.\n  - 2: Invalid.\n  - 3: Self-signed.\n- status_desc: Description for the certificate status.\n- revoked: Boolean.Get to know whether the certificate is revoked.\n- revoked_time: The revoke time for the certificate.\n- begin: Effective time of the certificate.\n- End: Expiration time of the certificate.\n- Serial_number: Serial number of the certificate."
+                        },
+                        "categories": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Domain categories. \n            \n- first_cats: Array.\n- second_cats: String."
+                        },
+                        "cur_ips": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "Current resolved IPs for the domain. Each item includes the following fields.\n- ip\n- location\n  - country\n  - country_code\n  - province\n  - city\n  - lng: longitude.\n  - lat: latitude."
+                        },
+                        "cur_whois": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Latest whois information for the domain. All the fields are shown bellow.\n- registrar_name: Registrar name.\n- name_server: Server names separated by \"|\".\n- registrant_name: Registrant name. \n- registrant_email: Registrant email.\n- registrant_company: Registrant company.\n- registrant_address: Registrant address.\n- registrant_phone: Registrant phone.\n- cdate: Registration date.\n- udate: Update date.\n- edate: Expiration date."
+                        }
+                      },
+                      "required": [
+                        "summary",
+                        "intelligences",
+                        "samples",
+                        "domain",
+                        "cas",
+                        "categories",
+                        "cur_ips",
+                        "cur_whois"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 200
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "data",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Success",
+                  "data": {
+                    "summary": {
+                      "judgments": [],
+                      "whitelist": true,
+                      "family": [],
+                      "first_seen": "2016-01-25",
+                      "last_seen": "2025-04-28",
+                      "APT": false,
+                      "threat_actor": [],
+                      "tag_categories": []
+                    },
+                    "intelligences": {
+                      "threatbook_lab": [
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2021-10-13",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2022-08-21"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2021-03-05",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2025-04-28"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2020-07-03",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2022-12-05"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2016-01-25",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2021-01-29"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2018-04-19",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2018-05-16"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2018-04-19",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2018-12-28"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2017-03-30",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2020-06-30"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2017-03-14",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2017-03-13"
+                        }
+                      ],
+                      "open_source": [
+                        {
+                          "source": "Open Source ",
+                          "confidence": 50,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2017-07-10",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2025-04-27"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 70,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2017-07-28",
+                          "intel_types": [
+                            "Malware"
+                          ],
+                          "last_seen": "2017-09-14"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2016-05-03",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2020-02-10"
+                        }
+                      ]
+                    },
+                    "samples": [
+                      {
+                        "sha256": "9c8c136252f14f42673e681a3a4a2304c913b05d8170e53ae987a8cdd83e5375",
+                        "ratio": "18/26",
+                        "scan_time": "2019-09-28 21:27:16",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "e053970fb06bfda6e02e5d8a5d402373712b5ee7f73a70f5dabdaa4c4e2c654c",
+                        "ratio": "17/26",
+                        "scan_time": "2019-09-28 19:31:33",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "a0d3a81f49cbdb6ee67c56e8d6c0e14d803e92cd5b12da3b8e45cf171e482c61",
+                        "ratio": "18/26",
+                        "scan_time": "2019-09-22 06:59:59",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "3166947ecd3003b5ddda74242aa5674138c645a6149fb063927bfb272e74b71d",
+                        "ratio": "11/26",
+                        "scan_time": "2019-09-21 14:59:15",
+                        "malware_type": "Trojan",
+                        "malware_family": "Redirector"
+                      },
+                      {
+                        "sha256": "71a0e8e3bd84ec2dc4f202056cbcca7755573ca286d89d0b66008b5277128d96",
+                        "ratio": "18/26",
+                        "scan_time": "2019-09-20 17:44:51",
+                        "malware_type": "Trojan",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "080a853a59a4a8fc5ec4df633ac1d6f36b800a0b26810d83f1262c81b31ad435",
+                        "ratio": "17/26",
+                        "scan_time": "2019-09-20 06:49:59",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "30ccbde3fc68719601cc8ff036b3a4c02bf76d04996f221a799df6d20fe3c95a",
+                        "ratio": "21/26",
+                        "scan_time": "2019-09-18 04:18:00",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "56302a42cc936aaa62b64406550972e9737beb23763e460c327354ab3a19731b",
+                        "ratio": "17/26",
+                        "scan_time": "2019-09-17 20:58:35",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "d10b0459b6fb09abd4e5fd2fdf5d941223b0e16ee50a5d3478f882354ca5871b",
+                        "ratio": "16/26",
+                        "scan_time": "2019-07-01 12:07:17",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "45864c05cf14e3d38b53da6f625d680de1ee61745f8be6dc6908f74ad96a5e2f",
+                        "ratio": "13/26",
+                        "scan_time": "2018-10-13 20:29:03",
+                        "malware_type": "TrojanDownloader",
+                        "malware_family": "Cutwail"
+                      },
+                      {
+                        "sha256": "3eb7a613c4d481aa5211f883479de571258214b152caec68dc503dba029e0668",
+                        "ratio": "9/26",
+                        "scan_time": "2018-10-13 18:50:36",
+                        "malware_type": "Worm",
+                        "malware_family": "Gamarue"
+                      },
+                      {
+                        "sha256": "743f09cffee8d20a12b0d63d67e4d68c6e0026506cb5bf4f9e16b311ac996520",
+                        "ratio": "13/26",
+                        "scan_time": "2018-10-12 20:45:51",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "8b90df71af0f8ee58450bdac626587bcf99551f5c7cee1c66909e316f6176f4c",
+                        "ratio": "13/26",
+                        "scan_time": "2018-10-12 18:21:17",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "107ed5f64b8be8346fd303a2b077db5f8ccb3aa2c66c4909fbed1b3e5246889d",
+                        "ratio": "10/26",
+                        "scan_time": "2018-08-29 20:12:51",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "0e95fb1461be71847485d8f6816af5f9934a3433ff9b7ff011c130d299fd1900",
+                        "ratio": "15/26",
+                        "scan_time": "2018-08-22 16:48:49",
+                        "malware_type": "Trojan",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "015c3218c9470b70242ef5646d66907e84b7be0444a6d049a84062afa966e737",
+                        "ratio": "14/26",
+                        "scan_time": "2018-08-06 07:40:16",
+                        "malware_type": "Virus",
+                        "malware_family": "Sality"
+                      },
+                      {
+                        "sha256": "d257aeb8196815cdc21e649def51256195e4f7d7caf0d98d4e70cc63e51326f7",
+                        "ratio": "14/26",
+                        "scan_time": "2018-07-11 18:53:19",
+                        "malware_type": "Trojan",
+                        "malware_family": "Toga!rfn"
+                      }
+                    ],
+                    "domain": "bing.com",
+                    "cas": [
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "da468a10b99755deed69dc8f329846a28279adb1",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-13",
+                        "end": "2025-12-13",
+                        "status_desc": "Valid",
+                        "serial_number": "62d3cf80ad02d3940a6b5370906c281cb86c1f68",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "14ce22d0a810a84e372600fab19d76d3f6242047",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-14",
+                        "end": "2025-12-14",
+                        "status_desc": "Valid",
+                        "serial_number": "3e48c8c93d1f711a673dc929c08d0b7466be9a26",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "dc7d38aaf6385c782cee94a7c119131fb265e305",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-06",
+                        "end": "2025-12-06",
+                        "status_desc": "Valid",
+                        "serial_number": "7afbb0ca13393693081933db1a1bebb225ac53f6",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "a98025daf7d87d83123cae11a40d6fe762eb048d",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-11-29",
+                        "end": "2025-11-29",
+                        "status_desc": "Valid",
+                        "serial_number": "4494631e875894b168b4daba57d2b920634cf77a",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "2ed802dae9c2a9f2dcb54fa7feeffefe9eb03461",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2025-01-26",
+                        "end": "2026-01-26",
+                        "status_desc": "Valid",
+                        "serial_number": "14a71508db7ae584806aa6c7a27be50b83864483",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "4d73b3b6eec15f91591506de098bd5e77b7b0e4d",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2025-04-06",
+                        "end": "2026-04-06",
+                        "status_desc": "Valid",
+                        "serial_number": "3dbd3c5a069f5c1a17e024f6a7849eb6f030ca27",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "9c9497c3a57673d1456d64be1f2e09dff12f676f",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-04",
+                        "end": "2025-12-04",
+                        "status_desc": "Valid",
+                        "serial_number": "46a7512e4d8881643a48fcf667ba2187a8a17d7d",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "a24e3afa24cbf777b99711413376507c256c7e32",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-16",
+                        "end": "2025-12-16",
+                        "status_desc": "Valid",
+                        "serial_number": "375fc24109126850c1685461960bdd2d0b896fd7",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "37aa37f54b28a482748240959a0e4107ed0ca327",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-03",
+                        "end": "2025-12-03",
+                        "status_desc": "Valid",
+                        "serial_number": "5363711198e3385fe2602a492b3699bd293abec5",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "bc927ef64905f13a7f187fd18a7453c5f89adeb8",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-15",
+                        "end": "2025-12-15",
+                        "status_desc": "Valid",
+                        "serial_number": "e128c3ed44c0b314e22ce94de3739060318aff0",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "1c4ce97d996a621e8f714eecf77c1e6ea4ada00a",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-14",
+                        "end": "2025-12-14",
+                        "status_desc": "Valid",
+                        "serial_number": "4afa47216e54b1f6baa3af3952797034375b52a9",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "d3c0204527ac8664cec237a89ad95a78511536a8",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2025-04-01",
+                        "end": "2026-04-01",
+                        "status_desc": "Valid",
+                        "serial_number": "29e7f7d2297525d0b4f28be1406e71ac087a241c",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "dynamic",
+                        "issuer": "cattle-ca",
+                        "fingerprint": "a2c44985f0220c1ff1cd3cdf34c115127256a550",
+                        "purpose": "SSL server|Netscape SSL server|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "1",
+                        "revoked": false,
+                        "begin": "2019-01-29",
+                        "end": "2024-11-19",
+                        "status_desc": "Expired",
+                        "serial_number": "11fb63f581442a40",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "7c7410e6da96430059871311a0f44715eaf16463",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-11-30",
+                        "end": "2025-11-30",
+                        "status_desc": "Valid",
+                        "serial_number": "70e9a2c3ab6c5f48da8cfe6ac6e99fa4f02da745",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "1238f9d87539da6057dbb9bb334533aadaa04ff2",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2025-01-21",
+                        "end": "2026-01-21",
+                        "status_desc": "Valid",
+                        "serial_number": "ce92a10a490244d6d6ff0c9244f29d675c94c2c",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "f8f1afaf31e14c21db28f84f673403ce0f43c03d",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-09",
+                        "end": "2025-12-09",
+                        "status_desc": "Valid",
+                        "serial_number": "65208005bd7015de6efbfc9c334abf9ca97c0a32",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "1bf37e71a4f6c4fca6eb3f14224e1bca2b7e4277",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-13",
+                        "end": "2025-12-13",
+                        "status_desc": "Valid",
+                        "serial_number": "72ade00aee387d34951de7c161300c248526860c",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "01907cdb1b765e3c2b77beda59dc3988463a755d",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-10",
+                        "end": "2025-12-10",
+                        "status_desc": "Valid",
+                        "serial_number": "5460d80a8cfc2801ab401e50b977a75ccc6963f5",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "72cdc2f44a33a3f1a6b768f71de9bdcc84d6d9ba",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-18",
+                        "end": "2025-12-18",
+                        "status_desc": "Valid",
+                        "serial_number": "7dab1bee9865081cd99955f8413447c459024a73",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "71154b33ac4a583876250975da484282a784707d",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-02",
+                        "end": "2025-12-02",
+                        "status_desc": "Valid",
+                        "serial_number": "530bd5a1ea4443f0dfa1b57d2dc5e06c1b12652e",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "8746de5ffc783f69403e0a325cc715aa62db2a4c",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2025-01-31",
+                        "end": "2026-01-31",
+                        "status_desc": "Valid",
+                        "serial_number": "153ecc450cee95caf5bb72f109f46e23dbb80407",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "f3c857967db38fee3548ae28354cd4b0a089e17a",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-11-26",
+                        "end": "2025-11-26",
+                        "status_desc": "Valid",
+                        "serial_number": "42cea3a737d3523ffef2718a84761f78ecb6cb5e",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "rcgen self signed cert",
+                        "issuer": "rcgen self signed cert",
+                        "fingerprint": "8b99738c4fda53a5da0cd412ba7ff3db79f4957c",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|CRL signing|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withECDSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "1975-01-01",
+                        "end": "4096-01-01",
+                        "status_desc": "Valid",
+                        "serial_number": "98e800690a258cfe",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "a12077052481149900bc759106e688ed440516ec",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-11-30",
+                        "end": "2025-11-30",
+                        "status_desc": "Valid",
+                        "serial_number": "c5b4095a6cbef58daee9b7b1a6bfc57f8e4bde0",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "a5b08a1d383d652f7fc65201dd77b4702aaa2f64",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-04",
+                        "end": "2025-12-04",
+                        "status_desc": "Valid",
+                        "serial_number": "61c1e8221c98a5a43afebd1d580e032a25c879f3",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "3349073bbb7f9061bea490c41208ea74146bf949",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-18",
+                        "end": "2025-12-18",
+                        "status_desc": "Valid",
+                        "serial_number": "3733ba581fa7982de7df43a419ce07ef8de0ede9",
+                        "revoked_time": ""
+                      }
+                    ],
+                    "categories": {
+                      "first_cats": [],
+                      "second_cats": ""
+                    },
+                    "cur_ips": [
+                      {
+                        "ip": "2620:1ec:33:1::10",
+                        "carrier": "Microsoft Corporation",
+                        "location": {
+                          "country": "United States",
+                          "province": "Washington",
+                          "city": "Redmond",
+                          "lng": "-122.12183",
+                          "lat": "47.67379",
+                          "country_code": "US"
+                        }
+                      },
+                      {
+                        "ip": "2620:1ec:33::10",
+                        "carrier": "Microsoft Corporation",
+                        "location": {
+                          "country": "United States",
+                          "province": "Washington",
+                          "city": "Redmond",
+                          "lng": "-122.12183",
+                          "lat": "47.67379",
+                          "country_code": "US"
+                        }
+                      },
+                      {
+                        "ip": "150.171.27.10",
+                        "carrier": "Microsoft Corporation",
+                        "location": {
+                          "country": "United States",
+                          "province": "Washington",
+                          "city": "Redmond",
+                          "lng": "-122.12183",
+                          "lat": "47.67379",
+                          "country_code": "US"
+                        }
+                      },
+                      {
+                        "ip": "150.171.28.10",
+                        "carrier": "Microsoft Corporation",
+                        "location": {
+                          "country": "United States",
+                          "province": "Washington",
+                          "city": "Redmond",
+                          "lng": "-122.12183",
+                          "lat": "47.67379",
+                          "country_code": "US"
+                        }
+                      }
+                    ],
+                    "cur_whois": {
+                      "cdate": "1996-01-29 05:00:00",
+                      "edate": "2026-01-30 00:00:00",
+                      "udate": "2024-12-29 11:59:19",
+                      "alexa": "",
+                      "registrar_name": "MarkMonitor, Inc.",
+                      "name_server": "dns1.p09.nsone.net|dns4.p09.nsone.net|ns1-204.azure-dns.com|ns3-204.azure-dns.org|dns3.p09.nsone.net|ns4-204.azure-dns.info|dns2.p09.nsone.net|ns2-204.azure-dns.net",
+                      "registrant_name": "Domain Administrator",
+                      "registrant_email": "domains@microsoft.com",
+                      "registrant_company": "Microsoft Corporation",
+                      "registrant_address": "One Microsoft Way,,Redmond,WA,US",
+                      "registrant_phone": "+1.4258828080"
+                    }
+                  },
+                  "response_code": 200
+                }
+              }
+            },
+            "headers": {}
+          },
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "No data"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 204
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "No data",
+                  "response_code": 204
+                }
+              }
+            },
+            "headers": {}
+          },
+          "206": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation."
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 206
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                  "response_code": 206
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Required:{resource/apikey}",
+                        "Invalid parameter:{parameter}"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 400
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Required:{resource/apikey}",
+                  "response_code": 400
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Invalid account status",
+                        "Invalid access IP",
+                        "Invalid API key",
+                        "Invalid key status",
+                        "No access to the API",
+                        "Expired API key"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 401
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid account status",
+                  "response_code": 401
+                }
+              }
+            },
+            "headers": {}
+          },
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Invalid API method"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 405
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid API method",
+                  "response_code": 405
+                }
+              }
+            },
+            "headers": {}
+          },
+          "429": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Request rate limitation",
+                        "Beyond {daily/monthly/total} quotas limitation"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 429
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Request rate limitation",
+                  "response_code": 429
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "System error"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 500
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "System error",
+                  "response_code": 500
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/v1/feeds/stix/ip": {
+      "get": {
+        "summary": "Get IP Reputation Feeds",
+        "deprecated": false,
+        "description": "This API provides inbound malicious or suspicious IPs. \n",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {
+              "Content-Disposition": {
+                "example": "",
+                "required": true,
+                "description": "",
+                "schema": {
+                  "type": "string",
+                  "const": "attachment; filename=your_file_name.zip"
+                }
+              },
+              "Content-Type": {
+                "example": "",
+                "required": true,
+                "description": "",
+                "schema": {
+                  "type": "string",
+                  "const": "application/zip"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "No data"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 204
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "No data",
+                  "response_code": 204
+                }
+              }
+            },
+            "headers": {}
+          },
+          "206": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation."
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 206
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                  "response_code": 206
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Required:{resource/apikey}",
+                        "Invalid parameter:{parameter}"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 400
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Required:{resource/apikey}",
+                  "response_code": 400
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Invalid account status",
+                        "Invalid access IP",
+                        "Invalid API key",
+                        "Invalid key status",
+                        "No access to the API",
+                        "Expired API key"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 401
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid account status",
+                  "response_code": 401
+                }
+              }
+            },
+            "headers": {}
+          },
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Invalid API method"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 405
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid API method",
+                  "response_code": 405
+                }
+              }
+            },
+            "headers": {}
+          },
+          "429": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Request rate limitation",
+                        "Beyond {daily/monthly/total} quotas limitation"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 429
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Request rate limitation",
+                  "response_code": 429
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "System error"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 500
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "System error",
+                  "response_code": 500
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/v1/feeds/stix/ioc": {
+      "get": {
+        "summary": "Get IOC Feeds",
+        "deprecated": false,
+        "description": "This API provides outbound malicious or suspicious domains and IPs. \n",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "No data"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 204
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "No data",
+                  "response_code": 204
+                }
+              }
+            },
+            "headers": {}
+          },
+          "206": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation."
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 206
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                  "response_code": 206
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Required:{resource/apikey}",
+                        "Invalid parameter:{parameter}"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 400
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Required:{resource/apikey}",
+                  "response_code": 400
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Invalid account status",
+                        "Invalid access IP",
+                        "Invalid API key",
+                        "Invalid key status",
+                        "No access to the API",
+                        "Expired API key"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 401
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid account status",
+                  "response_code": 401
+                }
+              }
+            },
+            "headers": {}
+          },
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Invalid API method"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 405
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid API method",
+                  "response_code": 405
+                }
+              }
+            },
+            "headers": {}
+          },
+          "429": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Request rate limitation",
+                        "Beyond {daily/monthly/total} quotas limitation"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 429
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Request rate limitation",
+                  "response_code": 429
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "System error"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 500
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "System error",
+                  "response_code": 500
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/v1/feeds/stix/hash": {
+      "get": {
+        "summary": "Get Hash Feeds",
+        "deprecated": false,
+        "description": "This API provides inbound malicious Hashs. ",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "No data"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 204
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "No data",
+                  "response_code": 204
+                }
+              }
+            },
+            "headers": {}
+          },
+          "206": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation."
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 206
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                  "response_code": 206
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Required:{resource/apikey}",
+                        "Invalid parameter:{parameter}"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 400
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Required:{resource/apikey}",
+                  "response_code": 400
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Invalid account status",
+                        "Invalid access IP",
+                        "Invalid API key",
+                        "Invalid key status",
+                        "No access to the API",
+                        "Expired API key"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 401
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid account status",
+                  "response_code": 401
+                }
+              }
+            },
+            "headers": {}
+          },
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Invalid API method"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 405
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Invalid API method",
+                  "response_code": 405
+                }
+              }
+            },
+            "headers": {}
+          },
+          "429": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Request rate limitation",
+                        "Beyond {daily/monthly/total} quotas limitation"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 429
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Request rate limitation",
+                  "response_code": 429
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "System error"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 500
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "System error",
+                  "response_code": 500
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "https://api.threatbook.io",
+      "description": "Prod Env"
+    }
+  ],
+  "security": []
+}

@@ -1,0 +1,100 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "ThreatBook CTI Documentation",
+  "colors": {
+    "primary": "#CC0000",
+    "light": "#eb2d17",
+    "dark": "#15803D"
+  },
+  "favicon": "/favicon.ico",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "guide/introduction"
+            ]
+          },
+          {
+            "group": "Use Cases",
+            "pages": [
+              "guide/compromise-detection",
+              "guide/inbound-enrichment",
+              "guide/pivoting-analysis"
+            ]
+          },
+          {
+            "group": "Quick Start",
+            "pages": [
+              "guide/account&limites",
+              "guide/research",
+              "guide/chat"
+            ]
+          },
+          {
+            "group": "Our CTI Data",
+            "pages": [
+              "guide/overview",
+              "guide/differentiator",
+              "api-reference/feeds_introduction"
+            ]
+          },
+          {
+            "group": "Knowledge Hub",
+            "pages": [
+              "guide/threat-labels"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "API Documentation",
+            "pages": [
+              "api-reference/authentication"
+            ]
+          },
+          {
+            "group": "Enrichment",
+            "pages": [
+              "api-reference/enrichment/ip-report",
+              "api-reference/enrichment/compromise-detection",
+              "api-reference/enrichment/ip-intelligence",
+              "api-reference/enrichment/domain-intelligence"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "/logo/logo_light.svg",
+    "dark": "/logo/logo_dark.svg",
+    "href": "https://threatbook.io/research/"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Contact us",
+        "href": "https://threatbook.io/contactus"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Go to ThreatBook CTI",
+      "href": "https://threatbook.io/research"
+    }
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/ThreatBookLabs",
+      "linkedin": "https://www.linkedin.com/company/threatbook/"
+    }
+  }
+}

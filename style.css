@@ -1,0 +1,39 @@
+.threatBook-download-btn {
+  color: #fff;
+  background-color: #1A1A1A;
+  border-radius: 40px;
+  cursor: pointer;
+  display: inline-flex;
+  padding: 8px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.threatBook-download-btn:hover {
+  background-color: #4D4D4D;
+}
+
+.threatBook-download-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: #fff;
+}
+
+a[href="https://threatbook.ai/contactus"] {
+  display: none;
+}
+
+#topbar-cta-button {
+  --primary-light: 26 26 26;
+  --primary-dark: 26 26 26;
+}
+
+table th {
+  text-align: left;
+}
+
+
