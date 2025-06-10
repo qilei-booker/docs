@@ -1,6 +1,6 @@
 const downloadUrl = {
-  download_ioc: '/images/SECAI_IOC_Sample.json',
-  download_ip: '/images/SECAI_IP_Reputation_Sample.json'
+  download_ioc: 'https://img.threatbook.io/Threatbook_IOC_Sample.json',
+  download_ip: 'https://img.threatbook.io/Threatbook_IP_Reputation_Sample.json'
 }
 
 function downloadFile(id) {
