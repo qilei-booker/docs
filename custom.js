@@ -3,12 +3,21 @@ const downloadUrl = {
   download_ip: 'https://img.threatbook.io/Threatbook_IP_Reputation_Sample.json'
 }
 
-function downloadFile(id) {
+async function downloadFile(id) {
   const url = downloadUrl[id];
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = url.split('/').pop();
-  a.click();
+  try {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = url.split('/').pop();
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(a.href);
+  } catch (error) {
+    console.error('download file error', error);
+  }
 }
 
 window.addEventListener('load', () => {
