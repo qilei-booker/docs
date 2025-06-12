@@ -2608,41 +2608,91 @@
         "security": []
       }
     },
-    "/api/v1/feeds/stix/ip": {
+    "/v2/feeds/stix/ip-reputation": {
       "get": {
         "summary": "Get IP Reputation Feeds",
         "deprecated": false,
         "description": "This API provides inbound malicious or suspicious IPs. \n",
         "tags": [],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "time",
+            "in": "query",
+            "description": "Precise time in UTC, format: YYYYMMDDHH. \nFor example, 2021012211 returns data from 2021-01-22 11:00 to 11:59 (UTC).\nDefault: returns the most recent data (t-2 hours).\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Controls sub-package filtering. Only applies to the IOC endpoint. Not set = return all\napt = return only APT package\n",
+            "required": false,
+            "schema": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "apt"
+              ]
+            }
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "description": "Controls full or incremental mode. Only applies to the IOC endpoint.\nDefault: increment, returns IOC incremental hourly feed\nfull: returns full IOC feed and ignores the time parameter\n",
+            "required": false,
+            "schema": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "full",
+                "increment"
+              ]
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Use your API key in the header: Bearer <your-api-key> ",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "A successful request returns a ZIP file containing a STIX 2.1 formatted JSON bundle. ",
             "content": {
               "application/octet-stream": {
                 "schema": {
                   "type": "object",
                   "properties": {}
-                }
+                },
+                "example": "A successful request returns a ZIP file containing a STIX 2.1 formatted JSON bundle."
               }
             },
             "headers": {
-              "Content-Disposition": {
-                "example": "",
-                "required": true,
+              "Content-Type\t": {
+                "example": "application/octet-stream",
+                "required": false,
                 "description": "",
                 "schema": {
-                  "type": "string",
-                  "const": "attachment; filename=your_file_name.zip"
+                  "type": "string"
                 }
               },
-              "Content-Type": {
-                "example": "",
-                "required": true,
+              "Content-Disposition\t": {
+                "example": "attachment; filename=\"SECAI_IP_Reputation_2025041011.zip\"",
+                "required": false,
                 "description": "",
                 "schema": {
-                  "type": "string",
-                  "const": "application/zip"
+                  "type": "string"
                 }
               }
             }
@@ -2867,262 +2917,77 @@
         "security": []
       }
     },
-    "/api/v1/feeds/stix/ioc": {
+    "/v2/feeds/stix/ioc": {
       "get": {
         "summary": "Get IOC Feeds",
         "deprecated": false,
         "description": "This API provides outbound malicious or suspicious domains and IPs. \n",
         "tags": [],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            },
-            "headers": {}
+        "parameters": [
+          {
+            "name": "time",
+            "in": "query",
+            "description": "Precise time in UTC, format: YYYYMMDDHH. \nFor example, 2021012211 returns data from 2021-01-22 11:00 to 11:59 (UTC).\nDefault: returns the most recent data (t-2 hours).\n",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
           },
-          "204": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "msg": {
-                      "type": "string",
-                      "const": "No data"
-                    },
-                    "response_code": {
-                      "type": "integer",
-                      "const": 204
-                    }
-                  },
-                  "required": [
-                    "msg",
-                    "response_code"
-                  ]
-                },
-                "example": {
-                  "msg": "No data",
-                  "response_code": 204
-                }
-              }
-            },
-            "headers": {}
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Controls sub-package filtering. Only applies to the IOC endpoint. Not set = return all\napt = return only APT package\n",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "apt"
+              ]
+            }
           },
-          "206": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "msg": {
-                      "type": "string",
-                      "const": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation."
-                    },
-                    "response_code": {
-                      "type": "integer",
-                      "const": 206
-                    }
-                  },
-                  "required": [
-                    "msg",
-                    "response_code"
-                  ]
-                },
-                "example": {
-                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
-                  "response_code": 206
-                }
-              }
-            },
-            "headers": {}
+          {
+            "name": "mode",
+            "in": "query",
+            "description": "Controls full or incremental mode. Only applies to the IOC endpoint.\nDefault: increment, returns IOC incremental hourly feed\nfull: returns full IOC feed and ignores the time parameter\n",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "full",
+                "increment"
+              ]
+            }
           },
-          "400": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "msg": {
-                      "type": "string",
-                      "enum": [
-                        "Required:{resource/apikey}",
-                        "Invalid parameter:{parameter}"
-                      ]
-                    },
-                    "response_code": {
-                      "type": "integer",
-                      "const": 400
-                    }
-                  },
-                  "required": [
-                    "msg",
-                    "response_code"
-                  ]
-                },
-                "example": {
-                  "msg": "Required:{resource/apikey}",
-                  "response_code": 400
-                }
-              }
-            },
-            "headers": {}
-          },
-          "401": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "msg": {
-                      "type": "string",
-                      "enum": [
-                        "Invalid account status",
-                        "Invalid access IP",
-                        "Invalid API key",
-                        "Invalid key status",
-                        "No access to the API",
-                        "Expired API key"
-                      ]
-                    },
-                    "response_code": {
-                      "type": "integer",
-                      "const": 401
-                    }
-                  },
-                  "required": [
-                    "msg",
-                    "response_code"
-                  ]
-                },
-                "example": {
-                  "msg": "Invalid account status",
-                  "response_code": 401
-                }
-              }
-            },
-            "headers": {}
-          },
-          "405": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "msg": {
-                      "type": "string",
-                      "const": "Invalid API method"
-                    },
-                    "response_code": {
-                      "type": "integer",
-                      "const": 405
-                    }
-                  },
-                  "required": [
-                    "msg",
-                    "response_code"
-                  ]
-                },
-                "example": {
-                  "msg": "Invalid API method",
-                  "response_code": 405
-                }
-              }
-            },
-            "headers": {}
-          },
-          "429": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "msg": {
-                      "type": "string",
-                      "enum": [
-                        "Request rate limitation",
-                        "Beyond {daily/monthly/total} quotas limitation"
-                      ]
-                    },
-                    "response_code": {
-                      "type": "integer",
-                      "const": 429
-                    }
-                  },
-                  "required": [
-                    "msg",
-                    "response_code"
-                  ]
-                },
-                "example": {
-                  "msg": "Request rate limitation",
-                  "response_code": 429
-                }
-              }
-            },
-            "headers": {}
-          },
-          "500": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "msg": {
-                      "type": "string",
-                      "const": "System error"
-                    },
-                    "response_code": {
-                      "type": "integer",
-                      "const": 500
-                    }
-                  },
-                  "required": [
-                    "msg",
-                    "response_code"
-                  ]
-                },
-                "example": {
-                  "msg": "System error",
-                  "response_code": 500
-                }
-              }
-            },
-            "headers": {}
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Use your API key in the header: Bearer <your-api-key> ",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
           }
-        },
-        "security": []
-      }
-    },
-    "/api/v1/feeds/stix/hash": {
-      "get": {
-        "summary": "Get Hash Feeds",
-        "deprecated": false,
-        "description": "This API provides inbound malicious Hashs. ",
-        "tags": [],
-        "parameters": [],
+        ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "A successful request returns a ZIP file containing a STIX 2.1 formatted JSON bundle. ",
             "content": {
-              "application/json": {
+              "application/octet-stream": {
                 "schema": {
                   "type": "object",
                   "properties": {}
-                }
+                },
+                "example": "A successful request returns a ZIP file containing a STIX 2.1 formatted JSON bundle."
               }
             },
             "headers": {}

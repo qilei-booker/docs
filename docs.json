@@ -68,6 +68,13 @@
               "api-reference/enrichment/ip-intelligence",
               "api-reference/enrichment/domain-intelligence"
             ]
+          },
+          {
+            "group": "Feeds",
+            "pages": [
+              "api-reference/feeds/ip-reputation",
+              "api-reference/feeds/ioc"
+            ]
           }
         ]
       }
