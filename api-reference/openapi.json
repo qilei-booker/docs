@@ -2509,37 +2509,6 @@
             }
           },
           {
-            "name": "type",
-            "in": "query",
-            "description": "Controls sub-package filtering. Only applies to the IOC endpoint. Not set = return all\napt = return only APT package\n",
-            "required": false,
-            "schema": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "enum": [
-                "apt"
-              ]
-            }
-          },
-          {
-            "name": "mode",
-            "in": "query",
-            "description": "Controls full or incremental mode. Only applies to the IOC endpoint.\nDefault: increment, returns IOC incremental hourly feed\nfull: returns full IOC feed and ignores the time parameter\n",
-            "required": false,
-            "schema": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "enum": [
-                "full",
-                "increment"
-              ]
-            }
-          },
-          {
             "name": "Authorization",
             "in": "header",
             "description": "Use your API key in the header: Bearer <your-api-key> ",
@@ -2581,35 +2550,6 @@
               }
             }
           },
-          "206": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "msg": {
-                      "type": "string",
-                      "const": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation."
-                    },
-                    "response_code": {
-                      "type": "integer",
-                      "const": 206
-                    }
-                  },
-                  "required": [
-                    "msg",
-                    "response_code"
-                  ]
-                },
-                "example": {
-                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
-                  "response_code": 206
-                }
-              }
-            },
-            "headers": {}
-          },
           "400": {
             "description": "",
             "content": {
@@ -2635,7 +2575,7 @@
                   ]
                 },
                 "example": {
-                  "msg": "Required:{resource/apikey}",
+                  "msg": "Required:{apikey}",
                   "response_code": 400
                 }
               }
@@ -2847,35 +2787,6 @@
             },
             "headers": {}
           },
-          "206": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "msg": {
-                      "type": "string",
-                      "const": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation."
-                    },
-                    "response_code": {
-                      "type": "integer",
-                      "const": 206
-                    }
-                  },
-                  "required": [
-                    "msg",
-                    "response_code"
-                  ]
-                },
-                "example": {
-                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
-                  "response_code": 206
-                }
-              }
-            },
-            "headers": {}
-          },
           "400": {
             "description": "",
             "content": {
@@ -2901,7 +2812,7 @@
                   ]
                 },
                 "example": {
-                  "msg": "Required:{resource/apikey}",
+                  "msg": "Required:{apikey}",
                   "response_code": 400
                 }
               }
