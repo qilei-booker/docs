@@ -63,10 +63,14 @@
           {
             "group": "Enrichment",
             "pages": [
-              "api-reference/enrichment/ip-report",
-              "api-reference/enrichment/compromise-detection",
-              "api-reference/enrichment/ip-intelligence",
-              "api-reference/enrichment/domain-intelligence"
+              "api-reference/enrichment/ip-report-v1",
+              "api-reference/enrichment/compromise-detection-v1",
+              "api-reference/enrichment/ip-intelligence-v1",
+              "api-reference/enrichment/domain-intelligence-v1",
+              "api-reference/enrichment/url-intelligence-v2",
+              "api-reference/enrichment/file-intelligence-v2",
+              "api-reference/enrichment/ip-intelligence-v2",
+              "api-reference/enrichment/domain-intelligence-v2"
             ]
           },
           {
