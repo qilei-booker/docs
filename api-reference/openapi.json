@@ -17,7 +17,7 @@
           {
             "name": "apikey",
             "in": "query",
-            "description": "Your API Key.\n              \nYou are able to get the key on \"My API\" page of [threatbook.io](https://threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "description": "Your API Key.\n              \nYou are able to get the key on \"My API\" page of [i.threatbook.io](https://i.threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
             "required": true,
             "example": "",
             "schema": {
@@ -62,12 +62,12 @@
                         "summary": {
                           "type": "object",
                           "properties": {},
-                          "description": "Summary of the intelligence determined by ThreatBook.\n            \nEach item includes the following fields:\n- judgments: Array. Intelligence type of the final verdict by ThreatBook.\n- whitelist: Boolean.\n  - true: It is whitelisted.\n  - false: It is not whitelisted.\n- first_seen: String. UTC Time of the first discovery of intelligence.\n- last_seen: String. UTC Time of the last discovery of intelligence."
+                          "description": "**Summary of the intelligence determined by ThreatBook**  \n\nEach item includes the following fields:  \n\n- **judgments**: Array. Intelligence type of the final verdict by ThreatBook.  \n- **whitelist**: Boolean.  \n  - `true`: It is whitelisted.  \n  - `false`: It is not whitelisted.  \n- **first_seen**: String. UTC time of the first discovery of intelligence.  \n- **last_seen**: String. UTC time of the last discovery of intelligence.  "
                         },
                         "basic": {
                           "type": "object",
                           "properties": {},
-                          "description": "Geographic location information. \n- carrier\n- Location\n   - country\n   - country_code\n   - province\n   - city\n   - lng: longitude.\n   - lat: latitude."
+                          "description": "**Geographic location information**  \n\n- **carrier**  \n- **location**  \n  - **country**  \n  - **country_code**  \n  - **province**  \n  - **city**  \n  - **lng**: longitude  \n  - **lat**: latitude  "
                         },
                         "asn": {
                           "type": "object",
@@ -80,7 +80,7 @@
                             "type": "object",
                             "properties": {}
                           },
-                          "description": "Open ports. Each item includes the following fields:\n- port\n- module\n- product\n- version\n- detail"
+                          "description": "**Open ports**  \nEach item includes the following fields:\n\n- **port**  \n- **module**  \n- **product**  \n- **version**  \n- **detail**  \n"
                         },
                         "cas": {
                           "type": "array",
@@ -88,7 +88,7 @@
                             "type": "object",
                             "properties": {}
                           },
-                          "description": "SSL certificates associated with this IP address. \nEach item includes the following fields:\n- protocol\n- port\n- digital_certificate: SSL Certificate detail.\n  - subject\n  - issuer\n  - fingerprint\n  - purpose\n  - verify: digital signature algorithm.\n  - Status: There are four status for the certificate.\n    - 0: Normal.\n    - 1: Expired.\n    - 2: Invalid.\n    - 3: Self-signed.\n  - status_desc: Description for the certificate status.\n  - revoked: Boolean.Get to know whether the certificate is revoked.\n  - revoke_time: The revoke time for the certificate.\n  - Start: Effective time of the certificate.\n  - End: Expiration time of the certificate.\n  - Serial_number: Serial number of the certificate."
+                          "description": "**SSL certificates associated with this IP address**  \nEach item includes the following fields:\n\n- **protocol**  \n- **port**  \n- **digital_certificate**: SSL Certificate detail.  \n  - **subject**  \n  - **issuer**  \n  - **fingerprint**  \n  - **purpose**  \n  - **verify**: Digital signature algorithm.  \n  - **status**: There are four status values for the certificate.  \n    - `0`: Normal  \n    - `1`: Expired  \n    - `2`: Invalid  \n    - `3`: Self-signed  \n  - **status_desc**: Description for the certificate status.  \n  - **revoked**: Boolean. Indicates whether the certificate is revoked.  \n  - **revoke_time**: The revoke time for the certificate.  \n  - **start**: Effective time of the certificate.  \n  - **end**: Expiration time of the certificate.  \n  - **serial_number**: Serial number of the certificate.  "
                         },
                         "IP": {
                           "type": "string",
@@ -362,7 +362,7 @@
           {
             "name": "apikey",
             "in": "query",
-            "description": "Your API Key.\n\nYou are able to get the key on \"My API\" page of [threatbook.io](https://threatbook.io/my-api).\n\n**Kindly note:**\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "description": "Your API Key.\n\nYou are able to get the key on \"My API\" page of [i.threatbook.io](https://i.threatbook.io/my-api).\n\n**Kindly note:**\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
             "required": true,
             "schema": {
               "type": "string"
@@ -371,7 +371,7 @@
           {
             "name": "resource",
             "in": "query",
-            "description": "Domain names / IP address / IP:Port to query.\n\nYou are allowed to query a domain or IP address with a port to get more accurate intelligence, for example:\n-Domain to query:\n\n**googlenew.moy.su**\n\n- IPv4 with port to query:\n\n  **183.18.2.4:8080**\n  \n- IPv6 with port to query:\n\n  \\[**2001:0db8:0000:0000:0001:0000:0000:0000**\\]:80",
+            "description": "Domain names / IP address / IP:Port to query.\n\nYou are allowed to query a domain or IP address with a port to get more accurate intelligence, for example:\n- Domain to query:\n\n  **googlenew.moy.su**\n\n- IPv4 with port to query:\n\n  **183.18.2.4:8080**\n  \n- IPv6 with port to query:\n\n  \\[**2001:0db8:0000:0000:0001:0000:0000:0000**\\]:80",
             "required": true,
             "schema": {
               "type": "string"
@@ -623,7 +623,7 @@
           {
             "name": "apikey",
             "in": "query",
-            "description": "Your API Key.\n\nYou are able to get the key on \"My API\" page of [threatbook.io](https://threatbook.io/my-api).\n\n**Kindly note:**\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "description": "Your API Key.\n\nYou are able to get the key on \"My API\" page of [i.threatbook.io](https://i.threatbook.io/my-api).\n\n**Kindly note:**\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
             "required": true,
             "example": "",
             "schema": {
@@ -669,12 +669,12 @@
                         "summary": {
                           "type": "object",
                           "properties": {},
-                          "description": "Summary of the intelligence determined by ThreatBook. It is produced in a strict quality control process.\n\nEach item includes the following fields:\n- **judgments**: Array. Intelligence type of the final verdict by ThreatBook.\n- **whitelist**: Boolean. \n  - true: It is whitelisted.\n  - false: It is not whitelisted.\n- **APT**: Boolean\n  - true: It is an APT.\n  - false: There is not enough evidence to identify whether it is an APT.\n- **threat_actor**: Array. \n- **family**: Array. Virus or trojan family.\n- **tag_categories**: Array. Fields for each item are shown bellow. \n  - tag_type: Tag type. For example, “industry”.\n  - tags: Specific tags are under the tag type.\n- **first_seen**: String. UTC Time of the first discovery of intelligence.\n- **last_seen**: String. UTC Time of the last discovery of intelligence."
+                          "description": "**Summary of the intelligence determined by ThreatBook**  \nIt is produced in a strict quality control process.  \n\nEach item includes the following fields:  \n\n- **judgments**: Array. Intelligence type of the final verdict by ThreatBook.  \n- **whitelist**: Boolean.  \n  - `true`: It is whitelisted.  \n  - `false`: It is not whitelisted.  \n- **APT**: Boolean.  \n  - `true`: It is an APT.  \n  - `false`: There is not enough evidence to identify whether it is an APT.  \n- **threat_actor**: Array.  \n- **family**: Array. Virus or trojan family.  \n- **tag_categories**: Array. Fields for each item are shown below.  \n  - **tag_type**: Tag type. For example, `\"industry\"`.  \n  - **tags**: Specific tags are under the tag type.  \n- **first_seen**: String. UTC time of the first discovery of intelligence.  \n- **last_seen**: String. UTC time of the last discovery of intelligence.  "
                         },
                         "intelligences": {
                           "type": "object",
                           "properties": {},
-                          "description": "Complete original intelligence. \n\nIntelligence consists of two parts:\n- threatbook_lab: The intelligence is produced or discovered by ThreatBook. All the final comprehensive verdicts are determined based on our own intelligence. \n  - source: Intelligence source.\n  - first_seen: String. UTC time.\n  - last_seen: String. UTC time.\n  - confidence: String. confidence score. The higher the score, the higher the credibility of the intelligence.\n  - expired: Boolean.\n    - true: This piece of intelligence is expired.\n    - false: This piece of intelligence is still valid.\n  - intel_types: Array. Intelligence type.\n  - Intel_tags: Array. tags for this intelligence.\n- open_source: The intelligence is gathered from open source. It is just for reference for our customers, we will not use it in our final verdict.\n  \n  All the fields are the same as \"threatbook_lab\" above. \n  \n  ——————\n\n  Open source intelligence includes the following non-exclusive intelligence sources, updating continuously…\n  \n  [mirc.com](http://mirc.com)\n  \n  [danger.rulez.sk](http://danger.rulez.sk)\n  \n  [alexa.com](http://alexa.com)\n  \n  [binarydefense.com](http://binarydefense.com)\n  \n  [blocklist.de](http://blocklist.de)\n  \n  [cinsscore.com](http://cinsscore.com)\n  \n  [sslbl.abuse.ch](http://sslbl.abuse.ch)\n  \n  [phishtank.com](http://phishtank.com)\n  \n  [packetmail.net](http://packetmail.net)\n  \n  [spamhaus.org](http://spamhaus.org)\n  \n  [vxvault.net](http://vxvault.net)\n  \n  [alienvault.com](http://alienvault.com)\n  \n  [nothink.org](http://nothink.org)\n  \n  [feodotracker.abuse.ch](http://feodotracker.abuse.ch)\n  \n  [openphish.com](http://openphish.com)\n  \n  [hosts-file.net](http://hosts-file.net)\n  \n  ……"
+                          "description": "**Complete original intelligence**  \n\nIntelligence consists of two parts:  \n\n- **threatbook_lab**: The intelligence is produced or discovered by ThreatBook. All the final comprehensive verdicts are determined based on our own intelligence.  \n  - **source**: Intelligence source.  \n  - **first_seen**: String. UTC time.  \n  - **last_seen**: String. UTC time.  \n  - **confidence**: String. Confidence score. The higher the score, the higher the credibility of the intelligence.  \n  - **expired**: Boolean.  \n    - `true`: This piece of intelligence is expired.  \n    - `false`: This piece of intelligence is still valid.  \n  - **intel_types**: Array. Intelligence type.  \n  - **intel_tags**: Array. Tags for this intelligence.  \n\n- **open_source**: The intelligence is gathered from open source. It is just for reference for our customers; we will not use it in our final verdict.  \n  - All the fields are the same as **\"threatbook_lab\"** above.  \n\n---\n\n**Open source intelligence includes the following non-exclusive intelligence sources, updating continuously…**  \n\n- [mirc.com](http://mirc.com)  \n- [danger.rulez.sk](http://danger.rulez.sk)  \n- [alexa.com](http://alexa.com)  \n- [binarydefense.com](http://binarydefense.com)  \n- [blocklist.de](http://blocklist.de)  \n- [cinsscore.com](http://cinsscore.com)  \n- [sslbl.abuse.ch](http://sslbl.abuse.ch)  \n- [phishtank.com](http://phishtank.com)  \n- [packetmail.net](http://packetmail.net)  \n- [spamhaus.org](http://spamhaus.org)  \n- [vxvault.net](http://vxvault.net)  \n- [alienvault.com](http://alienvault.com)  \n- [nothink.org](http://nothink.org)  \n- [feodotracker.abuse.ch](http://feodotracker.abuse.ch)  \n- [openphish.com](http://openphish.com)  \n- [hosts-file.net](http://hosts-file.net)  \n- ……  "
                         },
                         "samples": {
                           "type": "array",
@@ -682,12 +682,12 @@
                             "type": "object",
                             "properties": {}
                           },
-                          "description": "Relevant samples. It will be returned up to 20 samples.Each item includes the following fields:\n- sha256\n- scan_time\n- ratio: Detecting by multi-engine antivirus scanners. For example, \"1/22\" means one of the antivirus scanners considers this sample as malicious.\n- malware_type\n- malware_family"
+                          "description": "**Relevant samples**  \nIt will return up to 20 samples. Each item includes the following fields:\n\n- **sha256**  \n- **scan_time**  \n- **ratio**: Detecting by multi-engine antivirus scanners. For example, `\"1/22\"` means one of the antivirus scanners considers this sample as malicious.  \n- **malware_type**  \n- **malware_family**  "
                         },
                         "basic": {
                           "type": "object",
                           "properties": {},
-                          "description": "Geographic location information. \n- carrier\n- location\n  - country\n  - country_code\n  - province\n  - city\n  - lng: longitude.\n  - lat: latitude."
+                          "description": "**Geographic location information**  \n\n- **carrier**  \n- **location**  \n  - **country**  \n  - **country_code**  \n  - **province**  \n  - **city**  \n  - **lng**: longitude  \n  - **lat**: latitude  "
                         },
                         "asn": {
                           "type": "object",
@@ -700,7 +700,7 @@
                             "type": "object",
                             "properties": {}
                           },
-                          "description": "Open ports. Each item includes the following fields:\n- port\n- module\n- product\n- version\n- detail"
+                          "description": "**Open ports**  \nEach item includes the following fields:\n\n- **port**  \n- **module**  \n- **product**  \n- **version**  \n- **detail**  "
                         },
                         "cas": {
                           "type": "array",
@@ -708,7 +708,7 @@
                             "type": "object",
                             "properties": {}
                           },
-                          "description": "SSL certificates associtated with this IP address. Each item includes the following fields:\n- protocol\n- Port\n- digital_certificate: Certificate detail.\n  - subject\n  - issuer\n  - fingerprint\n  - purpose\n  - verify: digital signature algorithm.\n  - Status: There are four status for the certificate.\n    - 0: Normal.\n    - 1: Expired.\n    - 2: Invalid.\n    - 3: Self-signed.\n  - status_desc: Description for the certificate status.\n  - revoked: Boolean.Get to know whether the certificate is revoked.\n  - revoke_time: The revoke time for the certificate.\n  - begin: Effective time of the certificate.\n  - End: Expiration time of the certificate.\n  - Serial_number: Serial number of the certificate."
+                          "description": "**SSL certificates associated with this IP address**  \nEach item includes the following fields:\n\n- **protocol**  \n- **port**  \n- **digital_certificate**: Certificate detail.  \n  - **subject**  \n  - **issuer**  \n  - **fingerprint**  \n  - **purpose**  \n  - **verify**: Digital signature algorithm.  \n  - **status**: There are four status values for the certificate.  \n    - `0`: Normal  \n    - `1`: Expired  \n    - `2`: Invalid  \n    - `3`: Self-signed  \n  - **status_desc**: Description for the certificate status.  \n  - **revoked**: Boolean. Indicates whether the certificate is revoked.  \n  - **revoke_time**: The revoke time for the certificate.  \n  - **begin**: Effective time of the certificate.  \n  - **end**: Expiration time of the certificate.  \n  - **serial_number**: Serial number of the certificate.  "
                         },
                         "IP": {
                           "type": "string",
@@ -1419,7 +1419,7 @@
           {
             "name": "apikey",
             "in": "query",
-            "description": "Unique identifier for API request.\n              \nYou are able to get the key on \"My API\" page of [threatbook.io](https://threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "description": "Unique identifier for API request.\n              \nYou are able to get the key on \"My API\" page of [i.threatbook.io](https://i.threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
             "required": true,
             "schema": {
               "type": "string"
@@ -1467,12 +1467,12 @@
                         "summary": {
                           "type": "object",
                           "properties": {},
-                          "description": "Summary of the intelligence determined by ThreatBook. It is produced in a strict quality control process.\nEach item includes the following fields:\n- **judgments**: Array. Intelligence type of the final verdict by ThreatBook.\n- **whitelist**: Boolean. \n  - true: It is whitelisted.\n  - false: It is not whitelisted.\n- **APT**: Boolean\n  - true: It is an APT.\n  - false: There is not enough evidence to identify whether it is an APT.\n- **threat_actor**: Array. \n- **family**: Array. Virus or trojan family.\n- **tag_categories**: Array. Fields for each item are shown bellow. \n  - tag_type: Tag type. For example, “industry”.\n  - tags: Specific tags are under the tag type.\n- **first_seen**: String. UTC Time of the first discovery of intelligence.\n- **last_seen**: String. UTC Time of the last discovery of intelligence."
+                          "description": "**Summary of the intelligence determined by ThreatBook**  \nIt is produced in a strict quality control process.  \n\nEach item includes the following fields:  \n\n- **judgments**: Array. Intelligence type of the final verdict by ThreatBook.  \n- **whitelist**: Boolean.  \n  - `true`: It is whitelisted.  \n  - `false`: It is not whitelisted.  \n- **APT**: Boolean.  \n  - `true`: It is an APT.  \n  - `false`: There is not enough evidence to identify whether it is an APT.  \n- **threat_actor**: Array.  \n- **family**: Array. Virus or trojan family.  \n- **tag_categories**: Array. Fields for each item are shown below.  \n  - **tag_type**: Tag type. For example, `\"industry\"`.  \n  - **tags**: Specific tags are under the tag type.  \n- **first_seen**: String. UTC time of the first discovery of intelligence.  \n- **last_seen**: String. UTC time of the last discovery of intelligence.  "
                         },
                         "intelligences": {
                           "type": "object",
                           "properties": {},
-                          "description": "Complete original intelligence. \n\nIntelligence consists of two parts:\n\n- threatbook_lab: The intelligence is produced or discovered by ThreatBook. All the final comprehensive verdicts are determined based on our own intelligence. \n  - source: Intelligence source.\n  - first_seen: String. UTC time.\n  - last_seen: String. UTC time.\n  - confidence: String. confidence score. The higher the score, the higher the credibility of the intelligence.\n  - expired: Boolean.\n    - true: This piece of intelligence is expired.\n    - false: This piece of intelligence is still valid.\n  - intel_types: Array. Intelligence type.\n  - Intel_tags: Array. tags for this intelligence.\n- open_source: The intelligence is gathered from open source. It is just for reference for our customers, we will not use it in our final verdict.\n  \n  All the fields are the same as \"threatbook_lab\" above.\n   \n  ——————\n  \n  Open source intelligence includes the following non-exclusive intelligence sources, updating continuously…\n  \n  [mirc.com](http://mirc.com)\n  \n  [danger.rulez.sk](http://danger.rulez.sk)\n  \n  [alexa.com](http://alexa.com)\n  \n  [binarydefense.com](http://binarydefense.com)\n  \n  [blocklist.de](http://blocklist.de)\n  \n  [cinsscore.com](http://cinsscore.com)\n  \n  [sslbl.abuse.ch](http://sslbl.abuse.ch)\n  \n  [phishtank.com](http://phishtank.com)\n  \n  [packetmail.net](http://packetmail.net)\n  \n  [spamhaus.org](http://spamhaus.org)\n  \n  [vxvault.net](http://vxvault.net)\n  \n  [alienvault.com](http://alienvault.com)\n  \n  [nothink.org](http://nothink.org)\n  \n  [feodotracker.abuse.ch](http://feodotracker.abuse.ch)\n  \n  [openphish.com](http://openphish.com)\n  \n  [hosts-file.net](http://hosts-file.net)\n  \n  ……"
+                          "description": "**Complete original intelligence**  \n\nIntelligence consists of two parts:  \n\n- **threatbook_lab**: The intelligence is produced or discovered by ThreatBook. All the final comprehensive verdicts are determined based on our own intelligence.  \n  - **source**: Intelligence source.  \n  - **first_seen**: String. UTC time.  \n  - **last_seen**: String. UTC time.  \n  - **confidence**: String. Confidence score. The higher the score, the higher the credibility of the intelligence.  \n  - **expired**: Boolean.  \n    - `true`: This piece of intelligence is expired.  \n    - `false`: This piece of intelligence is still valid.  \n  - **intel_types**: Array. Intelligence type.  \n  - **intel_tags**: Array. Tags for this intelligence.  \n\n- **open_source**: The intelligence is gathered from open source. It is just for reference for our customers; we will not use it in our final verdict.  \n  - All the fields are the same as **\"threatbook_lab\"** above.  \n\n---\n\n**Open source intelligence includes the following non-exclusive intelligence sources, updating continuously…**  \n\n- [mirc.com](http://mirc.com)  \n- [danger.rulez.sk](http://danger.rulez.sk)  \n- [alexa.com](http://alexa.com)  \n- [binarydefense.com](http://binarydefense.com)  \n- [blocklist.de](http://blocklist.de)  \n- [cinsscore.com](http://cinsscore.com)  \n- [sslbl.abuse.ch](http://sslbl.abuse.ch)  \n- [phishtank.com](http://phishtank.com)  \n- [packetmail.net](http://packetmail.net)  \n- [spamhaus.org](http://spamhaus.org)  \n- [vxvault.net](http://vxvault.net)  \n- [alienvault.com](http://alienvault.com)  \n- [nothink.org](http://nothink.org)  \n- [feodotracker.abuse.ch](http://feodotracker.abuse.ch)  \n- [openphish.com](http://openphish.com)  \n- [hosts-file.net](http://hosts-file.net)  \n- ……  "
                         },
                         "samples": {
                           "type": "array",
@@ -1480,7 +1480,7 @@
                             "type": "object",
                             "properties": {}
                           },
-                          "description": "Relevant samples. It will be returned up to 20 samples.Each item includes the following fields:\n- sha256\n- scan_time\n- ratio: Detecting by multi-engine antivirus scanners. For example, \"1/22\" means one of the antivirus scanners considers this sample as malicious.\n- malware_type\n- malware_family"
+                          "description": "**Relevant samples**  \nIt will be returned up to 20 samples. Each item includes the following fields:\n\n- **sha256**  \n- **scan_time**  \n- **ratio**: Detecting by multi-engine antivirus scanners. For example, `\"1/22\"` means one of the antivirus scanners considers this sample as malicious.  \n- **malware_type**  \n- **malware_family**  "
                         },
                         "domain": {
                           "type": "string",
@@ -1492,12 +1492,12 @@
                             "type": "object",
                             "properties": {}
                           },
-                          "description": "Relevant certificates. Each item includes the following fields:\n- subject\n- issuer\n- fingerprint\n- purpose\n- verify: digital signature algorithm.\n- Status: There are four status for the certificate.\n  - 0: Normal.\n  - 1: Expired.\n  - 2: Invalid.\n  - 3: Self-signed.\n- status_desc: Description for the certificate status.\n- revoked: Boolean.Get to know whether the certificate is revoked.\n- revoked_time: The revoke time for the certificate.\n- begin: Effective time of the certificate.\n- End: Expiration time of the certificate.\n- Serial_number: Serial number of the certificate."
+                          "description": "**Relevant certificates**  \nEach item includes the following fields:\n\n- **subject**  \n- **issuer**  \n- **fingerprint**  \n- **purpose**  \n- **verify**: Digital signature algorithm.  \n- **status**: There are four status values for the certificate.  \n  - `0`: Normal  \n  - `1`: Expired  \n  - `2`: Invalid  \n  - `3`: Self-signed  \n- **status_desc**: Description for the certificate status.  \n- **revoked**: Boolean. Indicates whether the certificate is revoked.  \n- **revoked_time**: The revoke time for the certificate.  \n- **begin**: Effective time of the certificate.  \n- **end**: Expiration time of the certificate.  \n- **serial_number**: Serial number of the certificate.  "
                         },
                         "categories": {
                           "type": "object",
                           "properties": {},
-                          "description": "Domain categories. \n            \n- first_cats: Array.\n- second_cats: String."
+                          "description": "**Domain categories**  \n\n- **first_cats**: Array.  \n- **second_cats**: String.  "
                         },
                         "cur_ips": {
                           "type": "array",
@@ -1505,12 +1505,12 @@
                             "type": "object",
                             "properties": {}
                           },
-                          "description": "Current resolved IPs for the domain. Each item includes the following fields.\n- ip\n- location\n  - country\n  - country_code\n  - province\n  - city\n  - lng: longitude.\n  - lat: latitude."
+                          "description": "**Current resolved IPs for the domain**  \nEach item includes the following fields:\n\n- **ip**  \n- **location**  \n  - **country**  \n  - **country_code**  \n  - **province**  \n  - **city**  \n  - **lng**: longitude  \n  - **lat**: latitude  "
                         },
                         "cur_whois": {
                           "type": "object",
                           "properties": {},
-                          "description": "Latest whois information for the domain. All the fields are shown bellow.\n- registrar_name: Registrar name.\n- name_server: Server names separated by \"|\".\n- registrant_name: Registrant name. \n- registrant_email: Registrant email.\n- registrant_company: Registrant company.\n- registrant_address: Registrant address.\n- registrant_phone: Registrant phone.\n- cdate: Registration date.\n- udate: Update date.\n- edate: Expiration date."
+                          "description": "**Latest WHOIS information for the domain**  \nAll the fields are shown below:\n\n- **registrar_name**: Registrar name.  \n- **name_server**: Server names separated by `\"|\"`.  \n- **registrant_name**: Registrant name.  \n- **registrant_email**: Registrant email.  \n- **registrant_company**: Registrant company.  \n- **registrant_address**: Registrant address.  \n- **registrant_phone**: Registrant phone.  \n- **cdate**: Registration date.  \n- **udate**: Update date.  \n- **edate**: Expiration date.  "
                         }
                       },
                       "required": [
@@ -2410,7 +2410,7 @@
           {
             "name": "apikey",
             "in": "query",
-            "description": "Your API Key.\n              \nYou are able to get the key on \"My API\" page of [threatbook.io](https://threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "description": "Your API Key.\n              \nYou are able to get the key on \"My API\" page of [i.threatbook.io](https://i.threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
             "required": true,
             "example": "",
             "schema": {
@@ -2530,7 +2530,7 @@
                               "malware_family"
                             ]
                           },
-                          "description": "Related samples — up to 20 records are returned. This field is a JSON array, where each item contains the following attributes:\n\n sha256: File hash\n scan_time: Detection time\n ratio: Detection ratio\n malware_type: Malware type\n malware_family: Malware family"
+                          "description": "**Related samples — up to 20 records are returned**  \nThis field is a JSON array, where each item contains the following attributes:\n\n- **sha256**: File hash  \n- **scan_time**: Detection time  \n- **ratio**: Detection ratio  \n- **malware_type**: Malware type  \n- **malware_family**: Malware family  "
                         },
                         "asn": {
                           "type": "object",
@@ -2764,7 +2764,7 @@
           {
             "name": "apikey",
             "in": "query",
-            "description": "Unique identifier for API request.\n              \nYou are able to get the key on \"My API\" page of [threatbook.io](https://threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "description": "Unique identifier for API request.\n              \nYou are able to get the key on \"My API\" page of [i.threatbook.io](https://i.threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
             "required": true,
             "example": "",
             "schema": {
@@ -3085,7 +3085,7 @@
           {
             "name": "apikey",
             "in": "query",
-            "description": "Your API Key\n              \nYou are able to get the key on \"My API\" page of [threatbook.io](https://threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "description": "Your API Key\n              \nYou are able to get the key on \"My API\" page of [i.threatbook.io](https://i.threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
             "required": true,
             "example": "",
             "schema": {
@@ -3141,7 +3141,7 @@
                         "multiengines": {
                           "type": "object",
                           "properties": {},
-                          "description": "- **result**: Detection status from each antivirus engine.\n - \"safe\": The engine did not detect any threats.\n - malware_label: A specific label indicating the type of malware detected. For example, Trojan.e32du.\n\n- **scan_time**: The exact timestamp when the sample was scanned by multiple engines. The format is YYYY-MM-DD HH:MM:SS. For example, 2019-10-22 16:17:48."
+                          "description": "- **result**: Detection status from each antivirus engine.\n - **safe**: The engine did not detect any threats.\n - **malware_label**: A specific label indicating the type of malware detected. For example, Trojan.e32du.\n\n- **scan_time**: The exact timestamp when the sample was scanned by multiple engines. The format is YYYY-MM-DD HH:MM:SS. For example, 2019-10-22 16:17:48."
                         },
                         "summary": {
                           "type": "object",
@@ -3448,7 +3448,7 @@
           {
             "name": "apikey",
             "in": "query",
-            "description": "Your API Key\n              \nYou are able to get the key on \"My API\" page of [threatbook.io](https://threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "description": "Your API Key\n              \nYou are able to get the key on \"My API\" page of [i.threatbook.io](https://i.threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
             "required": false,
             "example": "87720c1af3ee4acc947630c31e3c53af6f1bfda4d44f423f9e7c130e91479be8",
             "schema": {
