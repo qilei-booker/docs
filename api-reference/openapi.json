@@ -2582,6 +2582,168 @@
                     "response_code",
                     "msg"
                   ]
+                },
+                "example": {
+                  "response_code": 200,
+                  "msg": "Success",
+                  "data": {
+                    "basic": {
+                      "carrier": "Cloudflare, Inc.",
+                      "location": {
+                        "country": "United States",
+                        "province": "",
+                        "city": "",
+                        "lng": "-101.407912",
+                        "lat": "39.765054",
+                        "country_code": "US"
+                      }
+                    },
+                    "threat_types": [
+                      "Whitelist"
+                    ],
+                    "verdict": "benign",
+                    "inbound_verdict": "benign",
+                    "outbound_verdict": "benign",
+                    "intel_labels": [],
+                    "is_highly_active": false,
+                    "seen_in_honeypot": false,
+                    "intelligences": [
+                      {
+                        "confidence": 100,
+                        "expired": false,
+                        "find_time": "2020-07-02 08:23:09",
+                        "intel_types": [
+                          "Whitelist"
+                        ],
+                        "intel_labels": [],
+                        "update_time": "2023-05-14 14:37:15"
+                      },
+                      {
+                        "confidence": 100,
+                        "expired": true,
+                        "find_time": "2019-05-27 19:34:00",
+                        "intel_types": [
+                          "Whitelist"
+                        ],
+                        "intel_labels": [],
+                        "update_time": "2020-07-01 14:52:24"
+                      }
+                    ]
+                  },
+                  "samples": [
+                    {
+                      "sha256": "08e9828b447cd3b12ddadf97985f858458d44769a04e7673f72249fc369f5eea",
+                      "ratio": "9/26",
+                      "scan_time": "2018-10-12 20:57:32",
+                      "malware_type": "SoftwareBundler",
+                      "malware_family": "ICLoader"
+                    },
+                    {
+                      "sha256": "75f515c886b417aa22e41d3b98630a5fe3b7254c25b6eb9c1a0d45d8b02c65b3",
+                      "ratio": "18/26",
+                      "scan_time": "2018-10-11 23:43:26",
+                      "malware_type": "",
+                      "malware_family": ""
+                    },
+                    {
+                      "sha256": "c0d40937bc77fa5facd4f08a7f2a74e4b8892cc6306cbf472a1a5045c0c0652a",
+                      "ratio": "12/26",
+                      "scan_time": "2018-10-11 19:23:38",
+                      "malware_type": "",
+                      "malware_family": ""
+                    },
+                    {
+                      "sha256": "66c302f6557ab3383ae559f5214232e64087c56c76b08fc75380eded732b37cb",
+                      "ratio": "6/26",
+                      "scan_time": "2018-09-21 05:31:35",
+                      "malware_type": "",
+                      "malware_family": ""
+                    },
+                    {
+                      "sha256": "1baf005a5d0f6ccc544191290cad02fc686aa065ab963b30f3e252318d9f71c4",
+                      "ratio": "6/26",
+                      "scan_time": "2018-09-21 05:26:13",
+                      "malware_type": "",
+                      "malware_family": ""
+                    },
+                    {
+                      "sha256": "efd4c9d36bf59e9c4f3d0e36784c274d890267535a3182b073df1db1ccbd8dcb",
+                      "ratio": "1/26",
+                      "scan_time": "2018-05-23 03:05:24",
+                      "malware_type": "",
+                      "malware_family": ""
+                    }
+                  ],
+                  "asn": {
+                    "rank": 4,
+                    "info": "CLOUDFLARENET, US",
+                    "number": 13335
+                  },
+                  "ssl_certs": [
+                    {
+                      "protocol": "https",
+                      "port": 443,
+                      "period": [],
+                      "digital_certificate": {
+                        "sha256": "73b8ed5becf1ba6493d2e2215a42dfdc7877e91e311ff5e59fb43d094871e699",
+                        "subject": "cloudflare-dns.com",
+                        "issuer": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
+                        "fingerprint": "3ba7e9f806eb30d2f4e3f905e53f07e9acf08e1e",
+                        "purpose": "SSL client|SSL server|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2025-01-02",
+                        "end": "2026-01-21",
+                        "status_desc": "Valid",
+                        "serial_number": "27dc8c5e17294aec9ed3f67728e8a08",
+                        "revoked_time": ""
+                      }
+                    },
+                    {
+                      "protocol": "https",
+                      "port": 443,
+                      "period": [],
+                      "digital_certificate": {
+                        "sha256": "f380cf2805268c47602eea2941b5f6f361c453d0ad3a504652cc83c53bd8e198",
+                        "subject": "kosmos4770.top",
+                        "issuer": "WE1",
+                        "fingerprint": "e753b0d29a651af5ebd3f19db66608cea4b86fcd",
+                        "purpose": "SSL server|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withECDSA",
+                        "status": "1",
+                        "revoked": false,
+                        "begin": "2025-06-20",
+                        "end": "2025-09-18",
+                        "status_desc": "Expired",
+                        "serial_number": "ddfa47ab063dfbc40ea0f14f3ac27b32",
+                        "revoked_time": ""
+                      }
+                    },
+                    {
+                      "protocol": "https",
+                      "port": 443,
+                      "period": [],
+                      "digital_certificate": {
+                        "sha256": "9f1d849073f8b93b6032dcb0148a936c3dd77e2e4ebe9f6ba6b0f75d71107cf9",
+                        "subject": "www.paradoxfwc.com",
+                        "issuer": "WE1",
+                        "fingerprint": "de76416fb1695a995bbc96baa8a35e86c6e2f91d",
+                        "purpose": "SSL server|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withECDSA",
+                        "status": "1",
+                        "revoked": false,
+                        "begin": "2025-06-28",
+                        "end": "2025-09-26",
+                        "status_desc": "Expired",
+                        "serial_number": "c50cee2014a63c2911c04140c3a4b2a2",
+                        "revoked_time": ""
+                      }
+                    }
+                  ],
+                  "update_time": "2023-05-14 14:37:15",
+                  "pdns_count": "993",
+                  "scene": ""
                 }
               }
             },
@@ -2903,6 +3065,147 @@
                     "response_code",
                     "msg"
                   ]
+                },
+                "example": {
+                  "response_code": 200,
+                  "msg": "Success",
+                  "data": {
+                    "threat_types": [
+                      "Whitelist"
+                    ],
+                    "verdict": "benign",
+                    "intel_labels": [],
+                    "intelligences": [
+                      {
+                        "confidence": 100,
+                        "expired": false,
+                        "find_time": "2021-10-31 15:12:25",
+                        "intel_types": [
+                          "Whitelist"
+                        ],
+                        "intel_labels": [],
+                        "update_time": "2025-10-16 15:04:36"
+                      }
+                    ],
+                    "samples": [
+                      {
+                        "sha256": "fea6767de2bdc2ffe0eb2c18a767d726130566d03008e5cc96bd65b2b792e1af",
+                        "ratio": "1/28",
+                        "scan_time": "2025-08-25 10:57:41",
+                        "malware_type": "Susware",
+                        "malware_family": "CompileTime"
+                      },
+                      {
+                        "sha256": "fc50c3ddfc38631382112999c6c9eddfc0325a369a65c8fa8b294bf664e7bbc0",
+                        "ratio": "0/28",
+                        "scan_time": "2024-11-05 07:29:11",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "5e0aeeb71c21bbe08754709f3a99c51f01cdd53cd163bb61bcad4fe51520b99c",
+                        "ratio": "0/28",
+                        "scan_time": "2024-10-22 09:51:22",
+                        "malware_type": "",
+                        "malware_family": ""
+                      }
+                    ],
+                    "pdns": [
+                      {
+                        "ip": "57.144.186.141",
+                        "carrier": "Facebook, Inc.",
+                        "location": {
+                          "country": "Singapore",
+                          "province": "Singapore",
+                          "city": "Singapore",
+                          "lng": "103.853519",
+                          "lat": "1.286529",
+                          "country_code": "SG"
+                        }
+                      },
+                      {
+                        "ip": "2a03:2880:f00c:20d:face:b00c:0:2",
+                        "carrier": "Facebook, Inc.",
+                        "location": {
+                          "country": "Ireland",
+                          "province": "Dublin",
+                          "city": "Dublin",
+                          "lng": "-6.260246",
+                          "lat": "53.349764",
+                          "country_code": "IE"
+                        }
+                      }
+                    ],
+                    "whois": {
+                      "cdate": "1991-01-20 21:00:00",
+                      "edate": "2034-01-21 21:00:00",
+                      "udate": "2025-01-22 08:09:14",
+                      "alexa": "",
+                      "registrar_name": "RegistrarSafe, LLC",
+                      "name_server": "D.NS.FACEBOOK.COM|A.NS.FACEBOOK.COM|C.NS.FACEBOOK.COM|B.NS.FACEBOOK.COM",
+                      "registrant_name": "Domain Admin",
+                      "registrant_email": "domain@fb.com",
+                      "registrant_company": "Meta Platforms, Inc.",
+                      "registrant_address": "1601 Willow Rd,Menlo Park,CA,US",
+                      "registrant_phone": "+1.6505434800"
+                    },
+                    "ssl_certs": [
+                      {
+                        "subject": "*.meta.com",
+                        "issuer": "DigiCert SHA2 High Assurance Server CA",
+                        "fingerprint": "0a6c23c59117f1af26fbaea710de87cad6e64b57",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "1",
+                        "revoked": false,
+                        "begin": "2022-05-09",
+                        "end": "2022-08-07",
+                        "status_desc": "Expired",
+                        "serial_number": "b8088ce43dd9d87827e44377cca1f03",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.meta.com",
+                        "issuer": "DigiCert SHA2 High Assurance Server CA",
+                        "fingerprint": "13c409b0780dab59e6ad54f1ef45f6fb907ac1df",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "1",
+                        "revoked": false,
+                        "begin": "2023-09-18",
+                        "end": "2023-12-17",
+                        "status_desc": "Expired",
+                        "serial_number": "1c6436d29f5fc547460b08b3e9b17c8",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.meta.com",
+                        "issuer": "DigiCert SHA2 High Assurance Server CA",
+                        "fingerprint": "058f831cae3c09ee9456227de45d03d2c5d51bbc",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "1",
+                        "revoked": false,
+                        "begin": "2023-10-07",
+                        "end": "2024-01-05",
+                        "status_desc": "Expired",
+                        "serial_number": "6b77fed613e97f91bbb8545ce771269",
+                        "revoked_time": ""
+                      }
+                    ],
+                    "umbrella_rank": {
+                      "global_rank": 11447
+                    },
+                    "categories": {
+                      "first_level": [
+                        "News",
+                        "Tool"
+                      ],
+                      "second_level": "Training and Tools"
+                    },
+                    "sub_domains_count": "1000+",
+                    "pdns_count": "2"
+                  }
                 }
               }
             },
@@ -3202,6 +3505,621 @@
                     "response_code",
                     "msg"
                   ]
+                },
+                "example": {
+                  "response_code": 200,
+                  "msg": "Success",
+                  "multiengines": {
+                    "result": {
+                      "IKARUS": "safe",
+                      "vbwebshell": "safe",
+                      "Avast": "Win32:Fareit-CW",
+                      "Avira": "Worm/Gamarue.ioemn",
+                      "Sophos": "safe",
+                      "K7": "EmailWorm ( 0040f1211 )",
+                      "Rising": "safe",
+                      "Kaspersky": "Trojan-Ransom.Win32.PornoAsset.cpbb",
+                      "Panda": "Trj/Genetic.gen",
+                      "Baidu-China": "Win32.Trojan.WisdomEyes.151026.9950.9999",
+                      "NANO": "safe",
+                      "Antiy": "Trojan[Downloader]/Win32.Wauchos",
+                      "AVG": "Win32:Fareit-CW",
+                      "Baidu": "safe",
+                      "DrWeb": "safe",
+                      "GDATA": "Gen:Variant.Sirefef.2107",
+                      "Microsoft": "TrojanDropper:Win32/Gamarue.C",
+                      "Qihu360": "Win32/Botnet.Andromeda.HxQBeV0A",
+                      "ESET": "safe",
+                      "ClamAV": "safe",
+                      "JiangMin": "Trojan/PornoAsset.plh",
+                      "Trustlook": "safe",
+                      "MicroAPT": "safe",
+                      "OneAV": "safe",
+                      "OneStatic": "safe",
+                      "MicroNonPE": "safe",
+                      "OneAV-PWSH": "safe",
+                      "ShellPub": "safe"
+                    },
+                    "scan_time": "2025-10-15 07:37:59",
+                    "detect_rate": "12/28"
+                  },
+                  "summary": {
+                    "sha1": "9156eaa5ed26bc220aaac3baf56241c48e7e03c1",
+                    "md5": "b102cd8c3a882636a4ec337a9344a3a6",
+                    "scenes": [],
+                    "tag": {
+                      "s": [
+                        "exe",
+                        "lang_english"
+                      ],
+                      "x": [
+                        "Trojan",
+                        "PornoAsset"
+                      ]
+                    },
+                    "file_size": 64000,
+                    "is_whitelist": false,
+                    "malware_type": "Trojan",
+                    "malware_family": "PornoAsset",
+                    "sandbox_type_list": [
+                      "win10_1903_enx64_office2016"
+                    ],
+                    "threat_level": "malicious",
+                    "submit_time": "2025-08-24 15:00:58",
+                    "last_detection_time": "2025-10-15 15:37:59",
+                    "file_name": "9145f476a9f1f3b793709276de9631dd406e4f240863bbf3d6c66bc3456feb4d",
+                    "file_type": "EXEx86",
+                    "sample_sha256": "9145f476a9f1f3b793709276de9631dd406e4f240863bbf3d6c66bc3456feb4d",
+                    "threat_score": 90,
+                    "sandbox_type": "win10_1903_enx64_office2016",
+                    "multi_engines": "12/28"
+                  },
+                  "signature": [
+                    {
+                      "severity": 1,
+                      "gray": false,
+                      "references": [],
+                      "sig_class": "Network Related",
+                      "name": "network_http",
+                      "description": "{\"en\": \"Performs some HTTP requests\", \"cn\": \"样本发起了HTTP请求\"}",
+                      "markcount": 5,
+                      "marks": [
+                        {
+                          "type": "generic",
+                          "generic": {
+                            "host": "anam0rph.su",
+                            "request": "POST /in.php HTTP/1.1\r\nHost: anam0rph.su\r\nUser-Agent: Mozilla/4.0\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 84\r\nConnection: close",
+                            "uri": "/in.php"
+                          }
+                        },
+                        {
+                          "type": "generic",
+                          "generic": {
+                            "host": "bdcrqgonzmwuehky.nl",
+                            "request": "POST /in.php HTTP/1.1\r\nHost: bdcrqgonzmwuehky.nl\r\nUser-Agent: Mozilla/4.0\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 84\r\nConnection: close",
+                            "uri": "/in.php"
+                          }
+                        },
+                        {
+                          "type": "generic",
+                          "generic": {
+                            "host": "somicrososoft.ru",
+                            "request": "POST /in.php HTTP/1.1\r\nHost: somicrososoft.ru\r\nUser-Agent: Mozilla/4.0\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 84\r\nConnection: close",
+                            "uri": "/in.php"
+                          }
+                        }
+                      ],
+                      "families": [],
+                      "attck_id": "",
+                      "attck_info": {}
+                    },
+                    {
+                      "severity": 1,
+                      "gray": false,
+                      "references": [],
+                      "sig_class": "Environment Awareness",
+                      "name": "read_active_computer_name",
+                      "description": "{\"en\": \"Reads the active computer name\", \"cn\": \"读取计算机名称\"}",
+                      "markcount": 1,
+                      "marks": [
+                        {
+                          "type": "ioc",
+                          "ioc": {
+                            "pid": [
+                              6968
+                            ],
+                            "category": "registry",
+                            "ioc": "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\ComputerName\\ActiveComputerName\\ComputerName"
+                          }
+                        }
+                      ],
+                      "families": [],
+                      "attck_id": "T1087",
+                      "attck_info": {
+                        "Contributors": "Travis Smith, Tripwire",
+                        "title": "Account Discovery",
+                        "Permissions Required": "User",
+                        "Platform": "Linux, macOS, Windows",
+                        "Data Sources": "API monitoring, Process command-line parameters, Process monitoring",
+                        "Tactic": "Discovery",
+                        "CAPEC ID": "CAPEC-575",
+                        "ID": "T1087"
+                      }
+                    },
+                    {
+                      "severity": 3,
+                      "gray": false,
+                      "references": [],
+                      "sig_class": "Malware behavior",
+                      "name": "suspicious_pe_in_memory",
+                      "description": "{\"en\": \"Detected PE file in memory\", \"cn\": \"在内存中检测到PE文件\"}",
+                      "markcount": 3,
+                      "marks": [
+                        {
+                          "type": "generic",
+                          "generic": {
+                            "virtual_address": "0x3970000",
+                            "size": 64512,
+                            "memory_type": "PE",
+                            "pid": 5612,
+                            "process_path": "C:\\Users\\Administrator\\Desktop\\6feb4d.exe"
+                          }
+                        },
+                        {
+                          "type": "generic",
+                          "generic": {
+                            "virtual_address": "0x3ae0000",
+                            "size": 1688,
+                            "memory_type": "shellcode",
+                            "pid": 5612,
+                            "process_path": "C:\\Users\\Administrator\\Desktop\\6feb4d.exe"
+                          }
+                        },
+                        {
+                          "type": "generic",
+                          "generic": {
+                            "virtual_address": "0x6c70000",
+                            "size": 14710,
+                            "memory_type": "shellcode",
+                            "pid": 6968,
+                            "process_path": "C:\\Windows\\SysWOW64\\svchost.exe"
+                          }
+                        }
+                      ],
+                      "families": [],
+                      "attck_id": "",
+                      "attck_info": {}
+                    }
+                  ],
+                  "static": {
+                    "details": {
+                      "pe_version_info": [],
+                      "pe_sections": [
+                        {
+                          "name": ".text",
+                          "virtual_address": "0x00001000",
+                          "virtual_size": "0x0000518e",
+                          "size_of_data": "0x00005200",
+                          "pointer_to_rawdata": "0x00000400",
+                          "hash": "e6f69cb384e70bf825dcbeb133e0dbbc",
+                          "SectionPermission": "R-E",
+                          "entropy": 6.892130502363175
+                        },
+                        {
+                          "name": ".reloc",
+                          "virtual_address": "0x00014000",
+                          "virtual_size": "0x00001da5",
+                          "size_of_data": "0x00001e00",
+                          "pointer_to_rawdata": "0x0000dc00",
+                          "hash": "3c89baa0cc859837bb9ac8917b6058d7",
+                          "SectionPermission": "RW-",
+                          "entropy": 6.966489345591115
+                        }
+                      ],
+                      "pe_signatures": {
+                        "product": "n/a",
+                        "verified": "Unsigned",
+                        "description": "n/a"
+                      },
+                      "pe_imports": [
+                        {
+                          "dll": "SHLWAPI.dll",
+                          "imports": [
+                            {
+                              "address": "0x40e000",
+                              "name": "PathIsURLW"
+                            },
+                            {
+                              "address": "0x40e004",
+                              "name": "PathGetDriveNumberA"
+                            },
+                            {
+                              "address": "0x40e008",
+                              "name": "PathIsRelativeA"
+                            }
+                          ]
+                        },
+                        {
+                          "dll": "KERNEL32.dll",
+                          "imports": [
+                            {
+                              "address": "0x40e020",
+                              "name": "lstrcpyW"
+                            }
+                          ]
+                        }
+                      ],
+                      "pe_resources": [
+                        {
+                          "name": "RT_ICON",
+                          "offset": "0x00013160",
+                          "size": "0x00000128",
+                          "filetype": "GLS_BINARY_LSB_FIRST",
+                          "language": "LANG_ENGLISH",
+                          "sublanguage": "SUBLANG_ENGLISH_US"
+                        },
+                        {
+                          "name": "RT_GROUP_ICON",
+                          "offset": "0x00013728",
+                          "size": "0x00000092",
+                          "filetype": "data",
+                          "language": "LANG_ENGLISH",
+                          "sublanguage": "SUBLANG_ENGLISH_US"
+                        }
+                      ],
+                      "tag": [],
+                      "pe_basic": {
+                        "tls_info": {},
+                        "import_hash": "540cba6657a101cb43bb9f60920f4768",
+                        "peid": [
+                          "filetype: PE32",
+                          "arch: I386",
+                          "mode: 32",
+                          "endianess: LE",
+                          "type: GUI",
+                          "compiler: Microsoft Visual C/C++(2008 SP1)[-]",
+                          "linker: Microsoft Linker(9.0)[GUI32]"
+                        ],
+                        "time_stamp": "2012-10-09 09:11:58",
+                        "entry_point_section": ".text",
+                        "image_base": "0x400000",
+                        "entry_point": "0x4505"
+                      },
+                      "pe_detect": {
+                        "find_crypt": {},
+                        "urls": []
+                      },
+                      "pe_exports": [
+                        {
+                          "address": "0x401b28",
+                          "name": "FirstMagnitudE",
+                          "ordinal": 1
+                        },
+                        {
+                          "address": "0x40446f",
+                          "name": "?SecondMagni@@YGEUCOMMANDLINE094@@WE",
+                          "ordinal": 2
+                        }
+                      ]
+                    },
+                    "basic": {
+                      "sha1": "9156eaa5ed26bc220aaac3baf56241c48e7e03c1",
+                      "sha256": "9145f476a9f1f3b793709276de9631dd406e4f240863bbf3d6c66bc3456feb4d",
+                      "file_type": "PE32 executable (GUI) Intel 80386, for MS Windows",
+                      "file_name": "9145f476a9f1f3b793709276de9631dd406e4f240863bbf3d6c66bc3456feb4d",
+                      "ssdeep": "768:8ZYOGJ8z39m6odrD2ydQtaCGvRDvqguFjI3LOLisuIPcH9e3FEx8EFK4AVSi0WC4:83t2dGanvsh2ki4PQeVEKE38TCNMBMpw",
+                      "file_size": 64000,
+                      "md5": "b102cd8c3a882636a4ec337a9344a3a6"
+                    }
+                  },
+                  "pstree": {
+                    "children": [
+                      {
+                        "pid": 5612,
+                        "ppid": 3832,
+                        "process_name": "6feb4d.exe",
+                        "command_line": "\"C:\\Users\\Administrator\\Desktop\\6feb4d.exe\" ",
+                        "argument_vector": [
+                          "C:\\Users\\Administrator\\Desktop\\6feb4d.exe"
+                        ],
+                        "first_seen": 1756047699918.287,
+                        "children": [
+                          {
+                            "pid": 6968,
+                            "ppid": 5612,
+                            "process_name": "svchost.exe",
+                            "command_line": "C:\\Windows\\syswow64\\svchost.exe",
+                            "argument_vector": [
+                              "C:\\Windows\\syswow64\\svchost.exe"
+                            ],
+                            "first_seen": 1756047703968.084,
+                            "children": [],
+                            "track": true
+                          }
+                        ],
+                        "track": true
+                      }
+                    ],
+                    "process_name": {
+                      "en": "Analysed 2 processes in total",
+                      "cn": "共分析了2个进程"
+                    }
+                  },
+                  "network": {
+                    "mitm": [],
+                    "tcp": [
+                      {
+                        "src": "100.64.8.14",
+                        "sport": 49723,
+                        "dst": "50.16.27.236",
+                        "dport": 80,
+                        "offset": 144133,
+                        "time": 19.677597045898438,
+                        "ppid": 5612,
+                        "pid": 6968,
+                        "process_path": "C:\\Windows\\SysWOW64\\svchost.exe",
+                        "process_name": "svchost.exe"
+                      },
+                      {
+                        "src": "100.64.8.14",
+                        "sport": 49726,
+                        "dst": "176.58.104.168",
+                        "dport": 80,
+                        "offset": 153964,
+                        "time": 21.888036012649536,
+                        "ppid": 5612,
+                        "pid": 6968,
+                        "process_path": "C:\\Windows\\SysWOW64\\svchost.exe",
+                        "process_name": "svchost.exe"
+                      }
+                    ],
+                    "udp": [],
+                    "icmp": [],
+                    "http": [
+                      {
+                        "count": 3,
+                        "host": "anam0rph.su",
+                        "port": 80,
+                        "data": "POST /in.php HTTP/1.1\r\nHost: anam0rph.su\r\nUser-Agent: Mozilla/4.0\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 84\r\nConnection: close\r\n\r\n",
+                        "uri": "/in.php",
+                        "body": "",
+                        "path": "/in.php",
+                        "url": "http://anam0rph.su/in.php",
+                        "user-agent": "Mozilla/4.0",
+                        "version": "1.1",
+                        "method": "POST"
+                      },
+                      {
+                        "count": 3,
+                        "host": "somicrososoft.ru",
+                        "port": 80,
+                        "data": "POST /in.php HTTP/1.1\r\nHost: somicrososoft.ru\r\nUser-Agent: Mozilla/4.0\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 84\r\nConnection: close\r\n\r\n",
+                        "uri": "/in.php",
+                        "body": "",
+                        "path": "/in.php",
+                        "url": "http://somicrososoft.ru/in.php",
+                        "user-agent": "Mozilla/4.0",
+                        "version": "1.1",
+                        "method": "POST"
+                      }
+                    ],
+                    "tls": [],
+                    "dns": [
+                      {
+                        "request": "somicrososoft.ru",
+                        "type": "A",
+                        "answers": [
+                          {
+                            "type": "A",
+                            "data": "3.229.117.57",
+                            "time": 22.89440417289734
+                          },
+                          {
+                            "type": "A",
+                            "data": "3.229.117.57",
+                            "time": 43.141231060028076
+                          },
+                          {
+                            "type": "A",
+                            "data": "3.229.117.57",
+                            "time": 62.58969497680664
+                          }
+                        ],
+                        "time": 22.542392015457153
+                      }
+                    ],
+                    "smtp": [],
+                    "irc": [],
+                    "irc_ex": [],
+                    "dns_servers": [
+                      "223.5.5.5",
+                      "8.8.4.4"
+                    ],
+                    "fingerprint": [],
+                    "tcp_ex": [
+                      {
+                        "src": "100.64.8.14",
+                        "dst": "50.16.27.236",
+                        "sport": 49723,
+                        "dport": 80,
+                        "proto": 6,
+                        "time": 19.677597045898438,
+                        "tcp_detail": [
+                          {
+                            "time": 19.677597045898438,
+                            "type": "request",
+                            "size": 241,
+                            "sha256": "fe7525bf77fe49345f26413e8ba8824834beae6d5984ece4f4c581a3df99bf74"
+                          },
+                          {
+                            "time": 19.677597045898438,
+                            "type": "response",
+                            "size": 149,
+                            "sha256": "ea4600ec90525266d9f4458351d0c971ccda17162400a7765c8293700c829a15"
+                          }
+                        ],
+                        "proc_path": "C:\\Windows\\SysWOW64\\svchost.exe",
+                        "proc_name": "svchost.exe",
+                        "pid": 6968
+                      },
+                      {
+                        "src": "100.64.8.14",
+                        "dst": "3.229.117.57",
+                        "sport": 49742,
+                        "dport": 80,
+                        "proto": 6,
+                        "time": 62.59141516685486,
+                        "tcp_detail": [
+                          {
+                            "time": 62.59141516685486,
+                            "type": "request",
+                            "size": 246,
+                            "sha256": "e2bfffd5c77cd0f552d6969942a18676874e55774da0c94f9461c37e921d1826"
+                          },
+                          {
+                            "time": 62.59141516685486,
+                            "type": "response",
+                            "size": 149,
+                            "sha256": "45ca865eba2b31cd28ca8bfe44fa6c4a16f25bd92e520a1761701a75270c34ac"
+                          }
+                        ],
+                        "proc_path": "C:\\Windows\\SysWOW64\\svchost.exe",
+                        "proc_name": "svchost.exe",
+                        "pid": 6968
+                      }
+                    ],
+                    "smtp_ex": [],
+                    "http_ex": [
+                      {
+                        "time": 23.122490167617798,
+                        "src": "100.64.8.14",
+                        "sport": 49727,
+                        "dst": "3.229.117.57",
+                        "dport": 80,
+                        "protocol": "http",
+                        "method": "POST",
+                        "host": "somicrososoft.ru",
+                        "uri": "/in.php",
+                        "url": "http://somicrososoft.ru/in.php",
+                        "status": 200,
+                        "request": "POST /in.php HTTP/1.1\r\nHost: somicrososoft.ru\r\nUser-Agent: Mozilla/4.0\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 84\r\nConnection: close",
+                        "response": "HTTP/1.1 200 OK\r\nServer: nginx\r\nDate: Sun, 24 Aug 2025 15:01:49 GMT\r\nContent-Type: application/octet-stream\r\nContent-Length: 0\r\nConnection: close",
+                        "req": {
+                          "file_info": {
+                            "name": "33f91bbc0b502f8daab951737c8088a190422a211fe1ae4c0481c96618e5b862",
+                            "size": 84,
+                            "crc32": "84E1BCE3",
+                            "md5": "2fad74b4750ec31092830231e76a6c3f",
+                            "sha1": "d4a2a32ed81842f4a392cb3c5b430e4ce2c4820f",
+                            "sha256": "33f91bbc0b502f8daab951737c8088a190422a211fe1ae4c0481c96618e5b862",
+                            "sha512": "c797da42edae157cc27c6d274023a17cd23ffc139705e97f06a3cae6cd74f9b61aa23de2bbc5c985dfea610c787f3e70d4f594f3f8b19a3b3a9dd8b60df50ffd",
+                            "ssdeep": "3:AfNmSUjGVLUooLWvU7jURTK9k8OQoC50rY:AfNmSUjAwxKvu8M1OQogZ",
+                            "type": "ASCII text, with no line terminators",
+                            "yara": [],
+                            "domains": [],
+                            "ips": [],
+                            "urls": [],
+                            "mails": []
+                          },
+                          "trid_info": [],
+                          "md5": "2fad74b4750ec31092830231e76a6c3f",
+                          "sha1": "d4a2a32ed81842f4a392cb3c5b430e4ce2c4820f",
+                          "sha256": "33f91bbc0b502f8daab951737c8088a190422a211fe1ae4c0481c96618e5b862"
+                        },
+                        "resp": {
+                          "file_info": {
+                            "name": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                            "size": 0,
+                            "crc32": "00000000",
+                            "md5": "d41d8cd98f00b204e9800998ecf8427e",
+                            "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+                            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                            "sha512": "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e",
+                            "ssdeep": "3::",
+                            "type": "empty",
+                            "yara": [],
+                            "domains": [],
+                            "ips": [],
+                            "urls": [],
+                            "mails": []
+                          },
+                          "trid_info": [],
+                          "md5": "d41d8cd98f00b204e9800998ecf8427e",
+                          "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+                          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                        },
+                        "md5": "d41d8cd98f00b204e9800998ecf8427e",
+                        "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+                        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                        "pid": 6968,
+                        "process_name": "svchost.exe"
+                      }
+                    ],
+                    "https_ex": [],
+                    "dead_hosts": [],
+                    "domains": [
+                      {
+                        "domain": "bdcrqgonzmwuehky.nl",
+                        "ip": "176.58.104.168"
+                      },
+                      {
+                        "domain": "somicrososoft.ru",
+                        "ip": "3.229.117.57"
+                      }
+                    ],
+                    "hosts": [
+                      "3.229.117.57",
+                      "176.58.104.168"
+                    ]
+                  },
+                  "dropped": [
+                    {
+                      "sha1": "9156eaa5ed26bc220aaac3baf56241c48e7e03c1",
+                      "threat_level": "malicious",
+                      "urls": [],
+                      "sha256": "9145f476a9f1f3b793709276de9631dd406e4f240863bbf3d6c66bc3456feb4d",
+                      "size": 64000,
+                      "filepath": "C:\\ProgramData\\Local Settings\\Temp\\msajyt.cmd",
+                      "name": "msajyt.cmd",
+                      "crc32": "49F50535",
+                      "ssdeep": "768:8ZYOGJ8z39m6odrD2ydQtaCGvRDvqguFjI3LOLisuIPcH9e3FEx8EFK4AVSi0WC4:83t2dGanvsh2ki4PQeVEKE38TCNMBMpw",
+                      "type": "PE32 executable (GUI) Intel 80386, for MS Windows",
+                      "yara": [],
+                      "md5": "b102cd8c3a882636a4ec337a9344a3a6"
+                    }
+                  ],
+                  "strings": {
+                    "5612_88165644311524082025": [
+                      ";x\\&:}V*",
+                      "hdll.hsbie",
+                      "kernel32.dll",
+                      ".]a[<HI",
+                      "hsk\\ehs\\dihviceh\\serhlsethntrohntcohurrehem\\chsyst",
+                      "h.dllhpi32hadva",
+                      "!This program cannot be run in DOS mode."
+                    ],
+                    "5612_51029104311524082025": [
+                      "ntdll.dll",
+                      "lstrcatW",
+                      "CloseHandle",
+                      "\\syswow64\\svchost.exe",
+                      "\\system32\\wuauclt.exe",
+                      "VirtualFree",
+                      "NtDelayExecution",
+                      "ZwUnmapViewOfSection",
+                      "ZwQueryInformationProcess"
+                    ],
+                    "pcap": [
+                      "DESKTOP-H9URB7T ",
+                      "bigcatalog",
+                      "MSFT 5.0",
+                      "Date: Sun, 24 Aug 2025 15:02:07 GMT",
+                      "edgekey",
+                      " EEEFFDELFEEPFACNEIDJFFFCECDHFECA",
+                      "!http://oneocsp.microsoft.com/ocsp0",
+                      "sidnlabs"
+                    ]
+                  }
                 }
               }
             },
@@ -3526,6 +4444,111 @@
                     "response_code",
                     "msg"
                   ]
+                },
+                "example": {
+                  "response_code": 200,
+                  "msg": "Success",
+                  "data": {
+                    "multiengines": {
+                      "threatbook": "whitelist",
+                      "threatcrowd.com": "safe",
+                      "squidblacklist.org": "safe",
+                      "osint.bambenekconsulting.com": "safe",
+                      "malwaredomains.com": "safe",
+                      "malwareconfig.com": "safe",
+                      "cymon.io": "safe",
+                      "cybercrime-tracker.net": "safe",
+                      "circl.lu-misp": "malware",
+                      "alienvault.com": "safe",
+                      "AlienVault-OTX": "safe",
+                      "Google Safebrowsing": "safe"
+                    },
+                    "threat_level": "unknown",
+                    "sandbox": {
+                      "threat_level": "unknown",
+                      "submit_time": "2021-02-04 06:12:03",
+                      "file_name": "allowlist",
+                      "sample_sha256": "c707737d9b33b1c3f97c58c16557fe522d72d2a787fe3904f3e15853bcdc6187",
+                      "sb_status": "OK",
+                      "sandbox_type": "win10_1903_enx64_office2016",
+                      "tag": {
+                        "s": [
+                          "json"
+                        ],
+                        "x": [
+                          "",
+                          ""
+                        ]
+                      },
+                      "sandbox_type_list": [
+                        "win7_sp1_enx86_office2013",
+                        "win7_sp1_enx64_office2013",
+                        "win10_1903_enx64_office2016"
+                      ]
+                    },
+                    "details": {
+                      "headers": {
+                        "X-CDN-TraceID": "0.df2dc017.1758892677.32052bfa",
+                        "X-EventID": "68d6928658de47418e6664d5720929ec",
+                        "Permissions-Policy": "unload=()",
+                        "Connection": "keep-alive",
+                        "P3P": "CP=\"NON UNI COM NAV STA LOC CURa DEVa PSAa PSDa OUR IND\"",
+                        "X-MSEdge-Ref": "Ref A: 03CF8523D6C7499D93664520AC6F5B41 Ref B: TYO201151004060 Ref C: 2025-09-26T13:17:58Z",
+                        "Date": "Fri, 26 Sep 2025 13:17:58 GMT",
+                        "UserAgentReductionOptOut": "A7kgTC5xdZ2WIVGZEfb1hUoNuvjzOZX3VIV/BA6C18kQOOF50Q0D3oWoAm49k3BQImkujKILc7JmPysWk3CSjwUAAACMeyJvcmlnaW4iOiJodHRwczovL3d3dy5iaW5nLmNvbTo0NDMiLCJmZWF0dXJlIjoiU2VuZEZ1bGxVc2VyQWdlbnRBZnRlclJlZHVjdGlvbiIsImV4cGlyeSI6MTY4NDg4NjM5OSwiaXNTdWJkb21haW4iOnRydWUsImlzVGhpcmRQYXJ0eSI6dHJ1ZX0=",
+                        "Cache-Control": "public, max-age=3600",
+                        "ETag": "DpuVz2peupDazmhHdjK3mg==",
+                        "Report-To": "{\"group\":\"csp-endpoint\",\"max_age\":86400,\"endpoints\":[{\"url\":\"https://aefd.nelreports.net/api/report?cat=bingcsp\"}]}",
+                        "Content-Security-Policy": "script-src https: 'strict-dynamic' 'report-sample' 'wasm-unsafe-eval' 'nonce-g64bSCNlxMpRWgFmG+SaCfJW+j9m5j1IfL0M6CaWuVU='; base-uri 'self';report-to csp-endpoint",
+                        "Vary": "Accept-Encoding",
+                        "Accept-CH": "Sec-CH-UA-Arch, Sec-CH-UA-Bitness, Sec-CH-UA-Full-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version",
+                        "Content-Type": "application/json"
+                      },
+                      "lastSeen": "2025-09-26 05:17:57",
+                      "ip": "150.171.27.10",
+                      "finalUrl": "http://www.bing.com/edgepinning/allowlist",
+                      "url": "http://bing.com/edgepinning/allowlist",
+                      "sha256s": [
+                        "c707737d9b33b1c3f97c58c16557fe522d72d2a787fe3904f3e15853bcdc6187"
+                      ],
+                      "status": 3,
+                      "httpStatusCode": 200,
+                      "historyScans": [
+                        {
+                          "fileName": "allowlist",
+                          "sha256": "c707737d9b33b1c3f97c58c16557fe522d72d2a787fe3904f3e15853bcdc6187",
+                          "multiEngines": "0/28",
+                          "fileType": "json"
+                        },
+                        {
+                          "fileName": "allowlist",
+                          "sha256": "c707737d9b33b1c3f97c58c16557fe522d72d2a787fe3904f3e15853bcdc6187",
+                          "multiEngines": "0/28",
+                          "fileType": "json"
+                        },
+                        {
+                          "fileName": "allowlist",
+                          "sha256": "c707737d9b33b1c3f97c58c16557fe522d72d2a787fe3904f3e15853bcdc6187",
+                          "multiEngines": "0/28",
+                          "fileType": "json"
+                        },
+                        {
+                          "fileName": "allowlist",
+                          "sha256": "c707737d9b33b1c3f97c58c16557fe522d72d2a787fe3904f3e15853bcdc6187",
+                          "multiEngines": "0/28",
+                          "fileType": "json"
+                        },
+                        {
+                          "fileName": "allowlist",
+                          "sha256": "c707737d9b33b1c3f97c58c16557fe522d72d2a787fe3904f3e15853bcdc6187",
+                          "multiEngines": "0/28",
+                          "fileType": "json"
+                        }
+                      ]
+                    },
+                    "me_positives": 1,
+                    "me_ratio": "1/12"
+                  }
                 }
               }
             },
