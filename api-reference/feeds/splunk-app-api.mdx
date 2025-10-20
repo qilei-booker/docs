@@ -1,0 +1,1198 @@
+---
+title: Splunk APP - ThreatBook Cloud API
+---
+
+## Introduction
+
+The **ThreatBook Cloud API Splunk App** integrates ThreatBook's threat intelligence capabilities directly into your Splunk environment. The app automates IOC (Indicator of Compromise) enrichment, allowing analysts to identify malicious IPs, domains, and file hashes in real time. It reduces manual effort, provides actionable dashboards, and enables automated response workflows.
+
+**Key functions:**
+
+-   **Threat Data Enrichment**: Automatically extracts IPs, domains, and file hashes from raw logs, de-duplicates them, and queries the ThreatBook Cloud API for threat scoring. Malicious IOCs are enriched with contextual data and stored in a designated target index.
+-   **Threat Dashboard**: Provides a visual overview of identified malicious IOCs, including trends and categories.
+-   **Response and Investigation**: Enriched results can be correlated with raw logs for investigation or automated response actions (such as blocking).
+
+<img src="/images/splunkApp/1.png" alt="" style={{margin: '0 auto', maxWidth: '100%'}} />
+
+## Quick Start
+
+### Download and Install
+
+1.  In Splunk Web, click **Find More Apps**.
+<img src="/images/splunkApp/2.png" alt="" style={{margin: '0 auto', maxWidth: '100%'}} />
+
+2.  Search **ThreatBook Cloud API**.
+<img src="/images/splunkApp/3.png" alt="" style={{margin: '0 auto', maxWidth: '100%'}} />
+
+3.  Click **Install**, enter your Splunk admin username and password.
+
+4.  Splunk will prompt for restart. Select **Restart Now**.
+
+5.  fter restart, log in again and verify that **ThreatBook Cloud API** appears in the Apps menu.
+
+**(Optional) Upgrading or Reinstalling the App**
+
+1.  If you already have an older version of the app installed, you should completely remove it before installing the new version. This prevents Splunk from using cached configuration files.Stop Splunk.
+
+2.  Delete the following directory: \$SPLUNK\_HOME/etc/apps/threatbook-api
+
+3.  Delete the cached configuration file if it exists: \$SPLUNK\_HOME/etc/system/local/my.conf
+
+4.  Restart Splunk.
+
+5.  Follow the above instructions to install the latest version (for reference, the most recent release as of September 2025 is v1.0.0).
+
+💡 *Note*:
+
+If you are upgrading from an older version, uninstall the previous app before reinstallation to avoid cache conflicts:
+
+1.  Remove \$SPLUNK\_HOME/etc/apps/threatbook-api
+
+2.  Remove \$SPLUNK\_HOME/etc/system/local/my.conf
+
+3.  Restart Splunk
+
+### Configuration Parameters
+
+Navigate to **ThreatBook Cloud API \> Configuration**.
+
+-   **Search Head URL**: Provide the Splunk Search Head node URL (default port 8089, e.g., 192.168.102.176:8089).
+-   **Search Head Token**: Create a Splunk token with read permissions on the source index (Settings \> Tokens).
+-   **Index Master URL**: Provide the indexer cluster management URL with protocol (default HEC port 8088, e.g., `http://192.168.102.176:8088`).
+-   **HEC Token**: Generate a token under Settings \> Data Inputs \> HTTP Event Collector, ensuring write permissions to the target index.
+
+|**Parameter**|**Description**|**Example**|
+|----|--|--|
+|**Search Head URL**     |Provide the URL of any node in the Splunk Search Head cluster, including the Splunk management port. The default management port is **8089**.                                                                                                      |`http://192.168.102.176:8089` |
+|**Search Head Token**   |Create the token **on the Search Head node that you provided**, then record the token value for configuration. Generate it via **Settings → Tokens**, and ensure the token has **read permission** for the source index.                           |eyJhbGciOiJIUzI1\... |
+|**Index Master URL**    |Provide the management URL of the indexer cluster, including the protocol. The default port is **8088**, which is typically associated with the HTTP Event Collector (HEC). HEC enables external systems to send event data to Splunk over HTTP.   |`http://192.168.102.176:8088` |
+|**HEC Token**           |A token created on the Indexer management address via **Settings → Data Inputs → HTTP Event Collector**. Ensure that the HEC token you create has **write permissions** for both the input and output indexes specified in the configuration.      |12d4bba9-xxxx-xxxx-xxxx-3fa34cd98e9f |
+
+<img src="/images/splunkApp/4.png" alt="" style={{margin: '0 auto', maxWidth: '100%'}} />
+
+## Use Cases
+
+The ThreatBook Cloud API Splunk App supports three primary enrichment use cases: **IP Enrichment**, **Domain Enrichment/Compromise Detection**, and **File Detection (Hash Intelligence)**. Each use case requires creating an enrichment instance with specific parameters.
+
+For each instance, configure the following fields:
+
+-   **API URL**: Provide the HTTP/HTTPS address of the ThreatBook API service.
+-   **API Key**: Unique identifier for API request. The API Key can be found in your personal account page on [My API \| ThreatBook CTI](https://i.threatbook.io/my-api)
+-   **Index (Out)**: Define the output index to store enriched results. For easier visualization in dashboard, it is recommended that all instances of the same type share the same output index
+-   **Frequency**: The interval (in minutes) at which the app reads logs from the input index and queries the API.
+-   **Add Data Source**: Enter the name of the input index. Provide an SPL query that extracts and renames fields to the required standard format (ip, domain, or hash). Each data source must include a rename command.\ 💡 Tip: If you need to filter events in the index, apply the filter first and then use the \"**\| rename**\" command.
+
+## IP Enrichment
+
+### Configuration Fields
+
+-   **API URL**: `https://api.threatbook.io/v2/ip/query`
+-   **API Key**: Paste the key from your [ThreatBook Intelligence｜ThreatBook CTI](https://i.threatbook.io) personal account.
+-   **Index (Out)**: Define the output index where enriched IP intelligence will be stored.
+    
+    *Recommendation*: Use a dedicated index such as \"threatbook-ip\". Multiple IP instances can share the same index for unified dashboards.
+
+-   **Frequency**: Enter how often (in minutes) the app queries the IP Intelligence with data from input index.
+
+    *Example*: 5 (query every 5 minutes).
+
+-   **Add Data Source**: Provide an SPL statement that extracts and renames fields.
+
+    -   **ip**: *required* -- field mapped as the query for the API.
+
+    -   **host**: *optional* -- field mapped to represent the source host.
+
+    *Example*: index=\"abc-ip\" \| rename src as ip, dst as host
+
+<img src="/images/splunkApp/5.png" alt="" style={{margin: '0 auto', maxWidth: '100%'}} />
+
+### Dashboard
+
+The IP Intelligence Dashboard provides security analysts with a clear view of malicious IP activities identified through enrichment:
+
+1.  **Threat Overview:** Visualizes alert volume, verdict distribution (overall, inbound, outbound), and the most common threat types.
+
+2.  **Contextual Insights:** Highlights top intelligence labels, geographic distribution, and application scenarios to help understand attack patterns.
+
+3.  **Investigation Support:** Offers a detailed table combining IOC attributes (IP, host, ASN, location) with enrichment results. The raw field allows you to click and view the original response data returned by the API.
+
+<img src="/images/splunkApp/6.png" alt="" style={{margin: '0 auto', maxWidth: '100%'}} />
+
+## Domain Enrichment/Compromise Detection
+
+### Configuration Fields
+
+-   **API URL**: `https://api.threatbook.io/v2/domain/query`
+-   **API Key**: Paste the key from your [ThreatBook Intelligence｜ThreatBook CTI](https://i.threatbook.io) personal account.
+-   **Index (Out)**: Define the output index where enriched domain intelligence will be stored.
+
+    *Recommendation*: Use a dedicated index such as \"threatbook-domain\". Multiple domain instances can share the same index.
+
+-   **Frequency**: Enter how often (in minutes) the app queries the Domain Intelligence with data from input index.
+
+    *Example*: 10 (query every 10 minutes).
+
+-   **Add Data Source**: Provide an SPL statement that extracts and renames fields.
+
+    -   **domain**: *required* -- field mapped as the query for the API.
+
+    -   **host**: *optional* -- field mapped to represent the source host.
+
+    *Example*: index=\"abc-domain\" \| rename src as domain, dst as host
+
+<img src="/images/splunkApp/7.png" alt="" style={{margin: '0 auto', maxWidth: '100%'}} />
+
+### Dashboard
+
+The Domain Intelligence Dashboard provides visibility into malicious domains enriched through the ThreatBook API:
+
+1.  **Threat Overview:** Shows alert counts over time, verdict distribution, and threat type breakdowns. Also includes first-level and second-level classifications to help categorize domain risks.
+
+2.  **Contextual Insights:** Highlights the top 10 intelligence labels and their distribution, making it easy to identify common patterns in domain-based attacks.
+
+3.  **Investigation Support:** Provides a detailed table including domain, host, verdict, threat types, intelligence labels, and category levels, with a *raw* field for accessing the original enrichment data.
+
+<img src="/images/splunkApp/8.png" alt="" style={{margin: '0 auto', maxWidth: '100%'}} />
+
+## File Detection (Hash Intelligence)
+ 
+### Configuration Fields
+
+-   **API URL**: `https://api.threatbook.io/v2/file/query`
+
+-   **API Key**: Paste the key from your [ThreatBook Intelligence｜ThreatBook CTI](https://i.threatbook.io) personal account.
+
+-   **Index (Out)**: Define the output index where enriched hash intelligence will be stored.
+
+    *Recommendation*: Use a dedicated index such as threatbook-hash. Multiple hash instances can share the same index.
+
+-   **Frequency**: Enter how often (in minutes) the app queries the File Intelligence with data from input index.
+
+    *Example*: 15 (query every 15 minutes).
+
+-   **Add Data Source**: Provide an SPL statement that extracts and renames fields.
+
+    -   **hash**: *required* -- supports md5, sha1, or sha256, used as the query key for the API.
+
+    -   **host**: *optional* -- field mapped to represent the source host.
+
+    *Example*: index=\"abc-hash\" \| rename src as hash, dst as host
+
+<img src="/images/splunkApp/9.png" alt="" style={{margin: '0 auto', maxWidth: '100%'}} />
+
+### Dashboard
+
+The File Intelligence Dashboard provides an overview of malicious file activity identified through hash enrichment:
+
+1.  **Threat Overview:** Displays alert counts over time, threat levels, whitelist distribution, and detection scenarios.
+
+2.  **Contextual Insights:** Highlights detection ratios across multiple antivirus engines and shows distribution by malware family/type to better understand malware characteristics.
+
+3.  **Investigation Support:** Provides a detailed table including file hash, threat classification, detection context, and enrichment details, with a *raw* field for accessing the original response data.
+
+<img src="/images/splunkApp/10.png" alt="" style={{margin: '0 auto', maxWidth: '100%'}} />
+
+## Technical Considerations and Limitations
+
+API Rate Limiting: Due to rate limits on the threatbook.io API, the app\'s performance is dependent on efficient data processing. It is recommended that users perform de-duplication of raw logs before they are ingested by the app to optimize API usage and avoid unnecessary calls.
+
+## Troubleshooting (UI cache & data verification)
+
+**Symptom:** After upgrading to the latest app version, the UI still looks like the old version.
+
+**Cause:** Splunk Web cache.
+
+**Fix (in order):**
+
+1.  **Force-refresh the browser cache** (hard reload) and reopen the app page.
+
+2.  If the UI is still outdated, edit:
+
+``` 
+$SPLUNK_HOME/etc/apps/threatbook-api/default/web.conf 
+```
+
+Add the following settings, then **restart Splunk** to apply:
+
+```
+[settings] 
+cacheEntriesLimit = 0 
+cacheBytesLimit  = 0 
+
+```
+
+**Verify data flow:**
+
+-   After the restart, **wait for at least one polling interval** (the value set in **Frequency**) and then check the **IP / Domain / Hash** dashboards to confirm that enriched data is appearing.
+
+**Logs for debugging:**
+
+-   App logs are written daily to:
+
+```
+$SPLUNK_HOME/etc/apps/threatbook-api/var/log/threatbook_api_2025-xx-xx.log
+```
+
+## Appendix：Output Index Reference
+
+### IP Intelligence
+
+For details of each intelligence field, please refer to the documentation: [IP Intelligence - ThreatBook CTI Documentation](/api-reference/enrichment/ip-intelligence-v2)
+
+```json
+{
+  "root":{
+    "results":{
+      "data": {
+        "samples": [
+          {
+            "sha256": "0802ac3eba35cd17c24624c9eab18fa756850d2c6ae503021bba1534219aa46a",
+            "ratio": "4/28",
+            "scan_time": "2025-09-25 16:40:12",
+            "malware_type": "Trojan",
+            "malware_family": "Babar"
+          },
+          {
+            "sha256": "4b631a1dd47b3fcdff406624e5e9ac4128b37b417dc89708ff8bbc03f11965a9",
+            "ratio": "11/28",
+            "scan_time": "2025-09-24 17:13:05",
+            "malware_type": "Trojan",
+            "malware_family": "Agent"
+          },
+          {
+            "sha256": "04a6861c7df7b656942b7c2e7bcc9ecb8de8f888a7ffa7cf5b2468ae8d6db681",
+            "ratio": "0/28",
+            "scan_time": "2025-09-08 14:05:46"
+          },
+          {
+            "sha256": "9d4a645f47901d9fe2f7cb8db3a40b93a62641b9d2f86d1709a9d64efc56645a",
+            "ratio": "4/28",
+            "scan_time": "2025-07-11 21:18:51",
+            "malware_type": "Trojan",
+            "malware_family": "CobaltStrike"
+          },
+          {
+            "sha256": "b857aaf67a1fd2bef6dcb24fb33a7426a04752dc043a06d1a02e2042387060cd",
+            "ratio": "12/28",
+            "scan_time": "2025-04-08 14:00:38",
+            "malware_type": "Backdoor",
+            "malware_family": "ConnectBack"
+          },
+          {
+            "sha256": "d319a064467e03d6681c6aa7a001b168d500e6f00bb587559b9ef9da7b0d959e",
+            "ratio": "2/28",
+            "scan_time": "2025-03-04 15:32:09",
+            "malware_type": "GrayWare",
+            "malware_family": "Presenoker"
+          },
+          {
+            "sha256": "403de5aaf68fe91b2b15d2d054ddab830a1b04b0f5e6978f18d90edcb8fbe68b",
+            "ratio": "9/28",
+            "scan_time": "2024-08-22 09:00:42",
+            "malware_type": "potentially unwanted",
+            "malware_family": "CoinMiner"
+          },
+          {
+            "sha256": "289afe7d0d057f1ff64b77630b9d74777adba6027c6e6071829df86bc3957536",
+            "ratio": "0/28",
+            "scan_time": "2024-07-23 10:10:38",
+            "malware_type": "",
+            "malware_family": ""
+          },
+          {
+            "sha256": "0ea8287f7755da183d8487a0a1fc23352aa825ca7e0173d4692b7e2faf8c1c3a",
+            "ratio": "0/28",
+            "scan_time": "2024-07-23 10:10:21",
+            "malware_type": "",
+            "malware_family": ""
+          }
+        ],
+        "intelligences": [
+          {
+            "confidence": 75,
+            "expired": false,
+            "find_time": "2025-04-24 03:58:32",
+            "intel_types": [
+              "Scanner"
+            ],
+            "intel_labels": [],
+            "update_time": "2025-09-25 16:34:41"
+          },
+          {
+            "confidence": 75,
+            "expired": false,
+            "find_time": "2021-04-03 04:30:17",
+            "intel_types": [
+              "Zombie"
+            ],
+            "intel_labels": [],
+            "update_time": "2025-09-10 02:42:18"
+          },
+          {
+            "confidence": 65,
+            "expired": false,
+            "find_time": "2020-09-09 12:06:48",
+            "intel_types": [
+              "Spam"
+            ],
+            "intel_labels": [],
+            "update_time": "2025-09-25 17:30:11"
+          },
+          {
+            "confidence": 75,
+            "expired": false,
+            "find_time": "1970-01-01 00:00:00",
+            "intel_types": [],
+            "intel_labels": [],
+            "update_time": "2025-09-25 18:11:14"
+          },
+          {
+            "confidence": 85,
+            "expired": true,
+            "find_time": "2024-12-13 16:35:47",
+            "intel_types": [
+              "C2"
+            ],
+            "intel_labels": [],
+            "update_time": "2024-12-13 16:50:31"
+          },
+          {
+            "confidence": 75,
+            "expired": true,
+            "find_time": "2018-12-14 07:16:21",
+            "intel_types": [
+              "Scanner"
+            ],
+            "intel_labels": [],
+            "update_time": "2022-11-24 01:11:05"
+          },
+          {
+            "confidence": 90,
+            "expired": true,
+            "find_time": "2018-05-04 09:54:27",
+            "intel_types": [
+              "IDC"
+            ],
+            "intel_labels": [],
+            "update_time": "2018-08-02 13:01:08"
+          },
+          {
+            "confidence": 65,
+            "expired": true,
+            "find_time": "2017-09-19 08:43:19",
+            "intel_types": [
+              "Malware"
+            ],
+            "intel_labels": [],
+            "update_time": "2021-02-26 17:43:07"
+          },
+          {
+            "confidence": 85,
+            "expired": true,
+            "find_time": "2017-04-21 06:58:19",
+            "intel_types": [
+              "Zombie"
+            ],
+            "intel_labels": [],
+            "update_time": "2025-06-17 13:17:09"
+          },
+          {
+            "confidence": 85,
+            "expired": true,
+            "find_time": "2017-04-21 06:58:19",
+            "intel_types": [
+              "Spam"
+            ],
+            "intel_labels": [],
+            "update_time": "2025-06-17 13:17:09"
+          }
+        ],
+        "scene": "",
+        "verdict": "malicious",
+        "basic": {
+          "carrier": "CariNet, Inc.",
+          "location": {
+            "country": "United States",
+            "province": "California",
+            "city": "Los Angeles",
+            "lng": "-118.244514",
+            "lat": "34.051941",
+            "country_code": "US"
+          }
+        },
+        "asn": {
+          "rank": 4,
+          "info": "CARINET, US",
+          "number": 10439
+        },
+        "intel_labels": [],
+        "threat_types": [
+          "Scanner",
+          "Spam",
+          "Zombie"
+        ],
+        "update_time": "2025-09-25 18:11:14",
+        "inbound_verdict": "malicious",
+        "outbound_verdict": "unknown",
+        "is_highly_active": false,
+        "seen_in_honeypot": true,
+        "ssl_certs": [],
+        "pdns_count": "1"
+      },
+      "response_code": 200,
+      "msg": "Success"
+    },
+    "ip":"8.8.8.8",
+    "host":"144.76.173.210"
+  }
+}
+```
+
+### Domain Intelligence
+
+For details of each intelligence field, please refer to the documentation: [Domain Intelligence - ThreatBook CTI Documentation](/api-reference/enrichment/domain-intelligence-v2)
+
+```json
+{
+  "root":{
+    "results":{
+      "data": {
+        "samples": [
+          {
+            "sha256": "cc1f9f52b11edff882f8d745ce43e2277426cd7d87a5309d3e86c41e98f640d1",
+            "ratio": "0/28",
+            "scan_time": "2024-11-06 14:05:18",
+            "malware_type": "",
+            "malware_family": ""
+          }
+        ],
+        "intelligences": [
+          {
+            "confidence": 85,
+            "expired": false,
+            "find_time": "2021-01-19 16:00:00",
+            "intel_types": [
+              "C2"
+            ],
+            "intel_labels": [
+              {
+                "label_type": "gangs",
+                "labels": [
+                  "DeepPanda"
+                ]
+              },
+              {
+                "label_type": "basic",
+                "labels": [
+                  "APT",
+                  "Malware"
+                ]
+              }
+            ],
+            "update_time": "2025-09-25 00:00:59"
+          }
+        ],
+        "verdict": "malicious",
+        "categories": {
+          "first_level": [
+            "Other"
+          ],
+          "second_level": "Other"
+        },
+        "intel_labels": [
+          {
+            "label_type": "gangs",
+            "labels": [
+              "DeepPanda"
+            ]
+          },
+          {
+            "label_type": "basic",
+            "labels": [
+              "APT",
+              "Malware"
+            ]
+          }
+        ],
+        "threat_types": [
+          "C2"
+        ],
+        "whois": {
+          "cdate": "2017-07-03 01:59:04",
+          "edate": "2026-07-03 01:59:04",
+          "udate": "2025-07-04 02:22:39",
+          "alexa": "",
+          "registrar_name": "GoDaddy.com, LLC",
+          "name_server": "NS53.DOMAINCONTROL.COM|NS54.DOMAINCONTROL.COM",
+          "registrant_name": "",
+          "registrant_email": "",
+          "registrant_company": "",
+          "registrant_address": "",
+          "registrant_phone": ""
+        },
+        "pdns": [
+          {
+            "ip": "15.197.148.33",
+            "carrier": "Amazon.com, Inc.",
+            "location": {
+              "country": "United States",
+              "province": "",
+              "city": "",
+              "lng": "-101.407912",
+              "lat": "39.765054",
+              "country_code": "US"
+            }
+          },
+          {
+            "ip": "3.33.130.190",
+            "carrier": "Amazon.com, Inc.",
+            "location": {
+              "country": "United States",
+              "province": "",
+              "city": "",
+              "lng": "-101.407912",
+              "lat": "39.765054",
+              "country_code": "US"
+            }
+          }
+        ],
+        "ssl_certs": [
+          {
+            "subject": "gnisoft.com",
+            "issuer": "Go Daddy Secure Certificate Authority - G2",
+            "fingerprint": "460eec7df8a3e385e6712135f4d8249f869ee5d2",
+            "purpose": "SSL client|SSL server|Netscape SSL server|Any Purpose|Any Purpose CA|OCSP helper",
+            "verify": "SHA256withRSA",
+            "status": "1",
+            "revoked": false,
+            "begin": "2023-10-28",
+            "end": "2024-10-28",
+            "status_desc": "Expired",
+            "serial_number": "6177b3fa936414cb",
+            "revoked_time": ""
+          },
+          {
+            "subject": "gnisoft.com",
+            "issuer": "Go Daddy Secure Certificate Authority - G2",
+            "fingerprint": "fcbc0d293ae65d5a263af2e16c632d5ff20fd0ae",
+            "purpose": "SSL client|SSL server|Netscape SSL server|Any Purpose|Any Purpose CA|OCSP helper",
+            "verify": "SHA256withRSA",
+            "status": "1",
+            "revoked": false,
+            "begin": "2024-01-07",
+            "end": "2025-01-07",
+            "status_desc": "Expired",
+            "serial_number": "f5498eba6149756f",
+            "revoked_time": ""
+          }
+        ],
+        "umbrella_rank": {
+          "global_rank": -1
+        },
+        "sub_domains_count": "8",
+        "pdns_count": "2"
+      },
+      "response_code": 200,
+      "msg": "Success"
+    },
+    "domain":"gnisoft.com",
+    "host":"91.198.66.112"
+  }
+}
+```
+
+### File Intelligence
+
+For details of each intelligence field, please refer to the documentation: [File Intelligence - ThreatBook CTI Documentation](/api-reference/enrichment/file-intelligence-v2)
+
+```json
+{
+  "root":{
+    "result":{
+      "data": {
+        "summary": {
+          "sha1": "039f786b81455c83dc50283e42d0ee2ac48059c8",
+          "md5": "7980094788f0e46145bdff91b0f4743e",
+          "scenes": [],
+          "tag": {
+            "s": [
+              "dll",
+              "lang_english"
+            ],
+            "x": [
+              "Trojan",
+              "ZLoader"
+            ]
+          },
+          "file_size": 471552,
+          "is_whitelist": false,
+          "malware_type": "Trojan",
+          "malware_family": "ZLoader",
+          "sandbox_type_list": [
+            "win10_1903_enx64_office2016",
+            "win7_sp1_enx86_office2013"
+          ],
+          "threat_level": "malicious",
+          "submit_time": "2024-11-05 23:56:27",
+          "last_detection_time": "2024-11-06 07:59:28",
+          "file_name": "7980094788F0E46145BDFF91B0F4743E",
+          "file_type": "DLLx64",
+          "sample_sha256": "603bd9ee50f7dc6de37f314bda227561f0fd67cdebf53a672ea32cce73a2efd3",
+          "threat_score": 70,
+          "sandbox_type": "win7_sp1_enx86_office2013",
+          "multi_engines": "14/28"
+        },
+        "multiengines": {
+          "result": {
+            "IKARUS": "Trojan.Win64.ZLoader",
+            "vbwebshell": "safe",
+            "Avast": "Win64:MalwareX-gen [Misc]",
+            "Avira": "TR/Redcap.nvthy",
+            "Sophos": "Mal/Generic-S",
+            "K7": "Spyware ( 005b0cf61 )",
+            "Rising": "Spyware.Zbot!8.16B (CLOUD)",
+            "Kaspersky": "Trojan.Win64.Agentb.lbtp",
+            "Panda": "Trj/Chgt.AD",
+            "Baidu-China": "safe",
+            "NANO": "safe",
+            "Antiy": "Trojan/Win64.ZLoader",
+            "AVG": "Win64:MalwareX-gen [Misc]",
+            "Baidu": "safe",
+            "DrWeb": "Trojan.PWS.Sphinx.116",
+            "GDATA": "Trojan.GenericKD.74808184",
+            "Microsoft": "Trojan:Win64/ZLoader.DB!MTB",
+            "Qihu360": "safe",
+            "ESET": "a variant of Win64/Spy.Zbot.S",
+            "ClamAV": "safe",
+            "JiangMin": "safe",
+            "Trustlook": "safe",
+            "MicroAPT": "safe",
+            "OneAV": "safe",
+            "OneStatic": "safe",
+            "MicroNonPE": "safe",
+            "OneAV-PWSH": "safe",
+            "ShellPub": "safe"
+          },
+          "scan_time": "2024-11-05 23:59:28",
+          "detect_rate": "14/28"
+        },
+        "static": {
+          "details": {
+            "pe_version_info": [
+              {
+                "name": "CompanyName",
+                "value": "Altair Industries"
+              },
+              {
+                "name": "FileDescription",
+                "value": "HexaLab"
+              },
+              {
+                "name": "FileVersion",
+                "value": "8.94.14.711"
+              },
+              {
+                "name": "InternalName",
+                "value": "HexaLab"
+              },
+              {
+                "name": "LegalCopyright",
+                "value": "Copyright © 2023 Altair Industries"
+              },
+              {
+                "name": "OriginalFilename",
+                "value": "HexaLab.dll"
+              },
+              {
+                "name": "ProductName",
+                "value": "Bit Nova"
+              },
+              {
+                "name": "ProductVersion",
+                "value": "8.94.14.711"
+              },
+              {
+                "name": "Translation",
+                "value": "0x0409 0x04b0"
+              }
+            ],
+            "pe_sections": [
+              {
+                "name": ".text",
+                "virtual_address": "0x00001000",
+                "virtual_size": "0x00057840",
+                "size_of_data": "0x00057a00",
+                "pointer_to_rawdata": "0x00000400",
+                "hash": "071570a522e923806c78ef95b2d6ed7b",
+                "SectionPermission": "R-E",
+                "entropy": 6.385688825236411
+              },
+              {
+                "name": ".rdata",
+                "virtual_address": "0x00059000",
+                "virtual_size": "0x00011fea",
+                "size_of_data": "0x00012000",
+                "pointer_to_rawdata": "0x00057e00",
+                "hash": "056c3c10d944547aa9ba1606fd4b6acf",
+                "SectionPermission": "R--",
+                "entropy": 5.843108990423532
+              },
+              {
+                "name": ".data",
+                "virtual_address": "0x0006b000",
+                "virtual_size": "0x00006d40",
+                "size_of_data": "0x00001600",
+                "pointer_to_rawdata": "0x00069e00",
+                "hash": "92078e4bf88550d7dd35cd2b0d1a7677",
+                "SectionPermission": "RW-",
+                "entropy": 1.9720657252837093
+              },
+              {
+                "name": ".pdata",
+                "virtual_address": "0x00072000",
+                "virtual_size": "0x00006d5c",
+                "size_of_data": "0x00006e00",
+                "pointer_to_rawdata": "0x0006b400",
+                "hash": "002497e496fa985f8d3f30284d3f586e",
+                "SectionPermission": "R--",
+                "entropy": 5.671708918490455
+              },
+              {
+                "name": "_RDATA",
+                "virtual_address": "0x00079000",
+                "virtual_size": "0x000000fc",
+                "size_of_data": "0x00000200",
+                "pointer_to_rawdata": "0x00072200",
+                "hash": "0d9aab0caec253f52388cd1c1f0460a5",
+                "SectionPermission": "R--",
+                "entropy": 2.4558081453626235
+              },
+              {
+                "name": ".reloc",
+                "virtual_address": "0x0007a000",
+                "virtual_size": "0x0000071c",
+                "size_of_data": "0x00000800",
+                "pointer_to_rawdata": "0x00072400",
+                "hash": "a1c06c8003ce55dbfd84874d5d760e10",
+                "SectionPermission": "R--",
+                "entropy": 5.187047747505069
+              },
+              {
+                "name": ".rsrc",
+                "virtual_address": "0x0007b000",
+                "virtual_size": "0x000004be",
+                "size_of_data": "0x00000600",
+                "pointer_to_rawdata": "0x00072c00",
+                "hash": "85dfdabfbcad79f9ab3406e21a0ef7d6",
+                "SectionPermission": "R--",
+                "entropy": 3.4830131399980435
+              }
+            ],
+            "pe_signatures": {
+              "product": "Bit Nova",
+              "verified": "Unsigned",
+              "description": "HexaLab"
+            },
+            "pe_imports": [
+              {
+                "dll": "KERNEL32.dll",
+                "imports": [
+                  {
+                    "address": "0x180059020",
+                    "name": "GetTickCount64"
+                  },
+                  {
+                    "address": "0x180059028",
+                    "name": "ResetEvent"
+                  },
+                  {
+                    "address": "0x180059278",
+                    "name": "GetModuleHandleExW"
+                  },
+                  {
+                    "address": "0x180059280",
+                    "name": "HeapFree"
+                  },
+                  {
+                    "address": "0x180059288",
+                    "name": "FindFirstFileExW"
+                  },
+                  {
+                    "address": "0x1800592a0",
+                    "name": "GetOEMCP"
+                  },
+                  {
+                    "address": "0x1800592a8",
+                    "name": "GetCPInfo"
+                  },
+                  {
+                    "address": "0x1800592b0",
+                    "name": "GetCommandLineA"
+                  },
+                  {
+                    "address": "0x1800592b8",
+                    "name": "GetCommandLineW"
+                  }
+                ]
+              },
+              {
+                "dll": "USER32.dll",
+                "imports": [
+                  {
+                    "address": "0x1800592e0",
+                    "name": "PeekMessageW"
+                  }
+                ]
+              },
+              {
+                "dll": "ADVAPI32.dll",
+                "imports": [
+                  {
+                    "address": "0x180059000",
+                    "name": "OpenSCManagerW"
+                  },
+                  {
+                    "address": "0x180059008",
+                    "name": "CloseServiceHandle"
+                  },
+                  {
+                    "address": "0x180059010",
+                    "name": "CryptReleaseContext"
+                  }
+                ]
+              },
+              {
+                "dll": "SHLWAPI.dll",
+                "imports": [
+                  {
+                    "address": "0x1800592c8",
+                    "name": "PathFindFileNameW"
+                  },
+                  {
+                    "address": "0x1800592d0",
+                    "name": "StrCmpNIA"
+                  }
+                ]
+              },
+              {
+                "dll": "WS2_32.dll",
+                "imports": [
+                  {
+                    "address": "0x1800592f0",
+                    "name": "ntohs"
+                  },
+                  {
+                    "address": "0x1800592f8",
+                    "name": "setsockopt"
+                  },
+                  {
+                    "address": "0x180059300",
+                    "name": "getsockopt"
+                  },
+                  {
+                    "address": "0x180059308",
+                    "name": "sendto"
+                  },
+                  {
+                    "address": "0x180059310",
+                    "name": "closesocket"
+                  },
+                  {
+                    "address": "0x180059318",
+                    "name": "shutdown"
+                  },
+                  {
+                    "address": "0x180059320",
+                    "name": "htonl"
+                  },
+                  {
+                    "address": "0x180059328",
+                    "name": "inet_addr"
+                  },
+                  {
+                    "address": "0x180059330",
+                    "name": "WSAGetLastError"
+                  }
+                ]
+              },
+              {
+                "dll": "ole32.dll",
+                "imports": [
+                  {
+                    "address": "0x180059380",
+                    "name": "CoCreateInstance"
+                  }
+                ]
+              },
+              {
+                "dll": "gdiplus.dll",
+                "imports": [
+                  {
+                    "address": "0x180059340",
+                    "name": "GdipGetImageEncodersSize"
+                  }
+                ]
+              },
+              {
+                "dll": "ntdll.dll",
+                "imports": [
+                  {
+                    "address": "0x180059350",
+                    "name": "RtlVirtualUnwind"
+                  },
+                  {
+                    "address": "0x180059358",
+                    "name": "RtlUnwindEx"
+                  },
+                  {
+                    "address": "0x180059360",
+                    "name": "RtlPcToFileHeader"
+                  },
+                  {
+                    "address": "0x180059368",
+                    "name": "RtlCaptureContext"
+                  },
+                  {
+                    "address": "0x180059370",
+                    "name": "RtlLookupFunctionEntry"
+                  }
+                ]
+              }
+            ],
+            "pe_resources": [
+              {
+                "name": "RT_VERSION",
+                "offset": "0x0007b0a0",
+                "size": "0x000002dc",
+                "filetype": "data",
+                "language": "LANG_ENGLISH",
+                "sublanguage": "SUBLANG_ENGLISH_US"
+              },
+              {
+                "name": "RT_MANIFEST",
+                "offset": "0x0007b37c",
+                "size": "0x00000142",
+                "filetype": "ASCII text, with CRLF line terminators",
+                "language": "LANG_ENGLISH",
+                "sublanguage": "SUBLANG_ENGLISH_US"
+              }
+            ],
+            "tag": [],
+            "pe_basic": {
+              "tls_info": {},
+              "import_hash": "e78df8995d788e9664d5306651cffb6f",
+              "peid": [
+                "filetype: PE64",
+                "arch: AMD64",
+                "mode: 64",
+                "endianess: LE",
+                "type: DLL",
+                "compiler: Microsoft Visual C/C++(-)[-]",
+                "linker: Microsoft Linker(14.29**)[DLL64]"
+              ],
+              "time_stamp": "2024-11-04 19:29:01",
+              "entry_point_section": ".text",
+              "image_base": "0x180000000",
+              "entry_point": "0x4d920"
+            },
+            "pe_detect": {
+              "find_crypt": {},
+              "urls": []
+            },
+            "pe_exports": [
+              {
+                "address": "0x1800237b0",
+                "name": "DllRegisterServer",
+                "ordinal": 1
+              },
+              {
+                "address": "0x1800019e0",
+                "name": "DmxzenyaSttc",
+                "ordinal": 2
+              },
+              {
+                "address": "0x18001d3a0",
+                "name": "DwxuexCcald",
+                "ordinal": 3
+              },
+              {
+                "address": "0x180027230",
+                "name": "FgesNhaw",
+                "ordinal": 4
+              },
+              {
+                "address": "0x180009940",
+                "name": "IntpTwppux",
+                "ordinal": 5
+              },
+              {
+                "address": "0x1800079f0",
+                "name": "RvqiZaej",
+                "ordinal": 6
+              },
+              {
+                "address": "0x180026ae0",
+                "name": "UpumvqvIlcu",
+                "ordinal": 7
+              },
+              {
+                "address": "0x18001a0e0",
+                "name": "VpjnIcef",
+                "ordinal": 8
+              },
+              {
+                "address": "0x180020d40",
+                "name": "YyuxzzvMetk",
+                "ordinal": 9
+              }
+            ]
+          },
+          "basic": {
+            "sha1": "039f786b81455c83dc50283e42d0ee2ac48059c8",
+            "sha256": "603bd9ee50f7dc6de37f314bda227561f0fd67cdebf53a672ea32cce73a2efd3",
+            "file_type": "PE32+ executable (DLL) (GUI) x86-64, for MS Windows",
+            "file_name": "603bd9ee50f7dc6de37f314bda227561f0fd67cdebf53a672ea32cce73a2efd3-1730851062",
+            "ssdeep": "6144:TYSbPcIFqVNwHRIkXRMTPPcIBbVpov6Cxfqm3xKRe+KTc:0Sb0tNwHtRcvVpLCBDWe+KTc",
+            "file_size": 471552,
+            "md5": "7980094788f0e46145bdff91b0f4743e"
+          }
+        },
+        "signature": [],
+        "dropped": [],
+        "network": {
+          "mitm": [],
+          "tcp": [],
+          "udp": [],
+          "icmp": [],
+          "http": [],
+          "tls": [],
+          "dns": [],
+          "smtp": [],
+          "irc": [],
+          "irc_ex": [],
+          "dns_servers": [
+            "119.29.29.29",
+            "223.5.5.5"
+          ],
+          "fingerprint": [],
+          "tcp_ex": [],
+          "smtp_ex": [],
+          "http_ex": [],
+          "https_ex": [],
+          "dead_hosts": [],
+          "domains": [],
+          "hosts": []
+        },
+        "pstree": {
+          "children": [
+            {
+              "track": true,
+              "pid": 6008,
+              "process_name": "rundll32.exe",
+              "command_line": "\"C:\\Windows\\System32\\rundll32.exe\" C:\\Users\\Administrator\\Desktop\\603bd9ee50f7dc6de37f314bda227561f0fd67cdebf53a672ea32cce73a2efd3.dll,RvqiZaej",
+              "first_seen": 1.730851039239155E9,
+              "ppid": 6004,
+              "children": []
+            },
+            {
+              "track": true,
+              "pid": 4608,
+              "process_name": "rundll32.exe",
+              "command_line": "\"C:\\Windows\\System32\\rundll32.exe\" C:\\Users\\Administrator\\Desktop\\603bd9ee50f7dc6de37f314bda227561f0fd67cdebf53a672ea32cce73a2efd3.dll,DllRegisterServer",
+              "first_seen": 1.730851039761047E9,
+              "ppid": 3280,
+              "children": []
+            },
+            {
+              "track": true,
+              "pid": 4276,
+              "process_name": "rundll32.exe",
+              "command_line": "\"C:\\Windows\\System32\\rundll32.exe\" C:\\Users\\Administrator\\Desktop\\603bd9ee50f7dc6de37f314bda227561f0fd67cdebf53a672ea32cce73a2efd3.dll,IntpTwppux",
+              "first_seen": 1.730851040195206E9,
+              "ppid": 4988,
+              "children": []
+            },
+            {
+              "track": true,
+              "pid": 5280,
+              "process_name": "rundll32.exe",
+              "command_line": "\"C:\\Windows\\System32\\rundll32.exe\" C:\\Users\\Administrator\\Desktop\\603bd9ee50f7dc6de37f314bda227561f0fd67cdebf53a672ea32cce73a2efd3.dll,VpjnIcef",
+              "first_seen": 1.730851040520639E9,
+              "ppid": 5824,
+              "children": []
+            },
+            {
+              "track": true,
+              "pid": 656,
+              "process_name": "rundll32.exe",
+              "command_line": "\"C:\\Windows\\System32\\rundll32.exe\" C:\\Users\\Administrator\\Desktop\\603bd9ee50f7dc6de37f314bda227561f0fd67cdebf53a672ea32cce73a2efd3.dll,YyuxzzvMetk",
+              "first_seen": 1.730851040886768E9,
+              "ppid": 2780,
+              "children": []
+            },
+            {
+              "track": true,
+              "pid": 3168,
+              "process_name": "rundll32.exe",
+              "command_line": "\"C:\\Windows\\System32\\rundll32.exe\" C:\\Users\\Administrator\\Desktop\\603bd9ee50f7dc6de37f314bda227561f0fd67cdebf53a672ea32cce73a2efd3.dll,DwxuexCcald",
+              "first_seen": 1.730851041251268E9,
+              "ppid": 4356,
+              "children": []
+            },
+            {
+              "track": true,
+              "pid": 6816,
+              "process_name": "rundll32.exe",
+              "command_line": "\"C:\\Windows\\System32\\rundll32.exe\" C:\\Users\\Administrator\\Desktop\\603bd9ee50f7dc6de37f314bda227561f0fd67cdebf53a672ea32cce73a2efd3.dll,FgesNhaw",
+              "first_seen": 1.730851041521835E9,
+              "ppid": 5256,
+              "children": []
+            },
+            {
+              "track": true,
+              "pid": 2612,
+              "process_name": "rundll32.exe",
+              "command_line": "\"C:\\Windows\\System32\\rundll32.exe\" C:\\Users\\Administrator\\Desktop\\603bd9ee50f7dc6de37f314bda227561f0fd67cdebf53a672ea32cce73a2efd3.dll,UpumvqvIlcu",
+              "first_seen": 1.73085104180838E9,
+              "ppid": 1348,
+              "children": []
+            },
+            {
+              "track": true,
+              "pid": 6600,
+              "process_name": "rundll32.exe",
+              "command_line": "\"C:\\Windows\\System32\\rundll32.exe\" C:\\Users\\Administrator\\Desktop\\603bd9ee50f7dc6de37f314bda227561f0fd67cdebf53a672ea32cce73a2efd3.dll,DmxzenyaSttc",
+              "first_seen": 1.730851042077707E9,
+              "ppid": 6216,
+              "children": []
+            }
+          ],
+          "process_name": {
+            "en": "Analysed 9 processes in total",
+            "cn": "共分析了9个进程"
+          }
+        },
+        "strings": {
+          "603bd9ee50f7dc6de37f314bda227561f0fd67cdebf53a672ea32cce73a2efd3": [
+            ".?AVbad_function_call@std@@",
+            "api-ms-win-core-file-l1-2-2",
+            "L9}@rdH",
+            "CreateProcessW",
+            "GetACP",
+            "      </requestedPrivileges>",
+            "api-ms-win-security-systemfunctions-l1-1-0",
+            "EnterCriticalSection",
+            "DESKTOP-H9URB7T",
+            "e13678",
+            "ip6-servers"
+          ]
+        }
+      },
+      "response_code": 200,
+      "msg": "Success"
+    },
+    "hash":"039f786b81455c83dc50283e42d0ee2ac48059c8",
+    "host":"45.77.252.42"
+  }
+}
+```
