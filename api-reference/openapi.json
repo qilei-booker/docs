@@ -228,7 +228,7 @@
                       "type": "string",
                       "enum": [
                         "Invalid account status",
-                        "Invalid access IP",
+                        "Invalid access IP: {actual IP address}",
                         "Invalid API key",
                         "Invalid key status",
                         "No access to the API",
@@ -489,7 +489,7 @@
                       "type": "string",
                       "enum": [
                         "Invalid account status",
-                        "Invalid access IP",
+                        "Invalid access IP: {actual IP address}",
                         "Invalid API key",
                         "Invalid key status",
                         "No access to the API",
@@ -1285,7 +1285,7 @@
                       "type": "string",
                       "enum": [
                         "Invalid account status",
-                        "Invalid access IP",
+                        "Invalid access IP: {actual IP address}",
                         "Invalid API key",
                         "Invalid key status",
                         "No access to the API",
@@ -2276,7 +2276,7 @@
                       "type": "string",
                       "enum": [
                         "Invalid account status",
-                        "Invalid access IP",
+                        "Invalid access IP: {actual IP address}",
                         "Invalid API key",
                         "Invalid key status",
                         "No access to the API",
@@ -2792,7 +2792,7 @@
                       "type": "string",
                       "enum": [
                         "Invalid account status",
-                        "Invalid access IP",
+                        "Invalid access IP: {actual IP address}",
                         "Invalid API key",
                         "Invalid key status",
                         "No access to the API",
@@ -3042,6 +3042,10 @@
                         "pdns_count": {
                           "type": "string",
                           "description": "Number of currently resolved IPs. Displays the exact number if fewer than 1000; shows 1000+ if greater."
+                        },
+                        "update_time": {
+                          "type": "string",
+                          "description": "Latest update time of the intelligence"
                         }
                       },
                       "required": [
@@ -3056,7 +3060,8 @@
                         "ssl_certs",
                         "umbrella_rank",
                         "sub_domains_count",
-                        "pdns_count"
+                        "pdns_count",
+                        "update_time"
                       ]
                     }
                   },
@@ -3254,7 +3259,7 @@
                       "type": "string",
                       "enum": [
                         "Invalid account status",
-                        "Invalid access IP",
+                        "Invalid access IP: {actual IP address}",
                         "Invalid API key",
                         "Invalid key status",
                         "No access to the API",
@@ -4200,7 +4205,7 @@
                       "type": "string",
                       "enum": [
                         "Invalid account status",
-                        "Invalid access IP",
+                        "Invalid access IP: {actual IP address}",
                         "Invalid API key",
                         "Invalid key status",
                         "No access to the API",
@@ -4629,7 +4634,7 @@
                       "type": "string",
                       "enum": [
                         "Invalid account status",
-                        "Invalid access IP",
+                        "Invalid access IP: {actual IP address}",
                         "Invalid API key",
                         "Invalid key status",
                         "No access to the API",
@@ -4854,7 +4859,7 @@
                       "type": "string",
                       "enum": [
                         "Invalid account status",
-                        "Invalid access IP",
+                        "Invalid access IP: {actual IP address}",
                         "Invalid API key",
                         "Invalid key status",
                         "No access to the API",
@@ -5096,7 +5101,7 @@
                       "type": "string",
                       "enum": [
                         "Invalid account status",
-                        "Invalid access IP",
+                        "Invalid access IP: {actual IP address}",
                         "Invalid API key",
                         "Invalid key status",
                         "No access to the API",
