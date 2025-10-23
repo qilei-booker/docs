@@ -3209,7 +3209,8 @@
                       "second_level": "Training and Tools"
                     },
                     "sub_domains_count": "1000+",
-                    "pdns_count": "2"
+                    "pdns_count": "2",
+                    "update_time": "2025-10-22 15:07:02"
                   }
                 }
               }
