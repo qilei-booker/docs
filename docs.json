@@ -86,9 +86,9 @@
             ]
           },
           {
-            "group": "Integration ",
+            "group": "Integration",
             "pages": [
-              "api-reference/feeds/splunk-app-api"
+              "api-reference/integration/splunk-app-api"
             ]
           }
         ]

@@ -80,14 +80,16 @@ For each instance, configure the following fields:
 -   **API Key**: Unique identifier for API request. The API Key can be found in your personal account page on [My API \| ThreatBook CTI](https://i.threatbook.io/my-api)
 -   **Index (Out)**: Define the output index to store enriched results. For easier visualization in dashboard, it is recommended that all instances of the same type share the same output index
 -   **Frequency**: The interval (in minutes) at which the app reads logs from the input index and queries the API.
--   **Add Data Source**: Enter the name of the input index. Provide an SPL query that extracts and renames fields to the required standard format (ip, domain, or hash). Each data source must include a rename command.\ 💡 Tip: If you need to filter events in the index, apply the filter first and then use the \"**\| rename**\" command.
+-   **Add Data Source**: Enter the name of the input index. Provide an SPL query that extracts and renames fields to the required standard format (ip, domain, or hash). Each data source must include a rename command.
+
+💡 Tip: If you need to filter events in the index, apply the filter first and then use the \"**\| rename**\" command.
 
 ## IP Enrichment
 
 ### Configuration Fields
 
 -   **API URL**: `https://api.threatbook.io/v2/ip/query`
--   **API Key**: Paste the key from your [ThreatBook Intelligence｜ThreatBook CTI](https://i.threatbook.io) personal account.
+-   **API Key**: Paste the key from your [My API | ThreatBook CTI](https://i.threatbook.io/my-api) personal account.
 -   **Index (Out)**: Define the output index where enriched IP intelligence will be stored.
     
     *Recommendation*: Use a dedicated index such as \"threatbook-ip\". Multiple IP instances can share the same index for unified dashboards.
@@ -123,7 +125,7 @@ The IP Intelligence Dashboard provides security analysts with a clear view of ma
 ### Configuration Fields
 
 -   **API URL**: `https://api.threatbook.io/v2/domain/query`
--   **API Key**: Paste the key from your [ThreatBook Intelligence｜ThreatBook CTI](https://i.threatbook.io) personal account.
+-   **API Key**: Paste the key from your [My API | ThreatBook CTI](https://i.threatbook.io/my-api) personal account.
 -   **Index (Out)**: Define the output index where enriched domain intelligence will be stored.
 
     *Recommendation*: Use a dedicated index such as \"threatbook-domain\". Multiple domain instances can share the same index.
@@ -160,7 +162,7 @@ The Domain Intelligence Dashboard provides visibility into malicious domains enr
 
 -   **API URL**: `https://api.threatbook.io/v2/file/query`
 
--   **API Key**: Paste the key from your [ThreatBook Intelligence｜ThreatBook CTI](https://i.threatbook.io) personal account.
+-   **API Key**: Paste the key from your [My API | ThreatBook CTI](https://i.threatbook.io/my-api) personal account.
 
 -   **Index (Out)**: Define the output index where enriched hash intelligence will be stored.
 
