@@ -98,19 +98,19 @@
   "logo": {
     "light": "/logo/logo_light.svg",
     "dark": "/logo/logo_dark.svg",
-    "href": "https://threatbook.io/research/"
+    "href": "https://i.threatbook.io/research/"
   },
   "navbar": {
     "links": [
       {
         "label": "Contact us",
-        "href": "https://threatbook.io/contactus"
+        "href": "https://i.threatbook.io/contactus"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Go to ThreatBook CTI",
-      "href": "https://threatbook.io/research"
+      "href": "https://i.threatbook.io/research"
     }
   },
   "footer": {
