@@ -70,6 +70,24 @@ Navigate to **ThreatBook Cloud API \> Configuration**.
 
 <img src="/images/splunkApp/4.png" alt="" style={{margin: '0 auto', maxWidth: '100%'}} />
 
+## Proxy Configuration
+ThreatBook Cloud API App supports proxy configuration to enable communication through SOCKS or HTTP proxies.
+This feature is useful in network environments with restricted outbound traffic or where external API access requires routing through a proxy.
+#### Configuration Fields：
+- **Proxy Type**: Select the protocol type used for proxy communication.Supported options include:
+  - HTTP – for standard web proxy
+  - SOCKS – supports **SOCKS4, SOCKS5, and SOCKS5h**.
+- **Host**: Enter the proxy server address. Example (SOCKS5h): socks5h://10.50.2.119
+- **Port**: Specify the port number used by the proxy server. Example: 8004
+
+<img src="/images/splunkApp/11.png" alt="" style={{margin: '0 auto', maxWidth: '100%'}} />
+
+## Notes
+1. If socks5h is used, the proxy will handle DNS resolution, which is recommended for external API connections.
+2. If socks5 is used, DNS will be resolved locally before passing traffic to the proxy.
+3. Ensure that the proxy host and port are reachable from your Splunk instance.
+4. After configuration, the app will automatically route all API enrichment requests through the proxy.
+
 ## Use Cases
 
 The ThreatBook Cloud API Splunk App supports three primary enrichment use cases: **IP Enrichment**, **Domain Enrichment/Compromise Detection**, and **File Detection (Hash Intelligence)**. Each use case requires creating an enrichment instance with specific parameters.
