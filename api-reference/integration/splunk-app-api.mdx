@@ -73,7 +73,8 @@ Navigate to **ThreatBook Cloud API \> Configuration**.
 ## Proxy Configuration
 ThreatBook Cloud API App supports proxy configuration to enable communication through SOCKS or HTTP proxies.
 This feature is useful in network environments with restricted outbound traffic or where external API access requires routing through a proxy.
-#### Configuration Fields：
+
+**Configuration Fields：**
 - **Proxy Type**: Select the protocol type used for proxy communication.Supported options include:
   - HTTP – for standard web proxy
   - SOCKS – supports **SOCKS4, SOCKS5, and SOCKS5h**.
@@ -82,7 +83,7 @@ This feature is useful in network environments with restricted outbound traffic 
 
 <img src="/images/splunkApp/11.png" alt="" style={{margin: '0 auto', maxWidth: '100%'}} />
 
-## Notes
+### Notes
 1. If socks5h is used, the proxy will handle DNS resolution, which is recommended for external API connections.
 2. If socks5 is used, DNS will be resolved locally before passing traffic to the proxy.
 3. Ensure that the proxy host and port are reachable from your Splunk instance.
