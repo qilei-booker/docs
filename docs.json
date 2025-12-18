@@ -68,6 +68,7 @@
               "api-reference/enrichment/ip-intelligence-v2",
               "api-reference/enrichment/domain-intelligence-v2",
               "api-reference/enrichment/file-intelligence-v2",
+              "api-reference/enrichment/file-upload-v2",
               "api-reference/enrichment/url-intelligence-v2",
               {
                 "group": "Deprecated",
