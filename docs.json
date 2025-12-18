@@ -79,6 +79,19 @@
             ]
           },
           {
+            "group": "Vulnerabilities",
+            "pages": [
+              "api-reference/vulnerabilities/vulnerability-intelligence-v2"
+            ]
+          },
+          {
+            "group": "Reports",
+            "pages": [
+              "api-reference/reports/report-list",
+              "api-reference/reports/report-detail"
+            ]
+          },
+          {
             "group": "Feeds",
             "pages": [
               "api-reference/feeds/ip-reputation",
