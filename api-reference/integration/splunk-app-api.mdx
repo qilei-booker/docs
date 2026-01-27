@@ -70,6 +70,50 @@ Navigate to **ThreatBook Cloud API \> Configuration**.
 
 <img src="/images/splunkApp/4.png" alt="" style={{margin: '0 auto', maxWidth: '100%'}} />
 
+## Enable App Runner Script
+
+After completing the configuration, you must enable the background runner script in Splunk.
+This script is required for the app to run correlation jobs and generate enrichment data.If the script is not enabled, dashboards will remain empty and no enrichment will be performed.
+
+### Steps
+1. Go to **Settings** → **Data Inputs** → **Scripts**
+2. Locate the script:
+  
+    $SPLUNK_HOME/etc/apps/threatbook-api/bin/app_runner.py
+
+3. Set the script status to **Enabled** and save.
+
+### Proxy Configuration
+
+The ThreatBook Cloud API Splunk App supports proxy configuration to enable outbound API requests through HTTP, HTTPS, or SOCKS proxies.
+
+This feature is designed for enterprise or restricted network environments where direct Internet access is not allowed and external API traffic must be routed through a proxy server.
+
+**Configuration Fields：**
+
+| Parameter | Description | Example |
+| :--- | :--- | :--- |
+| **Enable Proxy** | Enable or disable proxy usage for all outbound API requests. When disabled, all connections are made directly without using any proxy. | On / Off |
+| **Proxy Type** | Select the proxy protocol type. Supported options include:<ul><li>**HTTP** – Standard HTTP proxy</li><li>**HTTPS** – Secure HTTP proxy</li><li>**SOCKS4** – SOCKS4 proxy</li><li>**SOCKS5** – SOCKS5 proxy</li></ul> | SOCKS5 |
+| **Proxy Host** | Enter the hostname or IP address of the proxy server. <br /> **Do not include protocol prefixes (e.g., http://, socks5://).** | 10.50.2.119 |
+| **Proxy Port** | Specify the listening port of the proxy server. Must be between 1 and 65535. | 8004 |
+| **Username (Optional)** | Username for proxy authentication, if required by the proxy server. | proxy_user |
+| **Password (Optional)** | Password for proxy authentication. | ******** |
+| **Remote DNS Resolution** | When enabled, DNS resolution will be performed by the proxy server instead of the local Splunk host. This is recommended for SOCKS5 or environments where local DNS cannot resolve external domains. | Enabled / Disabled |
+
+### Test Connection
+
+Click **Test Connection** to validate the proxy configuration.
+
+The test will:
+* Validate all input fields (host, port, authentication format).
+* Attempt to connect to the ThreatBook Cloud API through the proxy.
+* Display a success message or detailed error information if the connection fails.
+
+### Notes
+1. Ensure that the proxy host and port are reachable from your Splunk instance.
+2. After configuration saved, the app will automatically route all API enrichment requests through the proxy.
+
 ## Use Cases
 
 The ThreatBook Cloud API Splunk App supports three primary enrichment use cases: **IP Enrichment**, **Domain Enrichment/Compromise Detection**, and **File Detection (Hash Intelligence)**. Each use case requires creating an enrichment instance with specific parameters.
