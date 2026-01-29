@@ -5817,10 +5817,6 @@
                     "data": {
                       "type": "object",
                       "properties": {
-                        "cursor": {
-                          "type": "string",
-                          "description": "Cursor value used to retrieve the next page of results.  \nIf empty, it indicates that no additional data is available."
-                        },
                         "items": {
                           "type": "array",
                           "items": {
@@ -5833,7 +5829,7 @@
                                     "type": "object",
                                     "properties": {
                                       "vpr": {
-                                        "type": "number",
+                                        "type": "integer",
                                         "description": "**Risk Score**  \nA numeric score where higher values indicate higher risk and higher remediation priority."
                                       },
                                       "vector_string": {
@@ -5856,7 +5852,7 @@
                                     "type": "object",
                                     "properties": {
                                       "cvss_basic_score": {
-                                        "type": "string",
+                                        "type": "number",
                                         "description": "**CVSS Base Score**"
                                       },
                                       "cvss_grade": {
@@ -5870,6 +5866,10 @@
                                       "cvss_vector": {
                                         "type": "object",
                                         "properties": {
+                                          "cvss_privileges_required": {
+                                            "type": "string",
+                                            "description": "**Privileges Required**"
+                                          },
                                           "cvss_attack_complexity": {
                                             "type": "string",
                                             "description": "**Exploit Difficulty**"
@@ -5878,25 +5878,22 @@
                                             "type": "string",
                                             "description": "**Attack Vector / Network Conditions**"
                                           },
-                                          "cvss_availability": {
+                                          "cvss_ui": {
                                             "type": "string",
-                                            "description": "**Availability Impact on the Target System**"
-                                          },
-                                          "cvss_confidentiality": {
-                                            "type": "string",
-                                            "description": "**Confidentiality Impact on the Target System**"
-                                          },
-                                          "cvss_integrity": {
-                                            "type": "string",
-                                            "description": "**Integrity Impact on the Target System**"
-                                          },
-                                          "cvss_privileges_required": {
-                                            "type": "string",
-                                            "description": "**Privileges Required**"
+                                            "description": "**User Interaction Required**"
                                           },
                                           "cvss_attack_requirements": {
                                             "type": "string",
                                             "description": "**Attack Requirements on the Target System**"
+                                          },
+                                          "cvss_vulnerable_system_confidentiality": {
+                                            "type": "string"
+                                          },
+                                          "cvss_vulnerable_system_integrity": {
+                                            "type": "string"
+                                          },
+                                          "cvss_vulnerable_system_availability": {
+                                            "type": "string"
                                           },
                                           "cvss_subsequent_system_confidentiality": {
                                             "type": "string",
@@ -5910,23 +5907,34 @@
                                             "type": "string",
                                             "description": "**Availability Impact on Other Affected Systems**"
                                           },
-                                          "cvss_ui": {
+                                          "cvss_availability": {
                                             "type": "string",
-                                            "description": "**User Interaction Required**"
+                                            "description": "**Availability Impact on the Target System**"
+                                          },
+                                          "cvss_confidentiality": {
+                                            "type": "string",
+                                            "description": "**Confidentiality Impact on the Target System**"
+                                          },
+                                          "cvss_integrity": {
+                                            "type": "string",
+                                            "description": "**Integrity Impact on the Target System**"
                                           }
                                         },
                                         "required": [
+                                          "cvss_privileges_required",
                                           "cvss_attack_complexity",
                                           "cvss_attack_vector",
-                                          "cvss_availability",
-                                          "cvss_confidentiality",
-                                          "cvss_integrity",
-                                          "cvss_privileges_required",
+                                          "cvss_ui",
                                           "cvss_attack_requirements",
+                                          "cvss_vulnerable_system_confidentiality",
+                                          "cvss_vulnerable_system_integrity",
+                                          "cvss_vulnerable_system_availability",
                                           "cvss_subsequent_system_confidentiality",
                                           "cvss_subsequent_system_integrity",
                                           "cvss_subsequent_system_availability",
-                                          "cvss_ui"
+                                          "cvss_availability",
+                                          "cvss_confidentiality",
+                                          "cvss_integrity"
                                         ],
                                         "description": "**CVSS Vector**"
                                       }
@@ -5989,6 +5997,9 @@
                                             "type": "string",
                                             "description": "**Attack Vector / Network Conditions**"
                                           },
+                                          "cvss_scope": {
+                                            "type": "string"
+                                          },
                                           "cvss_ui": {
                                             "type": "string",
                                             "description": "**User Interaction Required**"
@@ -6001,6 +6012,7 @@
                                           "cvss_integrity",
                                           "cvss_availability",
                                           "cvss_attack_vector",
+                                          "cvss_scope",
                                           "cvss_ui"
                                         ],
                                         "description": "**CVSS Vector**"
@@ -6132,57 +6144,9 @@
                                         "version": {
                                           "type": "array",
                                           "items": {
-                                            "type": "object",
-                                            "properties": {
-                                              "info": {
-                                                "type": "string",
-                                                "description": "**Specific Version**"
-                                              },
-                                              "update": {
-                                                "type": "string",
-                                                "description": "**Updated Version**"
-                                              },
-                                              "edition": {
-                                                "type": "string",
-                                                "description": "**Targeted Version** (used for compatibility with earlier CPE versions)"
-                                              },
-                                              "sw_edition": {
-                                                "type": "string",
-                                                "description": "**Target Market / Category** (indicates the product targets specific markets or user categories)"
-                                              },
-                                              "target_sw": {
-                                                "type": "string",
-                                                "description": "**Required Software Environment**"
-                                              },
-                                              "target_hw": {
-                                                "type": "string",
-                                                "description": "**Required Hardware Environment**"
-                                              }
-                                            },
-                                            "required": [
-                                              "info",
-                                              "update",
-                                              "edition",
-                                              "sw_edition",
-                                              "target_sw",
-                                              "target_hw"
-                                            ]
+                                            "type": "string"
                                           },
                                           "description": "**All Affected Versions**"
-                                        },
-                                        "vendor_alias": {
-                                          "type": "array",
-                                          "items": {
-                                            "type": "string"
-                                          },
-                                          "description": "**Vendor Aliases**"
-                                        },
-                                        "product_alias": {
-                                          "type": "array",
-                                          "items": {
-                                            "type": "string"
-                                          },
-                                          "description": "**Product Aliases**"
                                         },
                                         "version_comparison": {
                                           "type": "object",
@@ -6224,6 +6188,20 @@
                                             "version_list"
                                           ],
                                           "description": "#### Affected Version Ranges"
+                                        },
+                                        "vendor_alias": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          },
+                                          "description": "**Vendor Aliases**"
+                                        },
+                                        "product_alias": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          },
+                                          "description": "**Product Aliases**"
                                         }
                                       },
                                       "required": [
@@ -6298,69 +6276,7 @@
                                   "affected_components": {
                                     "type": "array",
                                     "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "package_manager": {
-                                          "type": "array",
-                                          "items": {
-                                            "type": "string"
-                                          },
-                                          "description": "**Package Manager Type**  \nIncludes system package managers and programming language package managers.  \n  System package managers usually include version information, such as `maven`, `ubuntu`, `ubuntu22.04`."
-                                        },
-                                        "component": {
-                                          "type": "array",
-                                          "items": {
-                                            "type": "object",
-                                            "properties": {
-                                              "name": {
-                                                "type": "string",
-                                                "description": "**Component Name**"
-                                              },
-                                              "version_comparison": {
-                                                "type": "object",
-                                                "properties": {
-                                                  "including": {
-                                                    "type": "array",
-                                                    "items": {
-                                                      "type": "string"
-                                                    },
-                                                    "description": "**Included Versions**"
-                                                  },
-                                                  "excluding": {
-                                                    "type": "array",
-                                                    "items": {
-                                                      "type": "string"
-                                                    },
-                                                    "description": "**Excluded Versions**"
-                                                  },
-                                                  "version_list": {
-                                                    "type": "array",
-                                                    "items": {
-                                                      "type": "string"
-                                                    },
-                                                    "description": "**Version Interval**"
-                                                  }
-                                                },
-                                                "required": [
-                                                  "version_list",
-                                                  "including",
-                                                  "excluding"
-                                                ],
-                                                "description": "**Component Version Range**"
-                                              }
-                                            },
-                                            "required": [
-                                              "name",
-                                              "version_comparison"
-                                            ]
-                                          },
-                                          "description": "**Component Information**"
-                                        }
-                                      },
-                                      "required": [
-                                        "package_manager",
-                                        "component"
-                                      ]
+                                      "type": "string"
                                     },
                                     "description": "#### Affected Components"
                                   }
@@ -6521,8 +6437,16 @@
                                 },
                                 "description": "**Vulnerability Patch**"
                               },
+                              "path": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "**Vulnerability Exploitation Path**"
+                              },
                               "link": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "**ATI Vulnerability Details Query URL**"
                               },
                               "basic_info": {
                                 "type": "object",
@@ -6626,6 +6550,90 @@
                                   "threatbook_create_time"
                                 ],
                                 "description": "**Basic Vulnerability Information**"
+                              },
+                              "temporary_mitigation": {
+                                "type": "object",
+                                "properties": {
+                                  "public_temporary_mitigations": {
+                                    "type": "object",
+                                    "properties": {
+                                      "source": {
+                                        "type": "string",
+                                        "description": "**Source (ThreatBook Lab or AI)**"
+                                      },
+                                      "text": {
+                                        "type": "string",
+                                        "description": "**Mitigation Details**"
+                                      }
+                                    },
+                                    "required": [
+                                      "source",
+                                      "text"
+                                    ],
+                                    "description": "#### Public Mitigations"
+                                  },
+                                  "configuration_level_mitigation": {
+                                    "type": "object",
+                                    "properties": {
+                                      "source": {
+                                        "type": "string",
+                                        "description": "**Source (ThreatBook Lab or AI)**"
+                                      },
+                                      "text": {
+                                        "type": "string",
+                                        "description": "**Mitigation Details**"
+                                      }
+                                    },
+                                    "required": [
+                                      "source",
+                                      "text"
+                                    ],
+                                    "description": "#### Configuration-level Mitigations"
+                                  },
+                                  "privilege_level_mitigation": {
+                                    "type": "object",
+                                    "properties": {
+                                      "source": {
+                                        "type": "string",
+                                        "description": "**Source (ThreatBook Lab or AI)**"
+                                      },
+                                      "text": {
+                                        "type": "string",
+                                        "description": "**Mitigation Details**"
+                                      }
+                                    },
+                                    "required": [
+                                      "source",
+                                      "text"
+                                    ],
+                                    "description": "#### Privilege-level Mitigations"
+                                  },
+                                  "network_level_mitigation": {
+                                    "type": "object",
+                                    "properties": {
+                                      "source": {
+                                        "type": "string",
+                                        "description": "**Source (ThreatBook Lab or AI)**"
+                                      },
+                                      "text": {
+                                        "type": "string",
+                                        "description": "**Mitigation Details**"
+                                      }
+                                    },
+                                    "required": [
+                                      "source",
+                                      "text"
+                                    ],
+                                    "description": "#### Network-level Mitigations"
+                                  }
+                                },
+                                "required": [
+                                  "public_temporary_mitigations",
+                                  "configuration_level_mitigation",
+                                  "network_level_mitigation",
+                                  "privilege_level_mitigation"
+                                ],
+                                "description": "**Temporary mitigation measures**\nIncluding public mitigations, configuration-level, privilege-level, and network-level mitigations."
                               }
                             },
                             "required": [
@@ -6643,12 +6651,16 @@
                         "total": {
                           "type": "integer",
                           "description": "Total number of records that match the query filters."
+                        },
+                        "cursor": {
+                          "type": "string",
+                          "description": "Cursor value used to retrieve the next page of results.  \nIf empty, it indicates that no additional data is available."
                         }
                       },
                       "required": [
-                        "cursor",
                         "items",
-                        "total"
+                        "total",
+                        "cursor"
                       ]
                     },
                     "response_code": {
@@ -6674,7 +6686,24 @@
                             "vector_string": "AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:A",
                             "risk_level": "High"
                           },
-                          "cvss_v4": {},
+                          "cvss_v4": {
+                            "cvss_basic_score": 9.3,
+                            "cvss_grade": "CRITICAL",
+                            "cvss_vector_string": "AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N",
+                            "cvss_vector": {
+                              "cvss_privileges_required": "NONE",
+                              "cvss_attack_complexity": "LOW",
+                              "cvss_attack_vector": "NETWORK",
+                              "cvss_ui": "NONE",
+                              "cvss_attack_requirements": "NONE",
+                              "cvss_vulnerable_system_confidentiality": "HIGH",
+                              "cvss_vulnerable_system_integrity": "HIGH",
+                              "cvss_vulnerable_system_availability": "HIGH",
+                              "cvss_subsequent_system_confidentiality": "NONE",
+                              "cvss_subsequent_system_integrity": "NONE",
+                              "cvss_subsequent_system_availability": "NONE"
+                            }
+                          },
                           "cvss_v3": {
                             "cvss_basic_score": 9.8,
                             "cvss_grade": "CRITICAL",
@@ -6688,24 +6717,11 @@
                               "cvss_integrity": "HIGH",
                               "cvss_availability": "HIGH",
                               "cvss_attack_vector": "NETWORK",
+                              "cvss_scope": "UNCHANGED",
                               "cvss_ui": "NONE"
                             }
                           },
-                          "cvss_v2": {
-                            "cvss_basic_score": 10,
-                            "cvss_grade": "HIGH",
-                            "cvss_exploitability": 10,
-                            "cvss_impact_subscore": 10,
-                            "cvss_vector_string": "AV:N/AC:L/Au:N/C:C/I:C/A:C",
-                            "cvss_vector": {
-                              "cvss_confidentiality": "COMPLETE",
-                              "cvss_integrity": "COMPLETE",
-                              "cvss_availability": "COMPLETE",
-                              "cvss_access_vector": "NETWORK",
-                              "cvss_access_complexity": "LOW",
-                              "cvss_authentication": "NONE"
-                            }
-                          }
+                          "cvss_v2": {}
                         },
                         "impact": {
                           "platform": [
@@ -6713,88 +6729,75 @@
                           ],
                           "affected_vendors_products": [
                             {
-                              "product": "Apache Dubbo",
-                              "vendor": "Apache Software Foundation",
+                              "product": "Oracle E-Business Suite",
+                              "vendor": "Oracle",
                               "version": [],
                               "version_comparison": {
                                 "including": [],
                                 "excluding": [],
                                 "version_list": [
                                   {
-                                    "range": "2.7.x<=version<=2.7.21"
-                                  },
-                                  {
-                                    "range": "3.0.x<=version<=3.0.13"
-                                  },
-                                  {
-                                    "range": "3.1.x<=version<=3.1.5"
+                                    "range": "12.2.3<=version<=12.2.14"
                                   }
                                 ]
                               },
                               "vendor_alias": [
-                                "apacheruanjianjijinhui",
-                                "Apache软件基金会",
-                                "apache",
-                                "Apache Software",
-                                "apachesoftware",
-                                "apache-ssl",
-                                "apachessl",
-                                "apache2triad",
-                                "Apache_authenhook",
-                                "Apache Authenhook Project",
-                                "Apache Authenhook",
-                                "apacheauthenhook",
-                                "apache_authenhook_project",
-                                "apache_friends",
-                                "apachefriends",
-                                "Apache Friends",
-                                "Apache_gallery",
-                                "Apache Gallery",
-                                "apachegallery",
-                                "Apache_solr_real-time",
-                                "Apache Solr Real-time",
-                                "Apache Solr Real-time Project",
-                                "apachesolrrealtime",
-                                "apache_solr_real-time_project",
-                                "Apache_stats",
-                                "Apache Stats",
-                                "apachestats",
-                                "apach",
-                                "Apache OFBiz",
-                                "apacheofbiz",
-                                "Apache Struts",
-                                "apachestruts",
-                                "Apache Tomcat",
-                                "Apache_tomcat",
-                                "apachetomcat",
-                                "Apache ShardingSphere",
-                                "apacheshardingsphere",
-                                "Apache Software Foundation",
-                                "apachesoftwarefoundation",
-                                "Apache Group",
-                                "apachegroup",
-                                "The Apache Software Foundation",
-                                "theapachesoftwarefoundation",
-                                "Apache Flink",
-                                "apacheflink",
-                                "Apache Subversion",
-                                "apachesubversion",
-                                "Apache Commons Components",
-                                "apachecommonscomponents",
-                                "Apache Commons",
-                                "apachecommons",
-                                "Xampp Apache friends",
-                                "xamppapachefriends",
-                                "cassandra",
-                                "Apache SkyWalking",
-                                "apacheskywalking",
-                                "apacheauthenhookproject",
-                                "apachesolrrealtimeproject"
+                                "oracle",
+                                "Weblogic-framework Project",
+                                "Weblogic-framework",
+                                "weblogic-framework_project",
+                                "Weblogic-framework_",
+                                "weblogicframework",
+                                "Oracle Financial Services Applications",
+                                "oraclefinancialservicesapplications",
+                                "Oracle Financial Services",
+                                "oraclefinancialservices",
+                                "Oracle Corporation",
+                                "oraclecorporation",
+                                "Oracle Retail Applications",
+                                "oracleretailapplications",
+                                "Oracle Sun",
+                                "oraclesun",
+                                "Oracle AB",
+                                "oracleab",
+                                "Diagnostics Oracle",
+                                "diagnosticsoracle",
+                                "oracle8i",
+                                "bea",
+                                "bea_systems",
+                                "Bea Systems",
+                                "beasystems",
+                                "jiaguwengufenyouxiangongsi",
+                                "jiaguwen",
+                                "mysql",
+                                "Mysql Project",
+                                "MySQL AB",
+                                "mysqlab",
+                                "weblogicframeworkproject",
+                                "mysql_project",
+                                "mysqlproject",
+                                "E-Business Suite Oracle",
+                                "ebusinesssuiteoracle",
+                                "Oracle PeopleSoft",
+                                "oraclepeoplesoft",
+                                "Oracle Virtualization",
+                                "oraclevirtualization",
+                                "Oracle Hospitality",
+                                "oraclehospitality",
+                                "Oracle Communications Applications",
+                                "oraclecommunicationsapplications"
                               ],
                               "product_alias": [
-                                "dubbo",
-                                "Apache Dubbo",
-                                "apachedubbo"
+                                "Oracle Concurrent Processing",
+                                "oracleconcurrentprocessing",
+                                "concurrent_processing",
+                                "Concurrent Processing",
+                                "concurrentprocessing",
+                                "Oracle E-Business Suite",
+                                "e-business_suite",
+                                "oracleebusinesssuite",
+                                "ebusinesssuite",
+                                "E-business Suite"
                               ]
                             }
                           ],
@@ -6802,177 +6805,724 @@
                             {
                               "cpe_match": [
                                 {
-                                  "cpe_uri": "cpe:2.3:a:apache:dubbo:*:*:*:*:*:*:*:*",
+                                  "cpe_uri": "cpe:2.3:a:oracle:concurrent_processing:*:*:*:*:*:*:*:*",
                                   "cpe_name": [
-                                    "cpe:2.3:a:apache:dubbo:2.7.0:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.1:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.2:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.3:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.4:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.4.1:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.5:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.6:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.7:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.8:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.9:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.10:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.11:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.12:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.13:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.14:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.15:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.16:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.17:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.18:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.19:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.20:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:2.7.21:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.0.0:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.0.1:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.0.2:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.0.2.1:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.0.3:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.0.4:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.0.5:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.0.6:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.0.7:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.0.8:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.0.9:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.0.10:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.0.11:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.0.12:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.0.13:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.1.0:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.1.1:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.1.2:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.1.3:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.1.4:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:3.1.5:*:*:*:*:*:*:*",
-                                    "cpe:2.3:a:apache:dubbo:*:*:*:*:*:*:*:*"
+                                    "cpe:2.3:a:oracle:concurrent_processing:12.2.3:*:*:*:*:*:*:*",
+                                    "cpe:2.3:a:oracle:concurrent_processing:12.2.13:*:*:*:*:*:*:*",
+                                    "cpe:2.3:a:oracle:concurrent_processing:12.2.0:*:*:*:*:*:*:*",
+                                    "cpe:2.3:a:oracle:concurrent_processing:12.2.1:*:*:*:*:*:*:*",
+                                    "cpe:2.3:a:oracle:concurrent_processing:12.2.2:*:*:*:*:*:*:*",
+                                    "cpe:2.3:a:oracle:concurrent_processing:12.2.4:*:*:*:*:*:*:*",
+                                    "cpe:2.3:a:oracle:concurrent_processing:12.2.5:*:*:*:*:*:*:*",
+                                    "cpe:2.3:a:oracle:concurrent_processing:12.2.6:*:*:*:*:*:*:*",
+                                    "cpe:2.3:a:oracle:concurrent_processing:12.2.7:*:*:*:*:*:*:*",
+                                    "cpe:2.3:a:oracle:concurrent_processing:12.2.8:*:*:*:*:*:*:*",
+                                    "cpe:2.3:a:oracle:concurrent_processing:12.2.9:*:*:*:*:*:*:*",
+                                    "cpe:2.3:a:oracle:concurrent_processing:12.2.10:*:*:*:*:*:*:*",
+                                    "cpe:2.3:a:oracle:concurrent_processing:12.2.11:*:*:*:*:*:*:*",
+                                    "cpe:2.3:a:oracle:concurrent_processing:12.2.12:*:*:*:*:*:*:*",
+                                    "cpe:2.3:a:oracle:concurrent_processing:12.2.14:*:*:*:*:*:*:*"
                                   ]
                                 }
                               ]
                             }
                           ],
-                          "affected_components": [
-                            {
-                              "package_manager": [
-                                "Maven"
-                              ],
-                              "component": [
-                                {
-                                  "name": "org.apache.dubbo:dubbo",
-                                  "version_comparison": {
-                                    "version_list": [
-                                      "0<=version<2.7.22",
-                                      "3.0.0<=version<3.0.13",
-                                      "3.1.0<=version<3.1.5"
-                                    ]
-                                  }
-                                }
-                              ]
-                            }
-                          ]
+                          "affected_components": []
                         },
                         "intelligence": {
                           "tag": [
                             "RCE",
-                            "TB PoC",
                             "PoC Disclosure",
-                            "KEV",
-                            "Public Component"
+                            "KEV"
                           ],
                           "has_poc_public": true,
-                          "has_poc_threatbook": true,
+                          "has_poc_threatbook": false,
                           "has_kev": true,
                           "is_highrisk": true,
                           "has_solution": true
                         },
                         "pocs": [
                           {
-                            "description": "",
-                            "title": "poc-go-tcp-apache-dubbo-cve-2023-23638-rce",
-                            "url": "",
-                            "file_url": "https://api.threatbook.io/secai/web/vul/download/81f7455ff5b106b80cb06fe7e80b4ddb.zip?key=73dae89e08a815b4fbc69455151de84f7f1bec771e99b3fad13eb136422aaff781dafcc5c18d3684bcef92a1dc2d613eada4606df5204ef4e5a5bc18fbdf433859c13d8fafc65d16b4d504ae0c1ddfadf5ab1c3868d8b135678ab9dc242b93257dfd3e60c80720ab02fb7977ca4527ad60ed6740370f3d0f86a7d929ebe3739db98b910186d7b1603c8f0931bdc3b08b86762b787c2d10c59f8168dfdcadaae8",
-                            "x_verified": true
+                            "description": "A critical pre-authentication Remote Code Execution (RCE) flaw in Oracle E-Business Suite (versions 12.2.3 - 12.2.14) allows attackers to gain full control over vulnerable servers via malicious HTTP requests - now actively exploited in the wild.",
+                            "title": "CVE-2025-61882-Oracle-E-Business-Suite-Pre-Auth-RCE-Exploit",
+                            "url": "https://github.com/AdityaBhatt3010/CVE-2025-61882-Oracle-E-Business-Suite-Pre-Auth-RCE-Exploit",
+                            "file_url": "https://ati.threatbook.io/api/web/vul/download/59def82321bdbb8492b4adffe33cfc7f.zip?key=975c712850e38f76a2362f904afd1a278d37971afc0c190cdeda5c0aebecc72b81dafcc5c18d3684bcef92a1dc2d613eada4606df5204ef4e5a5bc18fbdf433859c13d8fafc65d16b4d504ae0c1ddfadf5ab1c3868d8b135678ab9dc242b93250f07febb6cb152468ad78f161acd84d9fd059b3e3e39b8a6f9bc85324b0aebb66bad115cc6594166fd1876b264682075aff9f4abe74030bdf6df47ef3e0b9812",
+                            "x_verified": false
                           },
                           {
-                            "description": "Apache Dubbo (CVE-2023-23638)漏洞利用的工程化实践",
-                            "title": "Apache-Dubbo-CVE-2023-23638-exp",
-                            "url": "https://github.com/YYHYlh/Apache-Dubbo-CVE-2023-23638-exp",
-                            "file_url": "https://api.threatbook.io/secai/web/vul/download/6eb1c19d6ca6a972909f84775b772a5e.zip?key=91d604b61e5a656f7feaa610901ffaf4e42d730784549bff2af8b3b4b0ba660c81dafcc5c18d3684bcef92a1dc2d613eada4606df5204ef4e5a5bc18fbdf433859c13d8fafc65d16b4d504ae0c1ddfadf5ab1c3868d8b135678ab9dc242b93257dfd3e60c80720ab02fb7977ca4527ad60ed6740370f3d0f86a7d929ebe3739db98b910186d7b1603c8f0931bdc3b08b86762b787c2d10c59f8168dfdcadaae8",
+                            "description": "Detection for CVE-2025-61882",
+                            "title": "CVE-2025-61882-CVE-2025-61884",
+                            "url": "https://github.com/rxerium/CVE-2025-61882-CVE-2025-61884",
+                            "file_url": "https://ati.threatbook.io/api/web/vul/download/c519872ec494e7f0eb6c5056660860bd.zip?key=0416022e625679aa237e804942d7a95b497ffa1f0f8081a63567e7f68b94e57781dafcc5c18d3684bcef92a1dc2d613eada4606df5204ef4e5a5bc18fbdf433859c13d8fafc65d16b4d504ae0c1ddfadf5ab1c3868d8b135678ab9dc242b93250f07febb6cb152468ad78f161acd84d9fd059b3e3e39b8a6f9bc85324b0aebb66bad115cc6594166fd1876b264682075aff9f4abe74030bdf6df47ef3e0b9812",
+                            "x_verified": false
+                          },
+                          {
+                            "description": "🔍 Detect vulnerabilities CVE-2025-61882 and CVE-2025-61884 in Oracle E-Business Suite to help secure your systems from potential remote code execution threats.",
+                            "title": "CVE-2025-61882-CVE-2025-61884",
+                            "url": "https://github.com/siddu7575/CVE-2025-61882-CVE-2025-61884",
+                            "file_url": "https://ati.threatbook.io/api/web/vul/download/b21d5016a975fd7ae662a99676c3866c.zip?key=dc893a9181054078068fae5024a9ba02eb0edf5a6670eab484749382dce2d62281dafcc5c18d3684bcef92a1dc2d613eada4606df5204ef4e5a5bc18fbdf433859c13d8fafc65d16b4d504ae0c1ddfadf5ab1c3868d8b135678ab9dc242b93250f07febb6cb152468ad78f161acd84d9fd059b3e3e39b8a6f9bc85324b0aebb66bad115cc6594166fd1876b264682075a5085159691d320ae6628d63106ebcef",
+                            "x_verified": false
+                          },
+                          {
+                            "description": "CVE-2025-61882: Oracle E-Business Suite RCE Scanner and Exploit ",
+                            "title": "CVE-2025-61882",
+                            "url": "https://github.com/godnish/CVE-2025-61882",
+                            "file_url": "https://ati.threatbook.io/api/web/vul/download/87828f0d1c77dd5ea869350427dd6d0b.zip?key=da2322ac46e02031af07e96eea6cb6b270c61a3a74b247759a819b1ed3609b6181dafcc5c18d3684bcef92a1dc2d613eada4606df5204ef4e5a5bc18fbdf433859c13d8fafc65d16b4d504ae0c1ddfadf5ab1c3868d8b135678ab9dc242b93250f07febb6cb152468ad78f161acd84d9fd059b3e3e39b8a6f9bc85324b0aebb66bad115cc6594166fd1876b264682075a5085159691d320ae6628d63106ebcef",
+                            "x_verified": false
+                          },
+                          {
+                            "description": "CVE-2025-61882 — Critical Oracle EBS RCE: Analysis & Response",
+                            "title": "CVE-2025-61882-Executive-Summary",
+                            "url": "https://github.com/AshrafZaryouh/CVE-2025-61882-Executive-Summary",
+                            "file_url": "https://ati.threatbook.io/api/web/vul/download/0ec8b93deb689a8742a058b037997af8.zip?key=62cbefd1a96655fd1c74996d266fb342c0135e4c5d6af615a5e378f4f33a2a0e81dafcc5c18d3684bcef92a1dc2d613eada4606df5204ef4e5a5bc18fbdf433859c13d8fafc65d16b4d504ae0c1ddfadf5ab1c3868d8b135678ab9dc242b93250f07febb6cb152468ad78f161acd84d9fd059b3e3e39b8a6f9bc85324b0aebb66bad115cc6594166fd1876b264682075a5085159691d320ae6628d63106ebcef",
                             "x_verified": false
                           },
                           {
                             "description": "",
-                            "title": "CVE-2023-23638-Tools",
-                            "url": "https://github.com/AiK1d/CVE-2023-23638-Tools",
-                            "file_url": "https://api.threatbook.io/secai/web/vul/download/f9108445095ab5ca1421df7dc4500011.zip?key=1b4aab15b4796cb5259f3bbab4a890c87adeab04e33b5134305c9c01f150faba81dafcc5c18d3684bcef92a1dc2d613eada4606df5204ef4e5a5bc18fbdf433859c13d8fafc65d16b4d504ae0c1ddfadf5ab1c3868d8b135678ab9dc242b93257dfd3e60c80720ab02fb7977ca4527ad60ed6740370f3d0f86a7d929ebe3739d02914c0171ffc7306929e49c49e2508786762b787c2d10c59f8168dfdcadaae8",
+                            "title": "CVE-2025-61882-Oracle-EBS",
+                            "url": "https://github.com/zerozenxlabs/CVE-2025-61882-Oracle-EBS",
+                            "file_url": "https://ati.threatbook.io/api/web/vul/download/15f5430fa4a3d158136754b5e34056e4.zip?key=05b86aea1af570fafcf13564a8c12a6572dc4a93d8202cdca78b5f2beb8b762681dafcc5c18d3684bcef92a1dc2d613eada4606df5204ef4e5a5bc18fbdf433859c13d8fafc65d16b4d504ae0c1ddfadf5ab1c3868d8b135678ab9dc242b93250f07febb6cb152468ad78f161acd84d9fd059b3e3e39b8a6f9bc85324b0aebb66bad115cc6594166fd1876b264682075a5085159691d320ae6628d63106ebcef",
                             "x_verified": false
                           },
                           {
-                            "description": "PoC of Apache Dubbo CVE-2023-23638",
-                            "title": "Dubbo-RCE",
-                            "url": "https://github.com/X1r0z/Dubbo-RCE",
-                            "file_url": "https://api.threatbook.io/secai/web/vul/download/708744b1798b2a622941b3b404b2eb5c.zip?key=6b068c64ed7db7e019caf14d9dbf554dab6714d2efd393c298ddb05256ecbc6981dafcc5c18d3684bcef92a1dc2d613eada4606df5204ef4e5a5bc18fbdf433859c13d8fafc65d16b4d504ae0c1ddfadf5ab1c3868d8b135678ab9dc242b93257dfd3e60c80720ab02fb7977ca4527ad60ed6740370f3d0f86a7d929ebe3739d8f85641f4ff418f18dc7214dff6a539786762b787c2d10c59f8168dfdcadaae8",
+                            "description": "Sorumluluk Reddi Kendi sorumluluğunuzda kullanın, size ait olmayan veya tarama izninizin olmadığı altyapılarda gerçekleştireceğiniz yasa dışı faaliyetlerden sorumlu olmayacağım.",
+                            "title": "CVE-2025-61882-CVE-2025-61884",
+                            "url": "https://github.com/Zhert-lab/CVE-2025-61882-CVE-2025-61884",
+                            "file_url": "https://ati.threatbook.io/api/web/vul/download/ffab9970d7ad04a659a16d8ec5fe3e80.zip?key=af4b5059b8d220b57a69274b369cf86ab615e4d118ac965124562ee803d62f1f81dafcc5c18d3684bcef92a1dc2d613eada4606df5204ef4e5a5bc18fbdf433859c13d8fafc65d16b4d504ae0c1ddfadf5ab1c3868d8b135678ab9dc242b93250f07febb6cb152468ad78f161acd84d9fd059b3e3e39b8a6f9bc85324b0aebb66bad115cc6594166fd1876b264682075a5085159691d320ae6628d63106ebcef",
+                            "x_verified": false
+                          },
+                          {
+                            "description": "",
+                            "title": "watchTowr-vs-Oracle-E-Business-Suite-CVE-2025-61882",
+                            "url": "https://github.com/watchtowrlabs/watchTowr-vs-Oracle-E-Business-Suite-CVE-2025-61882",
+                            "file_url": "https://ati.threatbook.io/api/web/vul/download/41bb534370877854cc581b8163959b8e.zip?key=89e0cf34fd3747bd49594f4e19885f611ca09c875dcdf9a88a7296b3f4be053a81dafcc5c18d3684bcef92a1dc2d613eada4606df5204ef4e5a5bc18fbdf433859c13d8fafc65d16b4d504ae0c1ddfadf5ab1c3868d8b135678ab9dc242b93250f07febb6cb152468ad78f161acd84d9fd059b3e3e39b8a6f9bc85324b0aebb66bad115cc6594166fd1876b264682075a5085159691d320ae6628d63106ebcef",
+                            "x_verified": false
+                          },
+                          {
+                            "description": "",
+                            "title": "CVE-2025-61882",
+                            "url": "https://github.com/RootAid/CVE-2025-61882",
+                            "file_url": "https://ati.threatbook.io/api/web/vul/download/050f5f5ad420684eed576efc1a74e338.zip?key=42f73c1e2d4a8f179f6bad2e0cd37611f1fa98dbac36bb2c435bf25da37997c481dafcc5c18d3684bcef92a1dc2d613eada4606df5204ef4e5a5bc18fbdf433859c13d8fafc65d16b4d504ae0c1ddfadf5ab1c3868d8b135678ab9dc242b93250f07febb6cb152468ad78f161acd84d9fd059b3e3e39b8a6f9bc85324b0aebb66bad115cc6594166fd1876b2646820756b36cd4a5b2940ae8411c1470a2a9ab9",
+                            "x_verified": false
+                          },
+                          {
+                            "description": "",
+                            "title": "/http/cves/2025/CVE-2025-61882.yaml",
+                            "url": "https://github.com/projectdiscovery/nuclei-templates/blob/main/http/cves/2025/CVE-2025-61882.yaml",
+                            "file_url": "https://ati.threatbook.io/api/web/vul/download/c0f578ccf57826481d529c7c34d21956.zip?key=6afb6d3eaa3e78c4258b9329b62f2e1b864937fa656593f39d6ed25984e74b4f81dafcc5c18d3684bcef92a1dc2d613eada4606df5204ef4e5a5bc18fbdf433859c13d8fafc65d16b4d504ae0c1ddfadf5ab1c3868d8b135678ab9dc242b93250f07febb6cb152468ad78f161acd84d9fd059b3e3e39b8a6f9bc85324b0aebb66bad115cc6594166fd1876b2646820756b36cd4a5b2940ae8411c1470a2a9ab9",
+                            "x_verified": false
+                          },
+                          {
+                            "description": "Detects Oracle E-Business Suite (CVE-2025-61882). Detection: multi-tier checks — fingerprinting, version checks, endpoint & SSRF tests, timing analysis & controlled exploitation 4 high-confidence results. Default = safe fingerprinting only. Set aggressive=true 2 enable active/probing checks use w/caution. Provided By BattalionX BattalionX@proton.me",
+                            "title": "http-oracle-ebs-cve-2025-61882.nse",
+                            "url": "https://github.com/BattalionX/http-oracle-ebs-cve-2025-61882.nse",
+                            "file_url": "https://ati.threatbook.io/api/web/vul/download/f024d135178b17a5c455ac87bbfdbe30.zip?key=34373d1231c7b721cda7e1232df02152f33c6b29116973fafc99bda0e74dfcca81dafcc5c18d3684bcef92a1dc2d613eada4606df5204ef4e5a5bc18fbdf433859c13d8fafc65d16b4d504ae0c1ddfadf5ab1c3868d8b135678ab9dc242b93250f07febb6cb152468ad78f161acd84d9fd059b3e3e39b8a6f9bc85324b0aebb66bad115cc6594166fd1876b2646820756b36cd4a5b2940ae8411c1470a2a9ab9",
+                            "x_verified": false
+                          },
+                          {
+                            "description": "POC of CVE-2025-61882 ",
+                            "title": "CVE-2025-61882-POC",
+                            "url": "https://github.com/MindflareX/CVE-2025-61882-POC",
+                            "file_url": "https://ati.threatbook.io/api/web/vul/download/42757c9c79fce46d53ab731d50540b69.zip?key=4419d14dbe29f9a161f66cc19bf53ad4c2473b04ac58141a2ea5328f5886694b81dafcc5c18d3684bcef92a1dc2d613eada4606df5204ef4e5a5bc18fbdf433859c13d8fafc65d16b4d504ae0c1ddfadf5ab1c3868d8b135678ab9dc242b93250f07febb6cb152468ad78f161acd84d9fd059b3e3e39b8a6f9bc85324b0aebb66bad115cc6594166fd1876b2646820756b36cd4a5b2940ae8411c1470a2a9ab9",
                             "x_verified": false
                           }
                         ],
                         "solutions": [
                           {
                             "type": 0,
-                            "url": "https://lists.apache.org/thread/8h6zscfzj482z512d2v5ft63hdhzm0cb",
+                            "url": "https://www.oracle.com/security-alerts/alert-cve-2025-61882.html",
                             "source": [
-                              "cnvd",
-                              "cnnvd",
                               "Threatbook Lab"
                             ],
-                            "text": "The vendor has now released an upgrade patch to address the identified vulnerability. The patch can be obtained through the following link:\nhttps://lists.apache.org/thread/8h6zscfzj482z512d2v5ft63hdhzm0cb"
+                            "text": "The official version has been updated to address security vulnerabilities. Please visit the following link to download the latest update."
+                          },
+                          {
+                            "type": 1,
+                            "url": "https://www.oracle.com/security-alerts/alert-cve-2025-61882.html",
+                            "source": [
+                              "AI"
+                            ],
+                            "text": "The official authorities have released a new version addressing this vulnerability, and it is highly recommended that affected users upgrade to the latest version promptly."
                           }
                         ],
                         "patches": [
                           {
-                            "url": "https://lists.apache.org/thread/8h6zscfzj482z512d2v5ft63hdhzm0cb",
+                            "url": "https://www.oracle.com/security-alerts/alert-cve-2025-61882.html",
                             "source": [
-                              "cnvd",
-                              "cnnvd",
-                              "Threatbook Lab"
+                              "AI"
                             ],
                             "version": [],
-                            "text": "Apache Dubbo, a Java-based lightweight RPC (Remote Procedure Call) framework developed by the Apache Software Foundation, offers a range of features including interface-based remote invocation, fault tolerance, load balancing, and automatic service registration and discovery.\n\nA security vulnerability has been identified in Apache Dubbo, stemming from the unsafe deserialization of user-submitted data. This flaw could potentially allow attackers to execute malicious code. In response, the vendor has issued a security advisory and released relevant patches to address and rectify this vulnerability."
+                            "text": "The official patch addressing this vulnerability has been released. Affected users are strongly advised to apply the Oracle Security Alert CVE-2025-61882 patch [1][3] to ensure system security."
                           }
                         ],
-                        "link": "https://portal-test.threatbook-inc.cn/vulnerability/XVE-2023-4535",
+                        "path": [
+                          "/OA_HTML/configurator/UiServlet,/OA_HTML/help/../ieshostedsurvey.jsp",
+                          "/OA_HTML/configurator/UiServlet",
+                          "/OA_HTML/help/../ieshostedsurvey.jsp"
+                        ],
+                        "link": "https://portal-test.threatbook-inc.cn/vulnerability/XVE-2025-36247",
                         "basic_info": {
-                          "description": "Apache Dubbo is the United States Apache (Apache) Foundation of a lightweight Java-based RPC (Remote Procedure Call) framework. It provides interface-based remote calling, fault tolerance and load balancing, and automated service registration and discovery.Dubbo versions 2.7.21 and prior 2.7.x, 3.0.13 and prior 3.0.x, 3.1.5 and prior 3.1.x have a code issue vulnerability stemming from the presence of a deserialisation vulnerability, which could lead to the execution of malicious code execution. After analysis and research, the vulnerability can be remotely executed and is recommended to be fixed as soon as possible.",
+                          "description": "Oracle E-Business Suite (Oracle EBS) is a comprehensive, integrated enterprise-level business application suite developed by Oracle Corporation, designed to help businesses of all sizes digitize, automate, and optimize critical business processes. Leveraging over 30 years of Oracle's technological expertise, it continues to expand its functionality and innovate, finding widespread application in core business areas such as finance, human resources, supply chain management, and customer relationship management.  \n\nAttackers can exploit this module through unauthenticated HTTP requests by taking advantage of input validation flaws in XML parameter processing, leading to server-side request forgery (SSRF) attacks. Due to insufficient CRLF protection, CRLF injection can be used during SSRF to manipulate HTTP requests, while path traversal vulnerabilities may bypass authentication. These can subsequently be combined with XSLT injection to achieve remote code execution.",
                           "references": [
                             {
-                              "text": "https://lists.apache.org/thread/8h6zscfzj482z512d2v5ft63hdhzm0cb",
-                              "url": "https://lists.apache.org/thread/8h6zscfzj482z512d2v5ft63hdhzm0cb"
+                              "text": "",
+                              "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?search_api_fulltext=CVE-2025-61882&field_date_added_wrapper=all&field_cve=&sort_by=field_date_added&items_per_page=20&url="
                             },
                             {
                               "text": "",
-                              "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-23638"
-                            },
-                            {
-                              "text": "https://cxsecurity.com/cveshow/CVE-2023-23638/",
-                              "url": "https://cxsecurity.com/cveshow/CVE-2023-23638/"
-                            },
-                            {
-                              "text": "Apache Dubbo （CVE-2023-23638）完整利用及工程化实践",
-                              "url": "https://forum.butian.net/share/2277"
-                            },
-                            {
-                              "text": "Apache Dubbo CVE-2023-23638 JavaNative 反序列化漏洞分析",
-                              "url": "https://xz.aliyun.com/t/12333"
+                              "url": "https://cyberwebspider.com/blog/the-hacker-news/oracle-0-day-bitlocker-bypass-vmscape-whatsapp-worm-more/"
                             },
                             {
                               "text": "",
-                              "url": "https://xz.aliyun.com/t/12396"
+                              "url": "https://mp.weixin.qq.com/s?__biz=Mzg3ODY0NTczMA==&mid=2247494137&idx=1&sn=3dca11368ff3ac2ad1173747935ed03b"
                             },
                             {
                               "text": "",
-                              "url": "https://github.com/YYHYlh/Apache-Dubbo-CVE-2023-23638-exp/"
+                              "url": "https://sosransomware.com/ransomware/cl0p-oracle-ebs-une-centaine-entreprises-piratees-en-quelques-semaines/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://blackhatnews.tokyo/archives/27517"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://buaq.net/go-380014.html"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://databreaches.net/category/hack/page/10/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://securitycurated.com/infrastructure-and-network-security/can-a-court-stop-clops-nhs-dark-web-leak/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://blackhatnews.tokyo/archives/13546/amp"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://firecompass.com/weekly-cybersecurity-intelligence-report-cyber-threats-breaches-2-dec-10-dec-2/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.itsecuritynews.info/google-and-mandiant-uncover-oracle-hack/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cybermaterial.com/google-and-mandiant-uncover-oracle-hack/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.itsecuritynews.info/envoy-air-american-airlines-confirms-oracle-ebs-0-day-breach-linked-to-cl0p/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://mp.weixin.qq.com/s?__biz=MjM5NTc2MDYxMw==&mid=2458605947&idx=3&sn=bb7036139789a7cff46a66928f33f0d3"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.hipaajournal.com/nch-corporation-foundation-health-partners-one-community-health-breach/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.itsecuritynews.info/best-of-2025-oracle-breach-the-impact-is-bigger-than-you-think-grip/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.matricedigitale.it/2025/10/06/zero-day-in-zimbra-e-oracle-ebs-attacchi-con-file-icalendar-e-rce-estorsive-da-clop/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://databreaches.net/2025/10/06/update-on-the-emerging-cl0p-extortion-campaign-targeting-oracle-e-business-suite/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://blackhatnews.tokyo/archives/8732"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://blackhatnews.tokyo/archives/8710"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://blackhatnews.tokyo/archives/8712"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://mp.weixin.qq.com/s?__biz=MzkyMjQ5ODk5OA==&mid=2247514291&idx=1&sn=fc37fdc44a6cd4021c8e788cbcc5ffb9"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://securityaffairs.com/183049/security/u-s-cisa-adds-oracle-mozilla-microsoft-windows-linux-kernel-and-microsoft-ie-flaws-to-its-known-exploited-vulnerabilities-catalog.html"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://blog.onsec.io/cyber-daily-10-7-oracle-e-business-suite-zero-day-exploited-fbi-uk-urge-patching-ais-role-in-cyber-defense-microsoft-warns-of-windows-10-vulnerability/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://thecyberwire.com/podcasts/daily-podcast/2407/transcript"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://news.backbox.org/2025/10/07/skipping-the-airpods-pro-3-your-best-alternative-are-at-their-lowest-price-ever/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://news.backbox.org/2025/10/07/why-this-350-google-pixel-9a-deal-is-the-only-one-im-considering-for-prime-day/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.spartechsoftware.com/cybersecurity-news-bytes/spartech-software-cyberpulse-your-quick-strike-cyber-update-for-october-8-2025-405-pm/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.secrss.com/articles/83778"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.technadu.com/over-100-organizations-affected-in-oracle-hacking-campaign-by-cl0p-ransomware/611187/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.spartechsoftware.com/cybersecurity-news-bytes/spartech-software-cyberpulse-your-quick-strike-cyber-update-for-october-10-2025-405-pm/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.purple-ops.io/resources-hottest-cves/velociraptor-cve-2025-6264-ransomware/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://blackhatnews.tokyo/archives/9781"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://securityleaders.com.br/mais-de-100-empresas-sao-afetadas-por-ataque-hacker-a-oracle-aponta-google/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://blackhatnews.tokyo/archives/9752"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://blackhatnews.tokyo/archives/9746"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.spartechsoftware.com/cybersecurity-news-bytes/spartech-software-cyberpulse-your-quick-strike-cyber-update-for-october-12-2025-1041-am/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cybernoz.com/week-in-review-hackers-extorting-salesforce-centrestack-0-day-exploited/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://mp.weixin.qq.com/s?__biz=Mzk1NzM4NzMyMw==&mid=2247485149&idx=1&sn=831df51dce1ae3d1fea6efa0bd4f1e77"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.bleepingcomputer.com/news/security/harvard-investigating-breach-linked-to-oracle-zero-day-exploit/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.purple-ops.io/cybersecurity-threat-intelligence-blog/daily-ransomware-report-1013-2025/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cybernoz.com/security-affairs-newsletter-round-545-by-pierluigi-paganini-international-edition/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://mp.weixin.qq.com/s?__biz=Mzg3OTc0NDcyNQ==&mid=2247495017&idx=5&sn=8537ea32aa2402e3f02aa08f1c0a3d37"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://mp.weixin.qq.com/s?__biz=MzkzNDIzNDUxOQ==&mid=2247503335&idx=2&sn=49cec17929b4f7bab0e5e6cbc5450cdf"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://resources.blackkite.com/blog/focus-friday-tprm-insights-on-oracle-ebs-jenkins-redis-draytek-vigor-zimbra-elastic-django-grafana-sillytavern-and-wp-yoast-seo/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://mp.weixin.qq.com/s?__biz=MzAwNTgyODU3NQ==&mid=2651136513&idx=1&sn=d26ea5edaf6b96696f231aaa0f03d05b"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://blog.rsisecurity.com/zero-day-vulnerabilities-2025-threats-and-mitigation/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://blackhatnews.tokyo/archives/12652"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://mp.weixin.qq.com/s?__biz=MzkxMzAzMjU0OA==&mid=2247553396&idx=2&sn=5e2c0c0431b8ca71fe769d3c2a4194de"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://blackhatnews.tokyo/archives/11839"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://thecyberthrone.in/2025/10/20/unmasking-the-festival-of-ligths-hidden-cyber-threats/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://mp.weixin.qq.com/s?__biz=MzAwODU5NzYxOA==&mid=2247506594&idx=1&sn=57039c1f6e303ebdf22fb0af656c06b4"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.dailysecu.com/news/articleView.html?idxno=201262"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.cysecurity.news/2025/10/clop-ransomware-exploits-oracle-zero.html"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cybernoz.com/clop-ransomware-group-exploits-new-0-day-vulnerabilities-in-active-attacks/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://blog.netmanageit.com/clop-ransomware-dissecting-network-the-raven-file/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://theravenfile.com/2025/11/04/clop-ransomware-dissecting-network/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://rocket-boys.co.jp/security-measures-lab/oracle-possible-unauthorized-access-by-clop-ransomware-group-exploiting-known-vulnerability/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://rocket-boys.co.jp/security-measures-lab/large-scale-cyberattack-campaign-targeting-oracle-e-business-suite/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://rocket-boys.co.jp/security-measures-lab/oracle-e-business-suite-zero-day-attacks-google-and-mandiant-publish-attack-techniques-and-defenses/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.purple-ops.io/cybersecurity-threat-intelligence-blog/clop-zero-day-attacks/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://csirt.telconet.net/comunicacion/boletines-servicios/explotacion-critica-de-vulnerabilidad-en-oracle-e-business-suite-por-ransomware-cl0p/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cybsec.world/nn/oracle-zero-day-ble-utnyttet-av-cl0p-flere-maneder-for-sikkerhetsoppdateringen/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cybsec.world/oracle-zero-day-cl0p-exploited/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cybsec.world/nn/oracle-ebs-zero-day-ble-utnyttet-i-clop-datatvitslopsangrep-og-er-na-fikset/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cybsec.world/nn/hackere-utnytter-kritisk-oracle-ebs-sarbarhet-for-utpressing/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://rocket-boys.co.jp/security-measures-lab/sato-overseas-group-possible-data-leak-oracle-ebs-zero-day-cve-2025-61882/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://mp.weixin.qq.com/s?__biz=Mzg3OTYxODQxNg==&mid=2247487178&idx=1&sn=ac72d5933bee184338a6a3e0af3ae72e"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://rocket-boys.co.jp/security-measures-lab/clop-ransomware-targets-oracle-ebs-cve-2025-61882-61884-lists-30-companies/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://teamwin.in/cl0p-ransomware-group-allegedly-claims-breach-of-entrust-in-oracle-0-day-ebs-hack/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://entryzero.ai/blog/allianz-breach/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cyberinsider.com/logitech-customer-data-exposed-in-zero-day-flaw-cyberattack/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://dailysecurityreview.com/cyber-security/logitech-confirms-data-breach-after-clop-ransomware-attacks-oracle-systems/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cybernoz.com/logitech-confirms-data-breach-help-net-security/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://mp.weixin.qq.com/s?__biz=MzU5OTQ0NzY3Ng==&mid=2247501605&idx=2&sn=035e16bc79c227b11d7b230c59d6c787"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://buaq.net/go-376966.html"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://teamwin.in/lessons-from-oracle-e-business-suite-hack-that-allegedly-compromises-nearly-30-organizations-worldwide/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://buaq.net/jump-376966.htm"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cyberwebspider.com/blog/cyber-security-news/oracle-allegedly-breached-by-clop-ransomware-via-e-business-suite-0-day-hack/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://gbhackers.com/clop-ransomware-claims-oracle-breach-using-e-business-suite-0-day/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cybersecuritynews.com/broadcom-allegedly-breached-by-clop-ransomware/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cybernoz.com/broadcom-allegedly-breached-by-clop-ransomware-via-e-business-suite-0-day-hack/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://undercodenews.com/clops-zero-day-shockwave-oracle-listed-as-victim-in-a-high-stakes-ransomware-extortion-campaign/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://securebulletin.com/oracle-hit-clops-zero-day-exploit-leaves-tech-giant-exposed/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://meterpreter.org/cl0p-zero-day-hits-oracle-e-business-suite-cve-2025-61882-compromising-global-giants/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.spartechsoftware.com/cybersecurity-news-bytes/spartech-software-cyberpulse-your-quick-strike-cyber-update-for-november-24-2025-405-pm/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://thecybernews.com/oracle-hit-by-clop/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://healsecurity.com/canon-allegedly-breached-by-clop-ransomware-via-oracle-e-business-suite-0-day-hack/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.purple-ops.io/cybersecurity-threat-intelligence-blog/daily-ransomware-1-1-2026/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cybersecuritynews.com/canon-breached-clop-ransomware-oracle-ebs-hack/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://beyondmachines.net/event_details/oracle-releases-emergency-patch-for-e-business-suite-as-ransomware-gang-pushes-extortion-campaign-d-f-0-7-4"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.resecurity.com/blog/article/cve-2025-61882-mass-exploitation-oracle-e-business-suite-ebs-under-attack-by-cl0p-ransomware"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://securityonline.info/oracle-ebs-zero-day-cve-2025-61882-under-active-rce-exploitation-by-graceful-spider/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.theregister.com/2025/10/07/clop_oracle_ebs/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://securitycurated.com/malware-and-threats/how-does-sophisticated-malware-target-oracle-ebs-zero-days/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://buaq.net/go-367586.html"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://undercodenews.com/cl0p-ransomware-group-exploits-oracle-e-business-suite-flaw-cve-2025-61882-a-new-cyberstorm-unfolds/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cybersecuritycast.com/%d9%86%d8%b5%d9%88%d8%b5-%d8%a7%d8%b3%d8%aa%d8%ba%d9%84%d8%a7%d9%84-%d9%85%d8%b3%d8%b1%d8%a8%d8%a9-%d9%82%d8%af-%d8%aa%d8%b4%d8%b9%d9%84-%d9%85%d9%88%d8%ac%d8%a9-%d9%87%d8%ac%d9%85%d8%a7%d8%aa-%d8%ac/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.theregister.com/2025/10/09/miscreants_head_start_oracle_ebs_invasion/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.matricedigitale.it/2025/10/10/cl0p-viola-oracle-ebs-mandiant-indaga-e-aws-corre-ai-ripari/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://mp.weixin.qq.com/s?__biz=MzAxMjYyMzkwOA==&mid=2247533015&idx=1&sn=503b9d6a19714dc4da938c0db3732488"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://beyondmachines.net/event_details/harvard-university-investigates-data-breach-linked-to-critical-oracle-zero-day-flaw-l-7-3-g-1"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.matricedigitale.it/2025/10/13/harvard-indaga-su-zero-day-oracle-ed-europol-traccia-vittime-nellhackaton-empact-thb/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://mp.weixin.qq.com/s?__biz=Mzg3ODY0NTczMA==&mid=2247493792&idx=1&sn=fe15e810c021cb77e9a99d8008238d14"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://rocket-boys.co.jp/security-measures-lab/harvard-university-investigates-possible-data-breach-from-oracle-e-business-suite-zero-day-attack-as-clop-threatens-leak/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://mp.weixin.qq.com/s?__biz=Mzg3OTc0NDcyNQ==&mid=2247495033&idx=3&sn=652161f36966bb3f6d9b010df6379a1b"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.redhotcyber.com/post/universita-di-harvard-colpita-da-campagna-di-hacking-tramite-oracle-e-business-suite/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cyberwebspider.com/blog/security-week-news/american-airlines-subsidiary-envoy-air-hit-by-oracle-hack/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cyberwebspider.com/blog/security-week-news/cisa-confirms-exploitation-of-latest-oracle-ebs-vulnerability/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.seqrite.com/blog/anatomy-of-the-red-hat-intrusion-crimson-collective-and-slsh-extortions/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.darkreading.com/vulnerabilities-threats/oracle-ebs-attack-victims-more-numerous-expected"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://undercodenews.com/washington-post-data-breach-nearly-10000-employees-and-contractors-affected-in-oracle-hack/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://gbhackers.com/clop-ransomware/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://beyondmachines.net/event_details/allianz-uk-reports-breach-through-compromise-of-oracle-e-business-suite-w-o-n-k-y"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.theregister.com/2025/11/11/hitachiowned_globallogic_admits_data_stolen/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.bleepingcomputer.com/news/security/globallogic-warns-10-000-employees-of-data-theft-after-oracle-breach/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://undercodenews.com/hitachi-subsidiary-globallogic-hit-by-clop-ransomware-attack-exploiting-oracle-zero-day/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://beyondmachines.net/event_details/nhs-investigating-potential-breach-after-ransomware-group-claims-breach-of-oracle-e-business-suite-q-e-4-y-n"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cybersecuritynews.com/entrust-oracle-0-day-ebs-hack/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://rocket-boys.co.jp/security-measures-lab/washington-post-oracle-ebs-attack-9720-data-leak/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://mp.weixin.qq.com/s?__biz=MjM5NTc2MDYxMw==&mid=2458604320&idx=2&sn=364d0c2862669459505599b2fa67b41f"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cyberwebspider.com/blog/cyber-security-news/lessons-from-oracle-e-business-suite-hack-that-allegedly-compromises-nearly-30-organizations-worldwide/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.freebuf.com/articles/es/458296.html"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://teamwin.in/oracle-allegedly-breached-by-clop-ransomware-via-e-business-suite-0-day-hack/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://thedefendopsdiaries.com/how-zero-day-vulnerabilities-empower-modern-ransomware-lessons-from-the-dartmouth-college-breach/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.spartechsoftware.com/cybersecurity-news-bytes/spartech-software-cyberpulse-your-quick-strike-cyber-update-for-november-25-2025-405-pm/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://rocket-boys.co.jp/security-measures-lab/mazda-says-clop-cyberattack-had-no-impact-possible-oracle-ebs-vulnerability/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://blackhatnews.tokyo/archives/19944/amp"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://thedefendopsdiaries.com/how-a-single-oracle-zero-day-breach-rippled-across-industries-the-barts-health-nhs-incident/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://blackhatnews.tokyo/archives/26799"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.bleepingcomputer.com/news/security/clop-ransomware-targets-gladinet-centrestack-servers-for-extortion/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://blackhatnews.tokyo/archives/34840"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.itsecuritynews.info/cl0p-exploits-oracle-e-business-suite-zero-day-in-data-theft-extortion-campaign-cve-2025-61882/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://cybermaterial.com/oracle-ebs-hack-hits-nearly-30-victims/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://ti.dbappsecurity.com.cn/info/13674"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.cysecurity.news/2026/01/35-million-students-impacted-in-us.html"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://blogs.oracle.com/security/post/apply-july-2025-cpu"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-61882"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.crowdstrike.com/en-us/blog/crowdstrike-identifies-campaign-targeting-oracle-e-business-suite-zero-day-CVE-2025-61882/"
+                            },
+                            {
+                              "text": "",
+                              "url": "https://www.oracle.com/security-alerts/alert-cve-2025-61882.html"
                             }
                           ],
                           "timeline": [
@@ -6980,39 +7530,58 @@
                               "event_list": [
                                 "Public Disclosure"
                               ],
-                              "event_time": "2023-03-07 16:00:00"
+                              "event_time": "2025-10-04 16:00:00"
                             },
                             {
                               "event_list": [
-                                "Remediation Available",
-                                "Temporary Mitigation Available",
                                 "Vulnerability Recorded"
                               ],
-                              "event_time": "2023-03-09 11:03:12"
+                              "event_time": "2025-10-05 03:30:07"
                             },
                             {
                               "event_list": [
                                 "Exploitation Activity Observed"
                               ],
-                              "event_time": "2025-04-11 18:52:56"
+                              "event_time": "2025-10-06 21:10:17"
                             },
                             {
                               "event_list": [
                                 "PoC Recorded"
                               ],
-                              "event_time": "2025-06-08 16:50:36"
+                              "event_time": "2025-10-06 22:28:32"
+                            },
+                            {
+                              "event_list": [
+                                "Remediation Available",
+                                "Temporary Mitigation Available"
+                              ],
+                              "event_time": "2025-10-09 03:02:05"
                             }
                           ],
-                          "xve_id": "XVE-2023-4535",
-                          "cve_id": "CVE-2023-23638",
+                          "xve_id": "XVE-2025-36247",
+                          "cve_id": "CVE-2025-61882",
                           "cnnvd_id": [
-                            "CNNVD-202303-617"
+                            "CNNVD-202510-745"
                           ],
-                          "vuln_name": "Apache Dubbo Deserialization Remote Code Execution Vulnerability",
-                          "vuln_category": "Code Injection",
-                          "publish_time": 1678204800,
-                          "update_time": 1755159316,
-                          "threatbook_create_time": 1678359792
+                          "vuln_name": "Oracle E-Business Suite Remote Code Execution Vulnerability",
+                          "vuln_category": "Remote Code Execution",
+                          "publish_time": 1759593600,
+                          "update_time": 1768040795,
+                          "threatbook_create_time": 1759635007
+                        },
+                        "temporary_mitigation": {
+                          "public_temporary_mitigations": {
+                            "source": "AI",
+                            "text": "Interim mitigation measures for the CVE-2025-61882 vulnerability include:  \n1. Investigate outbound connections from Oracle EBS instances to known malicious infrastructure [1]  \n2. Search for malicious templates in `xdo_templates_vl` that match URL references in `TemplateCode` [1]  \n3. Collaborate with relevant Oracle database administrators to review potentially affected systems [1]  \n4. Examine suspicious sessions in `icx_sessions` involving `UserID 0` (sysadmin) and `UserID 6` (guest) [1]  \n5. Consider temporarily disabling internet access for exposed Oracle EBS services [1]  \n6. Protect EBS instances using a Web Application Firewall (WAF) [1]"
+                          },
+                          "configuration_level_mitigation": {
+                            "source": "Threatbook Lab",
+                            "text": "Implement protective measures by utilizing security equipment to restrict access to the following paths: /OA_HTML/configurator/UiServlet and /OA_HTML/help/../ieshostedsurvey.jsp."
+                          },
+                          "network_level_mitigation": {
+                            "source": "Threatbook Lab",
+                            "text": "Unless absolutely necessary, avoid exposing assets to the internet."
+                          }
                         }
                       }
                     ],
