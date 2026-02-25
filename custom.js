@@ -7,6 +7,8 @@ const downloadUrl = {
   download_actors: 'https://img.threatbook.io/ThreatBook_Actors_Sample.json'
 }
 
+const allowId = Object.keys(downloadUrl)
+
 async function downloadFile(id) {
   const url = downloadUrl[id];
   try {
@@ -27,7 +29,7 @@ async function downloadFile(id) {
 window.addEventListener('load', () => {
   document.addEventListener('click', e => {
     let div = e.target.closest('div');
-    if (e.target.id === 'download_ioc' || e.target.id === 'download_ip' || div.id === 'download_ioc' || div.id === 'download_ip') {
+    if (allowId.includes(e.target.id) || allowId.includes(div.id)) {
       const id = e.target.id || div.id;
       downloadFile(id);
     }
