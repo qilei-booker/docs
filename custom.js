@@ -1,7 +1,13 @@
 const downloadUrl = {
   download_ioc: 'https://img.threatbook.io/Threatbook_IOC_Sample.json',
-  download_ip: 'https://img.threatbook.io/Threatbook_IP_Reputation_Sample.json'
+  download_ip: 'https://img.threatbook.io/Threatbook_IP_Reputation_Sample.json',
+  download_hash: 'https://img.threatbook.io/ThreatBook_Hash_Sample.json',
+  download_url: 'https://img.threatbook.io/ThreatBook_URL_Sample.json',
+  download_reports: 'https://img.threatbook.io/ThreatBook_Reports_Sample.zip',
+  download_actors: 'https://img.threatbook.io/ThreatBook_Actors_Sample.json'
 }
+
+const allowId = Object.keys(downloadUrl)
 
 async function downloadFile(id) {
   const url = downloadUrl[id];
@@ -23,7 +29,7 @@ async function downloadFile(id) {
 window.addEventListener('load', () => {
   document.addEventListener('click', e => {
     let div = e.target.closest('div');
-    if (e.target.id === 'download_ioc' || e.target.id === 'download_ip' || div.id === 'download_ioc' || div.id === 'download_ip') {
+    if (allowId.includes(e.target.id) || allowId.includes(div.id)) {
       const id = e.target.id || div.id;
       downloadFile(id);
     }
