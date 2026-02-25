@@ -1,6 +1,10 @@
 const downloadUrl = {
   download_ioc: 'https://img.threatbook.io/Threatbook_IOC_Sample.json',
-  download_ip: 'https://img.threatbook.io/Threatbook_IP_Reputation_Sample.json'
+  download_ip: 'https://img.threatbook.io/Threatbook_IP_Reputation_Sample.json',
+  download_hash: 'https://img.threatbook.io/ThreatBook_Hash_Sample.json',
+  download_url: 'https://img.threatbook.io/ThreatBook_URL_Sample.json',
+  download_reports: 'https://img.threatbook.io/ThreatBook_Reports_Sample.zip',
+  download_actors: 'https://img.threatbook.io/ThreatBook_Actors_Sample.json'
 }
 
 async function downloadFile(id) {
