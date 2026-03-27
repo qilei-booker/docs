@@ -1858,7 +1858,7 @@
           {
             "name": "exclude",
             "in": "query",
-            "description": "You can exclude the following parameters from the response based on actual usage scenarios. When specifying multiple parameters, separate them with commas (note: do not include spaces).\n\n- **asn**: ASN information.  \n- **ssl_certs**: SSL certificate and related information.  \n- **intelligences**: Threat intelligence.  \n- **judgments**: Threat types derived from threat intelligence through comprehensive analysis.  \n- **tags_classes**: Tags related to attack groups or security incidents.  \n- **samples**: Related samples.  \n- **update_time**: Latest update time of the intelligence.  \n- **pdns_count**: Number of currently pointing domains.  \n- **scene**: Application scenario.  \n\nIf you don’t specify this parameter, we will return all data by default.",
+            "description": "You can exclude the following parameters from the response based on actual usage scenarios. When specifying multiple parameters, separate them with commas (note: do not include spaces).\n\n- **asn**: ASN information.  \n- **ssl_certs**: SSL certificate and related information.  \n- **intelligences**: Threat intelligence.  \n- **judgments**: Threat types derived from threat intelligence through comprehensive analysis.  \n- **tags_classes**: Tags related to attack groups or security incidents.  \n- **samples**: Related samples.  \n- **update_time**: Latest update time of the intelligence.  \n- **pdns_count**: Number of currently pointing domains.  \n- **scene**: Application scenario.  \n- **whois**: Whois information of the IP address.  \n\nIf you don’t specify this parameter, we will return all data by default.",
             "required": false,
             "schema": {
               "type": "string"
@@ -1964,6 +1964,10 @@
                           "type": "object",
                           "properties": {},
                           "description": "ASN information — represented as a JSON object containing the following fields:\n\n- **number**: ASN number  \n- **info**: AS name  \n- **rank**: Risk score (0–4, the higher the value, the greater the risk)  "
+                        },
+                        "whois": {
+                          "type": "object",
+                          "description": "Whois information of the IP address"
                         },
                         "ssl_certs": {
                           "type": "array",
@@ -2106,6 +2110,67 @@
                     "rank": 4,
                     "info": "CLOUDFLARENET, US",
                     "number": 13335
+                  },
+                  "whois":{
+                    "inetnum": {
+                      "admin_c": "JNIC1-AP",
+                      "country": "JP",
+                      "descr": "Enecom,Inc.",
+                      "descr2": "3-5-1, Futabanosato, Higashi-ku, Hiroshima-shi, Hiroshima 732-0057, Japan",
+                      "inetnum": "1.0.64.0 - 1.0.127.255",
+                      "mnt_by": "MAINT-JPNIC",
+                      "mnt_irt": "IRT-JPNIC-JP",
+                      "mnt_lower": "MAINT-JPNIC",
+                      "net_name": "MEGAEGG",
+                      "source": "APNIC",
+                      "status": "ALLOCATED PORTABLE",
+                      "tech_c": "JNIC1-AP",
+                      "udate": "20230706123050",
+                      "update_date": "2023-07-06T12:30:50Z"
+                    },
+                    "inetnum2": {
+                      "admin_c": "JP00076967",
+                      "country": "JP",
+                      "descr": "Enecom,Inc.",
+                      "inetnum": "1.0.64.0 - 1.0.79.255",
+                      "net_name": "MEGAEGG",
+                      "source": "JPNIC",
+                      "tech_c": "JP00076967",
+                      "udate": "20240515014402",
+                      "update_date": "2024-05-15T01:44:02Z"
+                    },
+                    "irt": {
+                      "abuse_mailbox": "hostmaster@nic.ad.jp",
+                      "address": "Uchikanda OS Bldg 4F, 2-12-6 Uchi-Kanda",
+                      "address2": "Chiyoda-ku, Tokyo 101-0047, japan",
+                      "admin_c": "JNIC1-AP",
+                      "auth": "# Filtered",
+                      "email": "hostmaster@nic.ad.jp",
+                      "fax_no": "+81-3-5297-2312",
+                      "irt": "IRT-JPNIC-JP",
+                      "mnt_by": "MAINT-JPNIC",
+                      "phone": "+81-3-5297-2311",
+                      "source": "APNIC",
+                      "tech_c": "JNIC1-AP",
+                      "udate": "20250904010000",
+                      "update_date": "2025-09-04T01:00:00Z"
+                    },
+                    "role": {
+                      "address": "Uchikanda OS Bldg 4F, 2-12-6 Uchi-Kanda",
+                      "address2": "Chiyoda-ku, Tokyo 101-0047, Japan",
+                      "admin_c": "JI13-AP",
+                      "country": "JP",
+                      "email": "hostmaster@nic.ad.jp",
+                      "fax_no": "+81-3-5297-2312",
+                      "mnt_by": "MAINT-JPNIC",
+                      "nic_hdl": "JNIC1-AP",
+                      "phone": "+81-3-5297-2311",
+                      "role": "Japan Network Information Center",
+                      "source": "APNIC",
+                      "tech_c": "JE53-AP",
+                      "udate": "20220105030402",
+                      "update_date": "2022-01-05T03:04:02Z"
+                    }
                   },
                   "ssl_certs": [
                     {
