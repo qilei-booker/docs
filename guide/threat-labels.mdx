@@ -1,88 +1,100 @@
 ---
 title: Threat Labels
+description: Unified guide of threat intelligence labels and categories, simplified and categorized for clear referencing.
 ---
-
 
 ## Threat Categories
 
 | **Type** | **Description** | **Verdict** |
-|--------------|---------------------------------------|--------------------|
-| C2 | This network address is a command and control server used by attackers. | Malicious |
-| Botnet | This network address is a node within a network of compromised computers. | Malicious |
-| Hijacked | This network address has been compromised and controlled by an attacker. | Malicious |
-| Phishing | This network address is a phishing site designed to steal user credentials. | Malicious |
-| Malware | This network address distributes malicious software to compromised systems. | Malicious |
-| Exploit | This network address attempted to exploit system vulnerabilities. | Malicious |
-| Scanner | This network address initiated network scanning activities, indicating potential threats. | Malicious |
-| Zombie | This network address is a compromised bot controlled by attackers. | Malicious |
-| Spam | This network address is associated with spam distribution activities. | Malicious |
-| Compromised | This network address is a host infiltrated by attackers. | Suspicious |
-| Brute Force | This network address initiated a brute force attack to gain unauthorized access. | Malicious |
+| :--- | :--- | :--- |
+| **C2** | A Command and Control (C&C) server set up by attackers to issue commands to compromised hosts and receive stolen data. Active connections indicate the host is compromised. | Malicious |
+| **Botnet** | A node within a botnet, which is a network of malware-infected computers controlled remotely to execute coordinated malicious activities. | Malicious |
+| **Hijacked** | A compromised network address where an attacker has hijacked communications to impersonate a trusted entity. | Malicious |
+| **Phishing** | A phishing site that mimics legitimate websites to deceive users into disclosing sensitive personal, account, or financial information. | Malicious |
+| **Malware** | A distribution point for malicious software. Proactive connections by hosts typically suggest malware infection. | Malicious |
+| **Exploit** | Attempted to exploit system vulnerabilities using malicious scripts or payloads to gain unauthorized access or execute arbitrary tasks. | Malicious |
+| **Scanner** | Initiated network scanning activities to identify vulnerable systems, explore exploits, or gather network intelligence, typically by bots, worms, or attackers. | Malicious |
+| **Zombie** | A compromised host functioning as a bot, controlled remotely to initiate cyber attacks, spread malware, or harvest data. | Malicious |
+| **Spam** | Associated with disseminating bulk unsolicited spam/malicious content, often using automated bots or email harvesting systems. | Malicious |
+| **Compromised** | Belongs to a host infiltrated and controlled by attackers. It may be used for launching cyber attacks, spreading malware, data theft, or botnets. | Suspicious |
+| **Brute Force** | Initiated a brute force attack, attempting to gain unauthorized access by exhaustively trying passwords or credentials, often using automated tools. | Malicious |
+| **Suspicious** | A dubious site containing undesirable or illegal content, though not actively involved in the remote control of users. | Suspicious |
+| **Trusted** | Belongs to a trusted network service. | Safe |
 
 ## Sub-type of “C2”
 
 | **Type** | **Description** | **Verdict** |
-|--------------|--------------------------------------|--------------------|
-| Sinkhole C2 | This network address is formerly a C2 server now controlled by security organisation. | Malicious |
+| :--- | :--- | :--- |
+| **Sinkhole C2** | A former Command and Control (C2) server now controlled by security institutions. Traffic from compromised hosts is redirected here to collect threat intelligence and assist in mitigation. | Malicious |
 
 ## Sub-type of “Suspicious”: Mining related
 
 | **Type** | **Description** | **Verdict** |
-|--------------|---------------------------------------|--------------------|
-| MiningPool | This network address is a private mining pool for cryptojacking activity. | Malicious |
-| CoinMiner | This network address is a public mining pool server, potentially misused by attackers. | Malicious |
+| :--- | :--- | :--- |
+| **CoinMiner** | A private mining pool service set up by attackers to receive data from hosts infected with cryptojacking malware. Key indicator for unauthorized cryptocurrency mining and resource exhaustion. | Malicious |
+| **MiningPool** | A public mining pool server bridging miners and pools. Often abused by attackers for unauthorized cryptocurrency mining. Unapproved traffic warrants investigation. | Malicious |
 
 ## Sub-type of “Suspicious”: Others
 
 | **Type** | **Description** | **Verdict** |
-|------------------|-----------------------------------|--------------------|
-| Suspicious Application | This network address is potentially harmful, containing malicious content. | Suspicious |
-| Suspicious Website | This network address is potentially harmful, containing malicious content. | Suspicious |
-| Reverse Proxy | This network address is a reverse proxy server, requiring security vigilance. | Suspicious |
-| C2 Panel | This network address is a command and control panel used by threat actors for managing infected systems. | Suspicious |
-| Fake Software Downloader | This network address hosts a fake software site that mimics legitimate platforms to trick users into downloading malware. | Suspicious |
+| :--- | :--- | :--- |
+| **Suspicious Application** | A potentially harmful application or site associated with malware, phishing, deceptive content, unauthorized data harvesting, or malicious ads. | Suspicious |
+| **Suspicious Website** | A potentially harmful website that may host malware. | Suspicious |
+| **Reverse Proxy** | A reverse proxy server. Can potentially be exploited by attackers for intranet penetration or bypassing network boundaries. | Suspicious |
+| **C2 Panel** | Associated with a Command and Control (C2) web interface, allowing attackers to remotely manage infected systems, execute commands, and exfiltrate data. | Suspicious |
+| **Fake Software Downloader** | This network address hosts a fake software site that mimics legitimate platforms to trick users into downloading malware. | Suspicious |
 
 ## Sub-type of “Phishing”
 
 | **Type** | **Description** | **Verdict** |
-|-----------------|------------------------------------|-------------------|
-| Fake Website | This network address imitates legitimate sites to steal user data. | Malicious |
+| :--- | :--- | :--- |
+| **Fake Website** | An imitation website designed to mimic reputable sites (replicating branding, design, and domains) to trick users into providing sensitive credentials or financial details. | Malicious |
 
 ## Sub-type of “Brute Force”
 
 | **Type** | **Description** | **Verdict** |
-|-----------------|-----------------------------------|--------------------|
-| SSH Brute Force | This network address initiated a brute force attack against SSH services. | Malicious |
-| FTP Brute Force | This network address initiated a brute force attack against FTP services. | Malicious |
-| SMTP Brute Force | This network address initiated a brute force attack against SMTP services. | Malicious |
-| Http Brute Force | This network address attempted HTTP brute-force attacks to bypass Basic Authentication. | Malicious |
-| Web Login Brute Force | This network address initiated a brute force attack against web login portals. | Malicious |
+| :--- | :--- | :--- |
+| **SSH Brute Force** | Initiated a brute force attack targeting SSH services. | Malicious |
+| **FTP Brute Force** | Initiated a brute force attack targeting FTP services. | Malicious |
+| **SMTP Brute Force** | Initiated a brute force attack targeting SMTP services. | Malicious |
+| **Http Brute Force** | This network address attempted HTTP brute-force attacks to bypass Basic Authentication. | Malicious |
+| **Web Login Brute Force** | Initiated a brute force attack targeting web login portals. | Malicious |
 
 ## Network Information
 
 | **Type** | **Description** |
-|-----------------------|-------------------------------------------------|
-| Bogon | This network address is reserved and not intended for public internet use. |
-| FullBogon | This network address is unassigned and should not be used for communication. |
-| Gateway | This network address is a gateway device facilitating network data exchange. |
-| IDC | This network address belongs to an Internet Data Center, potentially used for attacks. |
-| Dynamic IP | This network address is a temporary IP assigned by an ISP. |
-| Edu | This network address originates from an educational network. |
-| DDNS | This network address uses Dynamic DNS, often used by malicious C2 servers. |
-| Mobile | This network address is a node in a mobile communication network. |
-| Search Engine Crawler | This network address is a search engine crawler. |
-| CDN | This network address belongs to a Content Delivery Network. |
-| Advertisement | This network address is associated with an internet advertising service |
-| DNS | This network address is a DNS(Domain Name System) server. |
-| BTtracker | This network address is a BitTorrent tracker used for P2P file sharing. |
-| Backbone | This network address is part of a network service provider's backbone. |
-| IoT Device | This network address belongs to an IoT(Internet of Things) device. |
-| Game Server | This network address belongs to an internet gaming server. |
-| CloudWAF | This network address is a Cloud Web Application Firewall service. |
-| HTTP Proxy | This network address provides HTTP proxy services. |
-| Socks Proxy | This network address provides Socks proxy services. |
-| VPN | This network address provides VPN services for encrypted connections. |
-| Tor | This network address operates a Tor service for anonymous communication. |
+| :--- | :--- |
+| **Proxy** | An intermediary proxy server used to relay network traffic. Often abused by attackers to conceal their identity and geographic location. |
+| **HTTP Proxy** | Provides HTTP Proxy services. |
+| **HTTP Proxy In** | An inbound gateway providing HTTP Proxy services. |
+| **HTTP Proxy Out** | An outbound gateway providing HTTP Proxy services. |
+| **Socks Proxy** | Provides Socks Proxy services. |
+| **Socks Proxy In** | An inbound gateway providing Socks Proxy services. |
+| **Socks Proxy Out** | An outbound gateway providing Socks Proxy services. |
+| **VPN** | Provides Virtual Private Network (VPN) services, routing encrypted traffic to hide real IP addresses. Often abused by attackers to mask their origin. |
+| **VPN In** | An inbound gateway providing VPN services. |
+| **VPN Out** | An outbound gateway providing VPN services. |
+| **Tor** | A node running Tor (The Onion Router) service for anonymous communication. Due to high anonymity, it is frequently used by attackers to host malicious services or hide traffic. |
+| **Tor Proxy In** | An inbound entry point (Guard/Bridge node) to the Tor network. |
+| **Tor Proxy Out** | An outbound exit point (Exit node) from the Tor network. |
+| **Bogon** | An IP address not allocated for public Internet use (e.g., private networks, loopbacks, broadcast). Rarely represents a valid Internet threat indicator. |
+| **FullBogon** | An unassigned IP address that is neither allocated to any organization nor registered in private address spaces by IANA. |
+| **Gateway** | A gateway device facilitating data exchange and routing between a local network and the Internet. |
+| **IDC** | Belongs to an Internet Data Center. Since IDC servers rarely initiate outbound user requests directly, any unexpected traffic from them should be monitored as they may be rented/compromised by attackers. |
+| **Dynamic IP** | A temporary, changeable IP address assigned dynamically by an ISP using DHCP. |
+| **Edu** | Originates from an educational network or institution. |
+| **DDNS** | Associated with Dynamic Domain Name System (DDNS). Frequently exploited by attackers to map dynamic IPs to fixed domains for resilient C2 infrastructure. |
+| **Mobile** | A transmission/reception node (such as a base station) within a mobile communication network (GSM, CDMA, LTE, etc.). |
+| **CDN** | Belongs to a Content Delivery Network (CDN). Attackers sometimes exploit CDN infrastructures via techniques like domain fronting to bypass security detection. |
+| **DNS** | A Domain Name System (DNS) server that resolves human-readable domain names into IP addresses. |
+| **BTtracker** | A BitTorrent Tracker used for P2P file sharing. P2P networks are sometimes abused for malware distribution. |
+| **Backbone** | Part of a network service provider's high-capacity backbone network. |
+| **ICP** | A website that has successfully completed the Internet Content Provider (ICP) registration required in Mainland China. |
+| **IoT Device** | Belongs to an Internet of Things (IoT) smart device. |
+| **Game Server** | Belongs to an online internet gaming server. |
+| **Search Engine Crawler** | A search engine spider or crawler. Generally poses no cyber security threat, though high volume visits might affect server stability. |
+| **Advertisement** | Belongs to an online advertising service. |
+| **CloudWAF** | A cloud-based Web Application Firewall (WAF) service protecting web applications from exploits. Website traffic is routed through the Cloud WAF before reaching the destination server. |
 
 ## Inbound Activities & Contexts
 
@@ -195,7 +207,6 @@ title: Threat Labels
 
 | **Type** | **Description** |
 |------------------------|------------------------------------------------|
-| FinSpy_attack | FinSpy attack indicates activity associated with the FinSpy spyware suite. This powerful tool is known for surveillance and data exfiltration capabilities, often employed by nation-states. |
 | FinSpy_attack | FinSpy attack indicates activity associated with the FinSpy spyware suite. This powerful tool is known for surveillance and data exfiltration capabilities, often employed by nation-states. |
 | FreeMilk | FreeMilk is a cyber espionage campaign targeting government and private sector organizations, primarily in East Asia, using spear-phishing emails to deliver malware for data exfiltration. |
 | Subaat_Operation | Subaat_Operation is a small phishing campaign targeting US government agencies, utilizing Crimson Downloader and CVE-2012-0158 vulnerabilities, ultimately delivering malicious software like QuasarRAT. |
