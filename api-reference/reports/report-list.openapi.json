@@ -11,7 +11,7 @@
       "get": {
         "summary": "Report List (V2)",
         "deprecated": false,
-        "description": "",
+        "description": "Retrieves a paginated list of threat intelligence reports from ThreatBook Lab and open-source intelligence sources.",
         "tags": [],
         "parameters": [
           {
@@ -252,9 +252,9 @@
             "description": "**[Deprecated]** Specifies one or more threat event types to filter reports. Multiple values can be provided as a comma-separated list (e.g., APT,Ransomware). For the list of supported threat event types, please refer to the [Threat Report Glossaries](/guide/reports-glossaries).\n\n*Note: This parameter is only applicable to reports belonging to the **Incident Analysis** category.*",
             "required": false,
             "example": "",
-            "deprecated": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "deprecated": true
             }
           },
           {
@@ -263,9 +263,9 @@
             "description": "**[Deprecated]** Specifies one or more severity levels to filter reports. Accepts comma-separated values. Supported levels include:\n\n- **critical**\n- **high**\n- **low**\n\nIf not provided, reports of all severity levels will be returned.",
             "required": false,
             "example": "",
-            "deprecated": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "deprecated": true
             }
           },
           {
@@ -274,9 +274,9 @@
             "description": "**[Deprecated]** Specifies one or more report content categories to filter results. Accepts comma-separated values. Supported categories include:\n\n- **Incident Analysis**\n- **Malware Analysis**\n- **Vulnerability Analysis**\n- **Summary Report**\n- **Security News**\n- **Incident Response**\n\nMultiple values are supported.",
             "required": false,
             "example": "",
-            "deprecated": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "deprecated": true
             }
           },
           {
@@ -285,9 +285,9 @@
             "description": "**[Deprecated]** Specifies one or more threat actors to filter reports. Accepts comma-separated values.\n\nExample values include names of known threat groups such as **Lazarus**, **APT41**, etc. ",
             "required": false,
             "example": "",
-            "deprecated": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "deprecated": true
             }
           },
           {
@@ -296,9 +296,9 @@
             "description": "**[Deprecated]** Specifies one or more target countries to filter reports. Accepts comma-separated values. ",
             "required": false,
             "example": "",
-            "deprecated": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "deprecated": true
             }
           },
           {
@@ -307,9 +307,9 @@
             "description": "**[Deprecated]** Specifies one or more target industries to filter reports. Accepts comma-separated values. Industry names follow the **STIX II industry taxonomy** (e.g., *financial-services*, *government*, *technology*, etc.). For the list of supported industries, please refer to the [Reports Glossaries](/guide/reports-glossaries).",
             "required": false,
             "example": "",
-            "deprecated": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "deprecated": true
             }
           },
           {
@@ -318,9 +318,9 @@
             "description": "**[Deprecated]** Specifies one or more targeted organizations referenced in the reports. Accepts comma-separated values. ",
             "required": false,
             "example": "",
-            "deprecated": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "deprecated": true
             }
           },
           {
@@ -329,9 +329,9 @@
             "description": "**[Deprecated]** Specifies one or more targeted products referenced in the reports. Accepts comma-separated values.\n\n Examples include product names such as *OpenSSH*, *Exchange Server*",
             "required": false,
             "example": "",
-            "deprecated": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "deprecated": true
             }
           }
         ],
