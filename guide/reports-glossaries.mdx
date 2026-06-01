@@ -1,0 +1,90 @@
+---
+title: Reports Glossaries
+description: Detailed reference for CTI Threat Report properties and query fields, including report categories, threat types, industry classifications, and region codes.
+---
+
+This page provides a comprehensive reference of fields and attributes associated with **Threat Intelligence Reports** (CTI Reports). Use these values when filtering and querying reports via CTI APIs or searching within ThreatBook console.
+
+---
+
+## Report Category (`category`)
+
+The `category` field represents the primary classification of the threat intelligence report.
+
+| **Category Value** | **Description** |
+| :--- | :--- |
+| **Incident Analysis** | Analysis reports focusing on a single, specific cyber attack incident. |
+| **Malware Analysis** | Detailed analysis reports targeting a specific family or type of malicious software. |
+| **Vulnerability Analysis** | In-depth technical analysis and mitigation guidelines for a specific security vulnerability. |
+| **Summary Report** | High-level aggregated threat intelligence, such as security trends, event roundups, and landscape reports. |
+| **Incident Response** | Reports detailing incident response procedures, actions taken, and lesson-learned summaries. |
+| **Security News** | General security-related news, advisories, or bulletins not fitting the precise analytical categories above. |
+
+---
+
+## Threat Type (`threat_type`)
+
+The `threat_type` indicates the nature of the cyber threat or attacker behavior documented in the report.
+  <Note>
+    **Dependency Restriction**: Threat Type only takes effect when the query parameter `category` is explicitly set to **Incident Analysis**.
+  </Note>
+
+* **APT** (Advanced Persistent Threat)
+* **Ransomware**
+* **Supply Chain Attack**
+* **Phishing**
+* **Data Leakage**
+* **Data Breach**
+* **Crypto Mining**
+* **DDoS**
+* **Financial Theft**
+* **Others** — Any cyber threat type not covered by the categories above.
+
+---
+
+## Industry Classifications (`target_industry` and `industry_of_target_hq`)
+
+Industry properties categorize target entities impacted by the threat. There are two primary fields utilizing these industry values:
+- **Target Industry**: The target sectors mentioned in the threat report.
+- **Industry of Target HQ**: The registered corporate sector of the victim's headquarters.
+
+The reports mainly aligns with the **STIX 2.1** industry standards, supporting a structured Level-1 and Level-2 classification:
+
+| Level-1 Industry | Level-2 Industries |
+| :--- | :--- |
+| **Agriculture** | Farming, Livestock, Agri Supply Chain, AgriTech |
+| **Aerospace** | Aerospace Manufacturing, Satellite Systems, Space Operations |
+| **Automotive** | Car Manufacturers, Auto Parts, Dealerships, EV & Autonomous Tech |
+| **Chemical** | Chemical Manufacturing, Industrial Chemicals, Specialty Chemicals |
+| **Commercial** | Corporate Services, B2B Services, Trade & Distribution, Legal Services |
+| **Communications** | News Media, Magazines, Radio / FM, TV & Broadcasting, Digital Media |
+| **Construction** | Building Construction, Engineering, Infrastructure Construction, Architectural Services |
+| **Defense** | Defense Contractors, Military Manufacturing, Weapons Systems, Military Electronics |
+| **Education** | Higher Education, K12 Schools, Online Education, Vocational Training |
+| **Energy** | Oil & Gas, Electric Power, Renewables, Nuclear Energy |
+| **Entertainment** | Streaming, Gaming, Film & TV, Sports Entertainment |
+| **Financial-services** | Banking, Investment Banking, Securities, Payments, Wealth Management, Fintech |
+| **Government** | emergency-services, government-local, government-national, government-public-services, government-regional |
+| **Healthcare** | Hospitals, Clinics, Medical Devices, Healthcare Services |
+| **Hospitality-leisure** | Hotels, Restaurants, Tourism, Theme Parks, Resorts |
+| **Infrastructure** | dams, nuclear, water |
+| **Insurance** | Life Insurance, Property & Casualty, Reinsurance, Insurance Brokers |
+| **Manufacturing** | Industrial Manufacturing, Electronics Manufacturing, Machinery, Precision Manufacturing |
+| **Mining** | Mineral Extraction, Metal Processing, Mining Operations |
+| **Non-profit** | NGOs, Foundations |
+| **Pharmaceuticals** | Drug Manufacturing, Biotechnology, Pharma R&D, Pharma Supply Chain |
+| **Retail** | E-commerce, Supermarkets, Department Stores, Convenience Stores, Consumer Brands |
+| **Technology** | Software, Hardware, Cloud Computing, Cybersecurity, AI/ML, Semiconductors |
+| **Telecommunications** | Mobile Operators, ISP/Broadband, Satellite Communications, Network Operators |
+| **Transportation** | Airlines, Railways, Logistics & Freight, Public Transit, Maritime Shipping, Ports |
+| **Utilities** | Electric Utilities, Gas Utilities, Water Utilities, Waste & Sewage |
+| **Web3** | Crypto Exchanges, Blockchain Infrastructure, Wallets & Custody, DeFi Platforms, NFT / Digital Assets |
+
+---
+
+## Country & Region (`hq_region_code` / `target_region_code`)
+
+Country and region codes must comply with the **ISO 3166-1 alpha-2** standard (two-letter country codes).
+
+- **Standard**: [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search) (e.g., `US`, `CN`, `JP`, `GB`, `DE`).
+- **Usage**: Used to identify both the origin of threats/actors and the geographical locations of target entities.

@@ -1,0 +1,374 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "File Upload（V2）",
+    "description": "For potentially malicious files from office endpoints, Web/FTP/email attachments, or suspicious files on endpoints/servers, the system performs rapid detection using **22 antivirus scanning engines**. Based on the file type, the system automatically selects an appropriate sandbox environment for dynamic analysis.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v2/file/upload": {
+      "post": {
+        "summary": "File Upload（V2）",
+        "deprecated": false,
+        "description": "For potentially malicious files from office endpoints, Web/FTP/email attachments, or suspicious files on endpoints/servers, the system performs rapid detection using **22 antivirus scanning engines**. Based on the file type, the system automatically selects an appropriate sandbox environment for dynamic analysis.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "query",
+            "description": "Your API Key\n\nYou are able to get the key on \"My API\" page of [i.threatbook.io](https://i.threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "file",
+            "in": "query",
+            "description": "Files to be analyzed must be no larger than **100 MB**.\n\n- **Note:** Do not upload files exceeding 100 MB.\n- **Supported file types** include:  \n  PE executables (EXE, DLL, COM, etc.), Office documents (DOC, XLS, PPT, etc.), PDF, HTML, script files, MSI, SWF, JAR, LNK, ELF, and various archive formats (ZIP, RAR, 7Z, etc.).\n",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandbox_type",
+            "in": "query",
+            "description": "**Sandbox Execution Environment**  \nUsers can specify the sandbox environment in which the file will be executed.\n\nAvailable environments include:  \n\n- **Windows**:  \n  - win7_sp1_enx64_office2013  \n  - win7_sp1_enx86_office2013  \n  - win7_sp1_enx86_office2010  \n  - win7_sp1_enx86_office2007  \n  - win7_sp1_enx86_office2003  \n  - win10_1903_enx64_office2016  \n\n- **Linux**:  \n  - ubuntu_1704_x64  \n  - centos_7_x64  \n\n- **Kylin**:  \n  - kylin_desktop_v10  ",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "run_time",
+            "in": "query",
+            "description": "The sandbox execution time is **60s by default** and can be adjusted as needed, up to a maximum of **300s**.\n",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string",
+                          "description": "**File Hash**"
+                        },
+                        "permalink": {
+                          "type": "string",
+                          "description": "**ATI File Details Page URL**"
+                        }
+                      },
+                      "required": [
+                        "sha256",
+                        "permalink"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer"
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "response_code",
+                    "msg"
+                  ]
+                },
+                "example": {
+                  "data": {
+                    "sha256": "d79c9643d76062f553f76bb20b07da88fdbf5ddf3428ffc0223bb7bf90e36deb",
+                    "permalink": "https://ati.threatbook.io/hash/d79c9643d76062f553f76bb20b07da88fdbf5ddf3428ffc0223bb7bf90e36deb"
+                  },
+                  "response_code": 200,
+                  "msg": "Success"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "202": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "",
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        " In Progress"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 202
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": " In Progress",
+                      "response_code": 202
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "",
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string"
+                    },
+                    "response_code": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                      "response_code": 206
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Required:{resource/apikey}",
+                        "Invalid parameter:{parameter}"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 400
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "Required:{resource/apikey}",
+                      "response_code": 400
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Invalid account status",
+                        "Invalid access IP: {actual IP address}",
+                        "Invalid API key",
+                        "Invalid key status",
+                        "No access to the API",
+                        "Expired API key",
+                        "No access to the file report",
+                        "No access to: {parameter}"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 401
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "Invalid account status",
+                      "response_code": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Invalid API method"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 405
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "Invalid API method",
+                      "response_code": 405
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Request rate limitation",
+                        "Beyond {daily/monthly/total} quotas limitation"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 429
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "Request rate limitation",
+                      "response_code": 429
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "System error",
+                        "URL Download Fail"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 500
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "System error",
+                      "response_code": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "feeds": {
+        "bearerFormat": "JWT",
+        "description": "请输入您的 JWT 令牌。您可以调用 /login 接口获取该令牌。",
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

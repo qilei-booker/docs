@@ -1,0 +1,247 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Hash",
+    "description": "This API provides identified malicious file hashes.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v2/feeds/stix/hash": {
+      "get": {
+        "summary": "Hash",
+        "deprecated": false,
+        "description": "This API provides identified malicious file hashes.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "time",
+            "in": "query",
+            "description": "Precise time in UTC, format: YYYYMMDD. \nFor example, 20210122 returns data from 2021-01-22 (UTC).\nDefault: returns the most recent data (t-1 day).\nFeed packages can be retrieved for up to 90 days in the past.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": "PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000+y7\\\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000�\u0002\u0000\u0000\u0016\u0000 \u0000hash_20260109test.jsonUT\n\u0000\u0007�\u001esi�\u001esi�\u001esiux\u000b\u0000\u0001\u0004�\u0001\u0000\u0000\u0004\u0014\u0000\u0000\u0000RM�0\u0014硷�0句R\u0005\n}�2粜\u0016J/=u椤K0OD�M�`kC貌…讲6薄lK/\u000f���铼�N��6O=跟蒈\u000bv� \u0019g�J�\fq�\u001420\u0004Z{�\u001dm<鹱归潸铎�)�aV [�\nD箬�4遛C™��R\u0017�0匦Cc6�RJ*\u0015\u0012F\u001a$|.Z\u0018�gJYF\u001a\u0010�h�[�E`\u00068\u0016�+\u001cB\u001f庥T\n    }\u000e�\u0015�W觯db�y=v©\u0001�)�<w?�G\u0018™涂y|…�\u0010���ti&\u001eoaV�\u0012�/钞�ü\u000b\u001fA�9�K\n}\u0005w�9sl缜x,+�T\"L\u0010V�D�L�l1�?V�\u0013や乞>\u000f>�菝�w�v箜�\u0007D�T铽\n'��W\noü�TS&�r\nW�<\u0000�\u0010�\u0015\u00064!\u0018�s霉�^R辟�©�\tg…/�1卩�l�b�\u0007�\u001f�`/诡�^~\u0003PK\u0007\b�R.z\u0001\u0000\u0000�\u0002\u0000\u0000PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000+y7\\\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000�\u0000\u0000\u0000!\u0000 \u0000__MACOSX/._hash_20260109test.jsonUT\n\u0000\u0007�\u001esi�\u001esi�\u001esiux\u000b\u0000\u0001\u0004�\u0001\u0000\u0000\u0004\u0014\u0000\u0000\u0000c`\u0015cg`b`�MLV�\u000fVPü\u0002\u0018\u0003'\u0010\u001b\u0001q!\u0010�\u0019\u0002!!AP&H�\f �FS�\u0010\u0017M蜗�K,(�I�+(�/K�K�KN\u0005)赝w�:t�^s\u0000PK\u0007\by�m\u001aT\u0000\u0000\u0000�\u0000\u0000\u0000PK\u0001\u0002\u0014\u0003\u0014\u0000\b\u0000\b\u0000+y7\\�R.z\u0001\u0000\u0000�\u0002\u0000\u0000\u0016\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000�\u0000\u0000\u0000\u0000hash_20260109test.jsonUT\n\u0000\u0007�\u001esi�\u001esi�\u001esiux\u000b\u0000\u0001\u0004�\u0001\u0000\u0000\u0004\u0014\u0000\u0000\u0000PK\u0001\u0002\u0014\u0003\u0014\u0000\b\u0000\b\u0000+y7\\y�m\u001aT\u0000\u0000\u0000�\u0000\u0000\u0000!\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000��\u0001\u0000\u0000__MACOSX/._hash_20260109test.jsonUT\n\u0000\u0007�\u001esi�\u001esi�\u001esiux\u000b\u0000\u0001\u0004�\u0001\u0000\u0000\u0004\u0014\u0000\u0000\u0000PK\u0005\u0006\u0000\u0000\u0000\u0000\u0002\u0000\u0002\u0000�\u0000\u0000\u0000�\u0002\u0000\u0000\u0000\u0000"
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Required:{resource/apikey}",
+                        "Invalid parameter:{parameter}"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 400
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "Required:{resource/apikey}",
+                      "response_code": 400
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Invalid account status",
+                        "Invalid access IP: {actual IP address}",
+                        "Invalid API key",
+                        "Invalid key status",
+                        "No access to the API",
+                        "Expired API key",
+                        "No access to the file report",
+                        "No access to: {parameter}"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 401
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "Invalid account status",
+                      "response_code": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Invalid API method"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 405
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "Invalid API method",
+                      "response_code": 405
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Request rate limitation",
+                        "Beyond {daily/monthly/total} quotas limitation"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 429
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "Request rate limitation",
+                      "response_code": 429
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "System error",
+                        "URL Download Fail"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 500
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "System error",
+                      "response_code": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "feeds": {
+        "bearerFormat": "JWT",
+        "description": "请输入您的 JWT 令牌。您可以调用 /login 接口获取该令牌。",
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

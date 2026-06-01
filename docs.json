@@ -46,7 +46,8 @@
           {
             "group": "Knowledge Hub",
             "pages": [
-              "guide/threat-labels"
+              "guide/threat-labels",
+              "guide/reports-glossaries"
             ]
           }
         ]

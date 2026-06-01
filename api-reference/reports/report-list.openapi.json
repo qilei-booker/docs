@@ -1,0 +1,724 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Default module",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/v2/reports/list": {
+      "get": {
+        "summary": "Report List (V2)",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "query",
+            "description": "Your API Key\n              \nYou are able to get the key on \"API\" page of [ATI](https://ati.threatbook.io/apiconsole).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Keyword search parameter that matches across multiple indexed fields, including report title, summary, tags, IOCs, CVE identifiers and names, target products, target organizations, and other relevant attributes.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "threat_type",
+            "in": "query",
+            "description": "Specifies one or more threat event types to filter reports. Multiple values can be provided as a comma-separated list (e.g., APT,Ransomware). For the list of supported threat event types, please refer to the [Threat Report Glossaries](/guide/reports-glossaries).\n\n*Note: This parameter is only applicable to reports belonging to the **Incident Analysis** category.*",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "threat_type_list",
+            "in": "query",
+            "description": "Specifies one or more threat event types to filter reports. Multiple values should be passed as a JSON array of strings (String[]).For the list of supported threat event types, please refer to the [Threat Report Glossaries](/guide/reports-glossaries).\n\n*Note: This parameter is only applicable to reports belonging to the **Incident Analysis** category.*",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "severity",
+            "in": "query",
+            "description": "Specifies one or more severity levels to filter reports. Accepts comma-separated values. Supported levels include:\n\n- **critical**\n- **high**\n- **low**\n\nIf not provided, reports of all severity levels will be returned.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Specifies one or more report content categories to filter results. Accepts comma-separated values. Supported categories include:\n\n- **Incident Analysis**\n- **Malware Analysis**\n- **Vulnerability Analysis**\n- **Summary Report**\n- **Security News**\n- **Incident Response**\n\nMultiple values are supported.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "threat_actor",
+            "in": "query",
+            "description": "Specifies one or more threat actors to filter reports. Accepts comma-separated values.\n\nExample values include names of known threat groups such as **Lazarus**, **APT41**, etc. ",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "target_region",
+            "in": "query",
+            "description": "Specifies one or more target countries to filter reports. Accepts comma-separated values. ",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "target_region_list",
+            "in": "query",
+            "description": "Specifies one or more target countries to filter reports. Multiple values should be passed as a JSON array of strings (String[]).",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "target_region_code",
+            "in": "query",
+            "description": "Specifies one or more target countries to filter reports using ISO 3166-1 alpha-2 country codes (e.g., `US`, `CN`, `GB`). Multiple values should be passed as a JSON array of strings (String[]). For a full list of codes, refer to the [ISO Online Browsing Platform](https://www.iso.org/obp/ui/#search).",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "target_industry",
+            "in": "query",
+            "description": "Specifies one or more target industries to filter reports. Accepts comma-separated values. Industry names follow the **STIX II industry taxonomy** (e.g., *financial-services*, *government*, *technology*, etc.). ",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "target_org",
+            "in": "query",
+            "description": "Specifies one or more targeted organizations referenced in the reports. Accepts comma-separated values. ",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "target_product",
+            "in": "query",
+            "description": "Specifies one or more targeted products referenced in the reports. Accepts comma-separated values.\n\n Examples include product names such as *OpenSSH*, *Exchange Server*",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "has_iocs",
+            "in": "query",
+            "description": "Indicates whether to return only reports that contain IOC information. \n\n- **true**, only reports with IOC data will be returned.\n- **false** or omitted, all reports will be included by default.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "has_cves",
+            "in": "query",
+            "description": "Indicates whether to return only reports that contain CVE information.\n\n- **true**, only reports with CVE data will be returned.\n- **false** or omitted, all reports will be included by default.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "has_rules",
+            "in": "query",
+            "description": "Indicates whether to return only reports that contain detection rules.\n\n- **true**, only reports with detection rule data will be returned.\n- **false** or omitted, all reports will be included by default.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "published_from",
+            "in": "query",
+            "description": "Specifies the start of the report publication time range (inclusive).\nSupports ISO8601 datetime format, e.g., `2024-09-01T00:00:00Z`.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "published_to",
+            "in": "query",
+            "description": "Specifies the end of the report publication time range (inclusive).\nSupports ISO8601 datetime format, e.g., `2024-10-01T00:00:00Z`.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from_tb_lab",
+            "in": "query",
+            "description": "Indicates whether to return only ThreatBook Lab exclusive reports.\n\n- **true**, only ThreatBook Lab–originated reports will be returned.\n- **false** or omitted, all reports (including open-source intelligence) will be included by default.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Specifies the number of records to return per page.\nThe default value is **20**, and the maximum allowed value is **100**.",
+            "required": false,
+            "example": 0,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Specifies the pagination cursor used to retrieve the next page of results.  \nIf omitted, the first page of results will be returned.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "cursor": {
+                          "type": "string",
+                          "description": "Cursor value used to retrieve the next page of results.  \nIf empty, it indicates that no additional data is available."
+                        },
+                        "total": {
+                          "type": "integer",
+                          "description": "Total number of records that match the query filters."
+                        },
+                        "limit": {
+                          "type": "integer",
+                          "description": "Number of records returned in the current page."
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "Unique identifier of the report. Used to query report details."
+                              },
+                              "title": {
+                                "type": "string",
+                                "description": "Title of the threat intelligence report."
+                              },
+                              "summary": {
+                                "type": "string",
+                                "description": "A summary describing the highlights of the report."
+                              },
+                              "source": {
+                                "type": "string",
+                                "description": "Indicates the origin of the report.  \nValues include **ThreatBook Lab** (exclusive content) or **Open Source**."
+                              },
+                              "published_time": {
+                                "type": "string",
+                                "description": "Publication time of the report in ISO8601 format."
+                              },
+                              "event_time": {
+                                "type": "string",
+                                "description": "Time of the associated incident or threat activity.  \nMay be aggregated to day, month, or year depending on source data."
+                              },
+                              "severity": {
+                                "type": "string",
+                                "description": "Severity level of the report (e.g., `low`, `high`, `critical`)."
+                              },
+                              "organizations": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "List of affected organizations referenced in the report."
+                              },
+                              "regions": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "List of affected regions or countries referenced in the report."
+                              },
+                              "industries": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "List of affected industries based on STIX II industry taxonomy."
+                              },
+                              "products": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "List of affected products referenced in the report."
+                              },
+                              "threat_type": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "One or more threat event types associated with the report."
+                              },
+                              "tags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "Set of extracted intelligence tags associated with the report.  Currently supported tag categories include:\n\n- **Threat Actors** \n- **Malware Families** \n- **Attack Tools**"
+                              },
+                              "cve_stats": {
+                                "type": "integer",
+                                "description": "Total number of CVE identifiers referenced in the report."
+                              },
+                              "reference_link": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "One or more external source URLs related to the report."
+                              },
+                              "ioc_stats": {
+                                "type": "object",
+                                "properties": {
+                                  "ip": {
+                                    "type": "integer"
+                                  },
+                                  "domain": {
+                                    "type": "integer"
+                                  },
+                                  "hash": {
+                                    "type": "integer"
+                                  },
+                                  "url": {
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "ip",
+                                  "domain",
+                                  "hash",
+                                  "url"
+                                ],
+                                "description": "Statistics of IOCs contained in the report, including the count of IPs, domains, hashes and URLs."
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "title",
+                              "summary",
+                              "source",
+                              "published_time",
+                              "event_time",
+                              "severity",
+                              "organizations",
+                              "regions",
+                              "industries",
+                              "products",
+                              "threat_type",
+                              "tags",
+                              "cve_stats",
+                              "reference_link",
+                              "ioc_stats"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "cursor",
+                        "total",
+                        "limit",
+                        "items"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Allowed value: \"Success\""
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "response_code",
+                    "msg"
+                  ]
+                },
+                "example": {
+                  "data": {
+                    "cursor": "d19ba003fbc998df0d299f2ff41607ad2ce6ecc2a573f5e0a152bedaa8ff2f591ef5329521d6e2ddbd5646a56918d3b33f652e36ab05bde0fd78000e27c7caccd3ecd8903b1914e4c2858f93ffe27a773ed388a338b65e40dcf0b7745e0df41a3ede6a33a561f100d522ce9a00af42103a728e2d0fbdbabced7ea70a4702640e83d03a2d48481e215d635c2292984be2bb6ecb35e5c5a1a7c08b4d8599a74d8efa0ee76153b83c8c985b7df1d6143c18b14a851faf7059a6ce448ecefd801911ff6433d234d4b21368d1297271eeab6bbcbb4b01608756b024779f600b33cd88c3bc08250a29c0125ff9d97f2f103a061b78d9282a080849262ce8718ae7b59f25f26a09213f1cee20110c82651b96341db0f09c0969896b6d9beb3bc7538812",
+                    "total": 2753,
+                    "limit": 20,
+                    "items": [
+                      {
+                        "id": "303012",
+                        "title": "Qilin Ransomware Targets Italian Automotive Leader Pieffe Auto Group",
+                        "summary": "In 2025, the activities of the ransomware group Qilin significantly increased, launching a series of cyberattacks against enterprises and mid-sized organizations across multiple industries. Qilin employs a double extortion strategy, not only encrypting victims' data but also threatening to publicly disclose sensitive information to exert pressure, resulting in severe financial and reputational losses for businesses. The attack targets span various sectors, including automotive manufacturing, beverage production, medical devices, food industry, and legal services, demonstrating its broad attack range and increasingly sophisticated tactics. Victims include well-known companies such as Pieffe Auto Group in Italy, Asahi Group in Japan, Beta Dyne in the United States, and Volkswagen in France. Security experts recommend that affected organizations strengthen their cybersecurity defenses, including continuous monitoring, incident response plans, backup validation, and employee defense training, to mitigate the risk of future attacks. Qilin's attacks not only disrupt business operations but may also trigger a ripple effect on societal infrastructure, highlighting the urgency of cybersecurity protection.",
+                        "source": "Open Source",
+                        "published_time": "2025-11-25T00:00:00Z",
+                        "event_time": "2025-09-17",
+                        "severity": "Critical",
+                        "organizations": [
+                          "Magna Hospitality Group",
+                          "SHRM New Mexico",
+                          "Rasi Laboratories",
+                          "Mango’s Tropical Cafe",
+                          "Beta Dyne",
+                          "PCB Uitvaartzorg",
+                          "Pro-Fab, Inc.",
+                          "Lorber, Greenfield & Polito, LLP",
+                          "Sol Trading",
+                          "Sugar Land",
+                          "Alma Realty",
+                          "Marine Foods Express LTD",
+                          "Real Estate Specialists",
+                          "CHDFS Inc",
+                          "Omrin",
+                          "Gadge USA",
+                          "Shollenberger Januzzi & Wolfe",
+                          "Volkswagen France",
+                          "Echo Lake Foods, Inc.",
+                          "Bagnoles NL",
+                          "Mmlk",
+                          "Gun Accessory Supply",
+                          "Volkswagen Group",
+                          "Volkswagen Company",
+                          "Fayette County",
+                          "WebCut Converting, Inc.",
+                          "Alissco Group",
+                          "Florida Mark Products Company",
+                          "Pieffe Auto Group",
+                          "Viabizzuno",
+                          "More Than Gourmet",
+                          "Regional Business Systems",
+                          "Bengal Industries",
+                          "Marine Turbine Technologies",
+                          "Tong Yang Group",
+                          "Executive Cabinetry",
+                          "Tri City Foods",
+                          "Trigg Laboratories",
+                          "Fundidora de Cananea, S.A.",
+                          "Asahi Group Holdings, Ltd.",
+                          "Rex-Hide",
+                          "UScraft"
+                        ],
+                        "regions": [
+                          "Netherlands",
+                          "United States",
+                          "Japan",
+                          "UAE",
+                          "Mexico",
+                          "Italy",
+                          "France"
+                        ],
+                        "industries": [
+                          "Healthcare",
+                          "Manufacturing",
+                          "Government"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "Ransomware"
+                        ],
+                        "tags": [
+                          "Qilin"
+                        ],
+                        "cve_stats": 0,
+                        "reference_link": [
+                          "https://www.dexpose.io/free-darkweb-report/",
+                          "https://www.dexpose.io/email-data-breach-scan/",
+                          "https://cybernews.com/news/bmw-ransomware-attack-everest-claim-everest-luxury-target-jlr-trend/",
+                          "https://cybernews.com/security/production-process-of-jaguar-land-rover-disrupted-by-cyberattack/",
+                          "https://cybernews.com/security/jaguar-jlr-cyberattack-claimed-by-salesforce-hackers-scattered-spider-shiny-hunters/",
+                          "https://cybernews.com/security/massive-salesforce-breach-campaign-started-on-github/",
+                          "https://cybernews.com/news/marks-spencer-breach-tcs-third-party-vendor-social-engineering-attack/",
+                          "https://cybernews.com/news/jaguar-land-rover-production-down-for-at-least-another-week-due-to-cyberattack/",
+                          "https://cybernews.com/security/bridgestone-cyberattack-auto-manufacturer-disrupted-jaguar-link/",
+                          "https://cybernews.com/ransomlooker/",
+                          "https://cybernews.com/security/texas-electric-coops-ransomware-attack/",
+                          "https://cybernews.com/news/asahi-beer-cyberattack-claimed-qilin-ransomware-stolen-data/",
+                          "https://cybernews.com/news/cal-club-ransomware-attack-california-golf-club-san-franscico-qilin-claims/",
+                          "https://cybernews.com/news/israel-shamir-medical-center-ransowmare-attack-qilin-8t-patient-data-stolen/",
+                          "https://cybernews.com/news/nissan-ransomware-attack-creative-box-creative-box-radesign-studio-qilin-group/",
+                          "https://cybernews.com/news/inotiv-ransomware-attack-qilin-pharma-research-testing-animal-cruelty-fines/",
+                          "https://cybernews.com/security/singer-associates-ransomware-attack-qilin/",
+                          "https://cybernews.com/news/sk-group-ransomware-attack-qilin-gang-claims-stolen-data/",
+                          "https://cybernews.com/security/lee-enterprises-cyberattack-impact/",
+                          "https://cybernews.com/news/houston-symphony-qilin-ransomware-attack/",
+                          "https://cybernews.com/security/television-station-detroit-pbs-hacked/",
+                          "https://cybernews.com/news/yanfeng-ransomware-attack-claimed-qilin/",
+                          "https://cybernews.com/news/cancer-hospital-breach-is-claimed-by-qilin-gang-in-new-ransomware-low/",
+                          "https://botcrawl.com/category/data-breaches/"
+                        ]
+                      }
+                    ]
+                  },
+                  "response_code": 200,
+                  "msg": "Success"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "204": {
+            "description": "",
+            "content": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Required:{resource/apikey}",
+                        "Invalid parameter:{parameter}"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 400
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "Required:{resource/apikey}",
+                      "response_code": 400
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Invalid account status",
+                        "Invalid access IP: {actual IP address}",
+                        "Invalid API key",
+                        "Invalid key status",
+                        "No access to the API",
+                        "Expired API key",
+                        "No access to the file report",
+                        "No access to: {parameter}"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 401
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "Invalid account status",
+                      "response_code": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Invalid API method"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 405
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "Invalid API method",
+                      "response_code": 405
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Request rate limitation",
+                        "Beyond {daily/monthly/total} quotas limitation"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 429
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "Request rate limitation",
+                      "response_code": 429
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "System error",
+                        "URL Download Fail"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 500
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "System error",
+                      "response_code": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {}
+  },
+  "servers": [],
+  "security": []
+}

@@ -1,0 +1,446 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "URL Intelligence (V2)",
+    "description": "Retrieve URL scan engine detection results and the analysis results of downloaded files.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v2/url/query": {
+      "post": {
+        "summary": "URL Intelligence (V2)",
+        "deprecated": false,
+        "description": "Retrieve URL scan engine detection results and the analysis results of downloaded files.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "query",
+            "description": "Your API Key\n              \nYou are able to get the key on \"My API\" page of [i.threatbook.io](https://i.threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "required": false,
+            "example": "87720c1af3ee4acc947630c31e3c53af6f1bfda4d44f423f9e7c130e91479be8",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "description": "The URL to be scanned. The URL must be encoded.",
+            "required": false,
+            "example": "http://bing.com/edgepinning/allowlist",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string"
+                    },
+                    "response_code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "multiengines": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "**URL Scan Engine Detection Results**  \nThe following engines are included:\n\n- threatbook  \n- threatcrowd.com  \n- squidblacklist.org  \n- osint.bambenekconsulting.com  \n- malwaredomains.com  \n- malwareconfig.com  \n- cymon.io  \n- cybercrime-tracker.net  \n- circl.lu-misp  \n- alienvault.com  \n- AlienVault-OTX  \n- Google Safebrowsing  \n\n**Detection Result Definitions**\n\n- **No Detection**: Displayed as safe  \n\n- **Detected**:  \n  - **malware**: Malicious software  \n  - **c2**: Command and Control  \n  - **phishing**: Phishing  \n  - **suspicious_miningpool**: Public mining pool  \n  - **suspicious_coinminer**: Private mining pool  \n  - **compromised**: Compromised website  \n\n- **Whitelist**:  \n  - **whitelist**: Whitelisted  "
+                        },
+                        "threat_level": {
+                          "type": "string",
+                          "description": "**URL Threat Level**  \nThis field includes the following types:\n\n- **malicious**  \n- **suspicious**  \n- **unknown**  \n- **clean**  "
+                        },
+                        "sandbox": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "**Sandbox Analysis Report**  \nA JSON object that includes the following fields:\n\n- **threat_level**: Threat level (`malicious`, `suspicious`, `unknown`, `clean`)  \n- **submit_time**: Submission time  \n- **file_name**: File name  \n- **file_type**: File type  \n- **sample_sha256**: File SHA256  \n- **tag**: File detection tags  \n- **sb_status**: Task status  \n- **sandbox_type**: The last successful sandbox environment used for analysis  \n- **sandbox_type_list**: List of all sandbox environments in which the sample was successfully analyzed  "
+                        },
+                        "details": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "**HTTP Response Information**  \nA JSON object that includes the following fields:\n\n- **headers**: Response headers  \n- **lastSeen**: Last scan time  \n- **ip**: Resolved IP address  \n- **historyScan**: Historical detection results of downloaded files  \n- **finalUrl**: Final URL after redirection  \n- **url**: Original URL address  \n- **sha256s**: Hash values (SHA256) of historically downloaded files  \n- **status**: Status code  \n- **httpStatusCode**: HTTP response code  "
+                        },
+                        "me_positives": {
+                          "type": "integer",
+                          "description": "The number of multi-engines that detected the URL as malicious."
+                        },
+                        "me_ratio": {
+                          "type": "string",
+                          "description": " The detection ratio, represented as *detected engines / total engines*.  \n  - Example: `\"1/12\"` means 1 engine detected the URL out of 12 engines in total."
+                        }
+                      },
+                      "required": [
+                        "sandbox",
+                        "details",
+                        "multiengines",
+                        "me_positives",
+                        "me_ratio",
+                        "threat_level"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "response_code",
+                    "msg"
+                  ]
+                },
+                "example": {
+                  "response_code": 200,
+                  "msg": "Success",
+                  "data": {
+                    "multiengines": {
+                      "threatbook": "whitelist",
+                      "threatcrowd.com": "safe",
+                      "squidblacklist.org": "safe",
+                      "osint.bambenekconsulting.com": "safe",
+                      "malwaredomains.com": "safe",
+                      "malwareconfig.com": "safe",
+                      "cymon.io": "safe",
+                      "cybercrime-tracker.net": "safe",
+                      "circl.lu-misp": "malware",
+                      "alienvault.com": "safe",
+                      "AlienVault-OTX": "safe",
+                      "Google Safebrowsing": "safe"
+                    },
+                    "threat_level": "unknown",
+                    "sandbox": {
+                      "threat_level": "unknown",
+                      "submit_time": "2021-02-04 06:12:03",
+                      "file_name": "allowlist",
+                      "sample_sha256": "c707737d9b33b1c3f97c58c16557fe522d72d2a787fe3904f3e15853bcdc6187",
+                      "sb_status": "OK",
+                      "sandbox_type": "win10_1903_enx64_office2016",
+                      "tag": {
+                        "s": [
+                          "json"
+                        ],
+                        "x": [
+                          "",
+                          ""
+                        ]
+                      },
+                      "sandbox_type_list": [
+                        "win7_sp1_enx86_office2013",
+                        "win7_sp1_enx64_office2013",
+                        "win10_1903_enx64_office2016"
+                      ]
+                    },
+                    "details": {
+                      "headers": {
+                        "X-CDN-TraceID": "0.df2dc017.1758892677.32052bfa",
+                        "X-EventID": "68d6928658de47418e6664d5720929ec",
+                        "Permissions-Policy": "unload=()",
+                        "Connection": "keep-alive",
+                        "P3P": "CP=\"NON UNI COM NAV STA LOC CURa DEVa PSAa PSDa OUR IND\"",
+                        "X-MSEdge-Ref": "Ref A: 03CF8523D6C7499D93664520AC6F5B41 Ref B: TYO201151004060 Ref C: 2025-09-26T13:17:58Z",
+                        "Date": "Fri, 26 Sep 2025 13:17:58 GMT",
+                        "UserAgentReductionOptOut": "A7kgTC5xdZ2WIVGZEfb1hUoNuvjzOZX3VIV/BA6C18kQOOF50Q0D3oWoAm49k3BQImkujKILc7JmPysWk3CSjwUAAACMeyJvcmlnaW4iOiJodHRwczovL3d3dy5iaW5nLmNvbTo0NDMiLCJmZWF0dXJlIjoiU2VuZEZ1bGxVc2VyQWdlbnRBZnRlclJlZHVjdGlvbiIsImV4cGlyeSI6MTY4NDg4NjM5OSwiaXNTdWJkb21haW4iOnRydWUsImlzVGhpcmRQYXJ0eSI6dHJ1ZX0=",
+                        "Cache-Control": "public, max-age=3600",
+                        "ETag": "DpuVz2peupDazmhHdjK3mg==",
+                        "Report-To": "{\"group\":\"csp-endpoint\",\"max_age\":86400,\"endpoints\":[{\"url\":\"https://aefd.nelreports.net/api/report?cat=bingcsp\"}]}",
+                        "Content-Security-Policy": "script-src https: 'strict-dynamic' 'report-sample' 'wasm-unsafe-eval' 'nonce-g64bSCNlxMpRWgFmG+SaCfJW+j9m5j1IfL0M6CaWuVU='; base-uri 'self';report-to csp-endpoint",
+                        "Vary": "Accept-Encoding",
+                        "Accept-CH": "Sec-CH-UA-Arch, Sec-CH-UA-Bitness, Sec-CH-UA-Full-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version",
+                        "Content-Type": "application/json"
+                      },
+                      "lastSeen": "2025-09-26 05:17:57",
+                      "ip": "150.171.27.10",
+                      "finalUrl": "http://www.bing.com/edgepinning/allowlist",
+                      "url": "http://bing.com/edgepinning/allowlist",
+                      "sha256s": [
+                        "c707737d9b33b1c3f97c58c16557fe522d72d2a787fe3904f3e15853bcdc6187"
+                      ],
+                      "status": 3,
+                      "httpStatusCode": 200,
+                      "historyScans": [
+                        {
+                          "fileName": "allowlist",
+                          "sha256": "c707737d9b33b1c3f97c58c16557fe522d72d2a787fe3904f3e15853bcdc6187",
+                          "multiEngines": "0/28",
+                          "fileType": "json"
+                        },
+                        {
+                          "fileName": "allowlist",
+                          "sha256": "c707737d9b33b1c3f97c58c16557fe522d72d2a787fe3904f3e15853bcdc6187",
+                          "multiEngines": "0/28",
+                          "fileType": "json"
+                        },
+                        {
+                          "fileName": "allowlist",
+                          "sha256": "c707737d9b33b1c3f97c58c16557fe522d72d2a787fe3904f3e15853bcdc6187",
+                          "multiEngines": "0/28",
+                          "fileType": "json"
+                        },
+                        {
+                          "fileName": "allowlist",
+                          "sha256": "c707737d9b33b1c3f97c58c16557fe522d72d2a787fe3904f3e15853bcdc6187",
+                          "multiEngines": "0/28",
+                          "fileType": "json"
+                        },
+                        {
+                          "fileName": "allowlist",
+                          "sha256": "c707737d9b33b1c3f97c58c16557fe522d72d2a787fe3904f3e15853bcdc6187",
+                          "multiEngines": "0/28",
+                          "fileType": "json"
+                        }
+                      ]
+                    },
+                    "me_positives": 1,
+                    "me_ratio": "1/12"
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "202": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "",
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        " In Progress"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 202
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": " In Progress",
+                      "response_code": 202
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Required:{resource/apikey}",
+                        "Invalid parameter:{parameter}"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 400
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "Required:{resource/apikey}",
+                      "response_code": 400
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Invalid account status",
+                        "Invalid access IP: {actual IP address}",
+                        "Invalid API key",
+                        "Invalid key status",
+                        "No access to the API",
+                        "Expired API key",
+                        "No access to the file report",
+                        "No access to: {parameter}"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 401
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "Invalid account status",
+                      "response_code": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Invalid API method"
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 405
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "Invalid API method",
+                      "response_code": 405
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "Request rate limitation",
+                        "Beyond {daily/monthly/total} quotas limitation"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 429
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "Request rate limitation",
+                      "response_code": 429
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "enum": [
+                        "System error",
+                        "URL Download Fail"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 500
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "response_code"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "summary": "Example 1",
+                    "value": {
+                      "msg": "System error",
+                      "response_code": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "feeds": {
+        "bearerFormat": "JWT",
+        "description": "请输入您的 JWT 令牌。您可以调用 /login 接口获取该令牌。",
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
