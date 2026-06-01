@@ -35,16 +35,6 @@
             }
           },
           {
-            "name": "threat_type",
-            "in": "query",
-            "description": "Specifies one or more threat event types to filter reports. Multiple values can be provided as a comma-separated list (e.g., APT,Ransomware). For the list of supported threat event types, please refer to the [Threat Report Glossaries](/guide/reports-glossaries).\n\n*Note: This parameter is only applicable to reports belonging to the **Incident Analysis** category.*",
-            "required": false,
-            "example": "",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "threat_type_list",
             "in": "query",
             "description": "Specifies one or more threat event types to filter reports. Multiple values should be passed as a JSON array of strings (String[]).For the list of supported threat event types, please refer to the [Threat Report Glossaries](/guide/reports-glossaries).\n\n*Note: This parameter is only applicable to reports belonging to the **Incident Analysis** category.*",
@@ -57,43 +47,39 @@
             }
           },
           {
-            "name": "severity",
+            "name": "severity_list",
             "in": "query",
-            "description": "Specifies one or more severity levels to filter reports. Accepts comma-separated values. Supported levels include:\n\n- **critical**\n- **high**\n- **low**\n\nIf not provided, reports of all severity levels will be returned.",
+            "description": "Specifies one or more severity levels to filter reports. Multiple values should be passed as a JSON array of strings (String[]). Supported levels include:\n\n- **critical**\n- **high**\n- **low**\n\nIf not provided, reports of all severity levels will be returned.",
             "required": false,
-            "example": "",
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           {
-            "name": "category",
+            "name": "category_list",
             "in": "query",
-            "description": "Specifies one or more report content categories to filter results. Accepts comma-separated values. Supported categories include:\n\n- **Incident Analysis**\n- **Malware Analysis**\n- **Vulnerability Analysis**\n- **Summary Report**\n- **Security News**\n- **Incident Response**\n\nMultiple values are supported.",
+            "description": "Specifies one or more report content categories to filter results. Multiple values should be passed as a JSON array of strings (String[]). Supported categories include:\n\n- **Incident Analysis**\n- **Malware Analysis**\n- **Vulnerability Analysis**\n- **Summary Report**\n- **Security News**\n- **Incident Response**",
             "required": false,
-            "example": "",
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           {
-            "name": "threat_actor",
+            "name": "threat_actor_list",
             "in": "query",
-            "description": "Specifies one or more threat actors to filter reports. Accepts comma-separated values.\n\nExample values include names of known threat groups such as **Lazarus**, **APT41**, etc. ",
+            "description": "Specifies one or more threat actors to filter reports. Multiple values should be passed as a JSON array of strings (String[]).\n\nExample values include names of known threat groups such as **Lazarus**, **APT41**, etc.",
             "required": false,
-            "example": "",
             "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "target_region",
-            "in": "query",
-            "description": "Specifies one or more target countries to filter reports. Accepts comma-separated values. ",
-            "required": false,
-            "example": "",
-            "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           {
@@ -121,33 +107,63 @@
             }
           },
           {
-            "name": "target_industry",
+            "name": "target_industry_list",
             "in": "query",
-            "description": "Specifies one or more target industries to filter reports. Accepts comma-separated values. Industry names follow the **STIX II industry taxonomy** (e.g., *financial-services*, *government*, *technology*, etc.). ",
+            "description": "Specifies one or more target industries to filter reports. Multiple values should be passed as a JSON array of strings (String[]). Industry names follow the **STIX II industry taxonomy** (e.g., *financial-services*, *government*, *technology*, etc.). For the list of supported industries, please refer to the [Reports Glossaries](/guide/reports-glossaries).",
             "required": false,
-            "example": "",
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           {
-            "name": "target_org",
+            "name": "target_org_list",
             "in": "query",
-            "description": "Specifies one or more targeted organizations referenced in the reports. Accepts comma-separated values. ",
+            "description": "Specifies one or more targeted organizations referenced in the reports. Multiple values should be passed as a JSON array of strings (String[]).",
             "required": false,
-            "example": "",
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           {
-            "name": "target_product",
+            "name": "target_product_list",
             "in": "query",
-            "description": "Specifies one or more targeted products referenced in the reports. Accepts comma-separated values.\n\n Examples include product names such as *OpenSSH*, *Exchange Server*",
+            "description": "Specifies one or more targeted products referenced in the reports. Multiple values should be passed as a JSON array of strings (String[]). Examples include product names such as *OpenSSH*, *Exchange Server*.",
             "required": false,
-            "example": "",
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "industry_of_target_org",
+            "in": "query",
+            "description": "Specifies one or more targeted organizations' industries to filter reports. Multiple values should be passed as a JSON array of strings (String[]). Industry names follow the **STIX II industry taxonomy** (e.g., *financial-services*, *government*, *technology*, etc.). For the list of supported industries, please refer to the [Reports Glossaries](/guide/reports-glossaries).",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "hq_region_of_target_org",
+            "in": "query",
+            "description": "Specifies one or more targeted organizations' headquarters regions using ISO 3166-1 alpha-2 country codes (e.g., `US`, `CN`, `GB`). Multiple values should be passed as a JSON array of strings (String[]). For a full list of codes, refer to the [ISO Online Browsing Platform](https://www.iso.org/obp/ui/#search).",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           {
@@ -229,6 +245,94 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "threat_type",
+            "in": "query",
+            "description": "**[Deprecated]** Specifies one or more threat event types to filter reports. Multiple values can be provided as a comma-separated list (e.g., APT,Ransomware). For the list of supported threat event types, please refer to the [Threat Report Glossaries](/guide/reports-glossaries).\n\n*Note: This parameter is only applicable to reports belonging to the **Incident Analysis** category.*",
+            "required": false,
+            "example": "",
+            "deprecated": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "severity",
+            "in": "query",
+            "description": "**[Deprecated]** Specifies one or more severity levels to filter reports. Accepts comma-separated values. Supported levels include:\n\n- **critical**\n- **high**\n- **low**\n\nIf not provided, reports of all severity levels will be returned.",
+            "required": false,
+            "example": "",
+            "deprecated": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "**[Deprecated]** Specifies one or more report content categories to filter results. Accepts comma-separated values. Supported categories include:\n\n- **Incident Analysis**\n- **Malware Analysis**\n- **Vulnerability Analysis**\n- **Summary Report**\n- **Security News**\n- **Incident Response**\n\nMultiple values are supported.",
+            "required": false,
+            "example": "",
+            "deprecated": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "threat_actor",
+            "in": "query",
+            "description": "**[Deprecated]** Specifies one or more threat actors to filter reports. Accepts comma-separated values.\n\nExample values include names of known threat groups such as **Lazarus**, **APT41**, etc. ",
+            "required": false,
+            "example": "",
+            "deprecated": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "target_region",
+            "in": "query",
+            "description": "**[Deprecated]** Specifies one or more target countries to filter reports. Accepts comma-separated values. ",
+            "required": false,
+            "example": "",
+            "deprecated": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "target_industry",
+            "in": "query",
+            "description": "**[Deprecated]** Specifies one or more target industries to filter reports. Accepts comma-separated values. Industry names follow the **STIX II industry taxonomy** (e.g., *financial-services*, *government*, *technology*, etc.). For the list of supported industries, please refer to the [Reports Glossaries](/guide/reports-glossaries).",
+            "required": false,
+            "example": "",
+            "deprecated": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "target_org",
+            "in": "query",
+            "description": "**[Deprecated]** Specifies one or more targeted organizations referenced in the reports. Accepts comma-separated values. ",
+            "required": false,
+            "example": "",
+            "deprecated": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "target_product",
+            "in": "query",
+            "description": "**[Deprecated]** Specifies one or more targeted products referenced in the reports. Accepts comma-separated values.\n\n Examples include product names such as *OpenSSH*, *Exchange Server*",
+            "required": false,
+            "example": "",
+            "deprecated": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -294,6 +398,40 @@
                                 },
                                 "description": "List of affected organizations referenced in the report."
                               },
+                              "target_orgs": {
+                                "type": "array",
+                                "description": "Detailed list of targeted organizations containing rich entity attributes.",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "org_name": {
+                                      "type": "string",
+                                      "description": "The name of the targeted organization."
+                                    },
+                                    "website": {
+                                      "type": "string",
+                                      "description": "The official website domain of the targeted organization."
+                                    },
+                                    "org_industry": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      },
+                                      "description": "List of industries the targeted organization belongs to based on STIX II taxonomy (e.g., *financial-services*, *government*, *technology*, etc.). For the list of supported industries, please refer to the [Reports Glossaries](/guide/reports-glossaries)."
+                                    },
+                                    "hq_region": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      },
+                                      "description": "List of headquarters regions or countries of the targeted organization using ISO 3166-1 alpha-2 country codes (e.g., `US`, `CN`, `GB`). For a full list of codes, refer to the [ISO Online Browsing Platform](https://www.iso.org/obp/ui/#search)."
+                                    }
+                                  },
+                                  "required": [
+                                    "org_name"
+                                  ]
+                                }
+                              },
                               "regions": {
                                 "type": "array",
                                 "items": {
@@ -306,7 +444,7 @@
                                 "items": {
                                   "type": "string"
                                 },
-                                "description": "List of affected industries based on STIX II industry taxonomy."
+                                "description": "List of affected industries based on STIX II industry taxonomy. For the list of supported industries, please refer to the [Reports Glossaries](/guide/reports-glossaries)."
                               },
                               "products": {
                                 "type": "array",
@@ -374,6 +512,7 @@
                               "event_time",
                               "severity",
                               "organizations",
+                              "target_orgs",
                               "regions",
                               "industries",
                               "products",
@@ -422,48 +561,32 @@
                         "event_time": "2025-09-17",
                         "severity": "Critical",
                         "organizations": [
-                          "Magna Hospitality Group",
-                          "SHRM New Mexico",
-                          "Rasi Laboratories",
-                          "Mango’s Tropical Cafe",
-                          "Beta Dyne",
-                          "PCB Uitvaartzorg",
-                          "Pro-Fab, Inc.",
-                          "Lorber, Greenfield & Polito, LLP",
-                          "Sol Trading",
-                          "Sugar Land",
-                          "Alma Realty",
-                          "Marine Foods Express LTD",
-                          "Real Estate Specialists",
-                          "CHDFS Inc",
-                          "Omrin",
-                          "Gadge USA",
-                          "Shollenberger Januzzi & Wolfe",
                           "Volkswagen France",
-                          "Echo Lake Foods, Inc.",
-                          "Bagnoles NL",
-                          "Mmlk",
-                          "Gun Accessory Supply",
-                          "Volkswagen Group",
-                          "Volkswagen Company",
-                          "Fayette County",
-                          "WebCut Converting, Inc.",
-                          "Alissco Group",
-                          "Florida Mark Products Company",
-                          "Pieffe Auto Group",
-                          "Viabizzuno",
-                          "More Than Gourmet",
-                          "Regional Business Systems",
-                          "Bengal Industries",
-                          "Marine Turbine Technologies",
-                          "Tong Yang Group",
-                          "Executive Cabinetry",
-                          "Tri City Foods",
-                          "Trigg Laboratories",
-                          "Fundidora de Cananea, S.A.",
-                          "Asahi Group Holdings, Ltd.",
-                          "Rex-Hide",
-                          "UScraft"
+                          "Echo Lake Foods, Inc."
+                        ],
+                        "target_orgs": [
+                          {
+                            "org_name": "Volkswagen France",
+                            "website": "volkswagen.fr",
+                            "org_industry": [
+                              "Automotive",
+                              "Manufacturing"
+                            ],
+                            "hq_region": [
+                              "FR"
+                            ]
+                          },
+                          {
+                            "org_name": "Echo Lake Foods, Inc.",
+                            "website": "echolakefoods.com",
+                            "org_industry": [
+                              "Food & Beverage",
+                              "Manufacturing"
+                            ],
+                            "hq_region": [
+                              "US"
+                            ]
+                          }
                         ],
                         "regions": [
                           "Netherlands",

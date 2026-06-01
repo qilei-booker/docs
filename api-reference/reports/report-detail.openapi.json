@@ -76,7 +76,7 @@
                               "items": {
                                 "type": "string"
                               },
-                              "description": "Industries targeted in the incident (using STIX II industry taxonomy).  "
+                              "description": "Industries targeted in the incident (using STIX II industry taxonomy). For the list of supported industries, please refer to the [Reports Glossaries](/guide/reports-glossaries)."
                             },
                             "products": {
                               "type": "array",
@@ -91,13 +91,48 @@
                                 "type": "string"
                               },
                               "description": "Organizations referenced as targets.  "
+                            },
+                            "target_orgs": {
+                              "type": "array",
+                              "description": "Detailed list of targeted organizations containing rich entity attributes.",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "org_name": {
+                                    "type": "string",
+                                    "description": "The name of the targeted organization."
+                                  },
+                                  "website": {
+                                    "type": "string",
+                                    "description": "The official website domain of the targeted organization."
+                                  },
+                                  "org_industry": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    },
+                                    "description": "List of industries the targeted organization belongs to based on STIX II taxonomy (e.g., *financial-services*, *government*, *technology*, etc.). For the list of supported industries, please refer to the [Reports Glossaries](/guide/reports-glossaries)."
+                                  },
+                                  "hq_region": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    },
+                                    "description": "List of headquarters regions or countries of the targeted organization using ISO 3166-1 alpha-2 country codes (e.g., `US`, `CN`, `GB`). For a full list of codes, refer to the [ISO Online Browsing Platform](https://www.iso.org/obp/ui/#search)."
+                                  }
+                                },
+                                "required": [
+                                  "org_name"
+                                ]
+                              }
                             }
                           },
                           "required": [
                             "regions",
                             "industries",
                             "products",
-                            "organizations"
+                            "organizations",
+                            "target_orgs"
                           ],
                           "description": "Information describing the entities affected in the incident.  \nIncludes:"
                         },
@@ -451,6 +486,30 @@
                         "Asahi Group Holdings, Ltd.",
                         "Rex-Hide",
                         "UScraft"
+                      ],
+                      "target_orgs": [
+                        {
+                          "org_name": "Volkswagen France",
+                          "website": "volkswagen.fr",
+                          "org_industry": [
+                            "Automotive",
+                            "Manufacturing"
+                          ],
+                          "hq_region": [
+                            "FR"
+                          ]
+                        },
+                        {
+                          "org_name": "Echo Lake Foods, Inc.",
+                          "website": "echolakefoods.com",
+                          "org_industry": [
+                            "Food & Beverage",
+                            "Manufacturing"
+                          ],
+                          "hq_region": [
+                            "US"
+                          ]
+                        }
                       ],
                       "regions": [
                         "Netherlands",
