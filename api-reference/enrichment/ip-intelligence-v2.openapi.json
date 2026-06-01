@@ -1,0 +1,792 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "IP Intelligence (V2)",
+    "description": "IP Intelligence(V2) API provides detailed threat intelligence for both **inbound** and **outbound** IP addresses. This includes threat verdict and labes from **ThreatBook Lab**, as well as associated internet asset and contextual data for each IP address.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v2/ip/query": {
+      "post": {
+        "summary": "IP Intelligence (V2)",
+        "deprecated": false,
+        "description": "IP Intelligence(V2) API provides detailed threat intelligence for both **inbound** and **outbound** IP addresses. This includes threat verdict and labes from **ThreatBook Lab**, as well as associated internet asset and contextual data for each IP address.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "query",
+            "description": "Your API Key.\n              \nYou are able to get the key on \"My API\" page of [i.threatbook.io](https://i.threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource",
+            "in": "query",
+            "description": "Single IPv4 or IPv6 address to query.",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exclude",
+            "in": "query",
+            "description": "You can exclude the following parameters from the response based on actual usage scenarios. When specifying multiple parameters, separate them with commas (note: do not include spaces).\n\n- **asn**: ASN information.  \n- **ssl_certs**: SSL certificate and related information.  \n- **intelligences**: Threat intelligence.  \n- **judgments**: Threat types derived from threat intelligence through comprehensive analysis.  \n- **tags_classes**: Tags related to attack groups or security incidents.  \n- **samples**: Related samples.  \n- **update_time**: Latest update time of the intelligence.  \n- **pdns_count**: Number of currently pointing domains.  \n- **scene**: Application scenario.  \n- **whois**: Whois information of the IP address.  \n\nIf you don’t specify this parameter, we will return all data by default.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string"
+                    },
+                    "response_code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "basic": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "The basic information of this IP address, which is a JSON object with the following attributes:\n\n- **carrier**: ISP / service provider  \n- **location**: Geolocation information of the IP, represented as a JSON object with the following fields:  \n  - **country**: Country  \n  - **country_code**: Country code  \n  - **province**: Province / state  \n  - **city**: City  \n  - **lng**: Longitude  \n  - **lat**: Latitude  "
+                        },
+                        "threat_types": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "This field provides the comprehensively determined threat types.  \n\nFor the returned data, see [**Threat Labels**](https://docs.threatbook.io/guide/threat-labels)."
+                        },
+                        "verdict": {
+                          "type": "string",
+                          "description": "The overall verdict of IP address, includes：malicious/suspicious/unknown/benign."
+                        },
+                        "inbound_verdict": {
+                          "type": "string",
+                          "description": "Inbound verdict of IP address, includes：malicious/suspicious/unknown/benign."
+                        },
+                        "outbound_verdict": {
+                          "type": "string",
+                          "description": "Outbound verdict of IP address, includes：malicious/suspicious/unknown/benign."
+                        },
+                        "intel_labels": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "Related threat lables , include attack groups , malware families or security incident information.\n\nThis field is a JSON array, where each item contains the following attributes:\n\n- **label_type**: Tag category, such as \"industry\", \"gangs\", \"virus_family\", etc.  \n- **lables**: Specific tags for attack groups or security incidents, for example: APT, OceanLotus, etc.  "
+                        },
+                        "is_highly_active": {
+                          "type": "boolean",
+                          "description": "Indicates whether this IP address is highly active recently."
+                        },
+                        "seen_in_honeypot": {
+                          "type": "boolean",
+                          "description": "Indicates whether this IP address has has visited the honeypot."
+                        },
+                        "intelligences": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "Threat intelligence in detail — represented as a JSON array. Each item contains the following fields:\n\n- **find_time**: Time of discovery.  \n- **update_time**: Last update time.  \n- **confidence**: Confidence score.  \n- **expired**: Boolean. `false` means the intelligence is still valid; `true` means it has expired.  \n- **intel_types**: Threat types, represented as an array. The values of the array elements are defined in **\"Threat Labels\"**.  \n- **intel_tags**: Tag information of this intelligence, including related attack groups or security incidents. This is a JSON array where each item follows the same field definition as **tag_classes**.  "
+                        },
+                        "samples": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "sha256": {
+                                "type": "string"
+                              },
+                              "ratio": {
+                                "type": "string"
+                              },
+                              "scan_time": {
+                                "type": "string"
+                              },
+                              "malware_type": {
+                                "type": "string"
+                              },
+                              "malware_family": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "sha256",
+                              "ratio",
+                              "scan_time",
+                              "malware_type",
+                              "malware_family"
+                            ]
+                          },
+                          "description": "**Related samples — up to 20 records are returned**  \nThis field is a JSON array, where each item contains the following attributes:\n\n- **sha256**: File hash  \n- **scan_time**: Detection time  \n- **ratio**: Detection ratio  \n- **malware_type**: Malware type  \n- **malware_family**: Malware family  "
+                        },
+                        "asn": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "ASN information — represented as a JSON object containing the following fields:\n\n- **number**: ASN number  \n- **info**: AS name  \n- **rank**: Risk score (0–4, the higher the value, the greater the risk)  "
+                        },
+                        "whois": {
+                          "type": "object",
+                          "description": "Whois information of the IP address"
+                        },
+                        "ssl_certs": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "SSL-related certificate information — represented as a JSON array. Each item includes the following fields:\n\n- **protocol**: Protocol  \n- **port**: Port information  \n- **period**: Period during which the certificate is used on the IP  \n- **digital_certificate**: Certificate details  "
+                        },
+                        "update_time": {
+                          "type": "string",
+                          "description": "Latest update time of the intelligence."
+                        },
+                        "pdns_count": {
+                          "type": "string",
+                          "description": "Number of current resolved domains."
+                        },
+                        "scene": {
+                          "type": "string",
+                          "description": "Application scenario, e.g., dedicated enterprise line, data center, etc."
+                        }
+                      },
+                      "required": [
+                        "samples",
+                        "intel_labels",
+                        "threat_types",
+                        "intelligences",
+                        "scene",
+                        "verdict",
+                        "basic",
+                        "asn",
+                        "update_time",
+                        "inbound_verdict",
+                        "outbound_verdict",
+                        "is_highly_active",
+                        "seen_in_honeypot",
+                        "ssl_certs",
+                        "pdns_count"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "response_code",
+                    "msg"
+                  ]
+                },
+                "example": {
+                  "response_code": 200,
+                  "msg": "Success",
+                  "data": {
+                    "basic": {
+                      "carrier": "Cloudflare, Inc.",
+                      "location": {
+                        "country": "United States",
+                        "province": "",
+                        "city": "",
+                        "lng": "-101.407912",
+                        "lat": "39.765054",
+                        "country_code": "US"
+                      }
+                    },
+                    "threat_types": [
+                      "Whitelist"
+                    ],
+                    "verdict": "benign",
+                    "inbound_verdict": "benign",
+                    "outbound_verdict": "benign",
+                    "intel_labels": [],
+                    "is_highly_active": false,
+                    "seen_in_honeypot": false,
+                    "intelligences": [
+                      {
+                        "confidence": 100,
+                        "expired": false,
+                        "find_time": "2020-07-02 08:23:09",
+                        "intel_types": [
+                          "Whitelist"
+                        ],
+                        "intel_labels": [],
+                        "update_time": "2023-05-14 14:37:15"
+                      },
+                      {
+                        "confidence": 100,
+                        "expired": true,
+                        "find_time": "2019-05-27 19:34:00",
+                        "intel_types": [
+                          "Whitelist"
+                        ],
+                        "intel_labels": [],
+                        "update_time": "2020-07-01 14:52:24"
+                      }
+                    ]
+                  },
+                  "samples": [
+                    {
+                      "sha256": "08e9828b447cd3b12ddadf97985f858458d44769a04e7673f72249fc369f5eea",
+                      "ratio": "9/26",
+                      "scan_time": "2018-10-12 20:57:32",
+                      "malware_type": "SoftwareBundler",
+                      "malware_family": "ICLoader"
+                    },
+                    {
+                      "sha256": "75f515c886b417aa22e41d3b98630a5fe3b7254c25b6eb9c1a0d45d8b02c65b3",
+                      "ratio": "18/26",
+                      "scan_time": "2018-10-11 23:43:26",
+                      "malware_type": "",
+                      "malware_family": ""
+                    },
+                    {
+                      "sha256": "c0d40937bc77fa5facd4f08a7f2a74e4b8892cc6306cbf472a1a5045c0c0652a",
+                      "ratio": "12/26",
+                      "scan_time": "2018-10-11 19:23:38",
+                      "malware_type": "",
+                      "malware_family": ""
+                    },
+                    {
+                      "sha256": "66c302f6557ab3383ae559f5214232e64087c56c76b08fc75380eded732b37cb",
+                      "ratio": "6/26",
+                      "scan_time": "2018-09-21 05:31:35",
+                      "malware_type": "",
+                      "malware_family": ""
+                    },
+                    {
+                      "sha256": "1baf005a5d0f6ccc544191290cad02fc686aa065ab963b30f3e252318d9f71c4",
+                      "ratio": "6/26",
+                      "scan_time": "2018-09-21 05:26:13",
+                      "malware_type": "",
+                      "malware_family": ""
+                    },
+                    {
+                      "sha256": "efd4c9d36bf59e9c4f3d0e36784c274d890267535a3182b073df1db1ccbd8dcb",
+                      "ratio": "1/26",
+                      "scan_time": "2018-05-23 03:05:24",
+                      "malware_type": "",
+                      "malware_family": ""
+                    }
+                  ],
+                  "asn": {
+                    "rank": 4,
+                    "info": "CLOUDFLARENET, US",
+                    "number": 13335
+                  },
+                  "whois": {
+                    "inetnum": {
+                      "admin_c": "JNIC1-AP",
+                      "country": "JP",
+                      "descr": "Enecom,Inc.",
+                      "descr2": "3-5-1, Futabanosato, Higashi-ku, Hiroshima-shi, Hiroshima 732-0057, Japan",
+                      "inetnum": "1.0.64.0 - 1.0.127.255",
+                      "mnt_by": "MAINT-JPNIC",
+                      "mnt_irt": "IRT-JPNIC-JP",
+                      "mnt_lower": "MAINT-JPNIC",
+                      "net_name": "MEGAEGG",
+                      "source": "APNIC",
+                      "status": "ALLOCATED PORTABLE",
+                      "tech_c": "JNIC1-AP",
+                      "udate": "20230706123050",
+                      "update_date": "2023-07-06T12:30:50Z"
+                    },
+                    "inetnum2": {
+                      "admin_c": "JP00076967",
+                      "country": "JP",
+                      "descr": "Enecom,Inc.",
+                      "inetnum": "1.0.64.0 - 1.0.79.255",
+                      "net_name": "MEGAEGG",
+                      "source": "JPNIC",
+                      "tech_c": "JP00076967",
+                      "udate": "20240515014402",
+                      "update_date": "2024-05-15T01:44:02Z"
+                    },
+                    "irt": {
+                      "abuse_mailbox": "hostmaster@nic.ad.jp",
+                      "address": "Uchikanda OS Bldg 4F, 2-12-6 Uchi-Kanda",
+                      "address2": "Chiyoda-ku, Tokyo 101-0047, japan",
+                      "admin_c": "JNIC1-AP",
+                      "auth": "# Filtered",
+                      "email": "hostmaster@nic.ad.jp",
+                      "fax_no": "+81-3-5297-2312",
+                      "irt": "IRT-JPNIC-JP",
+                      "mnt_by": "MAINT-JPNIC",
+                      "phone": "+81-3-5297-2311",
+                      "source": "APNIC",
+                      "tech_c": "JNIC1-AP",
+                      "udate": "20250904010000",
+                      "update_date": "2025-09-04T01:00:00Z"
+                    },
+                    "role": {
+                      "address": "Uchikanda OS Bldg 4F, 2-12-6 Uchi-Kanda",
+                      "address2": "Chiyoda-ku, Tokyo 101-0047, Japan",
+                      "admin_c": "JI13-AP",
+                      "country": "JP",
+                      "email": "hostmaster@nic.ad.jp",
+                      "fax_no": "+81-3-5297-2312",
+                      "mnt_by": "MAINT-JPNIC",
+                      "nic_hdl": "JNIC1-AP",
+                      "phone": "+81-3-5297-2311",
+                      "role": "Japan Network Information Center",
+                      "source": "APNIC",
+                      "tech_c": "JE53-AP",
+                      "udate": "20220105030402",
+                      "update_date": "2022-01-05T03:04:02Z"
+                    }
+                  },
+                  "ssl_certs": [
+                    {
+                      "protocol": "https",
+                      "port": 443,
+                      "period": [],
+                      "digital_certificate": {
+                        "sha256": "73b8ed5becf1ba6493d2e2215a42dfdc7877e91e311ff5e59fb43d094871e699",
+                        "subject": "cloudflare-dns.com",
+                        "issuer": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
+                        "fingerprint": "3ba7e9f806eb30d2f4e3f905e53f07e9acf08e1e",
+                        "purpose": "SSL client|SSL server|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2025-01-02",
+                        "end": "2026-01-21",
+                        "status_desc": "Valid",
+                        "serial_number": "27dc8c5e17294aec9ed3f67728e8a08",
+                        "revoked_time": ""
+                      }
+                    },
+                    {
+                      "protocol": "https",
+                      "port": 443,
+                      "period": [],
+                      "digital_certificate": {
+                        "sha256": "f380cf2805268c47602eea2941b5f6f361c453d0ad3a504652cc83c53bd8e198",
+                        "subject": "kosmos4770.top",
+                        "issuer": "WE1",
+                        "fingerprint": "e753b0d29a651af5ebd3f19db66608cea4b86fcd",
+                        "purpose": "SSL server|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withECDSA",
+                        "status": "1",
+                        "revoked": false,
+                        "begin": "2025-06-20",
+                        "end": "2025-09-18",
+                        "status_desc": "Expired",
+                        "serial_number": "ddfa47ab063dfbc40ea0f14f3ac27b32",
+                        "revoked_time": ""
+                      }
+                    },
+                    {
+                      "protocol": "https",
+                      "port": 443,
+                      "period": [],
+                      "digital_certificate": {
+                        "sha256": "9f1d849073f8b93b6032dcb0148a936c3dd77e2e4ebe9f6ba6b0f75d71107cf9",
+                        "subject": "www.paradoxfwc.com",
+                        "issuer": "WE1",
+                        "fingerprint": "de76416fb1695a995bbc96baa8a35e86c6e2f91d",
+                        "purpose": "SSL server|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withECDSA",
+                        "status": "1",
+                        "revoked": false,
+                        "begin": "2025-06-28",
+                        "end": "2025-09-26",
+                        "status_desc": "Expired",
+                        "serial_number": "c50cee2014a63c2911c04140c3a4b2a2",
+                        "revoked_time": ""
+                      }
+                    }
+                  ],
+                  "update_time": "2023-05-14 14:37:15",
+                  "pdns_count": "993",
+                  "scene": ""
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "$ref": "#/components/responses/400",
+            "description": ""
+          },
+          "401": {
+            "$ref": "#/components/responses/401",
+            "description": ""
+          },
+          "405": {
+            "$ref": "#/components/responses/405",
+            "description": ""
+          },
+          "429": {
+            "$ref": "#/components/responses/429",
+            "description": ""
+          },
+          "500": {
+            "$ref": "#/components/responses/500",
+            "description": ""
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {
+      "202": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    " In Progress"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 202
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": " In Progress",
+                  "response_code": 202
+                }
+              }
+            }
+          }
+        }
+      },
+      "204": {
+        "description": "",
+        "content": {}
+      },
+      "206": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string"
+                },
+                "response_code": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                  "response_code": 206
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Required:{resource/apikey}",
+                    "Invalid parameter:{parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 400
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Required:{resource/apikey}",
+                  "response_code": 400
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Invalid account status",
+                    "Invalid access IP: {actual IP address}",
+                    "Invalid API key",
+                    "Invalid key status",
+                    "No access to the API",
+                    "Expired API key",
+                    "No access to the file report",
+                    "No access to: {parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 401
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Invalid account status",
+                  "response_code": 401
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "No Report Found"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 404
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "No Report Found",
+                  "response_code": 404
+                }
+              }
+            }
+          }
+        }
+      },
+      "405": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "const": "Invalid API method"
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 405
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Invalid API method",
+                  "response_code": 405
+                }
+              }
+            }
+          }
+        }
+      },
+      "429": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Request rate limitation",
+                    "Beyond {daily/monthly/total} quotas limitation"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 429
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Request rate limitation",
+                  "response_code": 429
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "System error",
+                    "URL Download Fail"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 500
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "System error",
+                  "response_code": 500
+                }
+              }
+            }
+          }
+        }
+      },
+      "feeds": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "No access to: {parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 401
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "No access to: {parameter}",
+                  "response_code": 401
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "feeds": {
+        "bearerFormat": "JWT",
+        "description": "请输入您的 JWT 令牌。您可以调用 /login 接口获取该令牌。",
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

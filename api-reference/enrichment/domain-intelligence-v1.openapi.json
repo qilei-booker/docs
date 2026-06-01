@@ -1,0 +1,1202 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Domain Intelligence (V1)",
+    "description": "Domain Intelligence(V1) API provides intelligence judgment, relevant threat actors, virus/trojan family, complete original intelligence, as well as associated DNS, whois and contextual data for each domain.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/domain/query": {
+      "post": {
+        "summary": "Domain Intelligence (V1)",
+        "deprecated": false,
+        "description": "Domain Intelligence(V1) API provides intelligence judgment, relevant threat actors, virus/trojan family, complete original intelligence, as well as associated DNS, whois and contextual data for each domain.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "query",
+            "description": "Unique identifier for API request.\n              \nYou are able to get the key on \"My API\" page of [i.threatbook.io](https://i.threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource",
+            "in": "query",
+            "description": "Single domain name to query.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "You are allowed to specify the following arguments to get specific data back. Each of them should be separated by commas if you would like to request more than two of them. \n\n- **summary**: Full summary of the threat intelligence.\n- **intelligences**: Original threat intelligence. \n- **samples**: Relevant samples.\n- **cur_ips**: Current resolved IPs for the domain.\n- **cur_whois**: latest whois information for the domain.\n- **cas**: Relevant certificates of the domain.\n- **categories**: Domain categories.\n\nIf you don’t specify this parameter, we will return all data",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Success",
+                      "description": "Allowed value: \"Success\""
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "summary": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "**Summary of the intelligence determined by ThreatBook**  \nIt is produced in a strict quality control process.  \n\nEach item includes the following fields:  \n\n- **judgments**: Array. Intelligence type of the final verdict by ThreatBook.  \n- **whitelist**: Boolean.  \n  - `true`: It is whitelisted.  \n  - `false`: It is not whitelisted.  \n- **APT**: Boolean.  \n  - `true`: It is an APT.  \n  - `false`: There is not enough evidence to identify whether it is an APT.  \n- **threat_actor**: Array.  \n- **family**: Array. Virus or trojan family.  \n- **tag_categories**: Array. Fields for each item are shown below.  \n  - **tag_type**: Tag type. For example, `\"industry\"`.  \n  - **tags**: Specific tags are under the tag type.  \n- **first_seen**: String. UTC time of the first discovery of intelligence.  \n- **last_seen**: String. UTC time of the last discovery of intelligence.  "
+                        },
+                        "intelligences": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "**Complete original intelligence**  \n\nIntelligence consists of two parts:  \n\n- **threatbook_lab**: The intelligence is produced or discovered by ThreatBook. All the final comprehensive verdicts are determined based on our own intelligence.  \n  - **source**: Intelligence source.  \n  - **first_seen**: String. UTC time.  \n  - **last_seen**: String. UTC time.  \n  - **confidence**: String. Confidence score. The higher the score, the higher the credibility of the intelligence.  \n  - **expired**: Boolean.  \n    - `true`: This piece of intelligence is expired.  \n    - `false`: This piece of intelligence is still valid.  \n  - **intel_types**: Array. Intelligence type.  \n  - **intel_tags**: Array. Tags for this intelligence.  \n\n- **open_source**: The intelligence is gathered from open source. It is just for reference for our customers; we will not use it in our final verdict.  \n  - All the fields are the same as **\"threatbook_lab\"** above.  \n\n---\n\n**Open source intelligence includes the following non-exclusive intelligence sources, updating continuously…**  \n\n- [mirc.com](http://mirc.com)  \n- [danger.rulez.sk](http://danger.rulez.sk)  \n- [alexa.com](http://alexa.com)  \n- [binarydefense.com](http://binarydefense.com)  \n- [blocklist.de](http://blocklist.de)  \n- [cinsscore.com](http://cinsscore.com)  \n- [sslbl.abuse.ch](http://sslbl.abuse.ch)  \n- [phishtank.com](http://phishtank.com)  \n- [packetmail.net](http://packetmail.net)  \n- [spamhaus.org](http://spamhaus.org)  \n- [vxvault.net](http://vxvault.net)  \n- [alienvault.com](http://alienvault.com)  \n- [nothink.org](http://nothink.org)  \n- [feodotracker.abuse.ch](http://feodotracker.abuse.ch)  \n- [openphish.com](http://openphish.com)  \n- [hosts-file.net](http://hosts-file.net)  \n- ……  "
+                        },
+                        "samples": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "**Relevant samples**  \nIt will be returned up to 20 samples. Each item includes the following fields:\n\n- **sha256**  \n- **scan_time**  \n- **ratio**: Detecting by multi-engine antivirus scanners. For example, `\"1/22\"` means one of the antivirus scanners considers this sample as malicious.  \n- **malware_type**  \n- **malware_family**  "
+                        },
+                        "domain": {
+                          "type": "string",
+                          "description": "Domain name for query will be returned."
+                        },
+                        "cas": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "**Relevant certificates**  \nEach item includes the following fields:\n\n- **subject**  \n- **issuer**  \n- **fingerprint**  \n- **purpose**  \n- **verify**: Digital signature algorithm.  \n- **status**: There are four status values for the certificate.  \n  - `0`: Normal  \n  - `1`: Expired  \n  - `2`: Invalid  \n  - `3`: Self-signed  \n- **status_desc**: Description for the certificate status.  \n- **revoked**: Boolean. Indicates whether the certificate is revoked.  \n- **revoked_time**: The revoke time for the certificate.  \n- **begin**: Effective time of the certificate.  \n- **end**: Expiration time of the certificate.  \n- **serial_number**: Serial number of the certificate.  "
+                        },
+                        "categories": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "**Domain categories**  \n\n- **first_cats**: Array.  \n- **second_cats**: String.  "
+                        },
+                        "cur_ips": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "**Current resolved IPs for the domain**  \nEach item includes the following fields:\n\n- **ip**  \n- **location**  \n  - **country**  \n  - **country_code**  \n  - **province**  \n  - **city**  \n  - **lng**: longitude  \n  - **lat**: latitude  "
+                        },
+                        "cur_whois": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "**Latest WHOIS information for the domain**  \nAll the fields are shown below:\n\n- **registrar_name**: Registrar name.  \n- **name_server**: Server names separated by `\"|\"`.  \n- **registrant_name**: Registrant name.  \n- **registrant_email**: Registrant email.  \n- **registrant_company**: Registrant company.  \n- **registrant_address**: Registrant address.  \n- **registrant_phone**: Registrant phone.  \n- **cdate**: Registration date.  \n- **udate**: Update date.  \n- **edate**: Expiration date.  "
+                        }
+                      },
+                      "required": [
+                        "summary",
+                        "intelligences",
+                        "samples",
+                        "domain",
+                        "cas",
+                        "categories",
+                        "cur_ips",
+                        "cur_whois"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "data",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Success",
+                  "data": {
+                    "summary": {
+                      "judgments": [],
+                      "whitelist": true,
+                      "family": [],
+                      "first_seen": "2016-01-25",
+                      "last_seen": "2025-04-28",
+                      "APT": false,
+                      "threat_actor": [],
+                      "tag_categories": []
+                    },
+                    "intelligences": {
+                      "threatbook_lab": [
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2021-10-13",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2022-08-21"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2021-03-05",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2025-04-28"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2020-07-03",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2022-12-05"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2016-01-25",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2021-01-29"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2018-04-19",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2018-05-16"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2018-04-19",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2018-12-28"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2017-03-30",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2020-06-30"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2017-03-14",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2017-03-13"
+                        }
+                      ],
+                      "open_source": [
+                        {
+                          "source": "Open Source ",
+                          "confidence": 50,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2017-07-10",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2025-04-27"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 70,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2017-07-28",
+                          "intel_types": [
+                            "Malware"
+                          ],
+                          "last_seen": "2017-09-14"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2016-05-03",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2020-02-10"
+                        }
+                      ]
+                    },
+                    "samples": [
+                      {
+                        "sha256": "9c8c136252f14f42673e681a3a4a2304c913b05d8170e53ae987a8cdd83e5375",
+                        "ratio": "18/26",
+                        "scan_time": "2019-09-28 21:27:16",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "e053970fb06bfda6e02e5d8a5d402373712b5ee7f73a70f5dabdaa4c4e2c654c",
+                        "ratio": "17/26",
+                        "scan_time": "2019-09-28 19:31:33",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "a0d3a81f49cbdb6ee67c56e8d6c0e14d803e92cd5b12da3b8e45cf171e482c61",
+                        "ratio": "18/26",
+                        "scan_time": "2019-09-22 06:59:59",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "3166947ecd3003b5ddda74242aa5674138c645a6149fb063927bfb272e74b71d",
+                        "ratio": "11/26",
+                        "scan_time": "2019-09-21 14:59:15",
+                        "malware_type": "Trojan",
+                        "malware_family": "Redirector"
+                      },
+                      {
+                        "sha256": "71a0e8e3bd84ec2dc4f202056cbcca7755573ca286d89d0b66008b5277128d96",
+                        "ratio": "18/26",
+                        "scan_time": "2019-09-20 17:44:51",
+                        "malware_type": "Trojan",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "080a853a59a4a8fc5ec4df633ac1d6f36b800a0b26810d83f1262c81b31ad435",
+                        "ratio": "17/26",
+                        "scan_time": "2019-09-20 06:49:59",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "30ccbde3fc68719601cc8ff036b3a4c02bf76d04996f221a799df6d20fe3c95a",
+                        "ratio": "21/26",
+                        "scan_time": "2019-09-18 04:18:00",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "56302a42cc936aaa62b64406550972e9737beb23763e460c327354ab3a19731b",
+                        "ratio": "17/26",
+                        "scan_time": "2019-09-17 20:58:35",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "d10b0459b6fb09abd4e5fd2fdf5d941223b0e16ee50a5d3478f882354ca5871b",
+                        "ratio": "16/26",
+                        "scan_time": "2019-07-01 12:07:17",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "45864c05cf14e3d38b53da6f625d680de1ee61745f8be6dc6908f74ad96a5e2f",
+                        "ratio": "13/26",
+                        "scan_time": "2018-10-13 20:29:03",
+                        "malware_type": "TrojanDownloader",
+                        "malware_family": "Cutwail"
+                      },
+                      {
+                        "sha256": "3eb7a613c4d481aa5211f883479de571258214b152caec68dc503dba029e0668",
+                        "ratio": "9/26",
+                        "scan_time": "2018-10-13 18:50:36",
+                        "malware_type": "Worm",
+                        "malware_family": "Gamarue"
+                      },
+                      {
+                        "sha256": "743f09cffee8d20a12b0d63d67e4d68c6e0026506cb5bf4f9e16b311ac996520",
+                        "ratio": "13/26",
+                        "scan_time": "2018-10-12 20:45:51",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "8b90df71af0f8ee58450bdac626587bcf99551f5c7cee1c66909e316f6176f4c",
+                        "ratio": "13/26",
+                        "scan_time": "2018-10-12 18:21:17",
+                        "malware_type": "Virus",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "107ed5f64b8be8346fd303a2b077db5f8ccb3aa2c66c4909fbed1b3e5246889d",
+                        "ratio": "10/26",
+                        "scan_time": "2018-08-29 20:12:51",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "0e95fb1461be71847485d8f6816af5f9934a3433ff9b7ff011c130d299fd1900",
+                        "ratio": "15/26",
+                        "scan_time": "2018-08-22 16:48:49",
+                        "malware_type": "Trojan",
+                        "malware_family": "Ramnit"
+                      },
+                      {
+                        "sha256": "015c3218c9470b70242ef5646d66907e84b7be0444a6d049a84062afa966e737",
+                        "ratio": "14/26",
+                        "scan_time": "2018-08-06 07:40:16",
+                        "malware_type": "Virus",
+                        "malware_family": "Sality"
+                      },
+                      {
+                        "sha256": "d257aeb8196815cdc21e649def51256195e4f7d7caf0d98d4e70cc63e51326f7",
+                        "ratio": "14/26",
+                        "scan_time": "2018-07-11 18:53:19",
+                        "malware_type": "Trojan",
+                        "malware_family": "Toga!rfn"
+                      }
+                    ],
+                    "domain": "bing.com",
+                    "cas": [
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "da468a10b99755deed69dc8f329846a28279adb1",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-13",
+                        "end": "2025-12-13",
+                        "status_desc": "Valid",
+                        "serial_number": "62d3cf80ad02d3940a6b5370906c281cb86c1f68",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "14ce22d0a810a84e372600fab19d76d3f6242047",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-14",
+                        "end": "2025-12-14",
+                        "status_desc": "Valid",
+                        "serial_number": "3e48c8c93d1f711a673dc929c08d0b7466be9a26",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "dc7d38aaf6385c782cee94a7c119131fb265e305",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-06",
+                        "end": "2025-12-06",
+                        "status_desc": "Valid",
+                        "serial_number": "7afbb0ca13393693081933db1a1bebb225ac53f6",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "a98025daf7d87d83123cae11a40d6fe762eb048d",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-11-29",
+                        "end": "2025-11-29",
+                        "status_desc": "Valid",
+                        "serial_number": "4494631e875894b168b4daba57d2b920634cf77a",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "2ed802dae9c2a9f2dcb54fa7feeffefe9eb03461",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2025-01-26",
+                        "end": "2026-01-26",
+                        "status_desc": "Valid",
+                        "serial_number": "14a71508db7ae584806aa6c7a27be50b83864483",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "4d73b3b6eec15f91591506de098bd5e77b7b0e4d",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2025-04-06",
+                        "end": "2026-04-06",
+                        "status_desc": "Valid",
+                        "serial_number": "3dbd3c5a069f5c1a17e024f6a7849eb6f030ca27",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "9c9497c3a57673d1456d64be1f2e09dff12f676f",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-04",
+                        "end": "2025-12-04",
+                        "status_desc": "Valid",
+                        "serial_number": "46a7512e4d8881643a48fcf667ba2187a8a17d7d",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "a24e3afa24cbf777b99711413376507c256c7e32",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-16",
+                        "end": "2025-12-16",
+                        "status_desc": "Valid",
+                        "serial_number": "375fc24109126850c1685461960bdd2d0b896fd7",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "37aa37f54b28a482748240959a0e4107ed0ca327",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-03",
+                        "end": "2025-12-03",
+                        "status_desc": "Valid",
+                        "serial_number": "5363711198e3385fe2602a492b3699bd293abec5",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "bc927ef64905f13a7f187fd18a7453c5f89adeb8",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-15",
+                        "end": "2025-12-15",
+                        "status_desc": "Valid",
+                        "serial_number": "e128c3ed44c0b314e22ce94de3739060318aff0",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "1c4ce97d996a621e8f714eecf77c1e6ea4ada00a",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-14",
+                        "end": "2025-12-14",
+                        "status_desc": "Valid",
+                        "serial_number": "4afa47216e54b1f6baa3af3952797034375b52a9",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "d3c0204527ac8664cec237a89ad95a78511536a8",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2025-04-01",
+                        "end": "2026-04-01",
+                        "status_desc": "Valid",
+                        "serial_number": "29e7f7d2297525d0b4f28be1406e71ac087a241c",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "dynamic",
+                        "issuer": "cattle-ca",
+                        "fingerprint": "a2c44985f0220c1ff1cd3cdf34c115127256a550",
+                        "purpose": "SSL server|Netscape SSL server|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "1",
+                        "revoked": false,
+                        "begin": "2019-01-29",
+                        "end": "2024-11-19",
+                        "status_desc": "Expired",
+                        "serial_number": "11fb63f581442a40",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "7c7410e6da96430059871311a0f44715eaf16463",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-11-30",
+                        "end": "2025-11-30",
+                        "status_desc": "Valid",
+                        "serial_number": "70e9a2c3ab6c5f48da8cfe6ac6e99fa4f02da745",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "1238f9d87539da6057dbb9bb334533aadaa04ff2",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2025-01-21",
+                        "end": "2026-01-21",
+                        "status_desc": "Valid",
+                        "serial_number": "ce92a10a490244d6d6ff0c9244f29d675c94c2c",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "f8f1afaf31e14c21db28f84f673403ce0f43c03d",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-09",
+                        "end": "2025-12-09",
+                        "status_desc": "Valid",
+                        "serial_number": "65208005bd7015de6efbfc9c334abf9ca97c0a32",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "1bf37e71a4f6c4fca6eb3f14224e1bca2b7e4277",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-13",
+                        "end": "2025-12-13",
+                        "status_desc": "Valid",
+                        "serial_number": "72ade00aee387d34951de7c161300c248526860c",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "01907cdb1b765e3c2b77beda59dc3988463a755d",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-10",
+                        "end": "2025-12-10",
+                        "status_desc": "Valid",
+                        "serial_number": "5460d80a8cfc2801ab401e50b977a75ccc6963f5",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "72cdc2f44a33a3f1a6b768f71de9bdcc84d6d9ba",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-18",
+                        "end": "2025-12-18",
+                        "status_desc": "Valid",
+                        "serial_number": "7dab1bee9865081cd99955f8413447c459024a73",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "71154b33ac4a583876250975da484282a784707d",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-02",
+                        "end": "2025-12-02",
+                        "status_desc": "Valid",
+                        "serial_number": "530bd5a1ea4443f0dfa1b57d2dc5e06c1b12652e",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "8746de5ffc783f69403e0a325cc715aa62db2a4c",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2025-01-31",
+                        "end": "2026-01-31",
+                        "status_desc": "Valid",
+                        "serial_number": "153ecc450cee95caf5bb72f109f46e23dbb80407",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "f3c857967db38fee3548ae28354cd4b0a089e17a",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-11-26",
+                        "end": "2025-11-26",
+                        "status_desc": "Valid",
+                        "serial_number": "42cea3a737d3523ffef2718a84761f78ecb6cb5e",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "rcgen self signed cert",
+                        "issuer": "rcgen self signed cert",
+                        "fingerprint": "8b99738c4fda53a5da0cd412ba7ff3db79f4957c",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|CRL signing|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withECDSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "1975-01-01",
+                        "end": "4096-01-01",
+                        "status_desc": "Valid",
+                        "serial_number": "98e800690a258cfe",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "a12077052481149900bc759106e688ed440516ec",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-11-30",
+                        "end": "2025-11-30",
+                        "status_desc": "Valid",
+                        "serial_number": "c5b4095a6cbef58daee9b7b1a6bfc57f8e4bde0",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "a5b08a1d383d652f7fc65201dd77b4702aaa2f64",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-04",
+                        "end": "2025-12-04",
+                        "status_desc": "Valid",
+                        "serial_number": "61c1e8221c98a5a43afebd1d580e032a25c879f3",
+                        "revoked_time": ""
+                      },
+                      {
+                        "subject": "*.bing.com",
+                        "issuer": "*.bing.com",
+                        "fingerprint": "3349073bbb7f9061bea490c41208ea74146bf949",
+                        "purpose": "SSL client|SSL server|Netscape SSL server|S/MIME signing|S/MIME encryption|Any Purpose|Any Purpose CA|OCSP helper",
+                        "verify": "SHA256withRSA",
+                        "status": "0",
+                        "revoked": false,
+                        "begin": "2024-12-18",
+                        "end": "2025-12-18",
+                        "status_desc": "Valid",
+                        "serial_number": "3733ba581fa7982de7df43a419ce07ef8de0ede9",
+                        "revoked_time": ""
+                      }
+                    ],
+                    "categories": {
+                      "first_cats": [],
+                      "second_cats": ""
+                    },
+                    "cur_ips": [
+                      {
+                        "ip": "2620:1ec:33:1::10",
+                        "carrier": "Microsoft Corporation",
+                        "location": {
+                          "country": "United States",
+                          "province": "Washington",
+                          "city": "Redmond",
+                          "lng": "-122.12183",
+                          "lat": "47.67379",
+                          "country_code": "US"
+                        }
+                      },
+                      {
+                        "ip": "2620:1ec:33::10",
+                        "carrier": "Microsoft Corporation",
+                        "location": {
+                          "country": "United States",
+                          "province": "Washington",
+                          "city": "Redmond",
+                          "lng": "-122.12183",
+                          "lat": "47.67379",
+                          "country_code": "US"
+                        }
+                      },
+                      {
+                        "ip": "150.171.27.10",
+                        "carrier": "Microsoft Corporation",
+                        "location": {
+                          "country": "United States",
+                          "province": "Washington",
+                          "city": "Redmond",
+                          "lng": "-122.12183",
+                          "lat": "47.67379",
+                          "country_code": "US"
+                        }
+                      },
+                      {
+                        "ip": "150.171.28.10",
+                        "carrier": "Microsoft Corporation",
+                        "location": {
+                          "country": "United States",
+                          "province": "Washington",
+                          "city": "Redmond",
+                          "lng": "-122.12183",
+                          "lat": "47.67379",
+                          "country_code": "US"
+                        }
+                      }
+                    ],
+                    "cur_whois": {
+                      "cdate": "1996-01-29 05:00:00",
+                      "edate": "2026-01-30 00:00:00",
+                      "udate": "2024-12-29 11:59:19",
+                      "alexa": "",
+                      "registrar_name": "MarkMonitor, Inc.",
+                      "name_server": "dns1.p09.nsone.net|dns4.p09.nsone.net|ns1-204.azure-dns.com|ns3-204.azure-dns.org|dns3.p09.nsone.net|ns4-204.azure-dns.info|dns2.p09.nsone.net|ns2-204.azure-dns.net",
+                      "registrant_name": "Domain Administrator",
+                      "registrant_email": "domains@microsoft.com",
+                      "registrant_company": "Microsoft Corporation",
+                      "registrant_address": "One Microsoft Way,,Redmond,WA,US",
+                      "registrant_phone": "+1.4258828080"
+                    }
+                  },
+                  "response_code": 200
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "$ref": "#/components/responses/400",
+            "description": ""
+          },
+          "401": {
+            "$ref": "#/components/responses/401",
+            "description": ""
+          },
+          "405": {
+            "$ref": "#/components/responses/405",
+            "description": ""
+          },
+          "429": {
+            "$ref": "#/components/responses/429",
+            "description": ""
+          },
+          "500": {
+            "$ref": "#/components/responses/500",
+            "description": ""
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {
+      "202": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    " In Progress"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 202
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": " In Progress",
+                  "response_code": 202
+                }
+              }
+            }
+          }
+        }
+      },
+      "204": {
+        "description": "",
+        "content": {}
+      },
+      "206": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string"
+                },
+                "response_code": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                  "response_code": 206
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Required:{resource/apikey}",
+                    "Invalid parameter:{parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 400
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Required:{resource/apikey}",
+                  "response_code": 400
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Invalid account status",
+                    "Invalid access IP: {actual IP address}",
+                    "Invalid API key",
+                    "Invalid key status",
+                    "No access to the API",
+                    "Expired API key",
+                    "No access to the file report",
+                    "No access to: {parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 401
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Invalid account status",
+                  "response_code": 401
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "No Report Found"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 404
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "No Report Found",
+                  "response_code": 404
+                }
+              }
+            }
+          }
+        }
+      },
+      "405": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "const": "Invalid API method"
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 405
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Invalid API method",
+                  "response_code": 405
+                }
+              }
+            }
+          }
+        }
+      },
+      "429": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Request rate limitation",
+                    "Beyond {daily/monthly/total} quotas limitation"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 429
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Request rate limitation",
+                  "response_code": 429
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "System error",
+                    "URL Download Fail"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 500
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "System error",
+                  "response_code": 500
+                }
+              }
+            }
+          }
+        }
+      },
+      "feeds": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "No access to: {parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 401
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "No access to: {parameter}",
+                  "response_code": 401
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "feeds": {
+        "bearerFormat": "JWT",
+        "description": "请输入您的 JWT 令牌。您可以调用 /login 接口获取该令牌。",
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

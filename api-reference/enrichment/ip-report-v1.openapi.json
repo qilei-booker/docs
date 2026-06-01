@@ -1,0 +1,556 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "IP Report (V1)",
+    "description": "You are able to get an IP report with comprehensive intelligence labels, such as **C2, Malware, Zombie, Compromised Host, Scanner,** etc., and contextual information like **open ports, certificates,** and so on.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/community/ip": {
+      "post": {
+        "summary": "IP Report (V1)",
+        "deprecated": false,
+        "description": "You are able to get an IP report with comprehensive intelligence labels, such as **C2, Malware, Zombie, Compromised Host, Scanner,** etc., and contextual information like **open ports, certificates,** and so on.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "query",
+            "description": "Your API Key.\n              \nYou are able to get the key on \"My API\" page of [i.threatbook.io](https://i.threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource",
+            "in": "query",
+            "description": "Single IPv4 or IPv6 to query.",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "You are allowed to specify the following arguments to get specific data back. Each of them should be separated by commas if you would like to request more than two of them.\n \n- **summary**: Summary of the threat intelligence.\n- **ports**: open ports of the IP.\n- **cas**: Relevant certificates of the IP.\n- **basic**: Geographic location and carrier, etc.\n- **asn**: Asn information.\n\nIf you don’t specify this parameter, we will return all data by default.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "summary": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "**Summary of the intelligence determined by ThreatBook**  \n\nEach item includes the following fields:  \n\n- **judgments**: Array. Intelligence type of the final verdict by ThreatBook.  \n- **whitelist**: Boolean.  \n  - `true`: It is whitelisted.  \n  - `false`: It is not whitelisted.  \n- **first_seen**: String. UTC time of the first discovery of intelligence.  \n- **last_seen**: String. UTC time of the last discovery of intelligence.  "
+                        },
+                        "basic": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "**Geographic location information**  \n\n- **carrier**  \n- **location**  \n  - **country**  \n  - **country_code**  \n  - **province**  \n  - **city**  \n  - **lng**: longitude  \n  - **lat**: latitude  "
+                        },
+                        "asn": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "ASN information."
+                        },
+                        "ports": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "**Open ports**  \nEach item includes the following fields:\n\n- **port**  \n- **module**  \n- **product**  \n- **version**  \n- **detail**  \n"
+                        },
+                        "cas": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "**SSL certificates associated with this IP address**  \nEach item includes the following fields:\n\n- **protocol**  \n- **port**  \n- **digital_certificate**: SSL Certificate detail.  \n  - **subject**  \n  - **issuer**  \n  - **fingerprint**  \n  - **purpose**  \n  - **verify**: Digital signature algorithm.  \n  - **status**: There are four status values for the certificate.  \n    - `0`: Normal  \n    - `1`: Expired  \n    - `2`: Invalid  \n    - `3`: Self-signed  \n  - **status_desc**: Description for the certificate status.  \n  - **revoked**: Boolean. Indicates whether the certificate is revoked.  \n  - **revoke_time**: The revoke time for the certificate.  \n  - **start**: Effective time of the certificate.  \n  - **end**: Expiration time of the certificate.  \n  - **serial_number**: Serial number of the certificate.  "
+                        },
+                        "IP": {
+                          "type": "string",
+                          "description": "The queried IP address. \n            \nPlease pay attention, IPv6 will be returned in the following format:\n**2001:0db8:0000:0000:0001:0000:0000:0000**"
+                        }
+                      },
+                      "required": [
+                        "summary",
+                        "basic",
+                        "asn",
+                        "ports",
+                        "cas",
+                        "IP"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 200
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "data",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Success",
+                  "data": {
+                    "summary": {
+                      "judgments": [],
+                      "whitelist": true,
+                      "first_seen": "2020-07-02",
+                      "last_seen": "2022-09-11"
+                    },
+                    "basic": {
+                      "carrier": "Cloudflare, Inc.",
+                      "location": {
+                        "country": "Australia",
+                        "province": "",
+                        "city": "",
+                        "lng": "151.211354",
+                        "lat": "-33.86264",
+                        "country_code": "AU"
+                      }
+                    },
+                    "asn": {
+                      "rank": 4,
+                      "info": "CLOUDFLARENET, US",
+                      "number": 13335
+                    },
+                    "ports": [
+                      {
+                        "port": 80,
+                        "module": "http",
+                        "product": "Cloudflare http proxy",
+                        "version": "",
+                        "detail": ""
+                      },
+                      {
+                        "port": 443,
+                        "module": "https",
+                        "product": "Cloudflare http proxy",
+                        "version": "",
+                        "detail": ""
+                      }
+                    ],
+                    "cas": [
+                      {
+                        "protocol": "https",
+                        "port": 443,
+                        "digital_certificate": {
+                          "sha256": "73b8ed5becf1ba6493d2e2215a42dfdc7877e91e311ff5e59fb43d094871e699",
+                          "subject": "cloudflare-dns.com",
+                          "issuer": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
+                          "fingerprint": "3ba7e9f806eb30d2f4e3f905e53f07e9acf08e1e",
+                          "purpose": "SSL client|SSL server|Any Purpose|Any Purpose CA|OCSP helper",
+                          "verify": "SHA256withRSA",
+                          "status": "0",
+                          "revoked": false,
+                          "begin": "2025-01-02",
+                          "end": "2026-01-21",
+                          "status_desc": "Valid",
+                          "serial_number": "27dc8c5e17294aec9ed3f67728e8a08",
+                          "revoked_time": ""
+                        }
+                      }
+                    ],
+                    "IP": "1.1.1.1"
+                  },
+                  "response_code": 200
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "$ref": "#/components/responses/400",
+            "description": ""
+          },
+          "401": {
+            "$ref": "#/components/responses/401",
+            "description": ""
+          },
+          "405": {
+            "$ref": "#/components/responses/405",
+            "description": ""
+          },
+          "429": {
+            "$ref": "#/components/responses/429",
+            "description": ""
+          },
+          "500": {
+            "$ref": "#/components/responses/500",
+            "description": ""
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {
+      "202": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    " In Progress"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 202
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": " In Progress",
+                  "response_code": 202
+                }
+              }
+            }
+          }
+        }
+      },
+      "204": {
+        "description": "",
+        "content": {}
+      },
+      "206": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string"
+                },
+                "response_code": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                  "response_code": 206
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Required:{resource/apikey}",
+                    "Invalid parameter:{parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 400
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Required:{resource/apikey}",
+                  "response_code": 400
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Invalid account status",
+                    "Invalid access IP: {actual IP address}",
+                    "Invalid API key",
+                    "Invalid key status",
+                    "No access to the API",
+                    "Expired API key",
+                    "No access to the file report",
+                    "No access to: {parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 401
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Invalid account status",
+                  "response_code": 401
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "No Report Found"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 404
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "No Report Found",
+                  "response_code": 404
+                }
+              }
+            }
+          }
+        }
+      },
+      "405": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "const": "Invalid API method"
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 405
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Invalid API method",
+                  "response_code": 405
+                }
+              }
+            }
+          }
+        }
+      },
+      "429": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Request rate limitation",
+                    "Beyond {daily/monthly/total} quotas limitation"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 429
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Request rate limitation",
+                  "response_code": 429
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "System error",
+                    "URL Download Fail"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 500
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "System error",
+                  "response_code": 500
+                }
+              }
+            }
+          }
+        }
+      },
+      "feeds": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "No access to: {parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 401
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "No access to: {parameter}",
+                  "response_code": 401
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "feeds": {
+        "bearerFormat": "JWT",
+        "description": "请输入您的 JWT 令牌。您可以调用 /login 接口获取该令牌。",
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

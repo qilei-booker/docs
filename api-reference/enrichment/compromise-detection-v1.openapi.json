@@ -1,0 +1,472 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Compromise Detection (V1)",
+    "description": "This API is used to detect if an outbound address requested from an internal host is malicious and corresponding threat intel labels.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/ioc/query": {
+      "post": {
+        "summary": "Compromise Detection (V1)",
+        "deprecated": false,
+        "description": "This API is used to detect if an outbound address requested from an internal host is malicious and corresponding threat intel labels.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "query",
+            "description": "Your API Key.\n\nYou are able to get the key on \"My API\" page of [i.threatbook.io](https://i.threatbook.io/my-api).\n\n**Kindly note:**\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource",
+            "in": "query",
+            "description": "Domain names / IP address / IP:Port to query.\n\nYou are allowed to query a domain or IP address with a port to get more accurate intelligence, for example:\n- Domain to query:\n\n  **googlenew.moy.su**\n\n- IPv4 with port to query:\n\n  **183.18.2.4:8080**\n  \n- IPv6 with port to query:\n\n  \\[**2001:0db8:0000:0000:0001:0000:0000:0000**\\]:80",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "ips": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Key is an IP, value is a JSON Object. All fields for each item are shown below:\n- **threat_level**: String.\n  - **malicious**: Only when we capture some specific activities related to \"C2, Sinkhole C2, MiningPool, CoinMiner, Malware\", we will consider it malicious in the compromise detection scenario.   \n  - **safe**: This determination is made only from the perspective of compromise detection and does not mean that there are no other malicious intelligence or activities associated with the IP or domain name beyond compromise.\n- **confidence_level**: String. There are three levels.\n  - high\n  - midium\n  - low\n- **judgments**: Array. Intelligence type.\n  There are 5 malicious types considered as **indicators of compromise(IOC)** in this API shown as below, other malicious types in the complete Intelligence Types sheets will not be returned.\n  - C2\n  - Sinkhole C2\n  - MiningPool\n  - CoinMiner\n  - Malware\n  \n    Besides, neutral intelligence type will be returned, such as CDN, IDC, DNS, etc.\n- **whitelist**: Boolean. \n  - true: It is whitelisted.\n  - false: It is not whitelisted.\n- **APT**: Boolean\n  - true: It is an APT.\n  - false: There is not enough evidence to identify whether it is an APT.\n- **threat_actor**: Array. \n- **family**: Array. Virus or Trojan family.\n- **tag_categories**: Array. Fields for each item are shown bellow. \n  - tag_type: Tag type. For example, “industry”.\n  - tags: Specific tags are under the tag type."
+                        },
+                        "domains": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Key is an Domain name, value is a JSON Object. All fields for each item are shown below:\n- **categories**: Object. Domain categories.\n  - first_cats:Array.\n  - Second_cats:String.\n  \nOther fields are the same as the description of \"ips\" above."
+                        }
+                      },
+                      "required": [
+                        "ips",
+                        "domains"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 200
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "data",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Success",
+                  "data": {
+                    "ips": {
+                      "183.18.2.4:8080": {
+                        "judgments": [
+                          "Dynamic IP",
+                          "Gateway"
+                        ],
+                        "whitelist": false,
+                        "family": [],
+                        "severity": "info",
+                        "APT": false,
+                        "threat_actor": [],
+                        "tag_categories": [],
+                        "confidence_level": "high",
+                        "threat_level": "safe"
+                      }
+                    }
+                  },
+                  "response_code": 200
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "$ref": "#/components/responses/400",
+            "description": ""
+          },
+          "401": {
+            "$ref": "#/components/responses/401",
+            "description": ""
+          },
+          "405": {
+            "$ref": "#/components/responses/405",
+            "description": ""
+          },
+          "429": {
+            "$ref": "#/components/responses/429",
+            "description": ""
+          },
+          "500": {
+            "$ref": "#/components/responses/500",
+            "description": ""
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {
+      "202": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    " In Progress"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 202
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": " In Progress",
+                  "response_code": 202
+                }
+              }
+            }
+          }
+        }
+      },
+      "204": {
+        "description": "",
+        "content": {}
+      },
+      "206": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string"
+                },
+                "response_code": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                  "response_code": 206
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Required:{resource/apikey}",
+                    "Invalid parameter:{parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 400
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Required:{resource/apikey}",
+                  "response_code": 400
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Invalid account status",
+                    "Invalid access IP: {actual IP address}",
+                    "Invalid API key",
+                    "Invalid key status",
+                    "No access to the API",
+                    "Expired API key",
+                    "No access to the file report",
+                    "No access to: {parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 401
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Invalid account status",
+                  "response_code": 401
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "No Report Found"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 404
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "No Report Found",
+                  "response_code": 404
+                }
+              }
+            }
+          }
+        }
+      },
+      "405": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "const": "Invalid API method"
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 405
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Invalid API method",
+                  "response_code": 405
+                }
+              }
+            }
+          }
+        }
+      },
+      "429": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Request rate limitation",
+                    "Beyond {daily/monthly/total} quotas limitation"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 429
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Request rate limitation",
+                  "response_code": 429
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "System error",
+                    "URL Download Fail"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 500
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "System error",
+                  "response_code": 500
+                }
+              }
+            }
+          }
+        }
+      },
+      "feeds": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "No access to: {parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 401
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "No access to: {parameter}",
+                  "response_code": 401
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "feeds": {
+        "bearerFormat": "JWT",
+        "description": "请输入您的 JWT 令牌。您可以调用 /login 接口获取该令牌。",
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

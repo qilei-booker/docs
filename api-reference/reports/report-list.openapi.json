@@ -1,0 +1,1554 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Report List",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v2/reports/list": {
+      "get": {
+        "summary": "Report List",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "query",
+            "description": "Your API Key\n              \nYou are able to get the key on \"My API\" page of [i.threatbook.io](https://i.threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Keyword search parameter that matches across multiple indexed fields, including report title, summary, tags, IOCs, CVE identifiers and names, target products, target organizations, and other relevant attributes.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "threat_type",
+            "in": "query",
+            "description": "Specifies one or more threat event types to filter reports. Accepts comma-separated values. Supported types include:\n\n- **APT**\n- **Ransomware**\n- **Supply Chain Attack**\n- **Phishing**\n- **Data Leakage**\n- **Data Breach**\n- **Crypto Mining**\n- **DDoS**\n- **Others** — any threat type not covered by the categories above.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "severity",
+            "in": "query",
+            "description": "Specifies one or more severity levels to filter reports. Accepts comma-separated values. Supported levels include:\n\n- **critical**\n- **high**\n- **low**\n\nIf not provided, reports of all severity levels will be returned.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "threat_actor",
+            "in": "query",
+            "description": "Specifies one or more threat actors (hacker groups) to filter reports. Accepts comma-separated values.\n\nExample values include names of known threat groups such as **Lazarus**, **APT41**, etc. ",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "target_region",
+            "in": "query",
+            "description": "Specifies one or more target countries to filter reports. Accepts comma-separated values. ",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "target_industry",
+            "in": "query",
+            "description": "Specifies one or more target industries to filter reports. Accepts comma-separated values. Industry names follow the **STIX II industry taxonomy** (e.g., *financial-services*, *government*, *technology*, etc.). ",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "target_org",
+            "in": "query",
+            "description": "Specifies one or more targeted organizations referenced in the reports. Accepts comma-separated values. ",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "target_product",
+            "in": "query",
+            "description": "Specifies one or more targeted products referenced in the reports. Accepts comma-separated values.\n\n Examples include product names such as *OpenSSH*, *Exchange Server*",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Specifies one or more report content categories to filter results. Accepts comma-separated values. Supported categories include:\n\n- **Incident Analysis**\n- **Malware Analysis**\n- **Vulnerability Analysis**\n- **Summary Report**\n- **Security News**\n- **Incident Response**\n\nMultiple values are supported.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "has_iocs",
+            "in": "query",
+            "description": "Indicates whether to return only reports that contain IOC information. \n\n- **true**, only reports with IOC data will be returned.\n- **false** or omitted, all reports will be included by default.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "has_cves",
+            "in": "query",
+            "description": "Indicates whether to return only reports that contain CVE information.\n\n- **true**, only reports with CVE data will be returned.\n- **false** or omitted, all reports will be included by default.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "has_rules",
+            "in": "query",
+            "description": "Indicates whether to return only reports that contain detection rules.\n\n- **true**, only reports with detection rule data will be returned.\n- **false** or omitted, all reports will be included by default.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "published_from",
+            "in": "query",
+            "description": "Specifies the start of the report publication time range (inclusive).\nSupports ISO8601 datetime format, e.g., `2024-09-01T00:00:00Z`.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "published_to",
+            "in": "query",
+            "description": "Specifies the end of the report publication time range (inclusive).\nSupports ISO8601 datetime format, e.g., `2024-10-01T00:00:00Z`.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from_tb_lab",
+            "in": "query",
+            "description": "Indicates whether to return only ThreatBook Lab exclusive reports.\n\n- **true**, only ThreatBook Lab–originated reports will be returned.\n- **false** or omitted, all reports (including open-source intelligence) will be included by default.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Specifies the number of records to return per page.\nThe default value is **20**, and the maximum allowed value is **100**.",
+            "required": false,
+            "example": 0,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Specifies the pagination cursor used to retrieve the next page of results.  \nIf omitted, the first page of results will be returned.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "cursor": {
+                          "type": "string",
+                          "description": "Cursor value used to retrieve the next page of results.  \nIf empty, it indicates that no additional data is available."
+                        },
+                        "total": {
+                          "type": "integer",
+                          "description": "Total number of records that match the query filters."
+                        },
+                        "limit": {
+                          "type": "integer",
+                          "description": "Number of records returned in the current page."
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "Unique identifier of the report. Used to query report details."
+                              },
+                              "title": {
+                                "type": "string",
+                                "description": "Title of the threat intelligence report."
+                              },
+                              "summary": {
+                                "type": "string",
+                                "description": "A summary describing the highlights of the report."
+                              },
+                              "source": {
+                                "type": "string",
+                                "description": "Indicates the origin of the report.  \nValues include **ThreatBook Lab** (exclusive content) or **Open Source**."
+                              },
+                              "published_time": {
+                                "type": "string",
+                                "description": "Publication time of the report in ISO8601 format."
+                              },
+                              "event_time": {
+                                "type": "string",
+                                "description": "Time of the associated incident or threat activity.  \nMay be aggregated to day, month, or year depending on source data."
+                              },
+                              "severity": {
+                                "type": "string",
+                                "description": "Severity level of the report (e.g., `low`, `high`, `critical`)."
+                              },
+                              "organizations": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "List of affected organizations referenced in the report."
+                              },
+                              "regions": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "List of affected regions or countries referenced in the report."
+                              },
+                              "industries": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "List of affected industries based on STIX II industry taxonomy."
+                              },
+                              "products": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "List of affected products referenced in the report."
+                              },
+                              "threat_type": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "One or more threat event types associated with the report."
+                              },
+                              "tags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "Set of extracted intelligence tags associated with the report.  Currently supported tag categories include:\n\n- **Threat Actors** \n- **Malware Families** \n- **Attack Tools**"
+                              },
+                              "cve_stats": {
+                                "type": "integer",
+                                "description": "Total number of CVE identifiers referenced in the report."
+                              },
+                              "reference_link": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "One or more external source URLs related to the report."
+                              },
+                              "ioc_stats": {
+                                "type": "object",
+                                "properties": {
+                                  "ip": {
+                                    "type": "integer"
+                                  },
+                                  "domain": {
+                                    "type": "integer"
+                                  },
+                                  "hash": {
+                                    "type": "integer"
+                                  },
+                                  "url": {
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "ip",
+                                  "domain",
+                                  "hash",
+                                  "url"
+                                ],
+                                "description": "Statistics of IOCs contained in the report, including the count of IPs, domains, hashes and URLs."
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "title",
+                              "summary",
+                              "source",
+                              "published_time",
+                              "event_time",
+                              "severity",
+                              "organizations",
+                              "regions",
+                              "industries",
+                              "products",
+                              "threat_type",
+                              "tags",
+                              "cve_stats",
+                              "reference_link",
+                              "ioc_stats"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "cursor",
+                        "total",
+                        "limit",
+                        "items"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Allowed value: \"Success\""
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "response_code",
+                    "msg"
+                  ]
+                },
+                "example": {
+                  "data": {
+                    "cursor": "d19ba003fbc998df0d299f2ff41607ad2ce6ecc2a573f5e0a152bedaa8ff2f591ef5329521d6e2ddbd5646a56918d3b33f652e36ab05bde0fd78000e27c7caccd3ecd8903b1914e4c2858f93ffe27a773ed388a338b65e40dcf0b7745e0df41a3ede6a33a561f100d522ce9a00af42103a728e2d0fbdbabced7ea70a4702640e83d03a2d48481e215d635c2292984be2bb6ecb35e5c5a1a7c08b4d8599a74d8efa0ee76153b83c8c985b7df1d6143c18b14a851faf7059a6ce448ecefd801911ff6433d234d4b21368d1297271eeab6bbcbb4b01608756b024779f600b33cd88c3bc08250a29c0125ff9d97f2f103a061b78d9282a080849262ce8718ae7b59f25f26a09213f1cee20110c82651b96341db0f09c0969896b6d9beb3bc7538812",
+                    "total": 2753,
+                    "limit": 20,
+                    "items": [
+                      {
+                        "id": "303012",
+                        "title": "Qilin Ransomware Targets Italian Automotive Leader Pieffe Auto Group",
+                        "summary": "In 2025, the activities of the ransomware group Qilin significantly increased, launching a series of cyberattacks against enterprises and mid-sized organizations across multiple industries. Qilin employs a double extortion strategy, not only encrypting victims' data but also threatening to publicly disclose sensitive information to exert pressure, resulting in severe financial and reputational losses for businesses. The attack targets span various sectors, including automotive manufacturing, beverage production, medical devices, food industry, and legal services, demonstrating its broad attack range and increasingly sophisticated tactics. Victims include well-known companies such as Pieffe Auto Group in Italy, Asahi Group in Japan, Beta Dyne in the United States, and Volkswagen in France. Security experts recommend that affected organizations strengthen their cybersecurity defenses, including continuous monitoring, incident response plans, backup validation, and employee defense training, to mitigate the risk of future attacks. Qilin's attacks not only disrupt business operations but may also trigger a ripple effect on societal infrastructure, highlighting the urgency of cybersecurity protection.",
+                        "source": "Open Source",
+                        "published_time": "2025-11-25T00:00:00Z",
+                        "event_time": "2025-09-17",
+                        "severity": "Critical",
+                        "organizations": [
+                          "Magna Hospitality Group",
+                          "SHRM New Mexico",
+                          "Rasi Laboratories",
+                          "Mango’s Tropical Cafe",
+                          "Beta Dyne",
+                          "PCB Uitvaartzorg",
+                          "Pro-Fab, Inc.",
+                          "Lorber, Greenfield & Polito, LLP",
+                          "Sol Trading",
+                          "Sugar Land",
+                          "Alma Realty",
+                          "Marine Foods Express LTD",
+                          "Real Estate Specialists",
+                          "CHDFS Inc",
+                          "Omrin",
+                          "Gadge USA",
+                          "Shollenberger Januzzi & Wolfe",
+                          "Volkswagen France",
+                          "Echo Lake Foods, Inc.",
+                          "Bagnoles NL",
+                          "Mmlk",
+                          "Gun Accessory Supply",
+                          "Volkswagen Group",
+                          "Volkswagen Company",
+                          "Fayette County",
+                          "WebCut Converting, Inc.",
+                          "Alissco Group",
+                          "Florida Mark Products Company",
+                          "Pieffe Auto Group",
+                          "Viabizzuno",
+                          "More Than Gourmet",
+                          "Regional Business Systems",
+                          "Bengal Industries",
+                          "Marine Turbine Technologies",
+                          "Tong Yang Group",
+                          "Executive Cabinetry",
+                          "Tri City Foods",
+                          "Trigg Laboratories",
+                          "Fundidora de Cananea, S.A.",
+                          "Asahi Group Holdings, Ltd.",
+                          "Rex-Hide",
+                          "UScraft"
+                        ],
+                        "regions": [
+                          "Netherlands",
+                          "United States",
+                          "Japan",
+                          "UAE",
+                          "Mexico",
+                          "Italy",
+                          "France"
+                        ],
+                        "industries": [
+                          "Healthcare",
+                          "Manufacturing",
+                          "Government"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "Ransomware"
+                        ],
+                        "tags": [
+                          "Qilin"
+                        ],
+                        "cve_stats": 0,
+                        "reference_link": [
+                          "https://www.dexpose.io/free-darkweb-report/",
+                          "https://www.dexpose.io/email-data-breach-scan/",
+                          "https://cybernews.com/news/bmw-ransomware-attack-everest-claim-everest-luxury-target-jlr-trend/",
+                          "https://cybernews.com/security/production-process-of-jaguar-land-rover-disrupted-by-cyberattack/",
+                          "https://cybernews.com/security/jaguar-jlr-cyberattack-claimed-by-salesforce-hackers-scattered-spider-shiny-hunters/",
+                          "https://cybernews.com/security/massive-salesforce-breach-campaign-started-on-github/",
+                          "https://cybernews.com/news/marks-spencer-breach-tcs-third-party-vendor-social-engineering-attack/",
+                          "https://cybernews.com/news/jaguar-land-rover-production-down-for-at-least-another-week-due-to-cyberattack/",
+                          "https://cybernews.com/security/bridgestone-cyberattack-auto-manufacturer-disrupted-jaguar-link/",
+                          "https://cybernews.com/ransomlooker/",
+                          "https://cybernews.com/security/texas-electric-coops-ransomware-attack/",
+                          "https://cybernews.com/news/asahi-beer-cyberattack-claimed-qilin-ransomware-stolen-data/",
+                          "https://cybernews.com/news/cal-club-ransomware-attack-california-golf-club-san-franscico-qilin-claims/",
+                          "https://cybernews.com/news/israel-shamir-medical-center-ransowmare-attack-qilin-8t-patient-data-stolen/",
+                          "https://cybernews.com/news/nissan-ransomware-attack-creative-box-creative-box-radesign-studio-qilin-group/",
+                          "https://cybernews.com/news/inotiv-ransomware-attack-qilin-pharma-research-testing-animal-cruelty-fines/",
+                          "https://cybernews.com/security/singer-associates-ransomware-attack-qilin/",
+                          "https://cybernews.com/news/sk-group-ransomware-attack-qilin-gang-claims-stolen-data/",
+                          "https://cybernews.com/security/lee-enterprises-cyberattack-impact/",
+                          "https://cybernews.com/news/houston-symphony-qilin-ransomware-attack/",
+                          "https://cybernews.com/security/television-station-detroit-pbs-hacked/",
+                          "https://cybernews.com/news/yanfeng-ransomware-attack-claimed-qilin/",
+                          "https://cybernews.com/news/cancer-hospital-breach-is-claimed-by-qilin-gang-in-new-ransomware-low/",
+                          "https://botcrawl.com/category/data-breaches/"
+                        ]
+                      },
+                      {
+                        "id": "299204",
+                        "title": "Under Medusa's Gaze: GoAnywhere Zero-Day Powers Ransomware Attacks",
+                        "summary": "On September 11, 2025, a critical deserialization vulnerability (CVE-2025-10035) was discovered in Fortra's GoAnywhere MFT software, allowing attackers to perform command injection and achieve remote code execution without authentication. The cybercriminal group Storm-1175 quickly exploited this vulnerability to carry out a series of attacks, including the deployment of Medusa ransomware. Attackers forged license response signatures to utilize the License Servlet for malware delivery, maintained persistent access using remote management tools such as SimpleHelp and MeshAgent, and exfiltrated data via Rclone. Following the discovery of the attack, Fortra immediately initiated an investigation and released hotfixes and formal patches on September 12 and 15, advising users to restrict internet access to the Admin Console and keep systems updated. Although Fortra acknowledged that the impact of the attack was limited, primarily affecting customers who exposed their Admin Consoles to the public internet, the incident highlighted the vulnerabilities enterprises face in cybersecurity and underscored the importance of timely patching and vulnerability management.",
+                        "source": "Open Source",
+                        "published_time": "2025-11-07T13:21:58Z",
+                        "event_time": "2025-09-10",
+                        "severity": "High",
+                        "organizations": [
+                          "Fortra"
+                        ],
+                        "regions": [
+                          "United States"
+                        ],
+                        "industries": [
+                          "Government"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "Ransomware",
+                          "Data Leakage"
+                        ],
+                        "tags": [
+                          "Storm-1175",
+                          "SimpleHelp",
+                          "Medusa"
+                        ],
+                        "cve_stats": 1,
+                        "reference_link": [
+                          "https://www.secpod.com/patch-management/",
+                          "https://www.secpod.com/schedule-demo-sign-up-trial/",
+                          "https://thehackernews.com/2025/10/microsoft-links-storm-1175-to.html",
+                          "https://www.databreachtoday.com/ondemand-transform-api-security-unmatched-discovery-defense-a-29329?rf=RAM_SeeAlso",
+                          "https://www.microsoft.com/en-us/security/blog/2025/10/06/investigating-active-exploitation-of-cve-2025-10035-goanywhere-managed-file-transfer-vulnerability/",
+                          "https://www.careersinfosecurity.com/ondemand-transform-api-security-unmatched-discovery-defense-a-29329?rf=RAM_SeeAlso",
+                          "https://thehackernews.com/2025/10/from-detection-to-patch-fortra-reveals.html",
+                          "https://thehackernews.com/2025/09/fortra-goanywhere-cvss-10-flaw.html",
+                          "https://www.spartechsoftware.com/glossary/ransomware/",
+                          "https://www.spartechsoftware.com/glossary/authentication/",
+                          "https://www.spartechsoftware.com/glossary/repos/",
+                          "https://www.spartechsoftware.com/glossary/credentials/",
+                          "https://www.spartechsoftware.com/glossary/phishing/",
+                          "https://www.spartechsoftware.com/glossary/malware/",
+                          "https://cyberscoop.com/fortra-goanywhere-vulnerability-exploitation/",
+                          "https://cyberscoop.com/goanywhere-file-transfer-service-vulnerability-september-2025/",
+                          "https://cyberscoop.com/goanywhere-vulnerability-active-exploitation-september-2025/",
+                          "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+                          "https://cyberscoop.com/microsoft-goanywhere-ransomware-storm-1175/",
+                          "https://www.theregister.com/2025/09/19/gortra_goanywhere_bug/",
+                          "https://www.theregister.com/2024/07/30/make_me_admin_esxi_flaw/",
+                          "https://www.theregister.com/2025/03/13/medusa_ransomware_infects_300_critical/",
+                          "https://www.theregister.com/2025/09/26/an_apts_playground_goanywhere_perfect10/"
+                        ]
+                      },
+                      {
+                        "id": "309625",
+                        "title": "Attackers Targeting Unpatched Cisco Equipment Notice Malware Implant Removal, Reinstall It Again",
+                        "summary": "In November 2025, Australia’s Signals Directorate (ASD) warned that attackers are installing an implant named “BADCANDY” on unpatched Cisco IOS XE devices, capable of detecting the deletion of their malware and reinstalling it. Attackers exploit the CVE-2023-20198 vulnerability, which allows control over Cisco devices. This flaw is widely exploited by the notorious Salt Typhoon group. The ASD noted that rebooting an infected device removes BADCANDY but does not reverse other actions taken by the attacker. Meanwhile, former defense contractor executive Peter Williams pleaded guilty to selling national security-related exploits to a Russian company that does business with the Kremlin. Williams admitted to selling at least eight sensitive cyber-exploit components, gaining approximately $1.3 million in illegal profits. Lastly, Palo Alto Networks warned that a new Windows malware named “Airstalk” may be used by a nation-state actor to create a command and control channel within Omnissa’s Workspace ONE management software to steal user data.",
+                        "source": "Open Source",
+                        "published_time": "2025-11-03T05:26:04Z",
+                        "event_time": "2025-11",
+                        "severity": "High",
+                        "regions": [
+                          "Australia"
+                        ],
+                        "industries": [
+                          "Government"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "APT",
+                          "Data Breach"
+                        ],
+                        "tags": [
+                          "TapTrap",
+                          "Salt Typhoon",
+                          "Airstalk",
+                          "BadCandy"
+                        ],
+                        "cve_stats": 1,
+                        "reference_link": [
+                          "https://www.theregister.com/2023/10/23/cisco_iosxe_fix/",
+                          "https://www.theregister.com/2025/08/28/china_salt_typhoon_alert/",
+                          "https://www.theregister.com/2025/10/24/former_l3harris_cyber_director_charged/",
+                          "https://unit42.paloaltonetworks.com/new-windows-based-malware-family-airstalk/",
+                          "https://www.theregister.com/security/cyber_crime/"
+                        ]
+                      },
+                      {
+                        "id": "309576",
+                        "title": "Malicious Pokémon Add-ons Found on VS Code Marketplace",
+                        "summary": "In November 2025, security researchers discovered five malicious VS Code extensions published by a developer using the alias \\\"DevelopmentInc.\\\" These extensions masquerade as developer tools but actually download and execute malicious code. Upon activation, they download malware from an attacker-controlled server through a hidden \\\"activate()\\\" function, saving it as sap.exe and executing it. The malware has been identified as Monero cryptocurrency mining software, capable of privilege escalation, disabling Windows Defender, and achieving persistence. It selects the nearest mining pool, downloads a region-specific mining executable, and runs it. These extensions have been removed from the marketplace, but similar threats may quickly resurface.",
+                        "source": "Open Source",
+                        "published_time": "2025-11-01T10:10:00Z",
+                        "event_time": "2025-11",
+                        "severity": "Low",
+                        "industries": [
+                          "Technology"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "Crypto Mining",
+                          "APT"
+                        ],
+                        "tags": [
+                          "Monero"
+                        ],
+                        "cve_stats": 0,
+                        "reference_link": [
+                          "https://www.google.com/preferences/source?q=cybernews.com"
+                        ]
+                      },
+                      {
+                        "id": "309603",
+                        "title": "How Attackers Use DLL Search Order Substitution to Secretly Run Malicious Code",
+                        "summary": "In November 2025, cyber attack activities targeting the telecommunications and manufacturing sectors in Central and South Asia were confirmed to be associated with the Naikon cybercriminal organization. This group has been active since 2010, primarily targeting government, military, and civilian organizations in Southeast Asia. The attacks utilized backdoors such as PlugX, RainyDay, and Turian, with attackers employing DLL search order hijacking techniques to disguise malicious code as legitimate programs. Investigations revealed significant similarities between Naikon and BackdoorDiplomacy in terms of target selection and encryption methods, suggesting that they may share resources or technology. The malware used in the attacks exhibited similar decryption logic and RC4 keys, indicating the attackers' ongoing utilization and improvement of these tools, reflecting the long-term and complex nature of their activities. Although no activity related to RainyDay and Turian was observed, the technical similarities imply that these attacks may have been carried out by the same or related groups of attackers, showcasing how mature cyber attack groups evolve and combine techniques to hide their tracks and expand their reach.",
+                        "source": "Open Source",
+                        "published_time": "2025-11-01T09:34:50Z",
+                        "event_time": "2025-11",
+                        "severity": "Critical",
+                        "organizations": [
+                          "23andme",
+                          "380000 sites affected by polyfill.io javascript events"
+                        ],
+                        "regions": [
+                          "中国台湾地区",
+                          "中国"
+                        ],
+                        "industries": [
+                          "Manufacturing"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "APT",
+                          "Data Breach"
+                        ],
+                        "tags": [
+                          "PlugX",
+                          "Naikon",
+                          "RainyDay",
+                          "turian"
+                        ],
+                        "cve_stats": 0,
+                        "reference_link": [
+                          "https://securelist.com/analysis/publications/69953/the-naikon-apt/",
+                          "https://threatconnect.com/wp-content/uploads/ThreatConnect-Project-Camera-Shy-Report.pdf",
+                          "https://www.welivesecurity.com/2021/06/10/backdoordiplomacy-upgrading-quarian-turian/",
+                          "https://www.bitdefender.com/files/News/CaseStudies/study/426/Bitdefender-PR-Whitepaper-BackdoorDiplomacy-creat6507-en-EN.pdf",
+                          "https://www.bitdefender.com/files/News/CaseStudies/study/396/Bitdefender-PR-Whitepaper-NAIKON-creat5397-en-EN.pdf",
+                          "https://research.checkpoint.com/2020/naikon-apt-cyber-espionage-reloaded/",
+                          "https://securelist.com/the-leap-of-a-cycldek-related-threat-actor/101243/"
+                        ]
+                      },
+                      {
+                        "id": "309624",
+                        "title": "‘RalfHacker’ identified as AdaptixC2 developer with ties to Russia",
+                        "summary": "In October 2025, cybersecurity researchers discovered that a threat actor with ties to Russia, known as \\\"RalfHacker,\\\" may be a developer of the AdaptixC2 framework and manages a related sales channel on Telegram. AdaptixC2 is described as an increasingly popular open-source post-exploitation framework that was initially used for red team testing but is now actively weaponized by malicious actors. Research indicates that AdaptixC2 spreads through social engineering on Microsoft Teams, where attackers impersonate help desk staff to lure victims into initiating remote sessions. AdaptixC2 has been observed in attacks involving Akira and Fog ransomware. Its modular architecture, cross-platform support, and flexible command-and-control channels make it highly effective for stealth and lateral movement. Due to its open-source nature, AdaptixC2 has attracted a large number of threat actors, offering capabilities that rival commercial tools like Cobalt Strike, but without the high licensing fees.",
+                        "source": "Open Source",
+                        "published_time": "2025-10-31T15:26:11Z",
+                        "event_time": "2025-10",
+                        "severity": "High",
+                        "industries": [
+                          "Technology"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "APT",
+                          "Data Breach"
+                        ],
+                        "tags": [
+                          "adaptixc2",
+                          "BINGO",
+                          "Akira"
+                        ],
+                        "cve_stats": 0,
+                        "reference_link": [
+                          "https://www.silentpush.com/blog/adaptix-c2/",
+                          "https://www.scworld.com/news/adaptixc2-spread-through-malicious-npm-package",
+                          "https://www.scworld.com/news/open-source-pentesting-tool-adaptixc2-increasingly-used-in-cyberattacks",
+                          "https://securelist.com/adaptixc2-agent-found-in-an-npm-package/117784/",
+                          "https://unit42.paloaltonetworks.com/adaptixc2-post-exploitation-framework/"
+                        ]
+                      },
+                      {
+                        "id": "309629",
+                        "title": "Rhysida OysterLoader malvertising campaign leverages over 40 code-signing certificates.",
+                        "summary": "In June 2025, the Rhysida ransomware gang launched a new malvertising campaign, utilizing over 40 code-signing certificates to spread the OysterLoader malware. OysterLoader is used to gain initial access to a victim's machine for the deployment of a persistent backdoor and other payloads, including the Rhysida ransomware. The gang conducts malvertising on platforms such as Google and Bing, imitating popular software like Microsoft Teams, PuTTy, and Zoom to trick users into installing OysterLoader. Rhysida has also exploited Microsoft's Trusted Signing system in an attempt to obtain certificates, with Microsoft having revoked more than 200 certificates associated with this campaign. In addition to OysterLoader, Rhysida has also employed Latrodectus malware in its operations. Since its establishment in 2021, the gang has conducted numerous attacks against governments, healthcare organizations, and other critical infrastructure sectors.",
+                        "source": "Open Source",
+                        "published_time": "2025-10-31T15:17:54Z",
+                        "event_time": "2025-06",
+                        "severity": "High",
+                        "organizations": [
+                          "Oregon Department of Environmental Quality",
+                          "Maryland Department of Transportation",
+                          "Cookeville Regional Medical Center"
+                        ],
+                        "regions": [
+                          "United States"
+                        ],
+                        "industries": [
+                          "Healthcare",
+                          "Government"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "Ransomware",
+                          "Data Breach",
+                          "拒绝服务事件"
+                        ],
+                        "tags": [
+                          "Broomstick",
+                          "CleanUpLoader",
+                          "Latrodectus",
+                          "Rhysida"
+                        ],
+                        "cve_stats": 0,
+                        "reference_link": [
+                          "https://www.scworld.com/brief/malvertising-campaign-deploys-oyster-backdoor-via-trojanized-software-installers",
+                          "https://www.scworld.com/brief/vanilla-tempests-rhysida-ransomware-attacks-foiled",
+                          "https://www.scworld.com/news/latrodectus-uses-sandbox-evasion-techniques-to-launch-malicious-payloads",
+                          "https://www.scworld.com/brief/oregon-agencys-1-3m-files-leaked-by-rhysida-ransomware-gang",
+                          "https://www.scworld.com/brief/rhysida-admits-cookville-regional-medical-center-compromise",
+                          "https://www.scworld.com/brief/maryland-transportation-department-reports-cyberattack-amid-rhysida-claims"
+                        ]
+                      },
+                      {
+                        "id": "309528",
+                        "title": "LANSCOPE Endpoint Manager Zero-Day Vulnerability Exploited by Threat Actors to Steal Data",
+                        "summary": "In April 2025, the BRONZE BUTLER group exploited the CVE-2025-61932 zero-day vulnerability in Motex LANSCOPE Endpoint Manager to target Japanese organizations and steal sensitive information. This vulnerability allows remote attackers to execute arbitrary code with SYSTEM privileges and affects version 9.4.7.1 and earlier. The attackers used the Gokcpdoor backdoor malware as their command-and-control infrastructure and deployed the Havoc C2 framework on certain systems for data exfiltration. They utilized legitimate tools and cloud storage services to extract data, demonstrating an intent to acquire confidential information from the victim organizations. Affected organizations should immediately review the business justification for public exposure and apply security updates.",
+                        "source": "Open Source",
+                        "published_time": "2025-10-31T13:41:19Z",
+                        "event_time": "2025-04",
+                        "severity": "Critical",
+                        "organizations": [
+                          "Japanese Organization"
+                        ],
+                        "regions": [
+                          "Japan"
+                        ],
+                        "industries": [
+                          "Technology"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "APT",
+                          "Data Leakage"
+                        ],
+                        "tags": [
+                          "Gokcpdoor",
+                          "Hellcat",
+                          "REDBALDKNIGHT"
+                        ],
+                        "ioc_stats": {
+                          "ip": 5,
+                          "domain": 0,
+                          "hash": 4,
+                          "url": 0
+                        },
+                        "cve_stats": 1,
+                        "reference_link": [
+                          "https://www.secureworks.com/research/threat-profiles/bronze-butler",
+                          "https://cyberpress.org/nist-publishes-cybersecurity-control-overlays/",
+                          "https://news.sophos.com/en-us/2025/10/30/bronze-butler-exploits-japanese-asset-management-software-vulnerability/",
+                          "https://cyberpress.org/nezha-tool-to-run-commands-on-web-servers/"
+                        ]
+                      },
+                      {
+                        "id": "309627",
+                        "title": "Hacktivist Attacks on Critical Infrastructure Surge in Q3 2025",
+                        "summary": "In the third quarter of 2025, incidents of hacktivist attacks on industrial control systems (ICS) nearly doubled, with activities targeting critical infrastructure significantly increasing, accounting for 25% of all hacktivist attacks by September. The attackers primarily targeted sectors such as Energy, Utilities, Manufacturing, and Agriculture, including Russia-aligned hacker groups INTEID, Dark Engine, Sector 16, and Z-Pentest, with a focus on industrial infrastructure in Ukraine, EU, and NATO member states. Z-Pentest executed attacks on water utility and agricultural biotechnology systems in the U.S. and Taiwan. Additionally, the Belarusian groups Cyber Partisans BY and Silent Crow claimed to have breached the IT infrastructure of Russian state airline Aeroflot, resulting in flight delays and cancellations, and exfiltrating over 22TB of data. The Ukrainian Cyber Alliance and BO Team also announced a breach of a Russian military drone manufacturer, leaking engineering blueprints and surveillance footage. The hacker group Team BD Cyber Ninja launched a custom ransomware tool, while Liwa’ Muhammad released its Ransomware-as-a-Service (RaaS) named ‘BQTLock’. In the third quarter, Ukraine emerged as the primary target of hacktivist attacks, while the Philippines became a new high-risk target due to domestic unrest and corruption scandals.",
+                        "source": "Open Source",
+                        "published_time": "2025-10-31T08:33:47Z",
+                        "event_time": "2025-09",
+                        "severity": "Critical",
+                        "organizations": [
+                          "Aeroflot"
+                        ],
+                        "regions": [
+                          "United States",
+                          "Philippines",
+                          "Ukraine",
+                          "Taiwan",
+                          "Russia"
+                        ],
+                        "industries": [
+                          "Manufacturing",
+                          "Energy",
+                          "Government"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "Ransomware",
+                          "APT",
+                          "Data Leakage",
+                          "拒绝服务事件"
+                        ],
+                        "tags": [
+                          " Z-Pentest"
+                        ],
+                        "cve_stats": 0,
+                        "reference_link": [
+                          "https://cyble.com/blog/hacktivists-attacks-on-critical-infrastructure/",
+                          "https://cyble.com/knowledge-hub/what-is-hactivism/",
+                          "https://cyble.com/knowledge-hub/what-is-ddos-attack/",
+                          "https://cyble.com/knowledge-hub/what-is-ransomware/",
+                          "https://cyble.com/blog/russian-hacktivists-target-energy-and-water-infrastructure/",
+                          "https://cyble.com/blog/dark-web-activity-new-hacktivist-group-emerges/",
+                          "https://cyble.com/knowledge-hub/what-is-cybersecurity/",
+                          "https://thecyberexpress.com/hacktivist-ics-attacks-canada/",
+                          "https://cyble.com/knowledge-hub/top-10-biggest-cyber-attacks-2024-25-other-attacks/",
+                          "https://cyble.com/knowledge-hub/what-is-vulnerability-management/",
+                          "https://cyble.com/solutions/attack-surface-management/",
+                          "https://cyble.com/solutions/dark-web-monitoring/",
+                          "https://cyble.com/knowledge-hub/what-is-a-cyber-attack/",
+                          "https://cyble.com/external-threat-profile-report/"
+                        ]
+                      },
+                      {
+                        "id": "309143",
+                        "title": "Analysis Report on the Leaked Internal Chat Records of the Ransomware Group Black Basta",
+                        "summary": "On January 13, 2025, the U.S. government service provider Conduent experienced a severe data breach affecting the sensitive information of over 500,000 residents. Attackers infiltrated its network starting October 21, 2024, and continued for nearly three months, stealing data including names, Social Security numbers, and medical records. The ransomware group SafePay claimed responsibility for the attack and threatened to publicly release or sell the stolen data. In another incident, a former executive of L3Harris Technologies, a contractor for the Five Eyes alliance, was charged with stealing trade secrets and selling them to Russia, involving eight core trade secrets and resulting in illegal profits of up to $1.3 million. Additionally, internal chat logs from the Black Basta ransomware group were leaked, revealing their attack tools and tactics, providing crucial threat intelligence.",
+                        "source": "Open Source",
+                        "published_time": "2025-10-31T06:57:37Z",
+                        "event_time": "2025-01",
+                        "severity": "High",
+                        "organizations": [
+                          "Conduent",
+                          "Cisco",
+                          "OpenAI"
+                        ],
+                        "regions": [
+                          "Canada",
+                          "Myanmar",
+                          "United States",
+                          "United Kingdom",
+                          "Russia"
+                        ],
+                        "industries": [
+                          "Government"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "Ransomware",
+                          "Data Leakage"
+                        ],
+                        "tags": [
+                          "BlackBasta"
+                        ],
+                        "cve_stats": 0,
+                        "reference_link": [
+                          "https://cyberscoop.com/ex-l3harris-executive-accused-of-selling-trade-secrets-to-russia/",
+                          "https://cyberscoop.com/black-basta-internal-chat-leak/"
+                        ]
+                      },
+                      {
+                        "id": "298950",
+                        "title": "ShinyHunters Launches Data Leak Site: Trinity of Chaos Announces New Ransomware Victims",
+                        "summary": "In October 2025, the Trinity of Chaos ransomware group launched a large-scale cyberattack against 39 globally renowned companies through a vulnerability in Salesforce, including firms such as Google, Cisco, Toyota, and Disney. This group is associated with Lapsus$, Scattered Spider, and ShinyHunters, and has initiated a TOR Data Leak Site, threatening to release over 1.5 billion records after October 10. The leaked data primarily consists of a substantial amount of personally identifiable information (PII) and business records, lacking password protection, which could be exploited for malicious activities such as social engineering and identity theft. The attackers infiltrated the Salesforce environment using vishing and stolen OAuth tokens, leading to the data breach. The FBI has issued a warning urging companies to enhance monitoring of their Salesforce environments. This incident poses a threat not only to the legal compliance of the affected companies but may also trigger widespread privacy violation investigations, impacting security and trust across multiple industries. The activities of Trinity of Chaos signify an escalation in ransomware tactics, prompting urgent audits and incident responses across various sectors.",
+                        "source": "Open Source",
+                        "published_time": "2025-10-31T01:16:55Z",
+                        "event_time": "2025-10",
+                        "severity": "Critical",
+                        "organizations": [
+                          "Google",
+                          "Jaguar Land Rover",
+                          "Stellantis Group",
+                          "Vietnam Airlines",
+                          "Qantas Airways",
+                          "Qantas",
+                          "Aeromexico",
+                          "FedEx",
+                          "Stellantis",
+                          "Disney",
+                          "Toyota",
+                          "Qantas Airlines",
+                          "Cisco",
+                          "Air France",
+                          "Salesforce"
+                        ],
+                        "regions": [
+                          "Vietnam",
+                          "United States",
+                          "Mexico",
+                          "United Kingdom",
+                          "France",
+                          "Australia"
+                        ],
+                        "industries": [
+                          "Insurance"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "Ransomware",
+                          "Data Leakage",
+                          "Phishing"
+                        ],
+                        "tags": [
+                          "Trinity of Chaos",
+                          "Scattered Lapsus$",
+                          "ShinyHunters",
+                          "Scattered Spider"
+                        ],
+                        "cve_stats": 0,
+                        "reference_link": [
+                          "https://www.resecurity.com/blog/article/trinity-of-chaos-the-lapsus-shinyhunters-and-scattered-spider-alliance-embarks-on-global-cybercrime-spree",
+                          "https://www.resecurity.com/blog/article/shinyhunters-launches-data-leak-site-trinity-of-chaos-announces-new-ransomware-victims",
+                          "https://cyberpress.org/multiple-nvidia-vulnerabilities/",
+                          "https://cyberpress.org/pro-russian-ddos-dutch/",
+                          "https://securityaffairs.com/182918/cyber-crime/shinyhunters-launches-data-leak-site-trinity-of-chaos-announces-new-ransomware-victims.html",
+                          "https://www.4hou.com/posts/pn31",
+                          "https://www.4hou.com/index.php/posts/pn31"
+                        ]
+                      },
+                      {
+                        "id": "309626",
+                        "title": "Claude AI Vulnerability Exposes Enterprise Data Through Code Interpreter Exploit",
+                        "summary": "In October 2025, a cybersecurity incident in the United States involved Anthropic's Claude AI assistant. Security researcher Johann Rehberger revealed a new vulnerability in Claude's code interpreter feature, which attackers can manipulate through indirect prompt injection to silently exfiltrate enterprise data, bypassing default security settings. The attackers leveraged Claude's API infrastructure to send the stolen data directly to accounts they controlled. This exploit took advantage of a critical oversight in Claude's network access controls; while the default settings restricted outbound connections to approved domains, it still allowed access to api.anthropic.com, which attackers exploited for data theft.",
+                        "source": "Open Source",
+                        "published_time": "2025-10-31T00:00:00Z",
+                        "event_time": "2025-10",
+                        "severity": "High",
+                        "organizations": [
+                          "Anthropic"
+                        ],
+                        "regions": [
+                          "United States"
+                        ],
+                        "industries": [
+                          "Technology"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "Data Leakage",
+                          "Data Breach"
+                        ],
+                        "tags": [],
+                        "cve_stats": 0,
+                        "reference_link": []
+                      },
+                      {
+                        "id": "306916",
+                        "title": "New ChatGPT Atlas Browser Exploit Lets Attackers Plant Persistent Hidden Commands – Security This Day",
+                        "summary": "In February 2024 and October 2025, a severe cross-site request forgery (CSRF) vulnerability was discovered in OpenAI's ChatGPT Atlas browser, allowing attackers to inject malicious instructions into the AI's persistent memory and execute arbitrary code. This vulnerability enables attackers to perform malicious operations using the user's authentication privileges without their knowledge, resulting in the potential takeover of user accounts, browsers, or connected systems. Tests have shown that the phishing attack interception rate of the Atlas browser is extremely low, at only 5.8%, significantly lower than other mainstream browsers, exposing users to up to 90% additional security risks. Attackers use social engineering techniques to trick users into clicking malicious links, leveraging existing sessions to initiate CSRF requests and inject hidden instructions, which may lead to persistent impacts across all devices associated with the account. This incident highlights the vulnerabilities of AI browsers in terms of security, emphasizing the need for enterprises to treat browsers as critical infrastructure and take measures to enhance security defenses.",
+                        "source": "Open Source",
+                        "published_time": "2025-10-30T12:55:39Z",
+                        "event_time": "2024-02",
+                        "severity": "High",
+                        "organizations": [
+                          "OpenAI"
+                        ],
+                        "regions": [
+                          "United States"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "Data Leakage",
+                          "Phishing"
+                        ],
+                        "tags": [],
+                        "ioc_stats": {
+                          "ip": 0,
+                          "domain": 0,
+                          "hash": 0,
+                          "url": 1
+                        },
+                        "cve_stats": 0,
+                        "reference_link": [
+                          "https://thehackernews.com/2025/10/chatgpt-atlas-browser-can-be-tricked-by.html",
+                          "https://cybersecuritynews.com/openai-atlas-browser-vulnerability/",
+                          "https://gbhackers.com/openai-atlas-browser-vulnerability/",
+                          "https://thehackernews.com/2025/10/new-chatgpt-atlas-browser-exploit-lets.html",
+                          "https://cybersecuritynews.com/chatgpt-atlas-browser-jailbroken/",
+                          "https://cyberpress.org/hackers-exploit-atlas-browser-vulnerability/",
+                          "https://www.csoonline.com/article/520886/application-security-threat-watch-cross-site-request-forgery-csrf.html?utm=hybrid_search",
+                          "https://www.csoonline.com/article/3806674/chatgpt-lucker-ermoglicht-ddos-attacken.html",
+                          "https://www.csoonline.com/article/3494219/chatgpt-und-co-was-cisos-beim-einsatz-von-genai-beachten-sollten.html",
+                          "https://www.csoonline.com/article/4081836/atlas-browser-exploit-ermoglicht-angriff-auf-chatgpt-speicher.html"
+                        ]
+                      },
+                      {
+                        "id": "308211",
+                        "title": "Analysis of the Salesforce Data Breach Incident: Precision Attacks and Defense Strategies of APT Organizations",
+                        "summary": "In August 2025, the hacker group \\\"Scattered Lapsus$ Hunters\\\" successfully infiltrated the Salesforce system through two waves of attacks, stealing nearly 1.5 billion data records involving over 760 companies and organizations, including Google and Cisco. The first attack utilized phishing emails disguised as IT support personnel to lure employees into authorizing malicious OAuth applications, resulting in the leakage of sensitive information. The second wave of attacks involved breaching the chat platform of SalesLoft to obtain OAuth tokens integrated with Salesforce, further penetrating the CRM systems of multiple companies. This incident also exposed the \\\"ForceLeaked\\\" vulnerability related to AI prompt injection, allowing attackers to implant malicious instructions to retrieve sensitive data. The leaked data includes the identity information of government agents, potentially leading to security risks for these agents. The FBI has shut down the relevant leak sites, but the risk of data exposure remains. Salesforce has refused to pay the ransom, and hackers have threatened to publicly disclose the data, which could trigger a wider range of leak incidents.",
+                        "source": "Open Source",
+                        "published_time": "2025-10-30T04:00:21Z",
+                        "event_time": "2025-08",
+                        "severity": "Critical",
+                        "organizations": [
+                          "Google",
+                          "Cisco",
+                          "Cloudflare",
+                          "Salesforce"
+                        ],
+                        "industries": [
+                          "Government"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "APT",
+                          "Data Leakage"
+                        ],
+                        "tags": [
+                          "Hunters"
+                        ],
+                        "cve_stats": 0
+                      },
+                      {
+                        "id": "308794",
+                        "title": "Technology and social media platforms lead phishing attacks, report indicates.",
+                        "summary": "In the third quarter of 2025, phishing attacks significantly increased, primarily targeting digital services that users trust, with Microsoft becoming the most attacked brand, accounting for 40% of global phishing attempts. Google and Apple followed with 9% and 6%, respectively. PayPal and DHL re-entered the global top ten after a period of absence, reflecting attackers' focus on digital payment and logistics services. The research found that attackers used counterfeit websites (such as dhl-login-check[.]org and paypal-me[.]icu) to trick users into entering personal information, leveraging familiar brand appearances and emotional triggers like urgency to blur the line between legitimate and fraudulent online experiences. The technology sector remains the most targeted area, and phishing attacks are expected to increase further during Black Friday and Christmas, particularly in travel and logistics services.",
+                        "source": "Open Source",
+                        "published_time": "2025-10-29T14:56:57Z",
+                        "event_time": "2025-09",
+                        "severity": "Low",
+                        "organizations": [
+                          "PayPal",
+                          "Google",
+                          "Apple",
+                          "DHL",
+                          "Microsoft"
+                        ],
+                        "regions": [
+                          "United States"
+                        ],
+                        "industries": [
+                          "Financial-services",
+                          "Technology"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "Phishing",
+                          "Data Breach"
+                        ],
+                        "tags": [],
+                        "ioc_stats": {
+                          "ip": 0,
+                          "domain": 2,
+                          "hash": 0,
+                          "url": 0
+                        },
+                        "cve_stats": 0
+                      },
+                      {
+                        "id": "306848",
+                        "title": "Researchers find vulnerabilities in OpenAI’s Atlas agentic browser",
+                        "summary": "In October 2025, security researchers discovered serious vulnerabilities in the Atlas browser developed by OpenAI. Attackers can inject malicious instructions through cross-site request forgery (CSRF) to execute code remotely, affecting users' ChatGPT integration. Research by LayerX indicates that Atlas users face a 90% higher risk of phishing attacks compared to users of other non-AI browsers. Testing showed that Atlas failed to block 97% of real-world attacks, while Microsoft Edge and Google Chrome blocked 53% and 47% of threats, respectively. Additionally, NeuralTrust found that the Atlas \\\"omnibox\\\" can be used for prompt injection, allowing attackers to exploit specially crafted links to bypass security checks. OpenAI acknowledged that prompt injection is an unresolved security issue, and users are advised to handle sensitive data cautiously when using Atlas.",
+                        "source": "Open Source",
+                        "published_time": "2025-10-28T06:45:54Z",
+                        "event_time": "2025-10",
+                        "severity": "Low",
+                        "products": [],
+                        "threat_type": [
+                          "Data Leakage",
+                          "Phishing"
+                        ],
+                        "tags": [],
+                        "cve_stats": 0,
+                        "reference_link": []
+                      },
+                      {
+                        "id": "306178",
+                        "title": "Crafted URLs can trick OpenAI Atlas into running dangerous commands.",
+                        "summary": "In October 2025, a serious security vulnerability was discovered in the OpenAI Atlas browser, allowing attackers to exploit input parsing flaws through malicious instructions disguised as URLs, thereby executing prompt injection attacks. This vulnerability stems from Atlas's ambiguous handling of the boundary between trusted user input and untrusted content, enabling attackers to craft seemingly legitimate strings that entice users to paste or click in the address bar, leading to unauthorized actions. These actions may include redirection to phishing sites, deletion of user files, or bypassing security layers, posing a severe threat to user data security. Researchers point out that this vulnerability is not merely a coding error but a logical failure in trust boundaries, reflecting the widespread security risks inherent in AI-driven browsers. To address this issue, experts recommend implementing strict URL parsing, clear user mode selection, and minimal privilege prompts as protective measures to enhance security and prevent such attacks.",
+                        "source": "Open Source",
+                        "published_time": "2025-10-28T05:55:37Z",
+                        "event_time": "2025-10",
+                        "severity": "Low",
+                        "organizations": [
+                          "OpenAI"
+                        ],
+                        "regions": [],
+                        "products": [],
+                        "threat_type": [
+                          "Data Breach"
+                        ],
+                        "tags": [],
+                        "ioc_stats": {
+                          "ip": 0,
+                          "domain": 0,
+                          "hash": 0,
+                          "url": 2
+                        },
+                        "cve_stats": 0,
+                        "reference_link": [
+                          "https://neuraltrust.ai/blog/openai-atlas-omnibox-prompt-injection",
+                          "https://cybersecuritynews.com/promptfix-attack-tricks-ai-browsers/",
+                          "https://cybersecuritynews.com/phishing-attack/",
+                          "https://cybersecuritynews.com/chatgpt-atlas-exposes-users/",
+                          "https://cybersecuritynews.com/red-teaming-tool-redtiger/",
+                          "https://www.securityweek.com/ai-sidebar-spoofing-puts-chatgpt-atlas-perplexity-comet-and-other-browsers-at-risk/",
+                          "https://www.securityweek.com/red-teams-breach-gpt-5-with-ease-warn-its-nearly-unusable-for-enterprise/",
+                          "https://www.securityweek.com/grok-4-falls-to-a-jailbreak-two-days-after-its-release/",
+                          "https://informationsecuritybuzz.com/researchers-expose-gpt-5-jailbreak-that-bypasses-safety-controls/",
+                          "https://informationsecuritybuzz.com/zero-click-ai-vulnerability-echoleak-ms-365/",
+                          "https://informationsecuritybuzz.com/relying-on-ai-providers-to-protect/"
+                        ]
+                      },
+                      {
+                        "id": "306872",
+                        "title": "OpenAI Atlas Browser Vulnerability Allows Attackers to Execute Malicious Scripts in ChatGPT",
+                        "summary": "In October 2025, cybersecurity firm LayerX identified a critical vulnerability in OpenAI's ChatGPT Atlas browser that allows malicious actors to inject harmful instructions into ChatGPT's memory and execute remote code. This vulnerability exploits a Cross-Site Request Forgery (CSRF) attack, enabling attackers to leverage victims' ChatGPT authentication credentials to inject malicious instructions. When users interact with ChatGPT for legitimate purposes, these tainted memories can be triggered, potentially allowing attackers to gain control over user accounts, browsers, or connected systems. Users of the Atlas browser face heightened risks, as they are logged into ChatGPT by default, resulting in a success rate for attacks of up to 94%. LayerX's testing revealed that Atlas has extremely low defenses against web attacks, successfully blocking only 6% of malicious webpages, which is significantly lower than other traditional browsers. Attackers can exploit this vulnerability to generate code containing hidden backdoors, further jeopardizing user security.",
+                        "source": "Open Source",
+                        "published_time": "2025-10-28T05:13:11Z",
+                        "event_time": "2025-10",
+                        "severity": "Critical",
+                        "organizations": [
+                          "OpenAI"
+                        ],
+                        "regions": [
+                          "United States"
+                        ],
+                        "industries": [
+                          "Technology"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "Data Leakage",
+                          "Phishing"
+                        ],
+                        "tags": [],
+                        "cve_stats": 0,
+                        "reference_link": [
+                          "https://gbhackers.com/apt-hackers-abuse-chatgpt-to-develop-advanced-malware/",
+                          "https://gbhackers.com/phpmyadmin-csrf-vulnerability/",
+                          "https://www.google.com/preferences/source?q=https://gbhackers.com/"
+                        ]
+                      },
+                      {
+                        "id": "308383",
+                        "title": "Analysis of Persistent Memory Vulnerabilities and Security Risks in AI Browsers",
+                        "summary": "In October 2025, cybersecurity researchers discovered a new vulnerability in OpenAI's ChatGPT Atlas web browser, which allows attackers to inject malicious instructions into the AI assistant's memory, enabling the execution of arbitrary code. This vulnerability exploits a Cross-Site Request Forgery (CSRF) flaw, allowing attackers to inject hidden commands into ChatGPT's persistent memory without the user's knowledge. This attack could result in the user losing control over their account, browser, and connected systems while using ChatGPT normally. A report from LayerX Security highlights that the existence of this vulnerability poses serious security risks for users, particularly since malicious commands can persist after the AI's persistent memory has been compromised, remaining until the user manually deletes them. The impact of this vulnerability also includes the potential for AI agents to become a primary avenue for data leaks in corporate environments, as developers may unknowingly have hidden commands implanted when requesting code generation. Research indicates that ChatGPT Atlas's ability to defend against malicious web pages is significantly lower than that of traditional browsers, increasing user risk by 90%.",
+                        "source": "Open Source",
+                        "published_time": "2025-10-27T15:33:32Z",
+                        "event_time": "2025-10",
+                        "severity": "High",
+                        "products": [],
+                        "threat_type": [
+                          "Data Leakage",
+                          "Phishing"
+                        ],
+                        "tags": [],
+                        "cve_stats": 0,
+                        "reference_link": [
+                          "https://thehackernews.com/2025/10/chatgpt-atlas-browser-can-be-tricked-by.html",
+                          "https://thehackernews.com/2025/10/new-chatgpt-atlas-browser-exploit-lets.html"
+                        ]
+                      },
+                      {
+                        "id": "306634",
+                        "title": "Cybersecurity News Weekly Roundup October 27, 2025 ~",
+                        "summary": "San Mateo, CA, October 2025 — A series of events in the cybersecurity field have occurred. A malware distribution campaign known as the \\\"YouTube Ghost Network\\\" has been exploiting hacked YouTube accounts to spread stealer malware through fake tutorials and pirated software videos. Active since 2021, the network has seen a significant increase in activity in 2025. Chinese state-linked hackers are exploiting a critical Microsoft SharePoint vulnerability for espionage, affecting government, telecom, and financial networks across multiple countries. Attackers have utilized backdoor tools such as Zingdoor, ShadowPad, and KrustyLoader. Palo Alto Networks' Unit 42 has observed a shift in the threat group associated with Scattered Lapsus$ Hunters towards an \\\"extortion-as-a-service\\\" model, testing a new ransomware variant named SHINYSP1D3R. European law enforcement has dismantled a cybercrime-as-a-service network called SIMCARTEL, arresting seven suspects and seizing a significant amount of equipment and funds. Amazon Web Services (AWS) experienced a widespread outage that impacted millions of websites and applications. China has accused the U.S. National Security Agency of conducting cyberattacks against its National Time Service Center, claiming the use of various cyberattack weapons. Overall, these events reflect the complexity and global impact of cybersecurity threats.",
+                        "source": "Open Source",
+                        "published_time": "2025-10-27T12:00:00Z",
+                        "event_time": "2025-10",
+                        "severity": "High",
+                        "organizations": [
+                          "Meta",
+                          "Google",
+                          "Microsoft"
+                        ],
+                        "regions": [
+                          "United States",
+                          "China"
+                        ],
+                        "industries": [
+                          "Government"
+                        ],
+                        "products": [],
+                        "threat_type": [
+                          "Phishing",
+                          "Data Breach"
+                        ],
+                        "tags": [
+                          "KrustyLoader",
+                          "Hunters",
+                          "Scattered Lapsus$",
+                          "YouTube Ghost Network",
+                          "Zingdoor",
+                          "ShadowPad"
+                        ],
+                        "cve_stats": 0,
+                        "reference_link": [
+                          "https://thehackernews.com/2025/10/3000-youtube-videos-exposed-as-malware.html",
+                          "https://cyberscoop.com/ai-superintelligence-ban-open-letter-future-of-life-harry-meghan-tech-leaders/",
+                          "https://cyberscoop.com/whatsapp-wins-injunction-against-nso-group-spyware-damages-reduced/",
+                          "https://cybersecuritynews.com/toolshell-vulnerability-compromise-networks/",
+                          "https://www.infosecurity-magazine.com/news/scattered-lapsus-hunters-shift/",
+                          "https://www.bleepingcomputer.com/news/security/meta-launches-new-anti-scam-tools-for-whatsapp-and-messenger/",
+                          "https://www.infosecurity-magazine.com/news/criminal-sim-card-supply-network/",
+                          "https://www.bleepingcomputer.com/news/technology/aws-outage-crashes-amazon-prime-video-fortnite-perplexity-and-more/"
+                        ]
+                      }
+                    ]
+                  },
+                  "response_code": 200,
+                  "msg": "Success"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "204": {
+            "$ref": "#/components/responses/204",
+            "description": ""
+          },
+          "400": {
+            "$ref": "#/components/responses/400",
+            "description": ""
+          },
+          "401": {
+            "$ref": "#/components/responses/401",
+            "description": ""
+          },
+          "405": {
+            "$ref": "#/components/responses/405",
+            "description": ""
+          },
+          "429": {
+            "$ref": "#/components/responses/429",
+            "description": ""
+          },
+          "500": {
+            "$ref": "#/components/responses/500",
+            "description": ""
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {
+      "202": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    " In Progress"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 202
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": " In Progress",
+                  "response_code": 202
+                }
+              }
+            }
+          }
+        }
+      },
+      "204": {
+        "description": "",
+        "content": {}
+      },
+      "206": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string"
+                },
+                "response_code": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                  "response_code": 206
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Required:{resource/apikey}",
+                    "Invalid parameter:{parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 400
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Required:{resource/apikey}",
+                  "response_code": 400
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Invalid account status",
+                    "Invalid access IP: {actual IP address}",
+                    "Invalid API key",
+                    "Invalid key status",
+                    "No access to the API",
+                    "Expired API key",
+                    "No access to the file report",
+                    "No access to: {parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 401
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Invalid account status",
+                  "response_code": 401
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "No Report Found"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 404
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "No Report Found",
+                  "response_code": 404
+                }
+              }
+            }
+          }
+        }
+      },
+      "405": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "const": "Invalid API method"
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 405
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Invalid API method",
+                  "response_code": 405
+                }
+              }
+            }
+          }
+        }
+      },
+      "429": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Request rate limitation",
+                    "Beyond {daily/monthly/total} quotas limitation"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 429
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Request rate limitation",
+                  "response_code": 429
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "System error",
+                    "URL Download Fail"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 500
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "System error",
+                  "response_code": 500
+                }
+              }
+            }
+          }
+        }
+      },
+      "feeds": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "No access to: {parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 401
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "No access to: {parameter}",
+                  "response_code": 401
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "feeds": {
+        "bearerFormat": "JWT",
+        "description": "请输入您的 JWT 令牌。您可以调用 /login 接口获取该令牌。",
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

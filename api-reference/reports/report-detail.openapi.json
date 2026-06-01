@@ -1,0 +1,1201 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Report Detail",
+    "description": "Retrieve the full details of a specific **threat intelligence report**.  \nThis endpoint returns comprehensive information including report **severity**, **threat and report types**, **summary**, **tags**, targeted **industries/regions/organizations/products**, **impacts**, **ATT&CK techniques**, etc.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v2/reports/{id}": {
+      "get": {
+        "summary": "Report Detail",
+        "deprecated": false,
+        "description": "Retrieve the full details of a specific **threat intelligence report**.  \nThis endpoint returns comprehensive information including report **severity**, **threat and report types**, **summary**, **tags**, targeted **industries/regions/organizations/products**, **impacts**, **ATT&CK techniques**, etc.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the report.",
+            "required": true,
+            "example": "237576",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "query",
+            "description": "Unique identifier for API request.\n\nYou are able to get the key on \"My API\" page of threatbook.io.\n\nKindly note:\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "required": true,
+            "example": "c7a7dcdce9a44ee5b749b5c6201b47ee6281af26f6ac4afcb1d8067901cf79b3",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Unique identifier of the report. Used to query report details."
+                        },
+                        "title": {
+                          "type": "string",
+                          "description": "Title of the threat intelligence report."
+                        },
+                        "summary": {
+                          "type": "string",
+                          "description": "A summary describing the highlights of the report."
+                        },
+                        "category": {
+                          "type": "string",
+                          "description": "Report type. "
+                        },
+                        "targets": {
+                          "type": "object",
+                          "properties": {
+                            "regions": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              },
+                              "description": "Geographic countries affected. "
+                            },
+                            "industries": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              },
+                              "description": "Industries targeted in the incident (using STIX II industry taxonomy).  "
+                            },
+                            "products": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              },
+                              "description": "Products impacted."
+                            },
+                            "organizations": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              },
+                              "description": "Organizations referenced as targets.  "
+                            }
+                          },
+                          "required": [
+                            "regions",
+                            "industries",
+                            "products",
+                            "organizations"
+                          ],
+                          "description": "Information describing the entities affected in the incident.  \nIncludes:"
+                        },
+                        "impacts": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "desc": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "name",
+                              "desc",
+                              "type"
+                            ]
+                          },
+                          "description": "List of identified impacts and consequences caused by the incident.  "
+                        },
+                        "ttps": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "tactic_id": {
+                                "type": "string"
+                              },
+                              "tactic": {
+                                "type": "string"
+                              },
+                              "technique_id": {
+                                "type": "string"
+                              },
+                              "technique": {
+                                "type": "string"
+                              },
+                              "technique_desc": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "tactic_id",
+                              "tactic",
+                              "technique_id",
+                              "technique",
+                              "technique_desc"
+                            ]
+                          },
+                          "description": "ATT&CK technique and tactic information observed in the incident,  \nincluding tactic name, tactic ID, technique name, and technique ID."
+                        },
+                        "mitigations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "desc": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "name",
+                              "desc",
+                              "type"
+                            ]
+                          },
+                          "description": "Recommended temporary mitigations or remediation suggestions to reduce the threat."
+                        },
+                        "source": {
+                          "type": "string",
+                          "description": "Indicates the origin of the report.  \nValues include **ThreatBook Lab** (exclusive content) or **Open Source**."
+                        },
+                        "published_time": {
+                          "type": "string",
+                          "description": "Publication time of the report in ISO8601 format."
+                        },
+                        "update_time": {
+                          "type": "string",
+                          "description": "Update time of the report in ISO8601 format."
+                        },
+                        "event_time": {
+                          "type": "string",
+                          "description": "Time of the associated incident or threat activity.  \nMay be aggregated to day, month, or year depending on source data."
+                        },
+                        "severity": {
+                          "type": "string",
+                          "description": "Severity level of the report (e.g., `low`, `high`, `critical`)."
+                        },
+                        "malicious_commands": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "description": {
+                                "type": "string"
+                              },
+                              "script_type": {
+                                "type": "string"
+                              },
+                              "code": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "description": "Malicious command-line instructions observed in the report."
+                        },
+                        "malicious_scripts": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "description": {
+                                "type": "string"
+                              },
+                              "script_type": {
+                                "type": "string"
+                              },
+                              "code": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "description",
+                              "script_type",
+                              "code"
+                            ]
+                          },
+                          "description": "Malicious script content observed in the report."
+                        },
+                        "malcious_file": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "List of malicious file names referenced in the report."
+                        },
+                        "iocs": {
+                          "type": "object",
+                          "properties": {
+                            "ip": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "domain": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "hash": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "url": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "required": [
+                            "ip",
+                            "domain",
+                            "hash",
+                            "url"
+                          ],
+                          "description": "Structured IOC intelligence related to the activity.  \nMay include IP addresses, domains, URLs and file hashes."
+                        },
+                        "cves": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "cve_id": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "cve_id",
+                              "name"
+                            ]
+                          },
+                          "description": "List of vulnerabilities associated with the incident,  \nincluding CVE identifiers and vulnerability names."
+                        },
+                        "rules": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "description": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "string"
+                              },
+                              "code": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "threat_type": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "One or more threat event types associated with the report."
+                        },
+                        "tags": {
+                          "type": "object",
+                          "properties": {
+                            "virus_family": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "attack_tools": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "threat_actors": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "required": [
+                            "virus_family",
+                            "attack_tools",
+                            "threat_actors"
+                          ],
+                          "description": "Set of extracted intelligence tags associated with the report.  Currently supported tag categories include:\n\n- **Threat Actors** \n- **Malware Families** \n- **Attack Tools**"
+                        },
+                        "reference_link": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "One or more external source URLs related to the report."
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "title",
+                        "summary",
+                        "category",
+                        "targets",
+                        "impacts",
+                        "ttps",
+                        "mitigations",
+                        "source",
+                        "published_time",
+                        "update_time",
+                        "event_time",
+                        "severity",
+                        "malicious_commands",
+                        "malicious_scripts",
+                        "malcious_file",
+                        "iocs",
+                        "rules",
+                        "threat_type",
+                        "tags",
+                        "reference_link",
+                        "cves"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Allowed value: \"Success\""
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "response_code",
+                    "msg"
+                  ]
+                },
+                "example": {
+                  "data": {
+                    "id": "303012",
+                    "title": "Qilin Ransomware Targets Italian Automotive Leader Pieffe Auto Group",
+                    "summary": "In 2025, the activities of the ransomware group Qilin significantly increased, launching a series of cyberattacks against enterprises and mid-sized organizations across multiple industries. Qilin employs a double extortion strategy, not only encrypting victims' data but also threatening to publicly disclose sensitive information to exert pressure, resulting in severe financial and reputational losses for businesses. The attack targets span various sectors, including automotive manufacturing, beverage production, medical devices, food industry, and legal services, demonstrating its broad attack range and increasingly sophisticated tactics. Victims include well-known companies such as Pieffe Auto Group in Italy, Asahi Group in Japan, Beta Dyne in the United States, and Volkswagen in France. Security experts recommend that affected organizations strengthen their cybersecurity defenses, including continuous monitoring, incident response plans, backup validation, and employee defense training, to mitigate the risk of future attacks. Qilin's attacks not only disrupt business operations but may also trigger a ripple effect on societal infrastructure, highlighting the urgency of cybersecurity protection.",
+                    "category": "Incident Analysis",
+                    "targets": {
+                      "organizations": [
+                        "Magna Hospitality Group",
+                        "SHRM New Mexico",
+                        "Rasi Laboratories",
+                        "Mango’s Tropical Cafe",
+                        "Beta Dyne",
+                        "PCB Uitvaartzorg",
+                        "Pro-Fab, Inc.",
+                        "Lorber, Greenfield & Polito, LLP",
+                        "Sol Trading",
+                        "Sugar Land",
+                        "Alma Realty",
+                        "Marine Foods Express LTD",
+                        "Real Estate Specialists",
+                        "CHDFS Inc",
+                        "Omrin",
+                        "Gadge USA",
+                        "Shollenberger Januzzi & Wolfe",
+                        "Volkswagen France",
+                        "Echo Lake Foods, Inc.",
+                        "Bagnoles NL",
+                        "Mmlk",
+                        "Gun Accessory Supply",
+                        "Volkswagen Group",
+                        "Volkswagen Company",
+                        "Fayette County",
+                        "WebCut Converting, Inc.",
+                        "Alissco Group",
+                        "Florida Mark Products Company",
+                        "Pieffe Auto Group",
+                        "Viabizzuno",
+                        "More Than Gourmet",
+                        "Regional Business Systems",
+                        "Bengal Industries",
+                        "Marine Turbine Technologies",
+                        "Tong Yang Group",
+                        "Executive Cabinetry",
+                        "Tri City Foods",
+                        "Trigg Laboratories",
+                        "Fundidora de Cananea, S.A.",
+                        "Asahi Group Holdings, Ltd.",
+                        "Rex-Hide",
+                        "UScraft"
+                      ],
+                      "regions": [
+                        "Netherlands",
+                        "United States",
+                        "Japan",
+                        "UAE",
+                        "Mexico",
+                        "Italy",
+                        "France"
+                      ],
+                      "industries": [
+                        "Healthcare",
+                        "Manufacturing",
+                        "Government"
+                      ],
+                      "products": []
+                    },
+                    "impacts": [
+                      {
+                        "name": "Sensitive Information Disclosure",
+                        "desc": "The Qilin organization threatens to publicly disclose sensitive customer data of Mmlk, which may include personal identification information and legal documents.",
+                        "type": "Data Breach"
+                      },
+                      {
+                        "name": "Business Disruption",
+                        "desc": "Due to facing ransomware threats, Mmlk may need to suspend certain services to address the security incident, affecting normal operations.",
+                        "type": "Business Disruption"
+                      }
+                    ],
+                    "ttps": [
+                      {
+                        "tactic_id": "TA0043",
+                        "tactic": "Reconnaissance",
+                        "technique_id": "T1589",
+                        "technique": "Gather Victim Identity Information",
+                        "technique_desc": "Attackers may collect victim identity information by monitoring the dark web, forums, and other channels. This information may include email addresses, domain names, and other critical data."
+                      },
+                      {
+                        "tactic_id": "TA0043",
+                        "tactic": "Reconnaissance",
+                        "technique_id": "T1595",
+                        "technique": "Active Scanning",
+                        "technique_desc": "Attackers may actively scan target networks to identify potential vulnerabilities or exploitable entry points. Recommendations mentioned in the article include using the DeXpose platform to monitor dark web and information theft activities, indicating that attackers may have obtained sensitive information about the target through scanning or other means."
+                      },
+                      {
+                        "tactic_id": "TA0043",
+                        "tactic": "Reconnaissance",
+                        "technique_id": "T1592",
+                        "technique": "Gather Victim Host Information",
+                        "technique_desc": "Attackers may collect information about target hosts by monitoring the victim's domain names, email addresses, and activities of key personnel. This information is typically used in subsequent attack phases, such as credential access or data theft."
+                      },
+                      {
+                        "tactic_id": "TA0043",
+                        "tactic": "Reconnaissance",
+                        "technique_id": "T1598.002",
+                        "technique": "Spearphishing Attachment",
+                        "technique_desc": "Attackers may send malicious attachments via spear-phishing emails to gain initial access. The article suggests conducting phishing simulations to enhance employee defenses, indicating that attackers may exploit this technique for initial access."
+                      },
+                      {
+                        "tactic_id": "TA0042",
+                        "tactic": "Resource Development",
+                        "technique_id": "T1588",
+                        "technique": "Obtain Capabilities",
+                        "technique_desc": "Attackers recruit affiliate groups through a Ransomware-as-a-Service (RaaS) model to expand their attack capabilities. In this article, the Qilin group recruits affiliates through Russian hacker forums and avoids attacking CIS countries, suggesting possible ties to the Kremlin."
+                      },
+                      {
+                        "tactic_id": "TA0001",
+                        "tactic": "Initial Access",
+                        "technique_id": "T1566",
+                        "technique": "Phishing",
+                        "technique_desc": "Attackers may test and exploit employees' security awareness weaknesses through phishing simulation attacks to gain initial access."
+                      },
+                      {
+                        "tactic_id": "TA0001",
+                        "tactic": "Initial Access",
+                        "technique_id": "T1190",
+                        "technique": "Exploit Public-Facing Application",
+                        "technique_desc": "Attackers may gain initial access by exploiting publicly available application vulnerabilities. The article recommends conducting compromise assessments to determine how attackers infiltrated the network, indicating that attackers may have exploited public vulnerabilities for initial access."
+                      },
+                      {
+                        "tactic_id": "TA0001",
+                        "tactic": "Initial Access",
+                        "technique_id": "T1566.001",
+                        "technique": "Spearphishing Attachment",
+                        "technique_desc": "Attackers may send malicious attachments via spear-phishing emails to trick target users into opening and executing malicious code. This method is commonly used to gain initial access."
+                      },
+                      {
+                        "tactic_id": "TA0002",
+                        "tactic": "Execution",
+                        "technique_id": "T1204",
+                        "technique": "User Execution",
+                        "technique_desc": "Attackers may induce users to perform malicious actions, such as opening malicious attachments or clicking on malicious links, through phishing simulations or exploiting weak passwords. This method is typically used in the initial access phase."
+                      },
+                      {
+                        "tactic_id": "TA0003",
+                        "tactic": "Persistence",
+                        "technique_id": "T1505",
+                        "technique": "Server Software Component",
+                        "technique_desc": "Attackers may maintain persistent access by implanting malicious code in server software components. The article suggests conducting a comprehensive compromise assessment to determine if any persistence mechanisms are in place, indicating that attackers may have used this technique."
+                      },
+                      {
+                        "tactic_id": "TA0004",
+                        "tactic": "Privilege Escalation",
+                        "technique_id": "T1053",
+                        "technique": "Scheduled Task/Job",
+                        "technique_desc": "Attackers may maintain access to victim systems by creating scheduled tasks or jobs. The article recommends conducting a thorough incident review to detect persistence mechanisms, indicating that attackers may have used this technique."
+                      },
+                      {
+                        "tactic_id": "TA0004",
+                        "tactic": "Privilege Escalation",
+                        "technique_id": "T1547",
+                        "technique": "Boot or Logon Autostart Execution",
+                        "technique_desc": "Attackers may achieve persistence by modifying system boot or login configurations, such as adding malicious programs to startup items to ensure that malicious code can still execute after system restarts."
+                      },
+                      {
+                        "tactic_id": "TA0004",
+                        "tactic": "Privilege Escalation",
+                        "technique_id": "T1547.001",
+                        "technique": "Registry Run Keys / Startup Folder",
+                        "technique_desc": "Attackers may achieve persistence by modifying registry run keys or placing malicious files in startup folders. This technique allows malware to run automatically at system startup."
+                      },
+                      {
+                        "tactic_id": "TA0005",
+                        "tactic": "Defense Evasion",
+                        "technique_id": "T1562",
+                        "technique": "Impair Defenses",
+                        "technique_desc": "Attackers may attempt to weaken the victim's defenses by disabling or circumventing security tools (such as backup systems), thereby increasing the success rate of ransomware encryption or data deletion."
+                      },
+                      {
+                        "tactic_id": "TA0005",
+                        "tactic": "Defense Evasion",
+                        "technique_id": "T1070",
+                        "technique": "Indicator Removal",
+                        "technique_desc": "Attackers may leverage external threat sources, including compromise indicators (IOCs) provided by DeXpose, to integrate them into SIEM or XDR platforms for real-time alerts and correlation."
+                      },
+                      {
+                        "tactic_id": "TA0005",
+                        "tactic": "Defense Evasion",
+                        "technique_id": "T1070.004",
+                        "technique": "File Deletion",
+                        "technique_desc": "Attackers may attempt to delete backup files or encrypt backup data to prevent victims from mitigating the impact of the attack through recovery mechanisms. This is typically part of a ransomware attack."
+                      },
+                      {
+                        "tactic_id": "TA0005",
+                        "tactic": "Defense Evasion",
+                        "technique_id": "T1562.001",
+                        "technique": "Disable or Modify Tools",
+                        "technique_desc": "Attackers may strengthen employee defenses by running phishing simulations and enforcing multi-factor authentication (MFA) to prevent attackers from exploiting weak or reused credentials from the dark web."
+                      },
+                      {
+                        "tactic_id": "TA0005",
+                        "tactic": "Defense Evasion",
+                        "technique_id": "T1078",
+                        "technique": "Valid Accounts",
+                        "technique_desc": "Attackers may use weak or reused credentials obtained from the dark web to access target systems. These credentials may have been acquired through information-stealing malware infections or other data breach incidents."
+                      },
+                      {
+                        "tactic_id": "TA0006",
+                        "tactic": "Credential Access",
+                        "technique_id": "T1555",
+                        "technique": "Credentials from Password Stores",
+                        "technique_desc": "Attackers may utilize information theft tools to obtain leaked credentials from the dark web or other sources, which may be used for further access to the victim's systems."
+                      },
+                      {
+                        "tactic_id": "TA0006",
+                        "tactic": "Credential Access",
+                        "technique_id": "T1528",
+                        "technique": "Steal Application Access Token",
+                        "technique_desc": "Attackers may obtain leaked credentials from dark web and information theft monitoring platforms to use these credentials for access during attacks."
+                      },
+                      {
+                        "tactic_id": "TA0006",
+                        "tactic": "Credential Access",
+                        "technique_id": "T1552",
+                        "technique": "Unsecured Credentials",
+                        "technique_desc": "Attackers may utilize weak or reused credentials obtained from the dark web to access systems. These credentials may have been leaked through information-stealing malware or other means."
+                      },
+                      {
+                        "tactic_id": "TA0008",
+                        "tactic": "Lateral Movement",
+                        "technique_id": "T1021.001",
+                        "technique": "Remote Desktop Protocol",
+                        "technique_desc": "Attackers gain unauthorized access to target systems by exploiting vulnerabilities or weaknesses in the Remote Desktop Protocol (RDP). The Qilin ransomware organization achieves initial access by exploiting RDP vulnerabilities to enter the victim's network."
+                      },
+                      {
+                        "tactic_id": "TA0008",
+                        "tactic": "Lateral Movement",
+                        "technique_id": "T1570",
+                        "technique": "Lateral Tool Transfer",
+                        "technique_desc": "After gaining internal system access, attackers may move laterally to further compromise production lines or access sensitive documents. This technique is commonly used to expand the attack surface and increase pressure on the victim."
+                      },
+                      {
+                        "tactic_id": "TA0009",
+                        "tactic": "Collection",
+                        "technique_id": "T1114",
+                        "technique": "Email Collection",
+                        "technique_desc": "Attackers may further implement attacks by collecting email addresses or related information. The article mentions that the DeXpose platform can scan for email exposure among employees or partners, indicating that attackers may exploit email information for attacks."
+                      },
+                      {
+                        "tactic_id": "TA0009",
+                        "tactic": "Collection",
+                        "technique_id": "T1119",
+                        "technique": "Automated Collection",
+                        "technique_desc": "Attackers may use automated tools to collect sensitive information about the target organization, including employee email addresses and partner data. This information may be used for subsequent attack activities."
+                      },
+                      {
+                        "tactic_id": "TA0009",
+                        "tactic": "Collection",
+                        "technique_id": "T1213",
+                        "technique": "Data from Information Repositories",
+                        "technique_desc": "Attackers stole 150 GB of sensitive data, including customer records, business documents, and vehicle information. This data may be stored in information repositories, such as databases or file storage systems, from which attackers accessed the data."
+                      },
+                      {
+                        "tactic_id": "TA0009",
+                        "tactic": "Collection",
+                        "technique_id": "T1530",
+                        "technique": "Data from Cloud Storage",
+                        "technique_desc": "Attackers may obtain sensitive data from the target organization through dark web and leaked database monitoring platforms, which may include stolen credentials, leaked databases, and other sensitive information related to the target."
+                      },
+                      {
+                        "tactic_id": "TA0011",
+                        "tactic": "Command and Control",
+                        "technique_id": "T1105",
+                        "technique": "Ingress Tool Transfer",
+                        "technique_desc": "Attackers may use remote tools to achieve command and control functionality, thereby maintaining access to the victim's network."
+                      },
+                      {
+                        "tactic_id": "TA0011",
+                        "tactic": "Command and Control",
+                        "technique_id": "T1071",
+                        "technique": "Application Layer Protocol",
+                        "technique_desc": "The Qilin ransomware group may use application layer protocols for command and control communication to maintain control within the target system and implement ransom strategies. The article mentions that attackers conduct attacks through multi-stage ransomware deployment and advanced evasion techniques, which may include command and control communication."
+                      },
+                      {
+                        "tactic_id": "TA0011",
+                        "tactic": "Command and Control",
+                        "technique_id": "T1071.001",
+                        "technique": "Web Protocols",
+                        "technique_desc": "Attackers may conduct command and control communication with victim systems through application layer protocols (such as HTTP or HTTPS). The article mentions that the Qilin ransomware group requests contact through specified channels, indicating that this technique may have been used."
+                      },
+                      {
+                        "tactic_id": "TA0011",
+                        "tactic": "Command and Control",
+                        "technique_id": "T1573",
+                        "technique": "Encrypted Channel",
+                        "technique_desc": "Attackers use encrypted command and control networks to hide communication content and avoid detection. The Qilin ransomware group uses encrypted command networks for communication to ensure that their activities are not detected by security monitoring tools."
+                      },
+                      {
+                        "tactic_id": "TA0010",
+                        "tactic": "Exfiltration",
+                        "technique_id": "T1537",
+                        "technique": "Transfer Data to Cloud Account",
+                        "technique_desc": "Attackers may implement data theft by transferring stolen data to cloud storage accounts. This method is typically used to ensure that data can be securely stored and accessed outside the victim's network."
+                      },
+                      {
+                        "tactic_id": "TA0010",
+                        "tactic": "Exfiltration",
+                        "technique_id": "T1020",
+                        "technique": "Automated Exfiltration",
+                        "technique_desc": "Attackers extract sensitive data from the victim's systems using automated tools. In this article, the Qilin ransomware group claims to have stolen approximately 2,000 files and 150 GB of data, including customer, employee, and business information, as well as detailed information such as vehicle identification numbers (VINs) and license plate numbers."
+                      },
+                      {
+                        "tactic_id": "TA0010",
+                        "tactic": "Exfiltration",
+                        "technique_id": "T1030",
+                        "technique": "Data Transfer Size Limits",
+                        "technique_desc": "Attackers may leverage external threat sources, including compromise indicators (IOCs) provided by DeXpose, to integrate them into SIEM or XDR platforms for real-time alerts and correlation, thereby gaining intelligence before data breaches occur."
+                      },
+                      {
+                        "tactic_id": "TA0040",
+                        "tactic": "Impact",
+                        "technique_id": "T1486",
+                        "technique": "Data Encrypted for Impact",
+                        "technique_desc": "Attackers encrypt sensitive data of the victim to force them to pay a ransom for the decryption key. The Qilin ransomware organization uses encryption technology to encrypt data during attacks and threatens victims to pay a ransom to recover their data."
+                      },
+                      {
+                        "tactic_id": "TA0040",
+                        "tactic": "Impact",
+                        "technique_id": "T1489",
+                        "technique": "Service Stop",
+                        "technique_desc": "Attackers cause victim systems to shut down or disrupt services through ransomware attacks. In this article, Jaguar Land Rover was forced to shut down systems due to a ransomware attack, affecting operations in the retail sector and multiple production facilities."
+                      }
+                    ],
+                    "mitigations": [
+                      {
+                        "name": "Protection and Blocking Recommendations",
+                        "desc": "Utilize DNS servers or DNS protection services to block domain resolution, preventing devices from accessing websites related to Indicators of Compromise (IOCs).",
+                        "type": "Response"
+                      },
+                      {
+                        "name": "Enhance Email Filtering",
+                        "desc": "Configure email gateways to identify and intercept phishing emails, employing machine learning and rule engines to analyze email content and attachments, blocking the delivery of suspicious links and malicious attachments, ensuring that employees can recognize potential phishing attacks upon receiving emails.",
+                        "type": "Prevention"
+                      },
+                      {
+                        "name": "Implement Multi-Factor Authentication",
+                        "desc": "Enable multi-factor authentication across all critical systems and applications to enhance security after credential leakage, ensuring that even if credentials are stolen, attackers cannot easily access the systems.",
+                        "type": "Prevention"
+                      },
+                      {
+                        "name": "Regularly Update System Patches",
+                        "desc": "Regularly check and apply security patches for operating systems and applications, particularly for known vulnerabilities related to Remote Desktop Protocol, ensuring that systems are always up to date.",
+                        "type": "Prevention"
+                      },
+                      {
+                        "name": "Monitor Abnormal Access Behavior",
+                        "desc": "Deploy Intrusion Detection Systems (IDS) and Security Information and Event Management (SIEM) tools to monitor and analyze network traffic in real-time, identifying abnormal remote desktop access behavior.",
+                        "type": "Detection"
+                      },
+                      {
+                        "name": "Monitor Network Traffic",
+                        "desc": "Deploy Network Intrusion Detection Systems (NIDS) and traffic analysis tools to monitor network traffic in real-time to identify abnormal activities and potential malware propagation, responding promptly to suspicious behavior.",
+                        "type": "Detection"
+                      },
+                      {
+                        "name": "Registry Monitoring",
+                        "desc": "Monitor the registry to identify and log any abnormal key value creations or modifications, promptly detecting potential persistence mechanisms and taking measures for removal.",
+                        "type": "Detection"
+                      },
+                      {
+                        "name": "Monitor the Dark Web",
+                        "desc": "Regularly monitor the dark web and information theft platforms to identify leaked credentials and databases, promptly detecting and responding to potential credential theft risks.",
+                        "type": "Detection"
+                      }
+                    ],
+                    "source": "Open Source",
+                    "published_time": "2025-11-25T00:00:00Z",
+                    "update_time": "2025-11-25T06:29:08Z",
+                    "event_time": "2025-09-17",
+                    "severity": "Critical",
+                    "threat_type": [
+                      "Ransomware"
+                    ],
+                    "tags": {
+                      "virus_family": [],
+                      "attack_tools": [],
+                      "threat_actors": [
+                        "Qilin"
+                      ]
+                    },
+                    "reference_link": [
+                      "https://www.dexpose.io/free-darkweb-report/",
+                      "https://www.dexpose.io/email-data-breach-scan/",
+                      "https://cybernews.com/news/bmw-ransomware-attack-everest-claim-everest-luxury-target-jlr-trend/",
+                      "https://cybernews.com/security/production-process-of-jaguar-land-rover-disrupted-by-cyberattack/",
+                      "https://cybernews.com/security/jaguar-jlr-cyberattack-claimed-by-salesforce-hackers-scattered-spider-shiny-hunters/",
+                      "https://cybernews.com/security/massive-salesforce-breach-campaign-started-on-github/",
+                      "https://cybernews.com/news/marks-spencer-breach-tcs-third-party-vendor-social-engineering-attack/",
+                      "https://cybernews.com/news/jaguar-land-rover-production-down-for-at-least-another-week-due-to-cyberattack/",
+                      "https://cybernews.com/security/bridgestone-cyberattack-auto-manufacturer-disrupted-jaguar-link/",
+                      "https://cybernews.com/ransomlooker/",
+                      "https://cybernews.com/security/texas-electric-coops-ransomware-attack/",
+                      "https://cybernews.com/news/asahi-beer-cyberattack-claimed-qilin-ransomware-stolen-data/",
+                      "https://cybernews.com/news/cal-club-ransomware-attack-california-golf-club-san-franscico-qilin-claims/",
+                      "https://cybernews.com/news/israel-shamir-medical-center-ransowmare-attack-qilin-8t-patient-data-stolen/",
+                      "https://cybernews.com/news/nissan-ransomware-attack-creative-box-creative-box-radesign-studio-qilin-group/",
+                      "https://cybernews.com/news/inotiv-ransomware-attack-qilin-pharma-research-testing-animal-cruelty-fines/",
+                      "https://cybernews.com/security/singer-associates-ransomware-attack-qilin/",
+                      "https://cybernews.com/news/sk-group-ransomware-attack-qilin-gang-claims-stolen-data/",
+                      "https://cybernews.com/security/lee-enterprises-cyberattack-impact/",
+                      "https://cybernews.com/news/houston-symphony-qilin-ransomware-attack/",
+                      "https://cybernews.com/security/television-station-detroit-pbs-hacked/",
+                      "https://cybernews.com/news/yanfeng-ransomware-attack-claimed-qilin/",
+                      "https://cybernews.com/news/cancer-hospital-breach-is-claimed-by-qilin-gang-in-new-ransomware-low/",
+                      "https://botcrawl.com/category/data-breaches/"
+                    ]
+                  },
+                  "response_code": 200,
+                  "msg": "Success"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "204": {
+            "$ref": "#/components/responses/204",
+            "description": ""
+          },
+          "400": {
+            "$ref": "#/components/responses/400",
+            "description": ""
+          },
+          "401": {
+            "$ref": "#/components/responses/401",
+            "description": ""
+          },
+          "405": {
+            "$ref": "#/components/responses/405",
+            "description": ""
+          },
+          "429": {
+            "$ref": "#/components/responses/429",
+            "description": ""
+          },
+          "500": {
+            "$ref": "#/components/responses/500",
+            "description": ""
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {
+      "202": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    " In Progress"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 202
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": " In Progress",
+                  "response_code": 202
+                }
+              }
+            }
+          }
+        }
+      },
+      "204": {
+        "description": "",
+        "content": {}
+      },
+      "206": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string"
+                },
+                "response_code": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                  "response_code": 206
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Required:{resource/apikey}",
+                    "Invalid parameter:{parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 400
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Required:{resource/apikey}",
+                  "response_code": 400
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Invalid account status",
+                    "Invalid access IP: {actual IP address}",
+                    "Invalid API key",
+                    "Invalid key status",
+                    "No access to the API",
+                    "Expired API key",
+                    "No access to the file report",
+                    "No access to: {parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 401
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Invalid account status",
+                  "response_code": 401
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "No Report Found"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 404
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "No Report Found",
+                  "response_code": 404
+                }
+              }
+            }
+          }
+        }
+      },
+      "405": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "const": "Invalid API method"
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 405
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Invalid API method",
+                  "response_code": 405
+                }
+              }
+            }
+          }
+        }
+      },
+      "429": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Request rate limitation",
+                    "Beyond {daily/monthly/total} quotas limitation"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 429
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Request rate limitation",
+                  "response_code": 429
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "System error",
+                    "URL Download Fail"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 500
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "System error",
+                  "response_code": 500
+                }
+              }
+            }
+          }
+        }
+      },
+      "feeds": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "No access to: {parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 401
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "No access to: {parameter}",
+                  "response_code": 401
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "feeds": {
+        "bearerFormat": "JWT",
+        "description": "请输入您的 JWT 令牌。您可以调用 /login 接口获取该令牌。",
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

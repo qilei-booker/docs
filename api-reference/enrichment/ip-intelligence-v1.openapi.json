@@ -1,0 +1,1007 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "IP Intelligence (V1)",
+    "description": "IP Intelligence(V1) API provides intelligence labels(intelligence type), relevant threat actors, virus/trojan family, complete original intelligence, as well as associated internet asset and contextual data for each IP address.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/ip/query": {
+      "post": {
+        "summary": "IP Intelligence (V1)",
+        "deprecated": false,
+        "description": "IP Intelligence(V1) API provides intelligence labels(intelligence type), relevant threat actors, virus/trojan family, complete original intelligence, as well as associated internet asset and contextual data for each IP address.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "query",
+            "description": "Your API Key.\n\nYou are able to get the key on \"My API\" page of [i.threatbook.io](https://i.threatbook.io/my-api).\n\n**Kindly note:**\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource",
+            "in": "query",
+            "description": "Single IPv4 or IPv6 address to query.",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "You are allowed to specify the following arguments to get specific data back. Each of them should be separated by commas if you would like to request more than two of them. \n- **summary**: Full summary of the threat intelligence;\n- **intelligences**: Original threat intelligence. \n- **samples**: Relevant samples;\n- **ports**: open ports of the IP;\n- **cas**: Relevant certificates of the IP;\n- **basic**: Geographic location and carrier, etc.\n- **asn**: Asn information.\n\nIf you don’t specify this parameter, we will return all data by default.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "const": "Success",
+                      "description": "Allowed value: \"Success\""
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "summary": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "**Summary of the intelligence determined by ThreatBook**  \nIt is produced in a strict quality control process.  \n\nEach item includes the following fields:  \n\n- **judgments**: Array. Intelligence type of the final verdict by ThreatBook.  \n- **whitelist**: Boolean.  \n  - `true`: It is whitelisted.  \n  - `false`: It is not whitelisted.  \n- **APT**: Boolean.  \n  - `true`: It is an APT.  \n  - `false`: There is not enough evidence to identify whether it is an APT.  \n- **threat_actor**: Array.  \n- **family**: Array. Virus or trojan family.  \n- **tag_categories**: Array. Fields for each item are shown below.  \n  - **tag_type**: Tag type. For example, `\"industry\"`.  \n  - **tags**: Specific tags are under the tag type.  \n- **first_seen**: String. UTC time of the first discovery of intelligence.  \n- **last_seen**: String. UTC time of the last discovery of intelligence.  "
+                        },
+                        "intelligences": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "**Complete original intelligence**  \n\nIntelligence consists of two parts:  \n\n- **threatbook_lab**: The intelligence is produced or discovered by ThreatBook. All the final comprehensive verdicts are determined based on our own intelligence.  \n  - **source**: Intelligence source.  \n  - **first_seen**: String. UTC time.  \n  - **last_seen**: String. UTC time.  \n  - **confidence**: String. Confidence score. The higher the score, the higher the credibility of the intelligence.  \n  - **expired**: Boolean.  \n    - `true`: This piece of intelligence is expired.  \n    - `false`: This piece of intelligence is still valid.  \n  - **intel_types**: Array. Intelligence type.  \n  - **intel_tags**: Array. Tags for this intelligence.  \n\n- **open_source**: The intelligence is gathered from open source. It is just for reference for our customers; we will not use it in our final verdict.  \n  - All the fields are the same as **\"threatbook_lab\"** above.  \n\n---\n\n**Open source intelligence includes the following non-exclusive intelligence sources, updating continuously…**  \n\n- [mirc.com](http://mirc.com)  \n- [danger.rulez.sk](http://danger.rulez.sk)  \n- [alexa.com](http://alexa.com)  \n- [binarydefense.com](http://binarydefense.com)  \n- [blocklist.de](http://blocklist.de)  \n- [cinsscore.com](http://cinsscore.com)  \n- [sslbl.abuse.ch](http://sslbl.abuse.ch)  \n- [phishtank.com](http://phishtank.com)  \n- [packetmail.net](http://packetmail.net)  \n- [spamhaus.org](http://spamhaus.org)  \n- [vxvault.net](http://vxvault.net)  \n- [alienvault.com](http://alienvault.com)  \n- [nothink.org](http://nothink.org)  \n- [feodotracker.abuse.ch](http://feodotracker.abuse.ch)  \n- [openphish.com](http://openphish.com)  \n- [hosts-file.net](http://hosts-file.net)  \n- ……  "
+                        },
+                        "samples": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "**Relevant samples**  \nIt will return up to 20 samples. Each item includes the following fields:\n\n- **sha256**  \n- **scan_time**  \n- **ratio**: Detecting by multi-engine antivirus scanners. For example, `\"1/22\"` means one of the antivirus scanners considers this sample as malicious.  \n- **malware_type**  \n- **malware_family**  "
+                        },
+                        "basic": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "**Geographic location information**  \n\n- **carrier**  \n- **location**  \n  - **country**  \n  - **country_code**  \n  - **province**  \n  - **city**  \n  - **lng**: longitude  \n  - **lat**: latitude  "
+                        },
+                        "asn": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "ASN information."
+                        },
+                        "ports": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "**Open ports**  \nEach item includes the following fields:\n\n- **port**  \n- **module**  \n- **product**  \n- **version**  \n- **detail**  "
+                        },
+                        "cas": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          },
+                          "description": "**SSL certificates associated with this IP address**  \nEach item includes the following fields:\n\n- **protocol**  \n- **port**  \n- **digital_certificate**: Certificate detail.  \n  - **subject**  \n  - **issuer**  \n  - **fingerprint**  \n  - **purpose**  \n  - **verify**: Digital signature algorithm.  \n  - **status**: There are four status values for the certificate.  \n    - `0`: Normal  \n    - `1`: Expired  \n    - `2`: Invalid  \n    - `3`: Self-signed  \n  - **status_desc**: Description for the certificate status.  \n  - **revoked**: Boolean. Indicates whether the certificate is revoked.  \n  - **revoke_time**: The revoke time for the certificate.  \n  - **begin**: Effective time of the certificate.  \n  - **end**: Expiration time of the certificate.  \n  - **serial_number**: Serial number of the certificate.  "
+                        },
+                        "IP": {
+                          "type": "string",
+                          "description": "IP address for query will be returned. \n\nPlease pay attention, IPv6 will be returned in the following format.\n\nFor example: **2001:0db8:0000:0000:0001:0000:0000:0000** "
+                        }
+                      },
+                      "required": [
+                        "summary",
+                        "intelligences",
+                        "samples",
+                        "basic",
+                        "asn",
+                        "ports",
+                        "cas",
+                        "IP"
+                      ]
+                    },
+                    "response_code": {
+                      "type": "integer",
+                      "const": 200
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "data",
+                    "response_code"
+                  ]
+                },
+                "example": {
+                  "msg": "Success",
+                  "data": {
+                    "summary": {
+                      "judgments": [],
+                      "whitelist": true,
+                      "family": [],
+                      "first_seen": "2020-07-02",
+                      "last_seen": "2022-09-11",
+                      "APT": false,
+                      "threat_actor": [],
+                      "tag_categories": []
+                    },
+                    "intelligences": {
+                      "threatbook_lab": [
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2021-08-29",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2021-08-30"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2021-08-29",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2021-08-30"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2020-07-02",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2022-09-11"
+                        },
+                        {
+                          "source": "ThreatBook Labs",
+                          "confidence": 100,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2019-05-27",
+                          "intel_types": [
+                            "Whitelist"
+                          ],
+                          "last_seen": "2020-07-01"
+                        }
+                      ],
+                      "open_source": [
+                        {
+                          "source": "phishtank.com",
+                          "confidence": 55,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2024-07-02",
+                          "intel_types": [
+                            "Phishing"
+                          ],
+                          "last_seen": "2024-10-25"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2024-02-08",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2025-04-19"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2018-09-13",
+                          "intel_types": [
+                            "Malware"
+                          ],
+                          "last_seen": "2018-09-29"
+                        },
+                        {
+                          "source": "cinsscore.com",
+                          "confidence": 50,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2018-04-24",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2018-04-24"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2018-02-24",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2018-03-10"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2017-10-11",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2017-10-28"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2017-10-02",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2018-04-04"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2017-07-07",
+                          "intel_types": [
+                            "Malware"
+                          ],
+                          "last_seen": "2025-04-28"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2017-07-07",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2017-10-23"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": false,
+                          "intel_tags": [],
+                          "first_seen": "2017-07-06",
+                          "intel_types": [
+                            "Spam"
+                          ],
+                          "last_seen": "2018-09-23"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 55,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2020-06-17",
+                          "intel_types": [
+                            "Malware"
+                          ],
+                          "last_seen": "2025-03-21"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 75,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2020-05-07",
+                          "intel_types": [
+                            "CDN"
+                          ],
+                          "last_seen": "2020-08-25"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 50,
+                          "expired": true,
+                          "intel_tags": [
+                            {
+                              "tags": [
+                                "Bitrep"
+                              ],
+                              "tags_type": "virus_family"
+                            }
+                          ],
+                          "first_seen": "2018-03-15",
+                          "intel_types": [
+                            "C2"
+                          ],
+                          "last_seen": "2019-09-18"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2017-07-14",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2023-08-31"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 65,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2017-07-06",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2023-08-31"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 35,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2016-11-10",
+                          "intel_types": [
+                            "Malware"
+                          ],
+                          "last_seen": "2022-08-08"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 43,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2016-10-06",
+                          "intel_types": [
+                            "Suspicious"
+                          ],
+                          "last_seen": "2018-06-08"
+                        },
+                        {
+                          "source": "openphish.com",
+                          "confidence": 26,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2016-09-03",
+                          "intel_types": [
+                            "Phishing"
+                          ],
+                          "last_seen": "2018-07-15"
+                        },
+                        {
+                          "source": "spamhaus.org",
+                          "confidence": 69,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2015-12-02",
+                          "intel_types": [
+                            "Phishing"
+                          ],
+                          "last_seen": "2016-09-25"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 35,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2015-11-25",
+                          "intel_types": [
+                            "Exploit",
+                            "Malware"
+                          ],
+                          "last_seen": "2016-05-03"
+                        },
+                        {
+                          "source": "Open Source ",
+                          "confidence": 75,
+                          "expired": true,
+                          "intel_tags": [],
+                          "first_seen": "2015-08-07",
+                          "intel_types": [
+                            "C2"
+                          ],
+                          "last_seen": "2016-10-16"
+                        }
+                      ]
+                    },
+                    "samples": [
+                      {
+                        "sha256": "08e9828b447cd3b12ddadf97985f858458d44769a04e7673f72249fc369f5eea",
+                        "ratio": "9/26",
+                        "scan_time": "2018-10-12 20:57:32",
+                        "malware_type": "SoftwareBundler",
+                        "malware_family": "ICLoader"
+                      },
+                      {
+                        "sha256": "75f515c886b417aa22e41d3b98630a5fe3b7254c25b6eb9c1a0d45d8b02c65b3",
+                        "ratio": "18/26",
+                        "scan_time": "2018-10-11 23:43:26",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "2236cd5dde6cb49d555ac787848a46ae9b1fba30928e775fbe750590164b7530",
+                        "ratio": "17/26",
+                        "scan_time": "2018-10-11 23:38:49",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "39c73e94d7fce76bb8a66c744a9326953d763795c0a9eafb5aab1e2cdea21482",
+                        "ratio": "17/26",
+                        "scan_time": "2018-10-11 21:16:15",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "e9dca6a2cb8642fcffd88e4668b669c110188922b11b88073b1e8fd9663f446c",
+                        "ratio": "6/26",
+                        "scan_time": "2018-10-11 20:13:38",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "a657c145a49bb467073b3ad98cbfbe951542ea7f86636696e9c05f701aba59a7",
+                        "ratio": "16/26",
+                        "scan_time": "2018-10-11 20:03:50",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "c0d40937bc77fa5facd4f08a7f2a74e4b8892cc6306cbf472a1a5045c0c0652a",
+                        "ratio": "18/26",
+                        "scan_time": "2018-10-11 19:23:38",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "f8b59451e34354cd82f5a13b63e0b9ea5d982c88c16b7bf9ba41bad983426d70",
+                        "ratio": "5/26",
+                        "scan_time": "2018-09-21 19:14:03",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "697c3b1fe1f886f6825c5b00f9185cfe180ae91253d3ea935e9498de8c97d92f",
+                        "ratio": "9/26",
+                        "scan_time": "2018-09-21 05:51:01",
+                        "malware_type": "SoftwareBundler",
+                        "malware_family": "ICLoader"
+                      },
+                      {
+                        "sha256": "66c302f6557ab3383ae559f5214232e64087c56c76b08fc75380eded732b37cb",
+                        "ratio": "6/26",
+                        "scan_time": "2018-09-21 05:31:35",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "1baf005a5d0f6ccc544191290cad02fc686aa065ab963b30f3e252318d9f71c4",
+                        "ratio": "6/26",
+                        "scan_time": "2018-09-21 05:26:13",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "b343cca26cd6ca83f903527831c778bafa45908a7b797c04e3f136a61111737f",
+                        "ratio": "6/26",
+                        "scan_time": "2018-09-21 05:15:11",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "37cfcbc7ab3cd031b5e23710c4c295bd5a128c68a9257afe95d94df645d3cd68",
+                        "ratio": "6/26",
+                        "scan_time": "2018-09-21 03:47:16",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "6dcbf32d8c6695d6070d6d589513da5ee43d95414c1d1f50456db4c2ab3e1ad3",
+                        "ratio": "11/26",
+                        "scan_time": "2018-08-23 20:16:15",
+                        "malware_type": "SoftwareBundler",
+                        "malware_family": "ICLoader"
+                      },
+                      {
+                        "sha256": "34589e27b7362fcd59c32a8c4ed7995c950c7db265aca58ee121dc091ae321b2",
+                        "ratio": "7/26",
+                        "scan_time": "2018-07-10 21:18:39",
+                        "malware_type": "",
+                        "malware_family": "Downloader"
+                      },
+                      {
+                        "sha256": "94a7e25aa2e79df2f84fd7a9670c440a8886e5cb37b47eb475bbce3e402fae47",
+                        "ratio": "3/26",
+                        "scan_time": "2018-06-16 18:43:28",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "c3589327ad0e848caf61b15c6b61ff234dbdaa28a18ea74e916d04974c471817",
+                        "ratio": "3/26",
+                        "scan_time": "2018-06-15 17:52:36",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "2fffb84c9304f0cd47f412229b7f71ba52cf84b5c2526e580a2e0457a28f1d25",
+                        "ratio": "3/26",
+                        "scan_time": "2018-06-15 17:47:14",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "c5ecadd07034afcae90d8504d4dc8d52353b1194b811566a0c0f41d4fee50644",
+                        "ratio": "1/26",
+                        "scan_time": "2018-06-03 00:12:20",
+                        "malware_type": "",
+                        "malware_family": ""
+                      },
+                      {
+                        "sha256": "efd4c9d36bf59e9c4f3d0e36784c274d890267535a3182b073df1db1ccbd8dcb",
+                        "ratio": "1/26",
+                        "scan_time": "2018-05-23 03:05:24",
+                        "malware_type": "",
+                        "malware_family": ""
+                      }
+                    ],
+                    "basic": {
+                      "carrier": "Cloudflare, Inc.",
+                      "location": {
+                        "country": "Australia",
+                        "province": "",
+                        "city": "",
+                        "lng": "151.211354",
+                        "lat": "-33.86264",
+                        "country_code": "AU"
+                      }
+                    },
+                    "asn": {
+                      "rank": 4,
+                      "info": "CLOUDFLARENET, US",
+                      "number": 13335
+                    },
+                    "ports": [
+                      {
+                        "port": 80,
+                        "module": "http",
+                        "product": "Cloudflare http proxy",
+                        "version": "",
+                        "detail": ""
+                      },
+                      {
+                        "port": 443,
+                        "module": "https",
+                        "product": "Cloudflare http proxy",
+                        "version": "",
+                        "detail": ""
+                      }
+                    ],
+                    "cas": [
+                      {
+                        "protocol": "https",
+                        "port": 443,
+                        "digital_certificate": {
+                          "sha256": "73b8ed5becf1ba6493d2e2215a42dfdc7877e91e311ff5e59fb43d094871e699",
+                          "subject": "cloudflare-dns.com",
+                          "issuer": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
+                          "fingerprint": "3ba7e9f806eb30d2f4e3f905e53f07e9acf08e1e",
+                          "purpose": "SSL client|SSL server|Any Purpose|Any Purpose CA|OCSP helper",
+                          "verify": "SHA256withRSA",
+                          "status": "0",
+                          "revoked": false,
+                          "begin": "2025-01-02",
+                          "end": "2026-01-21",
+                          "status_desc": "Valid",
+                          "serial_number": "27dc8c5e17294aec9ed3f67728e8a08",
+                          "revoked_time": ""
+                        }
+                      }
+                    ],
+                    "IP": "1.1.1.1"
+                  },
+                  "response_code": 200
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "$ref": "#/components/responses/400",
+            "description": ""
+          },
+          "401": {
+            "$ref": "#/components/responses/401",
+            "description": ""
+          },
+          "405": {
+            "$ref": "#/components/responses/405",
+            "description": ""
+          },
+          "429": {
+            "$ref": "#/components/responses/429",
+            "description": ""
+          },
+          "500": {
+            "$ref": "#/components/responses/500",
+            "description": ""
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {
+      "202": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    " In Progress"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 202
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": " In Progress",
+                  "response_code": 202
+                }
+              }
+            }
+          }
+        }
+      },
+      "204": {
+        "description": "",
+        "content": {}
+      },
+      "206": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string"
+                },
+                "response_code": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                  "response_code": 206
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Required:{resource/apikey}",
+                    "Invalid parameter:{parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 400
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Required:{resource/apikey}",
+                  "response_code": 400
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Invalid account status",
+                    "Invalid access IP: {actual IP address}",
+                    "Invalid API key",
+                    "Invalid key status",
+                    "No access to the API",
+                    "Expired API key",
+                    "No access to the file report",
+                    "No access to: {parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 401
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Invalid account status",
+                  "response_code": 401
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "No Report Found"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 404
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "No Report Found",
+                  "response_code": 404
+                }
+              }
+            }
+          }
+        }
+      },
+      "405": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "const": "Invalid API method"
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 405
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Invalid API method",
+                  "response_code": 405
+                }
+              }
+            }
+          }
+        }
+      },
+      "429": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "Request rate limitation",
+                    "Beyond {daily/monthly/total} quotas limitation"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 429
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "Request rate limitation",
+                  "response_code": 429
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "System error",
+                    "URL Download Fail"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 500
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "System error",
+                  "response_code": 500
+                }
+              }
+            }
+          }
+        }
+      },
+      "feeds": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "enum": [
+                    "No access to: {parameter}"
+                  ]
+                },
+                "response_code": {
+                  "type": "integer",
+                  "const": 401
+                }
+              },
+              "required": [
+                "msg",
+                "response_code"
+              ]
+            },
+            "examples": {
+              "Example 1": {
+                "summary": "Example 1",
+                "value": {
+                  "msg": "No access to: {parameter}",
+                  "response_code": 401
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "feeds": {
+        "bearerFormat": "JWT",
+        "description": "请输入您的 JWT 令牌。您可以调用 /login 接口获取该令牌。",
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
