@@ -7,9 +7,9 @@ This page provides a comprehensive reference of fields and attributes associated
 
 ---
 
-## Report Category (`category`)
+## Report Category (`category` / `category_list`)
 
-The `category` field represents the primary classification of the threat intelligence report.
+The `category` and `category_list` fields represent the primary classification of the threat intelligence report.
 
 | **Category Value** | **Description** |
 | :--- | :--- |
@@ -22,11 +22,11 @@ The `category` field represents the primary classification of the threat intelli
 
 ---
 
-## Threat Type (`threat_type`)
+## Threat Type (`threat_type` / `threat_type_list`)
 
-The `threat_type` indicates the nature of the cyber threat or attacker behavior documented in the report.
+The `threat_type` and `threat_type_list` indicate the nature of the cyber threat or attacker behavior documented in the report.
   <Note>
-    **Dependency Restriction**: Threat Type only takes effect when the query parameter `category` is explicitly set to **Incident Analysis**.
+    **Dependency Restriction**: Threat Type only takes effect when the query parameter `category` is explicitly set to **Incident Analysis**, or when the `category_list` array parameter contains **Incident Analysis**.
   </Note>
 
 * **APT** (Advanced Persistent Threat)
@@ -42,11 +42,13 @@ The `threat_type` indicates the nature of the cyber threat or attacker behavior 
 
 ---
 
-## Industry Classifications (`target_industry` and `industry_of_target_hq`)
+## Industry Classifications (`target_industry` / `target_industry_list`, `industry_of_target_org`, and `org_industry`)
 
-Industry properties categorize target entities impacted by the threat. There are two primary fields utilizing these industry values:
-- **Target Industry**: The target sectors mentioned in the threat report.
-- **Industry of Target HQ**: The registered corporate sector of the victim's headquarters.
+Industry properties categorize target entities impacted by the threat. The supported parameters and response fields utilizing these industry values include:
+- **Target Industry (`target_industry` / `target_industry_list`)**: The target sectors mentioned in the threat report.
+- **Industry of Target Org (`industry_of_target_org`)**: Filter by the industry sectors of the targeted organization.
+- **Target Org Industry (`target_orgs[].org_industry`)**: Response field showing the industries of the affected organization.
+- **Industry of Target HQ (`industry_of_target_hq`)**: The registered corporate sector of the victim's headquarters.
 
 The reports mainly aligns with the **STIX 2.1** industry standards, supporting a structured Level-1 and Level-2 classification:
 
@@ -82,9 +84,15 @@ The reports mainly aligns with the **STIX 2.1** industry standards, supporting a
 
 ---
 
-## Country & Region (`hq_region_code` / `target_region_code`)
+## Country & Region (`hq_region_of_target_org` / `target_region_code` / `hq_region`)
 
 Country and region codes must comply with the **ISO 3166-1 alpha-2** standard (two-letter country codes).
+
+The supported parameters and response fields utilizing these ISO country codes include:
+- **Target Region Code (`target_region_code` / `target_region_list`)**: Filter by the country codes of the targeted entities.
+- **HQ Region of Target Org (`hq_region_of_target_org`)**: Filter by the country codes of the targeted organization's headquarters.
+- **Target Org HQ Region (`target_orgs[].hq_region`)**: Response field showing the headquarters country codes of the targeted organization.
+- **Target HQ Region Code (`hq_region_code`)**: Registered country code of the victim's headquarters.
 
 - **Standard**: [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search) (e.g., `US`, `CN`, `JP`, `GB`, `DE`).
 - **Usage**: Used to identify both the origin of threats/actors and the geographical locations of target entities.
