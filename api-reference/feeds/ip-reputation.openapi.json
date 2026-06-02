@@ -5,6 +5,11 @@
     "description": "This API provides inbound malicious or suspicious IPs. \n",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://api.threatbook.io"
+    }
+  ],
   "paths": {
     "/v2/feeds/stix/ip-reputation": {
       "get": {

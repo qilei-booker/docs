@@ -5,6 +5,11 @@
     "description": "This API provides all threat actor profiles.",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://api.threatbook.io"
+    }
+  ],
   "paths": {
     "/v2/feeds/stix/actor": {
       "get": {

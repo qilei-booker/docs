@@ -5,6 +5,11 @@
     "description": "Domain Intelligence(V2) API provides detailed threat intelligence for verdict. This includes threat verdict and labes from **ThreatBook Lab**, as well as associated DNS, whois and contextual data for each domain.",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://api.threatbook.io"
+    }
+  ],
   "paths": {
     "/v2/domain/query": {
       "post": {

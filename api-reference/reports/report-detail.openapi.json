@@ -5,6 +5,11 @@
     "description": "Retrieve the full details of a specific **threat intelligence report**.  \nThis endpoint returns comprehensive information including report **severity**, **threat and report types**, **summary**, **tags**, targeted **industries/regions/organizations/products**, **impacts**, **ATT&CK techniques**, etc.",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://api.threatbook.io"
+    }
+  ],
   "paths": {
     "/v2/reports/{id}": {
       "get": {

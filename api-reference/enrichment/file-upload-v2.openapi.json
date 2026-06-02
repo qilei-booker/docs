@@ -5,6 +5,11 @@
     "description": "For potentially malicious files from office endpoints, Web/FTP/email attachments, or suspicious files on endpoints/servers, the system performs rapid detection using **22 antivirus scanning engines**. Based on the file type, the system automatically selects an appropriate sandbox environment for dynamic analysis.",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://api.threatbook.io"
+    }
+  ],
   "paths": {
     "/v2/file/upload": {
       "post": {

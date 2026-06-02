@@ -5,6 +5,11 @@
     "description": "Retrieve detailed static and dynamic analysis reports of a file, including file summary information, network behavior, behavioral signatures, static information, dropped behavior, process behavior, and multi-engines detection results.",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://api.threatbook.io"
+    }
+  ],
   "paths": {
     "/v2/file/query": {
       "post": {

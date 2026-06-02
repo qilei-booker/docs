@@ -5,6 +5,11 @@
     "description": "IP Intelligence(V2) API provides detailed threat intelligence for both **inbound** and **outbound** IP addresses. This includes threat verdict and labes from **ThreatBook Lab**, as well as associated internet asset and contextual data for each IP address.",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://api.threatbook.io"
+    }
+  ],
   "paths": {
     "/v2/ip/query": {
       "post": {

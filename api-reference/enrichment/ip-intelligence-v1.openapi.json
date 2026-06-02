@@ -5,6 +5,11 @@
     "description": "IP Intelligence(V1) API provides intelligence labels(intelligence type), relevant threat actors, virus/trojan family, complete original intelligence, as well as associated internet asset and contextual data for each IP address.",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://api.threatbook.io"
+    }
+  ],
   "paths": {
     "/v1/ip/query": {
       "post": {

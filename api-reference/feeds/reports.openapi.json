@@ -5,6 +5,11 @@
     "description": "This API provides structured threat intelligence reports and their associated objects, such as actors, indicators, vulnerabilities, and attack techniques.",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://api.threatbook.io"
+    }
+  ],
   "paths": {
     "/v2/feeds/stix/reports": {
       "get": {

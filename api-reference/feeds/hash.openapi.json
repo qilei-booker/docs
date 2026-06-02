@@ -5,6 +5,11 @@
     "description": "This API provides identified malicious file hashes.",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://api.threatbook.io"
+    }
+  ],
   "paths": {
     "/v2/feeds/stix/hash": {
       "get": {

@@ -5,6 +5,11 @@
     "description": "You are able to get an IP report with comprehensive intelligence labels, such as **C2, Malware, Zombie, Compromised Host, Scanner,** etc., and contextual information like **open ports, certificates,** and so on.",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://api.threatbook.io"
+    }
+  ],
   "paths": {
     "/v1/community/ip": {
       "post": {
