@@ -9,7 +9,7 @@
   "paths": {
     "/v2/reports/list": {
       "get": {
-        "summary": "Report List (V2)",
+        "summary": "Report List",
         "deprecated": false,
         "description": "Retrieves a paginated list of threat intelligence reports from ThreatBook Lab and open-source intelligence sources.",
         "tags": [],
