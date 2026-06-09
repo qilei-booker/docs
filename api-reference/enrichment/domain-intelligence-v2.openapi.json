@@ -76,7 +76,7 @@
                           "type": "string",
                           "description": "Verdict of domain, include：malicious/suspicious/unknown/benign"
                         },
-                        "intel_lables": {
+                        "intel_labels": {
                           "type": "array",
                           "items": {
                             "type": "string"
@@ -145,7 +145,7 @@
                       },
                       "required": [
                         "samples",
-                        "intel_lables",
+                        "intel_labels",
                         "threat_types",
                         "intelligences",
                         "verdict",
