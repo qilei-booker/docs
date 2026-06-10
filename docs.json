@@ -7,9 +7,6 @@
     "light": "#eb2d17",
     "dark": "#15803D"
   },
-  "icons": {
-    "library": "lucide"
-  },
   "api": {
     "params": {
       "expanded": "all"
