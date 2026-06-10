@@ -16,7 +16,7 @@
           {
             "name": "apikey",
             "in": "query",
-            "description": "Your API Key\n              \nYou are able to get the key on \"My API\" page of [i.threatbook.io](https://i.threatbook.io/my-api).\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
+            "description": "Your API key. For details on how to obtain and manage your API key, please refer to the [Authentication](https://docs.threatbook.io/api-reference/authentication) page.\n\n**Kindly note:**\n\nPlease check if you have bound your access IP to the key and have the authority quotas to access this API before you interact with it.",
             "required": true,
             "example": "",
             "schema": {
