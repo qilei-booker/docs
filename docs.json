@@ -94,8 +94,14 @@
           {
             "group": "Reports",
             "pages": [
-              "api-reference/reports/report-list",
-              "api-reference/reports/report-detail"
+              "api-reference/reports/report-list-v3",
+              "api-reference/reports/report-detail",
+              {
+                "group": "Deprecated",
+                "pages": [
+                  "api-reference/reports/report-list-v2"
+                ]
+              }
             ]
           },
           {
