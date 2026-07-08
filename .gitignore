@@ -3,3 +3,4 @@
 .temp
 start.sh
 .DS_Store
+node_modules
