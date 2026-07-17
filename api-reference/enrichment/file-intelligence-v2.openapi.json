@@ -858,7 +858,7 @@
               "Example 1": {
                 "summary": "Example 1",
                 "value": {
-                  "msg": "Success. It can only return the data before {IP/Domain} in this query because of the {rate/daily quotas/monthly quotas/total quotas} limitation.",
+                  "msg": "Success. Only partial data could be returned because of the {rate/daily/monthly/total quota} limitation.",
                   "response_code": 206
                 }
               }
@@ -918,7 +918,7 @@
                     "Invalid key status",
                     "No access to the API",
                     "Expired API key",
-                    "No access to the file report",
+                    "No access to the requested resource",
                     "No access to: {parameter}"
                   ]
                 },
