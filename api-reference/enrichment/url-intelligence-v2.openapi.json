@@ -27,7 +27,7 @@
             "name": "url",
             "in": "query",
             "description": "The URL to be scanned. The URL must be encoded.",
-            "required": false,
+            "required": true,
             "example": "http://bing.com/edgepinning/allowlist",
             "schema": {
               "type": "string"
@@ -292,7 +292,7 @@
                         "Invalid key status",
                         "No access to the API",
                         "Expired API key",
-                        "No access to the file report",
+                        "No access to the requested resource",
                         "No access to: {parameter}"
                       ]
                     },

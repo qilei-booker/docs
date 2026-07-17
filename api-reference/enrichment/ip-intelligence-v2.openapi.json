@@ -105,7 +105,7 @@
                             "type": "object",
                             "properties": {}
                           },
-                          "description": "Threat intelligence in detail — represented as a JSON array. Each item contains the following fields:\n\n- **find_time**: Time of discovery.  \n- **update_time**: Last update time.  \n- **confidence**: Confidence score.  \n- **expired**: Boolean. `false` means the intelligence is still valid; `true` means it has expired.  \n- **intel_types**: Threat types, represented as an array. The values of the array elements are defined in **\"Threat Labels\"**.  \n- **intel_tags**: Tag information of this intelligence, including related attack groups or security incidents. This is a JSON array where each item follows the same field definition as **intel_labels**.  "
+                          "description": "Threat intelligence in detail — represented as a JSON array. Each item contains the following fields:\n\n- **find_time**: Time of discovery.  \n- **update_time**: Last update time.  \n- **confidence**: Confidence score.  \n- **expired**: Boolean. `false` means the intelligence is still valid; `true` means it has expired.  \n- **intel_types**: Threat types, represented as an array. The values of the array elements are defined in **\"Threat Labels\"**.  \n- **intel_labels**: Tag information of this intelligence, including related attack groups or security incidents. This is a JSON array where each item follows the same field definition as **intel_labels**.  "
                         },
                         "samples": {
                           "type": "array",
@@ -472,7 +472,7 @@
                         "Invalid key status",
                         "No access to the API",
                         "Expired API key",
-                        "No access to the file report",
+                        "No access to the requested resource",
                         "No access to: {parameter}"
                       ]
                     },

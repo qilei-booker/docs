@@ -687,7 +687,7 @@
                         "Invalid key status",
                         "No access to the API",
                         "Expired API key",
-                        "No access to the file report",
+                        "No access to the requested resource",
                         "No access to: {parameter}"
                       ]
                     },
