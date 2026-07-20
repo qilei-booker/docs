@@ -274,7 +274,7 @@
                           },
                           "description": "Malicious script content observed in the report."
                         },
-                        "malcious_file": {
+                        "malicious_file": {
                           "type": "array",
                           "items": {
                             "type": "string"
