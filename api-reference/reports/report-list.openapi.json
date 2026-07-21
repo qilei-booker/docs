@@ -2186,6 +2186,10 @@
       }
     }
   },
-  "servers": [],
+  "servers": [
+    {
+      "url": "https://api.threatbook.io"
+    }
+  ],
   "security": []
 }
