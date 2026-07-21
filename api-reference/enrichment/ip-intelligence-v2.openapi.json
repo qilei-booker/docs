@@ -622,5 +622,10 @@
         "scheme": "bearer"
       }
     }
-  }
+  },
+  "servers": [
+    {
+      "url": "https://api.threatbook.io"
+    }
+  ]
 }

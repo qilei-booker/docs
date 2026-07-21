@@ -10,6 +10,11 @@
   "api": {
     "params": {
       "expanded": "all"
+    },
+    "playground": {
+      "display": "interactive",
+      "proxy": false,
+      "baseUrl": "https://api.threatbook.io"
     }
   },
   "favicon": "/favicon.ico",
