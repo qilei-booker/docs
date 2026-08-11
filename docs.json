@@ -121,7 +121,7 @@
             ]
           },
           {
-            "group": "Integration",
+            "group": "Third-party Integration",
             "pages": [
               "api-reference/integration/splunk-app-api"
             ]
