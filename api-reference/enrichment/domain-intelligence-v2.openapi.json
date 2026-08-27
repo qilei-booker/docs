@@ -100,7 +100,7 @@
                             "type": "object",
                             "properties": {}
                           },
-                          "description": "Resolved IP information of the domain. This is a JSON array, where each item is a JSON object with the following fields:\n\n- **ip**: Currently resolved IP address  \n- **carrier**: ISP / service provider  \n- **location**: Geolocation information of the IP, represented as a JSON object with the following fields:  \n  - **country**: Country  \n  - **country_code**: Country code  \n  - **province**: Province / state  \n  - **city**: City  \n  - **lng**: Longitude  \n  - **lat**: Latitude  "
+                          "description": "Resolved IP information of the domain. This is a JSON array, where each item is a JSON object with the following fields:\n\n- **ip**: Currently resolved IP address  \n- **carrier**: ISP / service provider  \n- **resolve_time**: Resolution time of the current IP address (format: `YYYY-MM-DD HH:mm:ss`)  \n- **location**: Geolocation information of the IP, represented as a JSON object with the following fields:  \n  - **country**: Country  \n  - **country_code**: Country code  \n  - **province**: Province / state  \n  - **city**: City  \n  - **lng**: Longitude  \n  - **lat**: Latitude  "
                         },
                         "whois": {
                           "type": "object",
@@ -133,6 +133,10 @@
                           "type": "string",
                           "description": "Number of currently resolved IPs. Displays the exact number if fewer than 1000; shows 1000+ if greater."
                         },
+                        "pdns_update_time": {
+                          "type": "string",
+                          "description": "The latest resolution time among all PDNS records (format: `YYYY-MM-DD HH:mm:ss`). Returns an empty string if no resolved IP is present."
+                        },
                         "update_time": {
                           "type": "string",
                           "description": "Latest update time of the intelligence"
@@ -151,6 +155,7 @@
                         "umbrella_rank",
                         "sub_domains_count",
                         "pdns_count",
+                        "pdns_update_time",
                         "update_time"
                       ]
                     }
@@ -209,6 +214,7 @@
                       {
                         "ip": "57.144.186.141",
                         "carrier": "Facebook, Inc.",
+                        "resolve_time": "2025-10-22 15:07:02",
                         "location": {
                           "country": "Singapore",
                           "province": "Singapore",
@@ -221,6 +227,7 @@
                       {
                         "ip": "2a03:2880:f00c:20d:face:b00c:0:2",
                         "carrier": "Facebook, Inc.",
+                        "resolve_time": "2025-10-21 08:30:15",
                         "location": {
                           "country": "Ireland",
                           "province": "Dublin",
@@ -300,6 +307,7 @@
                     },
                     "sub_domains_count": "1000+",
                     "pdns_count": "2",
+                    "pdns_update_time": "2025-10-22 15:07:02",
                     "update_time": "2025-10-22 15:07:02"
                   }
                 }
