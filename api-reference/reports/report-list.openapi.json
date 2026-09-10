@@ -1346,6 +1346,10 @@
                     "description": "Specifies the pagination cursor used to retrieve the next page of results.  \nIf omitted, the first page of results will be returned."
                   }
                 }
+              },
+              "example": {
+                "query": "",
+                "limit": 100
               }
             }
           }
@@ -1565,7 +1569,7 @@
                   "data": {
                     "cursor": "d19ba003fbc998df0d299f2ff41607ad2ce6ecc2a573f5e0a152bedaa8ff2f591ef5329521d6e2ddbd5646a56918d3b33f652e36ab05bde0fd78000e27c7caccd3ecd8903b1914e4c2858f93ffe27a773ed388a338b65e40dcf0b7745e0df41a3ede6a33a561f100d522ce9a00af42103a728e2d0fbdbabced7ea70a4702640e83d03a2d48481e215d635c2292984be2bb6ecb35e5c5a1a7c08b4d8599a74d8efa0ee76153b83c8c985b7df1d6143c18b14a851faf7059a6ce448ecefd801911ff6433d234d4b21368d1297271eeab6bbcbb4b01608756b024779f600b33cd88c3bc08250a29c0125ff9d97f2f103a061b78d9282a080849262ce8718ae7b59f25f26a09213f1cee20110c82651b96341db0f09c0969896b6d9beb3bc7538812",
                     "total": 2753,
-                    "limit": 20,
+                    "limit": 100,
                     "items": [
                       {
                         "id": "303012",

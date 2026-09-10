@@ -118,7 +118,7 @@
                         "umbrella_rank": {
                           "type": "object",
                           "properties": {},
-                          "description": "Umbrella ranking information of the domain, represented as a JSON object with the following fields:\n\n- **global_rank**: Current Alexa global rank (integer). Only rankings within the top 1,000,000 are counted. If the rank exceeds 1,000,000, -1 is returned.  "
+                          "description": "Umbrella ranking information of the domain, represented as a JSON object with the following fields:\n\n- **global_rank**: Current Umbrella global rank (integer). Only rankings within the top 1,000,000 are counted. If the rank exceeds 1,000,000, -1 is returned.  "
                         },
                         "categories": {
                           "type": "object",
