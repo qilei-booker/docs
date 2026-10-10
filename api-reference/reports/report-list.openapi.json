@@ -37,7 +37,7 @@
           {
             "name": "threat_type",
             "in": "query",
-            "description": "Specifies one or more threat event types to filter reports. Accepts comma-separated values. Supported types include:\n\n- **APT**\n- **Ransomware**\n- **Supply Chain Attack**\n- **Phishing**\n- **Data Leakage**\n- **Data Breach**\n- **Crypto Mining**\n- **DDoS**\n- **Others** — any threat type not covered by the categories above.",
+            "description": "Specifies one or more threat event types to filter reports. Accepts comma-separated values. Supported types include:\n\n- **APT**\n- **Ransomware**\n- **Supply Chain Attack**\n- **Phishing**\n- **Data Leakage**\n- **Crypto Mining**\n- **DDoS**\n- **AI Threats**\n- **Others** — any threat type not covered by the categories above.",
             "required": false,
             "example": "",
             "schema": {
